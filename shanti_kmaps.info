@@ -1,0 +1,9 @@
+name = Shanti Kmaps Integration Module
+description = "Intergrates Shanti knowledge map functionality into any Drupal site"
+core = 7.x
+package = Shanti
+
+files[] = shanti_kmaps.module
+
+stylesheets[all][] = misc/shanti_kmaps.css
+scripts[] = misc/shanti_kmaps.js

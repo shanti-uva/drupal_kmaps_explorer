@@ -1,0 +1,79 @@
+<?php 
+
+/**
+ * Kmap Tree Navigation Block functions
+ */
+ 
+/**
+ * Implements hook_theme().
+ */
+function shanti_kmaps_theme() {
+  return array(
+    'shanti_kmaps_tree' => array(
+      'variables' => array(
+        'title' => NULL,
+       ),
+      'template' => 'templates/shanti-kmaps-tree--block',
+    ),
+  );
+}
+
+/**
+ * Implements hook_block_info
+ */
+function shanti_kmaps_block_info() {
+	$blocks = array();
+	$blocks['kmaps_tree_block'] = array(
+		'info' => t('KMaps Navigation Tree'),
+	 );
+	
+	return $blocks;
+}
+
+/**
+ * Implements hook_block_view
+ */
+function shanti_kmaps_block_view($delta='') {
+	$block = array();
+
+	switch($delta) {
+		case 'kmaps_tree_block':
+			if(!_is_js_loaded('jquery.fancytree.js')) {
+				drupal_set_message('loading fancy tree!');
+				drupal_add_js('misc/fancytree/jquery.fancytree.js', 'file');
+				drupal_add_js('misc/fancytree/jquery.fancytree.edit.js', 'file');
+				drupal_add_js('misc/fancytree/jquery.fancytree.filter.js', 'file');
+				drupal_add_js('misc/fancytree/jquery.fancytree.glyph.js', 'file');
+			}
+			$block['content'] = shanti_kmaps_block_content();
+			break;
+	}
+
+	return $block;
+}
+
+/**
+ * Function for creating kmaps tree block content. Only returns the empty div. Content supplied through JS Ajax calls.
+ */
+function shanti_kmaps_block_content() {
+  return '<div id="kmaps-trees" class="view-wrap">
+  					<div id="km-places-tree">
+  						<h2>Places</h2><div class="tree"></div>
+  					</div>
+  					<div id="km-subjects-tree">
+  						<h2>Subjects</h2><div class="tree"></div>
+  					</div>
+  				</div>';
+}
+
+/**
+ * Gets current js declaration string and searches for js name in it. Returns TRUE if found; FALSE if not.
+ */
+function _is_js_loaded($jsname) {
+	$jsloaded = drupal_get_js();
+	if(strpos($jsloaded, $jsname) > -1) {
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
