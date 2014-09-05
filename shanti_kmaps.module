@@ -1,22 +1,37 @@
 <?php 
 
 /**
- * Kmap Tree Navigation Block functions
+ * Implemente hook_menu
  */
  
-/**
- * Implements hook_theme().
- */
-function shanti_kmaps_theme() {
-  return array(
-    'shanti_kmaps_tree' => array(
-      'variables' => array(
-        'title' => NULL,
-       ),
-      'template' => 'templates/shanti-kmaps-tree--block',
-    ),
+define('SUBJECTS_URL', 'http://subjects.kmaps.virginia.edu');
+define('PLACES_URL', 'http://places.kmaps.virginia.edu');
+
+function shanti_kmaps_menu() {
+	$items = array();
+
+  $items['kmap/template'] = array(
+    'title' => 'Kmaps Content Template',
+    'description' => 'Return the html for the display of a KMap feature',
+    'page callback' => 'shanti_kmaps_get_template',
+    'access callback' => TRUE,
   );
+	
+	return $items;
 }
+
+function shanti_kmaps_get_template() {
+	$location = drupal_get_path('module', 'shanti_kmaps');
+	$tmpl = file_get_contents($location . '/templates/shanti_kmap_page.tpl.php');
+	$json = array(
+		'template' => $tmpl,
+	);
+	drupal_json_output($json);
+}
+
+/**
+ * Kmap Tree Navigation Block functions
+ */
 
 /**
  * Implements hook_block_info
@@ -26,7 +41,6 @@ function shanti_kmaps_block_info() {
 	$blocks['kmaps_tree_block'] = array(
 		'info' => t('KMaps Navigation Tree'),
 	 );
-	
 	return $blocks;
 }
 
@@ -38,18 +52,29 @@ function shanti_kmaps_block_view($delta='') {
 
 	switch($delta) {
 		case 'kmaps_tree_block':
-			if(!_is_js_loaded('jquery.fancytree.js')) {
-				drupal_set_message('loading fancy tree!');
-				drupal_add_js('misc/fancytree/jquery.fancytree.js', 'file');
-				drupal_add_js('misc/fancytree/jquery.fancytree.edit.js', 'file');
-				drupal_add_js('misc/fancytree/jquery.fancytree.filter.js', 'file');
-				drupal_add_js('misc/fancytree/jquery.fancytree.glyph.js', 'file');
-			}
-			$block['content'] = shanti_kmaps_block_content();
+			shanti_kmaps_check_js();
+			$block['content'] = array(
+				'#theme' => 'shanti_kmaps_tree_block',
+				'#trees' => array('Places', 'Subjects'),
+			);
 			break;
 	}
 
 	return $block;
+}
+
+function shanti_kmaps_check_js() {
+	$theme_path = drupal_get_path('module', 'shanti_kmaps');
+	if(!_is_js_loaded('jquery.fancytree.js')) {
+		drupal_add_js($theme_path . '/js/fancytree/jquery.fancytree.js', 'file');
+		drupal_add_js($theme_path . '/js/fancytree/jquery.fancytree.edit.js', 'file');
+		drupal_add_js($theme_path . '/js/fancytree/jquery.fancytree.filter.js', 'file');
+		drupal_add_js($theme_path . '/js/fancytree/jquery.fancytree.glyph.js', 'file');
+	}
+
+	if(!_is_js_loaded('jquery.ba-bbq.min.js')) {
+		drupal_add_js($theme_path . '/js/jquery.ba-bbq.min.js', 'file');
+	}
 }
 
 /**
@@ -76,4 +101,29 @@ function _is_js_loaded($jsname) {
 	} else {
 		return FALSE;
 	}
+}
+
+ 
+/**
+ * Implements hook_theme().
+ */
+function shanti_kmaps_theme() {
+  return array(
+    'shanti_kmaps_tree_block' => array(
+      'variables' => array('block' => NULL, 'trees' => NUll),
+    ),
+  );
+}
+
+function theme_shanti_kmaps_tree_block($variables) {
+	$html = '<div id="kmaps-tree-block" class="view-wrap">';
+	foreach($variables['trees'] as $tree) {
+		$lctree = strtolower($tree);
+		$html .= "<div id=\"km-{$lctree}-tree\">
+  						<h2>{$tree}</h2><div class=\"tree\"></div>
+  					</div>";
+	}
+  $html .= '</div>';
+	dpm($html, 'in tsktb');
+	return $html;
 }

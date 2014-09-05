@@ -5,5 +5,5 @@ package = Shanti
 
 files[] = shanti_kmaps.module
 
-stylesheets[all][] = misc/shanti_kmaps.css
-scripts[] = misc/shanti_kmaps.js
+stylesheets[all][] = css/shanti_kmaps.css
+scripts[] = js/shanti_kmaps.js
