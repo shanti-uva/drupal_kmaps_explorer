@@ -15,6 +15,7 @@ function shanti_kmaps_menu() {
     'description' => 'Return the html for the display of a KMap feature',
     'page callback' => 'shanti_kmaps_get_template',
     'access callback' => TRUE,
+    'type' => MENU_LOCAL_ACTION,
   );
 	
 	return $items;
@@ -22,7 +23,7 @@ function shanti_kmaps_menu() {
 
 function shanti_kmaps_get_template() {
 	$location = drupal_get_path('module', 'shanti_kmaps');
-	$tmpl = file_get_contents($location . '/templates/shanti_kmap_page.tpl.php');
+	$tmpl = file_get_contents($location . '/templates/shanti-kmap-page.tpl.php');
 	$json = array(
 		'template' => $tmpl,
 	);
@@ -52,7 +53,6 @@ function shanti_kmaps_block_view($delta='') {
 
 	switch($delta) {
 		case 'kmaps_tree_block':
-			shanti_kmaps_check_js();
 			$block['content'] = array(
 				'#theme' => 'shanti_kmaps_tree_block',
 				'#trees' => array('Places', 'Subjects'),
@@ -61,20 +61,6 @@ function shanti_kmaps_block_view($delta='') {
 	}
 
 	return $block;
-}
-
-function shanti_kmaps_check_js() {
-	$theme_path = drupal_get_path('module', 'shanti_kmaps');
-	if(!_is_js_loaded('jquery.fancytree.js')) {
-		drupal_add_js($theme_path . '/js/fancytree/jquery.fancytree.js', 'file');
-		drupal_add_js($theme_path . '/js/fancytree/jquery.fancytree.edit.js', 'file');
-		drupal_add_js($theme_path . '/js/fancytree/jquery.fancytree.filter.js', 'file');
-		drupal_add_js($theme_path . '/js/fancytree/jquery.fancytree.glyph.js', 'file');
-	}
-
-	if(!_is_js_loaded('jquery.ba-bbq.min.js')) {
-		drupal_add_js($theme_path . '/js/jquery.ba-bbq.min.js', 'file');
-	}
 }
 
 /**
@@ -124,6 +110,6 @@ function theme_shanti_kmaps_tree_block($variables) {
   					</div>";
 	}
   $html .= '</div>';
-	dpm($html, 'in tsktb');
+	//dpm($html, 'in tsktb hey');
 	return $html;
 }

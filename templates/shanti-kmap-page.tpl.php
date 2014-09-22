@@ -53,54 +53,38 @@
   
     <!-- Column Main  -->                   
     <section  class="content-section col-xs-12 col-sm-9 equal-height">
-      
       <div class="tab-content">
-      
-        <article class="tab-pane" id="tab-overview">
-        </article>
+          
+            <article class="tab-pane active" id="tab-overview"><h6>Collections</h6><p>Collections are used to articulate collections and subcollections which then can be used to index and present audio-video, photographs, texts, visualizations, and so forth as connected together into collections. Thus one might have an "Architecture of Ukraine" collection, with subcollections devoted to Churches, public buildings, etc.&nbsp;</p><figure class="cap-bot"><img src="http://mms.thlib.org/images/0053/7241/67458_large.jpg" class="img-responsive img-thumbnail" alt="The assembly hall"><figcaption><div class="center-caption">The assembly hall</div><p>Shaba Ridzong is about 28 kilometer away from Ping'an; the County seat, Haidong Region, Qinghai Provice. This is one of four great Dzong in Amdo; they are Achong Nam Dzong, Pula Yangdzong, Dragkhar Dral Dzong and Shawa Ridzong. In the year of 1359, The fourth reincarnated Lama, the black hatted Karma Rolpe Dorje stayed at this monatery on his way to Beijing to with the invitation of King of Yuan dynasty. More importantly, when Zongkapa was three years old, he tool his religous vows in front of Choje Dondrup Rinchen and named him Ananda or Kunga Ningbo. This is the roof of the great assembly hall.</p></figcaption></figure></article>
 
-        <article class="tab-pane" id="tab-subjects"> 
-        </article>
+            <article class="tab-pane" id="tab-subjects"></article>
 
-        <article class="tab-pane" id="tab-essays">
-        </article>
+            <article class="tab-pane" id="tab-essays"></article>
 
-        <article class="tab-pane" id="tab-places">
-        </article>
-                        
-        <article class="tab-pane" id="tab-agents">
-        </article>
+            <article class="tab-pane" id="tab-places"></article>
+                            
+            <article class="tab-pane" id="tab-agents"></article>
 
-        <article class="tab-pane" id="tab-events">
-        </article>
+            <article class="tab-pane" id="tab-events"></article>
 
-        <article class="tab-pane" id="tab-photos">
-        </article>
+            <article class="tab-pane" id="tab-photos"></article>
 
-        <article class="tab-pane" id="tab-audio-video">
-        </article>
+            <article class="tab-pane" id="tab-audio-video"></article>
 
-        <article class="tab-pane" id="tab-visuals">
-        </article>
+            <article class="tab-pane" id="tab-visuals"></article>
 
-        <article class="tab-pane" id="tab-texts">
-        </article>
+            <article class="tab-pane" id="tab-texts"></article>
 
-        <article class="tab-pane" id="tab-maps">
-        </article>
+            <article class="tab-pane" id="tab-maps"></article>
 
-        <article class="tab-pane" id="tab-community">
-        </article>
+            <article class="tab-pane" id="tab-community"></article>
 
-        <article class="tab-pane" id="tab-terms">
-        </article>
+            <article class="tab-pane" id="tab-terms"></article>
 
-        <article class="tab-pane" id="tab-sources">
-        </article>
+            <article class="tab-pane" id="tab-sources"></article>
 
-        <article class="show-related-pages">
-        </article>
-      
+            <article class="show-related-pages"></article>
+          
       </div><!-- END tab-content -->
     </section><!-- END content-section -->                
   </div><!-- END row -->    
