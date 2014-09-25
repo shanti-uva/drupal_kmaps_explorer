@@ -1,0 +1,115 @@
+<?php 
+
+/**
+ * Implemente hook_menu
+ */
+ 
+define('SUBJECTS_URL', 'http://subjects.kmaps.virginia.edu');
+define('PLACES_URL', 'http://places.kmaps.virginia.edu');
+
+function kmaps_explorer_menu() {
+	$items = array();
+
+  $items['kmaps/template'] = array(
+    'title' => 'Kmaps Content Template',
+    'description' => 'Return the html for the display of a KMap feature',
+    'page callback' => 'kmaps_explorer_get_template',
+    'access callback' => TRUE,
+    'type' => MENU_LOCAL_ACTION,
+  );
+	
+	return $items;
+}
+
+function kmaps_explorer_get_template() {
+	$location = drupal_get_path('module', 'shanti_kmaps');
+	$tmpl = file_get_contents($location . '/templates/kmaps-explorer-page.tpl.php');
+	$json = array(
+		'template' => $tmpl,
+	);
+	drupal_json_output($json);
+}
+
+/**
+ * Kmap Tree Navigation Block functions
+ */
+
+/**
+ * Implements hook_block_info
+ */
+function kmaps_explorer_block_info() {
+	$blocks = array();
+	$blocks['kmaps_tree_block'] = array(
+		'info' => t('KMaps Navigation Tree'),
+	 );
+	return $blocks;
+}
+
+/**
+ * Implements hook_block_view
+ */
+function kmaps_explorer_block_view($delta='') {
+	$block = array();
+
+	switch($delta) {
+		case 'kmaps_tree_block':
+			$block['content'] = array(
+				'#theme' => 'kmaps_explorer_tree_block',
+				'#trees' => array('Places', 'Subjects'),
+			);
+			break;
+	}
+
+	return $block;
+}
+
+/**
+ * Function for creating kmaps tree block content. Only returns the empty div. Content supplied through JS Ajax calls.
+ */
+function kmaps_explorer_block_content() {
+  return '<div id="kmaps-trees" class="view-wrap">
+  					<div id="km-places-tree">
+  						<h2>Places</h2><div class="tree"></div>
+  					</div>
+  					<div id="km-subjects-tree">
+  						<h2>Subjects</h2><div class="tree"></div>
+  					</div>
+  				</div>';
+}
+
+/**
+ * Gets current js declaration string and searches for js name in it. Returns TRUE if found; FALSE if not.
+ */
+function _is_js_loaded($jsname) {
+	$jsloaded = drupal_get_js();
+	if(strpos($jsloaded, $jsname) > -1) {
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
+
+ 
+/**
+ * Implements hook_theme().
+ */
+function kmaps_explorer_theme() {
+  return array(
+    'kmaps_explorer_tree_block' => array(
+      'variables' => array('block' => NULL, 'trees' => NUll),
+    ),
+  );
+}
+
+function theme_kmaps_explorer_tree_block($variables) {
+	$html = '<div id="kmaps-tree-block" class="view-wrap">';
+	foreach($variables['trees'] as $tree) {
+		$lctree = strtolower($tree);
+		$html .= "<div id=\"km-{$lctree}-tree\">
+  						<h2>{$tree}</h2><div class=\"tree\"></div>
+  					</div>";
+	}
+  $html .= '</div>';
+	//dpm($html, 'in tsktb hey');
+	return $html;
+}
