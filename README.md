@@ -1,4 +1,4 @@
-drupal\_shanti\_kmaps: A stand-alone module that integrated shanti Kmaps into any drupal site. 
+**drupal\_shanti\_kmaps**: A stand-alone module that integrated shanti Kmaps into any Drupal site. 
 
 * **Author:** ndg8f
 * **Date:** 2014-08-29
