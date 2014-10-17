@@ -6,8 +6,8 @@ package = Shanti
 files[] = kmaps-explorer.module
 
 stylesheets[all][] = css/kmaps-explorer.css
-scripts[] = js/kmaps-explorer.js
-scripts[] = js/shanti-main-sj.js
-scripts[] = js/shanti-main-pl.js
-scripts[] = js/jquery.ba-bbq.min.js
-scripts[] = js/jquery.ba-hashchange.min.js
+; scripts[] = js/kmaps-explorer.js
+; scripts[] = js/shanti-main-sj.js
+; scripts[] = js/shanti-main-pl.js
+; scripts[] = js/jquery.ba-bbq.min.js
+; scripts[] = js/jquery.ba-hashchange.min.js
