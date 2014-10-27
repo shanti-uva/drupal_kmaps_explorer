@@ -142,6 +142,46 @@
                 <?php endforeach; ?>
               </p>
             <?php endif; ?>
+
+            <?php print $places_overview_image; ?>
+
+            <?php if(isset($obj->feature->closest_fid_with_shapes)): ?>
+              <div class="google-maps">
+                <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=http:%2F%2Fplaces.thlib.org%2Ffeatures%2Fgis_resources%2F<?php print $obj->feature->closest_fid_with_shapes; ?>.kmz&amp;ie=UTF8&amp;t=p&amp;output=embed"></iframe>
+                <div class="btn-group btn-group-gmaps">
+                  <button class="btn btn-default italic renderGmaps active">Google Map</button>
+                  <button class="btn btn-default italic renderOpenLayerMaps">Custom Map</button>
+                </div>
+              </div>
+            <?php endif; ?>
+
+            <aside class="panel-group" id="accordion">
+              <section class="panel panel-default">
+                <div class="panel-heading">
+                  <h6>
+                    <a href="#collapseOne" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">
+                    <i class="glyphicon glyphicon-plus"></i> Names
+                  </h6>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse">
+                  <div class="panel-body">
+                  </div>
+                </div>
+              </section>
+              <section>
+                <div class="panel-heading">
+                  <h6>
+                    <a href="#collapseTwo" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">
+                    <i class="glyphicon glyphicon-plus"></i> ETYMOLOGY
+                  </h6>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                  <div class="panel-body">
+                  </div>
+                </div>
+              </section>
+            </aside>
+
           <?php endif; ?>
         </article>
       
