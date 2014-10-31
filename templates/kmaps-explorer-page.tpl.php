@@ -160,7 +160,8 @@
                 <div class="panel-heading">
                   <h6>
                     <a href="#collapseOne" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">
-                    <i class="glyphicon glyphicon-plus"></i> Names
+                      <i class="glyphicon glyphicon-plus"></i> Names
+                    </a>
                   </h6>
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse">
@@ -168,11 +169,12 @@
                   </div>
                 </div>
               </section>
-              <section>
+              <section class="panel panel-default">
                 <div class="panel-heading">
                   <h6>
                     <a href="#collapseTwo" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">
-                    <i class="glyphicon glyphicon-plus"></i> ETYMOLOGY
+                      <i class="glyphicon glyphicon-plus"></i> ETYMOLOGY
+                    </a>
                   </h6>
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse">

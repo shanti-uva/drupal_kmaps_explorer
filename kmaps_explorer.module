@@ -280,8 +280,8 @@ function kmaps_explorer_initial_page($type, $id=2823) {
     'group' => CSS_THEME,
   );
 
-  drupal_add_css($path . '/css/bootstrap.min.css', $options);
-  drupal_add_css($path . '/css/bootstrap-theme.min.css', $options);
+  //drupal_add_css($path . '/css/bootstrap.min.css', $options);
+  //drupal_add_css($path . '/css/bootstrap-theme.min.css', $options);
   drupal_add_css($path . '/css/kmaps_explorer.css', $options);
 
   if ($type === 'places') {
@@ -294,7 +294,7 @@ function kmaps_explorer_initial_page($type, $id=2823) {
     'scope' => 'footer'
   );
 
-  drupal_add_js($path . '/js/vendor/bootstrap.min.js', $options);
+  //drupal_add_js($path . '/js/vendor/bootstrap.min.js', $options);
 
   if ($type === 'places') {
     drupal_add_js('//maps.googleapis.com/maps/api/js?key=AIzaSyAXpnXkPS39-Bo5ovHQWvyIk6eMgcvc1q4&amp;sensor=false', 'external');
