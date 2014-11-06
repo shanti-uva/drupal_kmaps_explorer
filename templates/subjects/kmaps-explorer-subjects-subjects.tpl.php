@@ -5,7 +5,7 @@
     <ul>
       <?php foreach($aItem->features as $bItem): ?>
         <li>
-          <a href="<?php print base_path() . 'subjects/' . $bItem->id; ?>">
+          <a href="<?php print base_path() . 'subjects/' . $bItem->id; ?>/overview/nojs" class="use-ajax">
             <?php print $bItem->header; ?> (From the General Perspective)
           </a>
         </li>
