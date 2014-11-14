@@ -167,6 +167,7 @@
               </div>
               <div id="collapseOne" class="panel-collapse collapse">
                 <div class="panel-body">
+                  <?php print $accordionName; ?>
                 </div>
               </div>
             </section>

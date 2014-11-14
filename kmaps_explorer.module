@@ -277,6 +277,11 @@ function kmaps_explorer_theme() {
       'arguments' => array(),
       'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
     ),
+    'kmaps_explorer_places_overview_names' => array(
+      'template' => 'kmaps-explorer-places-overview-names',
+      'arguments' => array(),
+      'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
+    ),
   );
 }
 
@@ -388,6 +393,13 @@ function kmaps_explorer_overview($type = 'ajax', $id, $app) {
         'url' => $obj->feature->illustrations[0]->url,
       ));
     }
+
+    //Accordion setup
+    $accordionURL = "http://places.kmaps.virginia.edu/features/" . $id . "/names.json";
+    $accordionOBJ = json_decode(file_get_contents($accordionURL));
+    $accordionName = theme('kmaps_explorer_places_overview_names', array(
+      'data' => $accordionOBJ,
+    ));
   }
 
   //Call to return the html for the main page template passing in all the variables.
@@ -399,6 +411,7 @@ function kmaps_explorer_overview($type = 'ajax', $id, $app) {
     'video_count' => $video_count,
     'places_overview_image' => isset($placesOverviewImage) ? $placesOverviewImage : '',
     'ajax' => $type == 'ajax' ? TRUE : FALSE,
+    'accordionName' => isset($accordionName) ? $accordionName : '',
   ));
 
   if($type == 'ajax') {
