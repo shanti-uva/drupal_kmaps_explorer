@@ -282,6 +282,11 @@ function kmaps_explorer_theme() {
       'arguments' => array(),
       'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
     ),
+    'kmaps_explorer_places_overview_etymology' => array(
+      'template' => 'kmaps-explorer-places-overview-etymology',
+      'arguments' => array(),
+      'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
+    ),
   );
 }
 
@@ -397,9 +402,17 @@ function kmaps_explorer_overview($type = 'ajax', $id, $app) {
     //Accordion setup
     $accordionURL = "http://places.kmaps.virginia.edu/features/" . $id . "/names.json";
     $accordionOBJ = json_decode(file_get_contents($accordionURL));
+    dpm($accordionOBJ);
     $accordionName = theme('kmaps_explorer_places_overview_names', array(
       'data' => $accordionOBJ,
     ));
+
+    $etymology = search_etymology($accordionOBJ->names);
+    if($etymology) {
+      $accordionEtymology = theme('kmaps_explorer_places_overview_etymology', array(
+        'etymology' => $etymology,
+      ));
+    }
   }
 
   //Call to return the html for the main page template passing in all the variables.
@@ -412,6 +425,7 @@ function kmaps_explorer_overview($type = 'ajax', $id, $app) {
     'places_overview_image' => isset($placesOverviewImage) ? $placesOverviewImage : '',
     'ajax' => $type == 'ajax' ? TRUE : FALSE,
     'accordionName' => isset($accordionName) ? $accordionName : '',
+    'accordionEtymology' => isset($accordionEtymology) ? $accordionEtymology : '',
   ));
 
   if($type == 'ajax') {
@@ -668,4 +682,21 @@ function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_nu
   } else {
     return t("Please enable JavaScript to use this application.");
   }
+}
+
+/**
+ * Recursive function to search for etymology from an object
+ */
+function search_etymology($obj) {
+  foreach ($obj as $key => $value) {
+    if (!empty($value->etymology)) {
+      return array(
+        'etymology_value' => $value->etymology,
+        'name' => $value->name,
+      );
+    } else {
+      search_etymology($value->names);
+    }
+  }
+  return FALSE;
 }

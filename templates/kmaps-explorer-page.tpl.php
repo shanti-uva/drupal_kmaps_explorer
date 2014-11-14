@@ -171,6 +171,7 @@
                 </div>
               </div>
             </section>
+            <?php if(!empty($accordionEtymology)): ?>
             <section class="panel panel-default">
               <div class="panel-heading">
                 <h6>
@@ -181,9 +182,11 @@
               </div>
               <div id="collapseTwo" class="panel-collapse collapse">
                 <div class="panel-body">
+                  <?php print $accordionEtymology; ?>
                 </div>
               </div>
             </section>
+            <?php endif; ?>
           </aside>
 
         <?php endif; ?>
