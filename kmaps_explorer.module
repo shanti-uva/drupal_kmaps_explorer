@@ -137,6 +137,15 @@ function kmaps_explorer_menu() {
     'access callback' => TRUE,
   );
 
+  $items['audio-video/node/%/%'] = array(
+    'title' => 'Subjects',
+    'description' => 'Creates a callback that shows individual audio-video nodes',
+    'page callback' => 'kmaps_explorer_audio_video_node',
+    'page arguments' => array(3, 2),
+    'access arguments' => TRUE,
+    'access callback' => TRUE,
+  );
+
 	return $items;
 }
 
@@ -681,6 +690,23 @@ function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_nu
     }
   } else {
     return t("Please enable JavaScript to use this application.");
+  }
+}
+
+/**
+ * Function to create ajax content for audio-video individual node items
+ */
+function kmaps_explorer_audio_video_node($type = 'ajax', $id) {
+  if($type == 'ajax') {
+    $avNodeURL = 'http://mediabase.drupal-dev.shanti.virginia.edu/services/embed/' . $id;
+    $avNodeObj = json_decode(file_get_contents($avNodeURL));
+
+    $commands = array();
+    $commands[] = ajax_command_html('#tab-main', $avNodeObj->embed);
+    $page = array('#type' => 'ajax', '#commands' => $commands);
+    ajax_deliver($page);
+  } else {
+    return t("Please enable JavaScript to use this application");
   }
 }
 
