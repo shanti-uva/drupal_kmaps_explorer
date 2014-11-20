@@ -18,7 +18,7 @@
 
       <?php if($obj->feature->associated_resources->description_count > 0): ?>
         <li class="essays">
-          <a href="<?php print base_path() . $type . '/' . $kid; ?>/essays/nojs" class="use-ajax">
+          <a href="<?php print base_path() . $type . '/' . $kid; ?>/essays/nojs<?php print isset($obj->feature->descriptions) ? '/' . $obj->feature->descriptions[0]->id : ''; ?>" class="use-ajax">
             <i class="icon shanticon-essays"></i>
             Essays
             <span class="badge"><?php print $obj->feature->associated_resources->description_count; ?></span>

@@ -68,7 +68,7 @@ function kmaps_explorer_menu() {
   $items['places/%/subjects/%'] = array(
     'title' => 'Subjects',
     'description' => 'Creates a callback that shows subjects in places via ajax',
-    'page callback' => 'kmaps_explorer_subjects_subjects',
+    'page callback' => 'kmaps_explorer_places_subjects',
     'page arguments' => array(3, 1),
     'access arguments' => TRUE,
     'access callback' => TRUE,
@@ -86,7 +86,7 @@ function kmaps_explorer_menu() {
   $items['places/%/essays/%'] = array(
     'title' => 'Subjects',
     'description' => 'Creates a callback that shows essays in places via ajax',
-    'page callback' => 'kmaps_explorer_subjects_essays',
+    'page callback' => 'kmaps_explorer_places_essays',
     'page arguments' => array(3, 1),
     'access arguments' => TRUE,
     'access callback' => TRUE,
@@ -301,6 +301,16 @@ function kmaps_explorer_theme() {
       'arguments' => array(),
       'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
     ),
+    'kmaps_explorer_places_essays_ajax' => array(
+      'template' => 'kmaps-explorer-places-essays',
+      'arguments' => array(),
+      'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
+    ),
+    'kmaps_explorer_places_subjects_ajax' => array(
+      'template' => 'kmaps-explorer-places-subjects',
+      'arguments' => array(),
+      'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
+    ),
   );
 }
 
@@ -399,11 +409,6 @@ function kmaps_explorer_overview($type = 'ajax', $id, $app) {
   // $avURL = 'http://mediabase.drupal-dev.shanti.virginia.edu/services/' . $app . '/' . $id . '?rows=12&pg=3';
   // $avObj = json_decode(file_get_contents($avURL));
   // dpm($avObj);
-
-  //Test
-  $placesURL = "http://places.kmaps.virginia.edu/features/" . $id . "/related.json";
-  $placesObj = json_decode(file_get_contents($placesURL));
-  dpm($placesObj);
   
   //Places Overview setup
   if ($app == 'places') {
@@ -483,13 +488,56 @@ function kmaps_explorer_subjects_subjects($type = 'ajax', $id) {
 }
 
 /**
+ * Function to create the ajax content for subjects in places
+ */
+function kmaps_explorer_places_subjects($type = 'ajax', $id) {
+  if($type == 'ajax') {
+    $subjectsURL = "http://places.kmaps.virginia.edu/features/" . $id . "/topics.json";
+    $subjObj = json_decode(file_get_contents($subjectsURL));
+
+    //Retrieve the title of the node
+    $title = variable_get('kmaps_explorer_node_title', '');
+
+    $output = theme('kmaps_explorer_places_subjects_ajax', array(
+      'data' => $subjObj,
+      'title' => $title,
+    ));
+
+    $commands = array();
+    $commands[] = ajax_command_html('#tab-main', $output);
+    $page = array('#type' => 'ajax', '#commands' => $commands);
+    ajax_deliver($page);
+  } else {
+    return t("Please enable JavaScript to use this application.");
+  }
+}
+
+/**
  * Function to create the ajax content for essays in subjects
  */
 function kmaps_explorer_subjects_essays($type = 'ajax', $id) {
   if($type == 'ajax') {
     $essaysURL = "http://subjects.kmaps.virginia.edu/features/" . $id . "/descriptions.json";
     $essayObj = json_decode(file_get_contents($essaysURL));
-    $output = theme('kmaps_explorer_subjects_essays_ajax', array('data' => $essayObj));
+    $output = theme('kmaps_explorer_places_essays_ajax', array('data' => $essayObj));
+
+    $commands = array();
+    $commands[] = ajax_command_html('#tab-main', $output);
+    $page = array('#type' => 'ajax', '#commands' => $commands);
+    ajax_deliver($page);
+  } else {
+    return t("Please enable JavaScript to use this application.");
+  }
+}
+
+/**
+ * Function to create the ajax content for esssays in places
+ */
+function kmaps_explorer_places_essays($type = 'ajax', $id, $textId) {
+  if($type == 'ajax') {
+    $essayURL = "http://places.kmaps.virginia.edu/features/" . $id . "/descriptions/" . $textId . ".json";
+    $essayObj = json_decode(file_get_contents($essayURL));
+    $output = theme('kmaps_explorer_places_essays_ajax', array('data' => $essayObj->description));
 
     $commands = array();
     $commands[] = ajax_command_html('#tab-main', $output);
