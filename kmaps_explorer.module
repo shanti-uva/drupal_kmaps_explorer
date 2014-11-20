@@ -296,6 +296,11 @@ function kmaps_explorer_theme() {
       'arguments' => array(),
       'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
     ),
+    'kmaps_explorer_places_places_ajax' => array(
+      'template' => 'kmaps-explorer-places-places',
+      'arguments' => array(),
+      'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
+    ),
   );
 }
 
@@ -394,6 +399,11 @@ function kmaps_explorer_overview($type = 'ajax', $id, $app) {
   // $avURL = 'http://mediabase.drupal-dev.shanti.virginia.edu/services/' . $app . '/' . $id . '?rows=12&pg=3';
   // $avObj = json_decode(file_get_contents($avURL));
   // dpm($avObj);
+
+  //Test
+  $placesURL = "http://places.kmaps.virginia.edu/features/" . $id . "/related.json";
+  $placesObj = json_decode(file_get_contents($placesURL));
+  dpm($placesObj);
   
   //Places Overview setup
   if ($app == 'places') {
@@ -411,7 +421,7 @@ function kmaps_explorer_overview($type = 'ajax', $id, $app) {
     //Accordion setup
     $accordionURL = "http://places.kmaps.virginia.edu/features/" . $id . "/names.json";
     $accordionOBJ = json_decode(file_get_contents($accordionURL));
-    dpm($accordionOBJ);
+    //dpm($accordionOBJ);
     $accordionName = theme('kmaps_explorer_places_overview_names', array(
       'data' => $accordionOBJ,
     ));
@@ -524,6 +534,32 @@ function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num=1, $total
     $commands = array();
     $commands[] = ajax_command_html('#tab-main', $output);
     $commands[] = ajax_command_append('#tab-main', $pagination);
+    $page = array('#type' => 'ajax', '#commands' => $commands);
+    if($subpage) {
+      return $page;
+    } else {  
+      ajax_deliver($page);
+    }
+  } else {
+    return t("Please enable JavaScript to use this application.");
+  }
+}
+
+/**
+ * Function to create the ajax content for the places in places
+ */
+function kmaps_explorer_places_places($type = 'ajax', $id, $page_num = 1, $total_pages = 1, $subpage = FALSE) {
+  if($type == 'ajax') {
+    $placesURL = "http://places.kmaps.virginia.edu/features/" . $id . "/related.json";
+    $placesObj = json_decode(file_get_contents($placesURL));
+    
+    $output = theme('kmaps_explorer_places_places_ajax', array(
+      'data' => $placesObj,
+      'title' => variable_get('kmaps_explorer_node_title', ''),
+    ));
+
+    $commands = array();
+    $commands[] = ajax_command_html('#tab-main', $output);
     $page = array('#type' => 'ajax', '#commands' => $commands);
     if($subpage) {
       return $page;
