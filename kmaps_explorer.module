@@ -137,6 +137,15 @@ function kmaps_explorer_menu() {
     'access callback' => TRUE,
   );
 
+  $items['places/%/audio-video/%'] = array(
+    'title' => 'Subjects',
+    'description' => 'Creates a callback that shows audio-video in places via ajax',
+    'page callback' => 'kmaps_explorer_subjects_audio_video', //using same function as in subjects.
+    'page arguments' => array(3, 1, 'place'),
+    'access arguments' => TRUE,
+    'access callback' => TRUE,
+  );
+
   $items['audio-video/node/%/%'] = array(
     'title' => 'Subjects',
     'description' => 'Creates a callback that shows individual audio-video nodes',
@@ -565,7 +574,7 @@ function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num=1, $total
     ));
 
     //create the pager input element
-    $page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'places');
+    $page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'places', 'subject');
     $input_el = render($page_input_array);
 
     $pageBaseUrl = base_path() . 'subjects/' . $id . '/places/nojs/';
@@ -622,13 +631,13 @@ function kmaps_explorer_places_places($type = 'ajax', $id, $page_num = 1, $total
 /**
  * Initial function to create the lone text field for pager
  */
-function kmaps_explorer_text_field($form, &$form_state, $id, $page_num, $total_pages, $related_assoc) {
+function kmaps_explorer_text_field($form, &$form_state, $id, $page_num, $total_pages, $related_assoc, $app = 'none') {
   $form['page_num_text'] = array(
     '#type' => 'textfield',
     '#value' => isset($form_state['input']['page_num_text']) ? $form_state['input']['page_num_text'] : $page_num,
     '#attributes' => array(
       'class' => array('page-input'),
-      'data-arg' => $id . '-' . $total_pages . '-' . $related_assoc,
+      'data-arg' => $id . '-' . $total_pages . '-' . $related_assoc . '-' . $app,
     ),
     '#ajax' => array(
       'callback' => 'kmaps_explore_pager_ajax',
@@ -648,7 +657,7 @@ function kmaps_explorer_text_field($form, &$form_state, $id, $page_num, $total_p
  * Function to handle the callback of the ajax pager input text field.
  */
 function kmaps_explore_pager_ajax($form, &$form_state) {
-  list($id, $total_pages, $related_assoc) = explode('-', $form['page_num_text']['#attributes']['data-arg']);
+  list($id, $total_pages, $related_assoc, $app) = explode('-', $form['page_num_text']['#attributes']['data-arg']);
   $page_num = $form_state['input']['page_num_text'];
   if ($related_assoc == 'places') {
     return kmaps_explorer_subjects_places('ajax', intval($id), intval($page_num), intval($total_pages), TRUE);
@@ -656,8 +665,8 @@ function kmaps_explore_pager_ajax($form, &$form_state) {
   if ($related_assoc == 'photos') {
     return kmaps_explorer_subjects_photos('ajax', intval($id), intval($page_num), intval($total_pages), TRUE);
   }
-  if ($related_assoc == 'audio-video') {
-    return kmaps_explorer_subjects_audio_video('ajax', intval($id), intval($page_num), intval($total_pages), TRUE);
+  if ($related_assoc == 'audiovideo') {
+    return kmaps_explorer_subjects_audio_video('ajax', intval($id), $app, intval($page_num), intval($total_pages), TRUE);
   }
 }
 
@@ -678,7 +687,7 @@ function kmaps_explorer_subjects_photos($type = 'ajax', $id, $page_num=1, $total
     ));
 
     //create the pager input element
-    $page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'photos');
+    $page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'photos', 'subject');
     $input_el = render($page_input_array);
 
     $pageBaseUrl = base_path() . 'subjects/' . $id . '/photos/nojs/';
@@ -749,10 +758,10 @@ function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_nu
     ));
 
     //create the pager input element
-    $page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'audio-video');
+    $page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'audiovideo', $app);
     $input_el = render($page_input_array);
 
-    $pageBaseUrl = base_path() . 'subjects/' . $id . '/audio-video/nojs/';
+    $pageBaseUrl = base_path() . $app . 's/' . $id . '/audio-video/nojs/';
     $pagination = theme('kmaps_explorer_pagination_template', array(
       'first_link' => $pageBaseUrl . '1/' . $total_pages,
       'previous_link' => $pageBaseUrl . ($page_num <= 1 ? '1' : ($page_num - 1)) . '/' . $total_pages,
