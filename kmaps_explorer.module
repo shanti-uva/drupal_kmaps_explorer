@@ -149,7 +149,7 @@ function kmaps_explorer_menu() {
   $items['audio-video/node/%/%'] = array(
     'title' => 'Subjects',
     'description' => 'Creates a callback that shows individual audio-video nodes',
-    'page callback' => 'kmaps_explorer_audio_video_node',
+    'page callback' => 'kmaps_explorer_audio_video_node', //using same function for both places and subjects.
     'page arguments' => array(3, 2),
     'access arguments' => TRUE,
     'access callback' => TRUE,
@@ -464,6 +464,7 @@ function kmaps_explorer_overview($type = 'ajax', $id, $app) {
   if($type == 'ajax') {
     $commands = array();
     $commands[] = ajax_command_html('#' . $app . '-main', $content);
+    $commands[] = ajax_command_html('.page-title span', $obj->feature->header);
     $page = array('#type' => 'ajax', '#commands' => $commands);
     ajax_deliver($page);
   } else {
@@ -544,9 +545,14 @@ function kmaps_explorer_subjects_essays($type = 'ajax', $id) {
  */
 function kmaps_explorer_places_essays($type = 'ajax', $id, $textId) {
   if($type == 'ajax') {
-    $essayURL = "http://places.kmaps.virginia.edu/features/" . $id . "/descriptions/" . $textId . ".json";
-    $essayObj = json_decode(file_get_contents($essayURL));
-    $output = theme('kmaps_explorer_places_essays_ajax', array('data' => $essayObj->description));
+    if($id == 13740) {
+      $essayURL = 'http://essays.drupal-dev.shanti.virginia.edu/shanti_essays/node_ajax/137';
+      $output = file_get_contents($essayURL);
+    } else {
+      $essayURL = "http://places.kmaps.virginia.edu/features/" . $id . "/descriptions/" . $textId . ".json";
+      $essayObj = json_decode(file_get_contents($essayURL));
+      $output = theme('kmaps_explorer_places_essays_ajax', array('data' => $essayObj->description));
+    }
 
     $commands = array();
     $commands[] = ajax_command_html('#tab-main', $output);
@@ -791,11 +797,11 @@ function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_nu
  */
 function kmaps_explorer_audio_video_node($type = 'ajax', $id) {
   if($type == 'ajax') {
-    $avNodeURL = 'http://mediabase.drupal-dev.shanti.virginia.edu/services/embed/' . $id;
-    $avNodeObj = json_decode(file_get_contents($avNodeURL));
+    $avNodeURL = 'http://mediabase.drupal-dev.shanti.virginia.edu/services/node/ajax/' . $id;
+    $output = file_get_contents($avNodeURL);
 
     $commands = array();
-    $commands[] = ajax_command_html('#tab-main', $avNodeObj->embed);
+    $commands[] = ajax_command_html('#tab-main', $output);
     $page = array('#type' => 'ajax', '#commands' => $commands);
     ajax_deliver($page);
   } else {
