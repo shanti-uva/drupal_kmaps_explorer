@@ -3,9 +3,20 @@
   <ul>
     <?php foreach($data->feature->feature_types as $aItem): ?>
       <li>
-        <a href="<?php print base_path(); ?>subjects/<?php print $aItem->id; ?>/overview/nojs" class="use-ajax">
-          <?php print $aItem->title; ?>
-        </a>
+        <?php print shanti_sarvaka_info_popover(array(
+          'label' => $aItem->title,
+          'desc' => 'Currently no description available',
+          'tree' => array(
+            'label' => 'Subjects',
+            'items' => array('t' => ''),
+          ),
+          'links' => array(
+            'Full Entry' => array(
+              'icon' => 'subjects',
+              'href' => 'subjects/' . $aItem->id . '/overview/nojs',
+            ),
+          ),
+        )); ?>
       </li>
     <?php endforeach; ?>
   </ul>

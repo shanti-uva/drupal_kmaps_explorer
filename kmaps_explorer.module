@@ -21,7 +21,7 @@ function kmaps_explorer_menu() {
   $items['subjects'] = array(
     'title' => 'Subjects',
     'description' => 'Creates a page that shows the initial landing content of the subjects app.',
-    'page callback' => 'kmaps_explorer_subjects_landing',
+    'page callback' => 'kmaps_explorer_places_landing',
     'page arguments' => array('subjects'),
     'access arguments' => array('access content'),
     'type' => MENU_NORMAL_ITEM,
@@ -661,6 +661,7 @@ function kmaps_explorer_text_field($form, &$form_state, $id, $page_num, $total_p
   $form['page_num_text'] = array(
     '#type' => 'textfield',
     '#value' => isset($form_state['input']['page_num_text']) ? $form_state['input']['page_num_text'] : $page_num,
+    '#size' => 10,
     '#attributes' => array(
       'class' => array('page-input'),
       'data-arg' => $id . '-' . $total_pages . '-' . $related_assoc . '-' . $app,
