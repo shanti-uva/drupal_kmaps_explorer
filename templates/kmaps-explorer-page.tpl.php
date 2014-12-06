@@ -137,9 +137,9 @@
             <p>
               <h6 class="custom-inline">FEATURE TYPE &nbsp;&nbsp;</h6>
               <?php foreach($obj->feature->feature_types as $pl_feat_type): ?>
-                <a href="<?php print base_path() . $reverse_type . '/' . $pl_feat_type->id; ?>">
+                <a href="<?php print base_path() . $reverse_type . '/' . $pl_feat_type->id; ?>/overview/nojs">
                   <?php print $pl_feat_type->title; ?>
-                </a>; 
+                </a>&nbsp;
               <?php endforeach; ?>
             </p>
           <?php endif; ?>
