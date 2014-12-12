@@ -587,7 +587,8 @@ function kmaps_explorer_places_essays($type = 'ajax', $id, $textId) {
   if($type == 'ajax') {
     if($id == 13740) {
       $essayURL = 'http://essays.drupal-dev.shanti.virginia.edu/shanti_essays/node_ajax/137';
-      $output = file_get_contents($essayURL);
+      //$output = file_get_contents($essayURL);
+      $output = '<iframe height="700" width="100%" src="' . $essayURL . '"></iframe>';
     } else {
       $essayURL = "http://places.kmaps.virginia.edu/features/" . $id . "/descriptions/" . $textId . ".json";
       $essayObj = json_decode(file_get_contents($essayURL));

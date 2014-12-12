@@ -5,7 +5,7 @@
       <li>
         <?php print shanti_sarvaka_info_popover(array(
           'label' => $aItem->title,
-          'desc' => 'Currently no description available',
+          'desc' => '<p>Currently no description available</p>',
           'tree' => array(
             'label' => 'Subjects',
             'items' => array('t' => ''),
