@@ -1,5 +1,5 @@
 <div id="places-main">
-  <div role="tabpanel">
+  <div class="feature-carousel-tabpanel" role="tabpanel">
     <div class="tabcontent">
 
       <div id="slide-one" class="feature-slide tab-pane fade active in">
@@ -300,13 +300,13 @@
 
 
 		<!-- BEGIN bottom-tier - large slides -->
-    <ul id="carousel-feature-slides" class="carousel-feature-slides large-slides bxslider" role="tablist">
+    <ul id="carousel-feature-slides" class="carousel-feature-slides bx-large-slides bxslider" role="tablist">
       <li class="active" role="presentation">
         <div>
           <a href="#slide-one" aria-controls="slide-one" role="tab" data-toggle="tab">
             <img src="<?php print $path; ?>/places/chamdo-0.png">
-            <p><strong>Name:</strong> Chamdo Prefecture<br>
-              <strong>Place ID:</strong> F15359
+            <p><span><strong>Name:</strong>Chamdo Prefecture</span>
+              <span><strong>Place ID:</strong>F15359</span>
             </p>
           </a>
         </div>
@@ -315,8 +315,8 @@
         <div>
           <a href="#slide-two" aria-controls="slide-two" role="tab" data-toggle="tab">
             <img src="<?php print $path; ?>/places/lhasa-0.png">
-            <p><strong>Name:</strong> Lhasa Prefecture-level City<br>
-              <strong>Place ID:</strong> F17632
+            <p><span><strong>Name:</strong>Lhasa Prefecture-level City</span>
+              <span><strong>Place ID:</strong>F17632</span>
             </p>
           </a>
         </div>
@@ -325,8 +325,8 @@
         <div>
           <a href="#slide-three" aria-controls="slide-three" role="tab" data-toggle="tab">
             <img src="<?php print $path; ?>/places/nyingchi-0.png">
-            <p><strong>Name:</strong> Nyingchi Prefecture<br>
-              <strong>Place ID:</strong> F179
+            <p><span><strong>Name:</strong>Nyingchi Prefecture</span>
+              <span><strong>Place ID:</strong>F179</span>
             </p>
           </a>
         </div>
@@ -335,9 +335,8 @@
         <div>
           <a href="#slide-four" aria-controls="slide-four" role="tab" data-toggle="tab">
             <img src="<?php print $path; ?>/places/ngari-0.png">
-            <p>
-              <strong>Name:</strong> Ngari Prefecture<br>
-              <strong>Place ID:</strong> F7981
+            <p><span><strong>Name:</strong>Ngari Prefecture</span>
+              <span><strong>Place ID:</strong>F7981</span>
             </p>
           </a>
         </div>
@@ -346,9 +345,8 @@
         <div>
           <a href="#slide-five" aria-controls="slide-five" role="tab" data-toggle="tab">
 	          <img src="<?php print $path; ?>/places/lhokha-0.png">
-	          <p>
-	            <strong>Name:</strong>Lhokha Prefecture<br>
-	            <strong>Place ID:</strong>F7981
+	          <p><span><strong>Name:</strong>Lhokha Prefecture</span>
+	            <span><strong>Place ID:</strong>F7981</span>
 	          </p>
           </a>
         </div>
