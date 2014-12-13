@@ -5,14 +5,14 @@
       <div id="slide-one" class="feature-slide tab-pane fade active in">
         <div class="carousel-header go-to-link">
           <span>Featured Places: Tibet Autonomous Region</span>
-          <a href="/collections">View All Collections</a>
+          <a href="#">View All Collections</a>
         </div>
         <div id="feature-slide-detail" class="feature-slide-detail">
           <div class="container-fluid">
             <div class="row">
 		              <div class="feature-slide-detail-content col-xs-12 col-sm-7 col-md-6 col-lg-7">
 		                <div><h3 class="feature-slide-title">
-		                  <a href="collection/tibetan-and-himalayan-library">
+		                  <a href="#">
 		                   <span class="icon shanticon-stack"></span>
 		                      Chamdo Prefecture
 		                  </a>
@@ -25,7 +25,7 @@
 		              <div class="carousel-related-resource-group col-xs-12 col-sm-5 col-md-6 col-lg-5">
 		                <div class="row">
 		                  <div class="col-xs-6 col-md-4 carousel-resource-item">
-		                    <a href="">
+			                    <a href="#">
 		                    <span><img src="<?php print $path; ?>/places/chamdo-1.jpg"></span>
 		                      <h6>January 1, 2015</h6>
 		                      <h5>Karub District</h5>
@@ -33,7 +33,7 @@
 		                    </a>
 		                  </div>
 		                  <div class="col-xs-6 col-md-4 carousel-resource-item">
-		                    <a href="">
+		                    <a href="#">
 		                    <span><img src="<?php print $path; ?>/places/chamdo-2.jpg"></span>
 		                      <h6>January 1, 2015</h6>
 		                      <h5>Baxoi County</h5>
@@ -41,7 +41,7 @@
 		                    </a>
 		                  </div>
 		                  <div class="hidden-xs hidden-sm col-md-4 carousel-resource-item">
-		                    <a href="">
+		                    <a href="#">
 		                    <span><img src="<?php print $path; ?>/places/chamdo-3.jpg"></span>
 		                      <h6>January 1, 2015</h6>
 		                      <h5>Markum County</h5>
@@ -64,14 +64,14 @@
       <div id="slide-two" class="feature-slide tab-pane fade">
         <div class="carousel-header go-to-link">
           <span>Featured Places: Tibet Autonomous Region</span>
-          <a href="/collections">View All Collections</a>
+          <a href="#">View All Collections</a>
         </div>
         <div id="feature-slide-detail" class="feature-slide-detail">
           <div class="container-fluid">
             <div class="row">
                   <div class="feature-slide-detail-content col-xs-12 col-sm-7 col-md-6 col-lg-7">
                     <div><h3 class="feature-slide-title">
-                      <a href="collection/tibetan-and-himalayan-library">
+                      <a href="#">
                        <span class="icon shanticon-stack"></span>
                           Lhasa Prefecture
                       </a>
@@ -84,7 +84,7 @@
                   <div class="carousel-related-resource-group col-xs-12 col-sm-5 col-md-6 col-lg-5 ">
                     <div class="row">
                         <div class="col-xs-6 col-md-4 carousel-resource-item">
-                          <a href="">
+                          <a href="#">
                           <span><img src="<?php print $path; ?>/places/lhasa-1.jpg"></span>
                             <h6>January 1, 2015</h6>
                             <h5>Chengguan District</h5>
@@ -92,7 +92,7 @@
                           </a>
                         </div>
                         <div class="col-xs-6 col-md-4 carousel-resource-item">
-                          <a href="">
+                          <a href="#">
                           <span><img src="<?php print $path; ?>/places/lhasa-2.jpg"></span>
                             <h6>January 1, 2015</h6>
                             <h5>Doilungdêgên County</h5>
@@ -100,7 +100,7 @@
                           </a>
                         </div>
                         <div class="hidden-xs hidden-sm col-md-4 carousel-resource-item">
-                          <a href="">
+                          <a href="#">
                           <span><img src="<?php print $path; ?>/places/lhasa-3.jpg"></span>
                             <h6>January 1, 2015</h6>
                             <h5>Lhünzhub County</h5>
@@ -123,14 +123,14 @@
       <div id="slide-three" class="feature-slide tab-pane fade">
         <div class="carousel-header go-to-link">
           <span>Featured Places: Tibet Autonomous Region</span>
-          <a href="/collections">View All Collections</a>
+          <a href="#">View All Collections</a>
         </div>
         <div id="feature-slide-detail" class="feature-slide-detail">
           <div class="container-fluid">
             <div class="row">
                   <div class="feature-slide-detail-content col-xs-12 col-sm-7 col-md-6 col-lg-7">
                     <div><h3 class="feature-slide-title">
-                      <a href="collection/tibetan-and-himalayan-library">
+                      <a href="#">
                        <span class="icon shanticon-stack"></span>
                           Nyingchi Prefecture
                       </a>
@@ -143,7 +143,7 @@
                   <div class="carousel-related-resource-group col-xs-12 col-sm-5 col-md-6 col-lg-5 ">
                     <div class="row">
                         <div class="col-xs-6 col-md-4 carousel-resource-item">
-                          <a href="">
+                          <a href="#">
                           <span><img src="<?php print $path; ?>/places/nyingchi-1.jpg"></span>
                             <h6>January 1, 2015</h6>
                             <h5>Nyingchi County</h5>
@@ -151,7 +151,7 @@
                           </a>
                         </div>
                         <div class="col-xs-6 col-md-4 carousel-resource-item">
-                          <a href="">
+                          <a href="#">
                           <span><img src="<?php print $path; ?>/places/nyingchi-2.jpg"></span>
                             <h6>January 1, 2015</h6>
                             <h5>Gongbo'gyamda County</h5>
@@ -159,7 +159,7 @@
                           </a>
                         </div>
                         <div class="hidden-xs hidden-sm col-md-4 carousel-resource-item">
-                          <a href="">
+                          <a href="#">
                           <span><img src="<?php print $path; ?>/places/nyingchi-3.jpg"></span>
                             <h6>January 1, 2015</h6>
                             <h5>Bomê County</h5>
@@ -182,14 +182,14 @@
       <div id="slide-four" class="feature-slide tab-pane fade">
         <div class="carousel-header go-to-link">
           <span>Featured Places: Tibet Autonomous Region</span>
-          <a href="/collections">View All Collections</a>
+          <a href="#">View All Collections</a>
         </div>
         <div id="feature-slide-detail" class="feature-slide-detail">
           <div class="container-fluid">
             <div class="row">
                   <div class="feature-slide-detail-content col-xs-12 col-sm-7 col-md-6 col-lg-7">
                     <div><h3 class="feature-slide-title">
-                      <a href="collection/tibetan-and-himalayan-library">
+                      <a href="#">
                        <span class="icon shanticon-stack"></span>
                           Ngari Prefecture
                       </a>
@@ -202,7 +202,7 @@
                   <div class="carousel-related-resource-group col-xs-12 col-sm-5 col-md-6 col-lg-5 ">
                     <div class="row">
                         <div class="col-xs-6 col-md-4 carousel-resource-item">
-                          <a href="">
+                          <a href="#">
                           <span><img src="<?php print $path; ?>/places/ngari-1.jpg"></span>
                             <h6>January 1, 2015</h6>
                             <h5>Rutog County</h5>
@@ -210,7 +210,7 @@
                           </a>
                         </div>
                         <div class="col-xs-6 col-md-4 carousel-resource-item">
-                          <a href="">
+                          <a href="#">
                           <span><img src="<?php print $path; ?>/places/ngari-2.jpg"></span>
                             <h6>January 1, 2015</h6>
                             <h5>Burang County</h5>
@@ -218,7 +218,7 @@
                           </a>
                         </div>
                         <div class="hidden-xs hidden-sm col-md-4 carousel-resource-item">
-                          <a href="">
+                          <a href="#">
                           <span><img src="<?php print $path; ?>/places/ngari-3.jpg"></span>
                             <h6>January 1, 2015</h6>
                             <h5>Gar County</h5>
@@ -241,14 +241,14 @@
 			<div id="slide-five" class="feature-slide tab-pane fade">
         <div class="carousel-header go-to-link">
           <span>Featured Places: Tibet Autonomous Region</span>
-          <a href="/collections">View All Collections</a>
+          <a href="#">View All Collections</a>
         </div>
         <div id="feature-slide-detail" class="feature-slide-detail">
           <div class="container-fluid">
             <div class="row">
                   <div class="feature-slide-detail-content col-xs-12 col-sm-7 col-md-6 col-lg-7">
                     <div><h3 class="feature-slide-title">
-                      <a href="collection/tibetan-and-himalayan-library">
+                      <a href="#">
                        <span class="icon shanticon-stack"></span>
                           Lhoka Prefecture
                       </a>
@@ -261,7 +261,7 @@
                   <div class="carousel-related-resource-group col-xs-12 col-sm-5 col-md-6 col-lg-5 ">
                     <div class="row">
                         <div class="col-xs-6 col-md-4 carousel-resource-item">
-                          <a href="">
+                          <a href="#">
                           <span><img src="<?php print $path; ?>/places/lhokha-1.jpg"></span>
                             <h6>January 1, 2015</h6>
                             <h5>Gonggar County</h5>
@@ -269,7 +269,7 @@
                           </a>
                         </div>
                         <div class="col-xs-6 col-md-4 carousel-resource-item">
-                          <a href="">
+                          <a href="#">
                           <span><img src="<?php print $path; ?>/places/lhokha-2.jpg"></span>
                             <h6>January 1, 2015</h6>
                             <h5>Chongye County</h5>
@@ -277,7 +277,7 @@
                           </a>
                         </div>
                         <div class="hidden-xs hidden-sm col-md-4 carousel-resource-item">
-                          <a href="">
+                          <a href="#">
                           <span><img src="<?php print $path; ?>/places/lhokha-3.jpg"></span>
                             <h6>January 1, 2015</h6>
                             <h5>Nêdong County</h5>

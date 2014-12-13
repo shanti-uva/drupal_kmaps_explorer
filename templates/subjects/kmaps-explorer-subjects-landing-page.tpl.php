@@ -25,7 +25,7 @@
                   <div class="carousel-related-resource-group col-xs-12 col-sm-5 col-md-6 col-lg-5 ">
                     <div class="row">
                         <div class="col-xs-6 col-md-4 carousel-resource-item">
-                          <a href="">
+                          <a href="#">
                           <span><img src="<?php print $path; ?>/subjects/personal-1.jpg"></span>
                             <h6>January 1, 2015</h6>
                             <h5>Caplan Collection</h5>
@@ -33,7 +33,7 @@
                           </a>
                         </div>
                         <div class="col-xs-6 col-md-4 carousel-resource-item">
-                          <a href="">
+                          <a href="#">
                           <span><img src="<?php print $path; ?>/subjects/personal-2.jpg"></span>
                             <h6>January 1, 2015</h6>
                             <h5>Mark Turin Collection</h5>
@@ -41,7 +41,7 @@
                           </a>
                         </div>
                         <div class="hidden-xs hidden-sm col-md-4 carousel-resource-item">
-                          <a href="">
+                          <a href="#">
                           <span><img src="<?php print $path; ?>/subjects/personal-3.jpg"></span>
                             <h6>January 1, 2015</h6>
                             <h5>Nicolas Sihle</h5>
