@@ -48,7 +48,7 @@ function kmaps_explorer_menu() {
   );
 
   $items['places/%/overview/%'] = array(
-    'title' => 'Subjects',
+    'title' => 'Places',
     'description' => 'Creates a callback that shows overview in places via ajax',
     'page callback' => 'kmaps_explorer_overview',
     'page arguments' => array(3, 1, 'places'),
@@ -66,7 +66,7 @@ function kmaps_explorer_menu() {
   );
 
   $items['places/%/subjects/%'] = array(
-    'title' => 'Subjects',
+    'title' => 'Places',
     'description' => 'Creates a callback that shows subjects in places via ajax',
     'page callback' => 'kmaps_explorer_places_subjects',
     'page arguments' => array(3, 1),
@@ -84,7 +84,7 @@ function kmaps_explorer_menu() {
   );
 
   $items['places/%/essays/%'] = array(
-    'title' => 'Subjects',
+    'title' => 'Places',
     'description' => 'Creates a callback that shows essays in places via ajax',
     'page callback' => 'kmaps_explorer_places_essays',
     'page arguments' => array(3, 1),
@@ -102,7 +102,7 @@ function kmaps_explorer_menu() {
   );
 
   $items['places/%/places/%'] = array(
-    'title' => 'Subjects',
+    'title' => 'Places',
     'description' => 'Creates a callback that shows places in places via ajax',
     'page callback' => 'kmaps_explorer_places_places',
     'page arguments' => array(3, 1),
@@ -119,10 +119,28 @@ function kmaps_explorer_menu() {
     'access callback' => TRUE,
   );
 
+  $items['places/%/photos/%'] = array(
+    'title' => 'Places',
+    'description' => 'Creates a callback that shows photos in places via ajax',
+    'page callback' => 'kmaps_explorer_places_photos',
+    'page arguments' => array(3, 1),
+    'access arguments' => TRUE,
+    'access callback' => TRUE,
+  );
+
   $items['subjects/%/texts/%'] = array(
     'title' => 'Subjects',
     'description' => 'Creates a callback that shows texts in subjects via ajax',
     'page callback' => 'kmaps_explorer_subjects_texts',
+    'page arguments' => array(3, 1),
+    'access arguments' => TRUE,
+    'access callback' => TRUE,
+  );
+
+  $items['places/%/texts/%'] = array(
+    'title' => 'Places',
+    'description' => 'Creates a callback that shows texts in places via ajax',
+    'page callback' => 'kmaps_explorer_places_texts',
     'page arguments' => array(3, 1),
     'access arguments' => TRUE,
     'access callback' => TRUE,
@@ -138,7 +156,7 @@ function kmaps_explorer_menu() {
   );
 
   $items['places/%/audio-video/%'] = array(
-    'title' => 'Subjects',
+    'title' => 'Places',
     'description' => 'Creates a callback that shows audio-video in places via ajax',
     'page callback' => 'kmaps_explorer_subjects_audio_video', //using same function as in subjects.
     'page arguments' => array(3, 1, 'place'),
@@ -320,6 +338,11 @@ function kmaps_explorer_theme() {
       'arguments' => array(),
       'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
     ),
+    'kmaps_explorer_places_texts_ajax' => array(
+      'template' => 'kmaps-explorer-places-texts',
+      'arguments' => array(),
+      'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
+    ),
   );
 }
 
@@ -424,6 +447,9 @@ function kmaps_explorer_overview($type = 'ajax', $id, $app) {
     drupal_add_js($path . '/js/inset-map.js', $options);
   }
 
+  //custom javascript
+  drupal_add_js($path . '/js/custom.js', $options);
+
   drupal_add_library('system', 'drupal.ajax');
 
   //Create the url for related assets for subjects and places
@@ -440,25 +466,34 @@ function kmaps_explorer_overview($type = 'ajax', $id, $app) {
   //Store the title of this node for other functions to use
   variable_set('kmaps_explorer_node_title', $obj->feature->header);
 
+  //Store the count for the places photos if available
+  if(isset($obj->feature->associated_resources->picture_count) && intval($obj->feature->associated_resources->picture_count) > 0) {
+    variable_set('kmaps_explorer_places_photos_count', $obj->feature->associated_resources->picture_count);
+  }
+
   //Get solr data
   $solrJSON = file_get_contents($solrURL);
   $solrObj = json_decode($solrJSON);
+  //dpm($solrObj);
 
   $video_count = 0;
+  $solr_text_count = 0;
 
   foreach ($solrObj->grouped->service->groups as $solrKey => $solrValue) {
     if ($solrValue->groupValue == "mediabase" && $solrValue->doclist->numFound > 0) {
       $video_count = $solrValue->doclist->numFound;
     }
+    if ($solrValue->groupValue == "essays_drupal" && $solrValue->doclist->numFound > 0) {
+      $solr_text_count = $solrValue->doclist->numFound;
+    }
   }
 
   //test information for subpages
-  // $mid = 20;
   // $app = 'subject';
   // $avURL = 'http://mediabase.drupal-dev.shanti.virginia.edu/services/' . $app . '/' . $id . '?rows=12&pg=3';
   // $avObj = json_decode(file_get_contents($avURL));
   // dpm($avObj);
-  
+
   //Places Overview setup
   if ($app == 'places') {
     if (count($obj->feature->illustrations) > 0 && $obj->feature->illustrations[0]->type =='mms') {
@@ -495,6 +530,7 @@ function kmaps_explorer_overview($type = 'ajax', $id, $app) {
     'obj' => $obj,
     'reverse_type' => $app == 'subjects' ? 'places' : 'subjects',
     'video_count' => $video_count,
+    'solr_text_count' => $solr_text_count,
     'places_overview_image' => isset($placesOverviewImage) ? $placesOverviewImage : '',
     'ajax' => $type == 'ajax' ? TRUE : FALSE,
     'accordionName' => isset($accordionName) ? $accordionName : '',
@@ -583,9 +619,13 @@ function kmaps_explorer_subjects_essays($type = 'ajax', $id) {
 /**
  * Function to create the ajax content for esssays in places
  */
-function kmaps_explorer_places_essays($type = 'ajax', $id, $textId) {
+function kmaps_explorer_places_essays($type = 'ajax', $id, $solr, $textId) {
   if($type == 'ajax') {
     if($id == 13740) {
+      $essayURL = 'http://essays.drupal-dev.shanti.virginia.edu/shanti_essays/node_ajax/137';
+      //$output = file_get_contents($essayURL);
+      $output = '<iframe height="700" width="100%" src="' . $essayURL . '"></iframe>';
+    } elseif($solr == 'solr') {
       $essayURL = 'http://essays.drupal-dev.shanti.virginia.edu/shanti_essays/node_ajax/137';
       //$output = file_get_contents($essayURL);
       $output = '<iframe height="700" width="100%" src="' . $essayURL . '"></iframe>';
@@ -711,7 +751,12 @@ function kmaps_explore_pager_ajax($form, &$form_state) {
     return kmaps_explorer_subjects_places('ajax', intval($id), intval($page_num), intval($total_pages), TRUE);
   }
   if ($related_assoc == 'photos') {
-    return kmaps_explorer_subjects_photos('ajax', intval($id), intval($page_num), intval($total_pages), TRUE);
+    if ($app == 'subject') {
+      return kmaps_explorer_subjects_photos('ajax', intval($id), intval($page_num), intval($total_pages), TRUE);
+    }
+    if ($app == 'place') {
+      return kmaps_explorer_places_photos('ajax', intval($id), intval($page_num), intval($total_pages), TRUE);
+    }
   }
   if ($related_assoc == 'audiovideo') {
     return kmaps_explorer_subjects_audio_video('ajax', intval($id), $app, intval($page_num), intval($total_pages), TRUE);
@@ -764,6 +809,51 @@ function kmaps_explorer_subjects_photos($type = 'ajax', $id, $page_num=1, $total
 }
 
 /**
+ * Function to create ajax content for photos in places
+ */
+function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num=1, $total_pages=1, $subpage=FALSE) {
+  if($type == 'ajax') {
+    $photosURL = 'http://mms.thlib.org/places/' . $id . '/pictures.json?per_page=30&page=' . $page_num;
+    $photosObj = json_decode(file_get_contents($photosURL));
+
+    $total_items = intval(variable_get('kmaps_explorer_places_photos_count', 0));
+    $total_pages = intval($total_items / 32);
+
+    $output = theme('kmaps_explorer_subjects_photos_ajax', array(
+      'data' => $photosObj->place->media,
+      'title' => variable_get('kmaps_explorer_node_title', ''),
+    ));
+
+    //create the pager input element
+    $page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'photos', 'place');
+    $input_el = render($page_input_array);
+
+    $pageBaseUrl = base_path() . 'places/' . $id . '/photos/nojs/';
+    $pagination = theme('kmaps_explorer_pagination_template', array(
+      'first_link' => $pageBaseUrl . '1/' . $total_pages,
+      'previous_link' => $pageBaseUrl . ($page_num <= 1 ? '1' : ($page_num - 1)) . '/' . $total_pages,
+      'next_link' => $pageBaseUrl . ($page_num >= $total_pages ? $total_pages : ($page_num + 1)) . '/' . $total_pages,
+      'last_link' => $pageBaseUrl . $total_pages . '/' . $total_pages,
+      'total_pages' => $total_pages,
+      'page_num' => $page_num,
+      'input_el' => $input_el,
+    ));
+
+    $commands = array();
+    $commands[] = ajax_command_html('#tab-main', $output);
+    $commands[] = ajax_command_append('#tab-main', $pagination);
+    $page = array('#type' => 'ajax', '#commands' => $commands);
+    if($subpage) {
+      return $page;
+    } else {  
+      ajax_deliver($page);
+    }
+  } else {
+    return t("Please enable JavaScript to use this application.");
+  }
+}
+
+/**
  * Function to create ajax content for texts in subjects
  */
 function kmaps_explorer_subjects_texts($type = 'ajax', $id, $page_num=1, $total_pages=1, $subpage=FALSE) {
@@ -773,6 +863,40 @@ function kmaps_explorer_subjects_texts($type = 'ajax', $id, $page_num=1, $total_
 
     $output = theme('kmaps_explorer_subjects_texts_ajax', array(
       'data' => $textsObj->topic->media,
+      'title' => variable_get('kmaps_explorer_node_title', ''),
+    ));
+
+    $commands = array();
+    $commands[] = ajax_command_html('#tab-main', $output);
+    $page = array('#type' => 'ajax', '#commands' => $commands);
+    if($subpage) {
+      return $page;
+    } else {  
+      ajax_deliver($page);
+    }
+  } else {
+    return t("Please enable JavaScript to use this application.");
+  }
+}
+
+/**
+ * Function to create ajax content for texts in places
+ */
+function kmaps_explorer_places_texts($type = 'ajax', $id, $page_num=1, $total_pages=1, $subpage=FALSE) {
+  if($type == 'ajax') {
+    $textsURL = 'http://mms.thlib.org/places/' . $id . '/documents.json';
+    $textsObj = json_decode(file_get_contents($textsURL));
+    $textImages = array();
+    foreach ($textsObj->place->media as $Imgkey => $Imgvalue) {
+      $ImgURL = 'http://mms.thlib.org' . '/media_objects/' . $Imgvalue->id . '.json';
+      $ImgOBJ = json_decode(file_get_contents($ImgURL));
+      if(isset($ImgOBJ->document)) {
+        array_push($textImages, $ImgOBJ->document);
+      }
+    }
+
+    $output = theme('kmaps_explorer_places_texts_ajax', array(
+      'data' => $textImages,
       'title' => variable_get('kmaps_explorer_node_title', ''),
     ));
 

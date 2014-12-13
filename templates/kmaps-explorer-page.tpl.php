@@ -2,7 +2,7 @@
   <!-- Column Resources  -->              
   <aside class="content-resources col-xs-6 col-sm-3 sidebar-offcanvas equal-height">
     <ul class="nav nav-pills nav-stacked">
-      <li class="overview"><a href="<?php print base_path() . $type . '/' . $kid; ?>/overview/nojs" class="use-ajax">
+      <li class="overview active"><a href="<?php print base_path() . $type . '/' . $kid; ?>/overview/nojs" class="use-ajax">
         <i class="icon shanticon-overview"></i>Overview</a>
       </li>
 
@@ -16,7 +16,15 @@
         </li>
       <?php endif; ?>
 
-      <?php if($obj->feature->associated_resources->description_count > 0): ?>
+      <?php if($solr_text_count > 0): ?>
+        <li class="essays">
+          <a href="<?php print base_path() . $type . '/' . $kid; ?>/essays/nojs/solr/<?php print isset($obj->feature->descriptions) ? '/' . $obj->feature->descriptions[0]->id : ''; ?>" class="use-ajax">
+            <i class="icon shanticon-essays"></i>
+            Essays
+            <span class="badge"><?php print $obj->feature->associated_resources->description_count; ?></span>
+          </a>
+        </li>
+      <?php elseif($obj->feature->associated_resources->description_count > 0): ?>
         <li class="essays">
           <a href="<?php print base_path() . $type . '/' . $kid; ?>/essays/nojs<?php print isset($obj->feature->descriptions) ? '/' . $obj->feature->descriptions[0]->id : ''; ?>" class="use-ajax">
             <i class="icon shanticon-essays"></i>

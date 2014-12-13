@@ -14,10 +14,9 @@
         controls:true,
         autoReload: true,
         moveSlides: 1,
+        infiniteLoop: false,
         breaks: [{screen:0, slides:1, pager:false},{screen:380, slides:1},{screen:450, slides:2},{screen:768, slides:3},{screen:1200, slides:4}]
       });
     }
   };
-
-
 })(jQuery);

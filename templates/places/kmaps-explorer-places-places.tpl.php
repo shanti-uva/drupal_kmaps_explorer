@@ -7,9 +7,20 @@
         <ul>
           <?php foreach($bItem->features as $cItem): ?>
             <li>
-              <a href="<?php print base_path(); ?>places/<?php print $cItem->id; ?>/overview/nojs" class="use-ajax">
-                <?php print $cItem->header; ?>
-              </a>
+              <?php print shanti_sarvaka_info_popover(array(
+                'label' => $cItem->header,
+                'desc' => '<p>Currently no description available</p>',
+                'tree' => array(
+                  'label' => 'Places',
+                  'items' => array('t' => ''),
+                ),
+                'links' => array(
+                  'Full Entry' => array(
+                    'icon' => 'places',
+                    'href' => 'places/' . $cItem->id . '/overview/nojs',
+                  ),
+                ),
+              )); ?>
             </li>
           <?php endforeach; ?>
         </ul>

@@ -5,9 +5,20 @@
     <ul>
       <?php foreach($aItem->features as $bItem): ?>
         <li>
-          <a href="<?php print base_path() . 'subjects/' . $bItem->id; ?>/overview/nojs" class="use-ajax">
-            <?php print $bItem->header; ?> (From the General Perspective)
-          </a>
+          <?php print shanti_sarvaka_info_popover(array(
+        'label' => $bItem->header . ' (From the General Perspective)',
+        'desc' => '<p>Currently no description available</p>',
+        'tree' => array(
+          'label' => 'Feature Types',
+          'items' => array('t' => ''),
+        ),
+        'links' => array(
+          'Full Entry' => array(
+            'icon' => 'Subjects',
+            'href' => 'subjects/' . $bItem->id . '/overview/nojs',
+          ),
+        ),
+      )); ?>
         </li>
       <?php endforeach; ?>
     </ul>
