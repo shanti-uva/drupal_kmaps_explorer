@@ -8,7 +8,7 @@
           $(this).parent().addClass('active');
       });
 
-      $('#carousel-feature-slides.large-slides').bxSlider({
+      $('#carousel-feature-slides.bx-large-slides').bxSlider({
         slideMargin:10,
         pager:true,
         controls:true,
@@ -19,7 +19,7 @@
         breaks: [{screen:0, slides:1, pager:false},{screen:380, slides:1},{screen:450, slides:2},{screen:768, slides:3},{screen:1200, slides:4}]
       });
 
-      $('#carousel-feature-slides.small-slides').bxSlider({
+      $('#carousel-feature-slides.bx-small-slides').bxSlider({
         slideMargin:10,
         pager:true,
         controls:true,
