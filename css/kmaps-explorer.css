@@ -74,6 +74,6 @@ figcaption .center-caption {
 
 .content-resources ul.nav > li .ajax-progress {
   position: absolute;
-  right: 0;
-  top: 25%;
+  right: 0.05rem;
+  top: 0.05rem;
 }
