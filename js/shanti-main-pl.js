@@ -107,8 +107,8 @@ function processPlacesData(data) {
         overviewContent += '<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=http:%2F%2Fplaces.thlib.org%2Ffeatures%2Fgis_resources%2F' + data.feature.closest_fid_with_shapes + '.kmz&amp;ie=UTF8&amp;t=p&amp;output=embed"></iframe>';
         overviewContent += '</div>';
         overviewContent += '<div class="btn-group btn-group-gmaps">';
-        overviewContent += '<button class="btn btn-default italic renderGmaps active">Google Map</button>';
-        overviewContent += '<button class="btn btn-default italic renderOpenLayerMaps">Custom Map</button>'
+        overviewContent += '<button class="btn btn-default renderGmaps active">Google Map</button>';
+        overviewContent += '<button class="btn btn-default renderOpenLayerMaps">Custom Map</button>'
         overviewContent += '</div>';
       }
       overviewContent += '<aside class="panel-group" id="accordion">';
