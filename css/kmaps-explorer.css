@@ -66,14 +66,3 @@ figcaption .center-caption {
 .subjects-overview-image .cap-bot figcaption { left: 0; bottom: -30%;}
 .subjects-overview-image .cap-bot:hover figcaption { bottom: 0; }
 
-/*Correctly position the Drupal ajax throbber*/
-
-.content-resources ul.nav > li {
-  position: relative;
-}
-
-.content-resources ul.nav > li .ajax-progress {
-  position: absolute;
-  right: 0.05rem;
-  top: 0.05rem;
-}
