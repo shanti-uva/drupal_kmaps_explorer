@@ -21,7 +21,7 @@
           <a href="<?php print base_path() . $type . '/' . $kid; ?>/essays/nojs/solr/<?php print isset($obj->feature->descriptions) ? '/' . $obj->feature->descriptions[0]->id : ''; ?>" class="use-ajax">
             <span class="icon shanticon-essays"></span>
             Essays
-            <span class="badge"><?php print $obj->feature->associated_resources->description_count; ?></span>
+            <span class="badge"><?php print $solr_text_count; ?></span>
           </a>
         </li>
       <?php elseif($obj->feature->associated_resources->description_count > 0): ?>
