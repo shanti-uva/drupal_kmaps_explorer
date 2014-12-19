@@ -316,7 +316,8 @@ jQuery(function ($) {
                 top: '0px',
                 left: '0px',
                 zIndex: 10000,
-                backgroundColor: 'grey'
+                opacity: 9,
+                backgroundColor: 'white'
             }).appendTo(this).fadeTo(0, 0.5).find('div').position( { my: 'center center', at: 'center center', of: '.overlay-mask' } );
         }
 

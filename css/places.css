@@ -6,7 +6,7 @@
 /* .breadwrap ol li:last-child{ position:relative;top:-0.93em;} */
 
 /* --- gmaps-buttons is example of class set on div wrapper ---*/
-.btn-group-gmaps{ display:inline-block;	position:absolute;top:600px;left:80px;-moz-box-shadow: 0px 0px 25px 0px rgba(50, 50, 50, 0.75);box-shadow: 0px 0px 25px 0px rgba(50, 50, 50, 0.75);}
+.btn-group-gmaps{ display:inline-block;	position:absolute;top:600px;left:80px;-moz-box-shadow: 0px 0px 15px 0px rgba(50, 50, 50, 0.6);box-shadow: 0px 0px 15px 0px rgba(50, 50, 50, 0.6);}
 .btn-group-gmaps.btn-group > .btn.btn-default{ border:none;/*font-family:'droidserif',palatino,'Palatino Linotype',georgia,serif;*/}
 .btn-group-gmaps .btn.btn-default.active{ color:#fff; background:#606060; }
 
