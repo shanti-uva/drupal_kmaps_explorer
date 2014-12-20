@@ -20,7 +20,7 @@
         <li class="essays">
           <a href="<?php print base_path() . $type . '/' . $kid; ?>/essays/nojs/solr/<?php print isset($obj->feature->descriptions) ? '/' . $obj->feature->descriptions[0]->id : ''; ?>" class="use-ajax">
             <span class="icon shanticon-essays"></span>
-            Essays
+            Texts
             <span class="badge"><?php print $solr_text_count; ?></span>
           </a>
         </li>
@@ -28,7 +28,7 @@
         <li class="essays">
           <a href="<?php print base_path() . $type . '/' . $kid; ?>/essays/nojs<?php print isset($obj->feature->descriptions) ? '/' . $obj->feature->descriptions[0]->id : ''; ?>" class="use-ajax">
             <span class="icon shanticon-essays"></span>
-            Essays
+            Texts
             <span class="badge"><?php print $obj->feature->associated_resources->description_count; ?></span>
           </a>
         </li>
@@ -79,16 +79,6 @@
       <?php if(false): ?>
         <li class="visuals"><a href="<?php print base_path() . $type . '/' . $kid; ?>/visuals">
           <span class="icon shanticon-visuals"></span>Visuals<span class="badge"></span></a>
-        </li>
-      <?php endif; ?>
-
-      <?php if($obj->feature->associated_resources->document_count > 0): ?>
-        <li class="texts">
-          <a href="<?php print base_path() . $type . '/' . $kid; ?>/texts/nojs" class="use-ajax">
-            <span class="icon shanticon-texts"></span>
-            Texts
-            <span class="badge"><?php print $obj->feature->associated_resources->document_count; ?></span>
-          </a>
         </li>
       <?php endif; ?>
 
