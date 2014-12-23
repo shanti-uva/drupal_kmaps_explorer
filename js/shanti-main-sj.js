@@ -149,7 +149,7 @@ jQuery(function($) {
           $(".extruder .text").css("width","100%");
         });
           // styles inline for now, forces
-        $(".flap").prepend("<span style='font-size:21px; position:absolute; left:17px; top:12px; z-index:10;'><i class='icon shanticon-search'></i></span>");
+        $(".flap").prepend("<span style='font-size:21px; position:absolute; left:17px; top:12px; z-index:10;'><span class='icon shanticon-search'></span></span>");
         $(".flap").addClass("on-flap");
   }
 
@@ -1665,7 +1665,7 @@ function processSubjectsSolr(data) {
 
 function populateBreadcrumbs(bInd, bVal) {
   $breadcrumbOl = $("ol.breadcrumb");
-  $breadcrumbOl.append('<li><a href="#id=' + bVal.id + '">' + bVal.header + '</a><i class="fa fa-angle-right"></i></li>');
+  $breadcrumbOl.append('<li><a href="#id=' + bVal.id + '">' + bVal.header + '</a><span class="fa fa-angle-right"></span></li>');
 }
 
 function showOverviewImage(data) {
@@ -1743,15 +1743,15 @@ function relatedPhotos(data) {
 
   contentPh += '</div>';
   contentPh += '<ul id="photo-pagination" class="pager">';
-  contentPh += '<li class="first-page pager-first first"><a href="' + shanti.photosURL + '&page=1' + '"><i class="icon"></i></a></li>';
-  contentPh += '<li class="previous-page pager-previous"><a href="' + shanti.photosURL + '&page=1' + '"><i class="icon"></i></a></li>';
+  contentPh += '<li class="first-page pager-first first"><a href="' + shanti.photosURL + '&page=1' + '"><span class="icon"></span></a></li>';
+  contentPh += '<li class="previous-page pager-previous"><a href="' + shanti.photosURL + '&page=1' + '"><span class="icon"></span></a></li>';
   contentPh += '<li>PAGE</li>';
   contentPh += '<li class="pager-current widget"><input type="text" value="1" class="page-input"></li>';
   contentPh += '<li>OF ' + data.topic.total_pages + '</li>';
-  contentPh += '<li class="next-page pager-next"><a href="' + shanti.photosURL + '&page=2' + '"><i class="icon"></i></a></li>';
-  contentPh += '<li class="last-page pager-last last"><a href="' + shanti.photosURL + '&page=' + data.topic.total_pages + '"><i class="icon"></i></a></li>';
+  contentPh += '<li class="next-page pager-next"><a href="' + shanti.photosURL + '&page=2' + '"><span class="icon"></span></a></li>';
+  contentPh += '<li class="last-page pager-last last"><a href="' + shanti.photosURL + '&page=' + data.topic.total_pages + '"><span class="icon"></span></a></li>';
   contentPh += '</ul>';
-  contentPh += '<div class="paginated-spin"><i class="fa fa-spinner"></i></div>';
+  contentPh += '<div class="paginated-spin"><span class="fa fa-spinner"></span></div>';
   $("#tab-photos").append(contentPh);
 
   //Add the event listener for the first-page element
@@ -1934,7 +1934,7 @@ function relatedVideos(data) {
     contentAV += '<span class="icon"></span>';
     contentAV += '</span>';
     contentAV += '<img src="' + rElm.thumbnail + '/width/360/height/270/type/2/bgcolor/000000' + '" alt="Video" typeof="foaf:Image" class="k-no-rotate">';
-    contentAV += '<i class="shanticon-video thumbtype"></i>';
+    contentAV += '<span class="shanticon-video thumbtype"></span>';
     contentAV += '</a>';
     contentAV += '</div>';
     contentAV += '<div class="shanti-thumbnail-info">';
@@ -1968,15 +1968,15 @@ function relatedVideos(data) {
   var total_pages = parseInt(data.total / data.rows);
 
   contentAV += '<ul id="photo-pagination" class="pager">';
-  contentAV += '<li class="first-page pager-first first"><a href="' + avURL + '&pg=1' + '"><i class="icon"></i></a></li>';
-  contentAV += '<li class="previous-page pager-previous"><a href="' + avURL + '&pg=1' + '"><i class="icon"></i></a></li>';
+  contentAV += '<li class="first-page pager-first first"><a href="' + avURL + '&pg=1' + '"><span class="icon"></span></a></li>';
+  contentAV += '<li class="previous-page pager-previous"><a href="' + avURL + '&pg=1' + '"><span class="icon"></span></a></li>';
   contentAV += '<li>PAGE</li>';
   contentAV += '<li class="pager-current widget"><input type="text" value="1" class="page-input"></li>';
   contentAV += '<li>OF ' + total_pages + '</li>';
-  contentAV += '<li class="next-page pager-next"><a href="' + avURL + '&pg=2' + '"><i class="icon"></i></a></li>';
-  contentAV += '<li class="last-page pager-last last"><a href="' + avURL + '&pg=' + total_pages + '"><i class="icon"></i></a></li>';
+  contentAV += '<li class="next-page pager-next"><a href="' + avURL + '&pg=2' + '"><span class="icon"></span></a></li>';
+  contentAV += '<li class="last-page pager-last last"><a href="' + avURL + '&pg=' + total_pages + '"><span class="icon"></span></a></li>';
   contentAV += '</ul>';
-  contentAV += '<div class="paginated-spin"><i class="fa fa-spinner"></i></div>';
+  contentAV += '<div class="paginated-spin"><span class="fa fa-spinner"></span></div>';
 
   $("#tab-audio-video").append(contentAV);
 
@@ -2123,7 +2123,7 @@ function paginatedVideos(data) {
     contentAV += '<span class="icon"></span>';
     contentAV += '</span>';
     contentAV += '<img src="' + rElm.thumbnail + '/width/360/height/270/type/2/bgcolor/000000' + '" alt="Video" typeof="foaf:Image" class="k-no-rotate">';
-    contentAV += '<i class="shanticon-video thumbtype"></i>';
+    contentAV += '<span class="shanticon-video thumbtype"></span>';
     contentAV += '</a>';
     contentAV += '</div>';
     contentAV += '<div class="shanti-thumbnail-info">';
@@ -2210,15 +2210,15 @@ function relatedPlaces(data) {
   var total_pages = data.total_pages;
 
   contentPl += '<ul id="photo-pagination" class="pager">';
-  contentPl += '<li class="first-page pager-first first"><a href="' + avURL + '?page=1' + '"><i class="icon"></i></a></li>';
-  contentPl += '<li class="previous-page pager-previous"><a href="' + avURL + '?page=1' + '"><i class="icon"></i></a></li>';
+  contentPl += '<li class="first-page pager-first first"><a href="' + avURL + '?page=1' + '"><span class="icon"></span></a></li>';
+  contentPl += '<li class="previous-page pager-previous"><a href="' + avURL + '?page=1' + '"><span class="icon"></span></a></li>';
   contentPl += '<li>PAGE</li>';
   contentPl += '<li class="pager-current widget"><input type="text" value="1" class="page-input"></li>';
   contentPl += '<li>OF ' + total_pages + '</li>';
-  contentPl += '<li class="next-page pager-next"><a href="' + avURL + '?page=2' + '"><i class="icon"></i></a></li>';
-  contentPl += '<li class="last-page pager-last last"><a href="' + avURL + '?page=' + total_pages + '"><i class="icon"></i></a></li>';
+  contentPl += '<li class="next-page pager-next"><a href="' + avURL + '?page=2' + '"><span class="icon"></span></a></li>';
+  contentPl += '<li class="last-page pager-last last"><a href="' + avURL + '?page=' + total_pages + '"><span class="icon"></span></a></li>';
   contentPl += '</ul>';
-  contentPl += '<div class="paginated-spin"><i class="fa fa-spinner"></i></div>';
+  contentPl += '<div class="paginated-spin"><span class="fa fa-spinner"></span></div>';
 
   $("#tab-places").append(contentPl);
 
