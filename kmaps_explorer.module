@@ -383,7 +383,7 @@ function kmaps_explorer_subjects_landing($type) {
     'scope' => 'footer',
   );
 
-  // drupal_add_js($path . '/js/jquery.bxslider-rahisified.js', $options);
+  drupal_add_js($path . '/js/jquery.bxslider-rahisified.js', $options);
   // drupal_add_js($path . '/js/bxsliderInit.js', $options);
 
   return theme('kmaps_explorer_subjects_landing', array(
@@ -410,7 +410,7 @@ function kmaps_explorer_places_landing($type) {
     'scope' => 'footer',
   );
 
-  // drupal_add_js($path . '/js/jquery.bxslider-rahisified.js', $options);
+  drupal_add_js($path . '/js/jquery.bxslider-rahisified.js', $options);
   // drupal_add_js($path . '/js/bxsliderInit.js', $options);
 
   return theme('kmaps_explorer_places_landing', array(
