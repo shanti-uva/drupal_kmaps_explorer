@@ -375,16 +375,16 @@ function kmaps_explorer_subjects_landing($type) {
     'group' => CSS_THEME,
   );
 
-  drupal_add_css('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', 'external');
-  drupal_add_css($path . '/css/jquery.bxslider.css', $options);
+  // drupal_add_css('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', 'external');
+  // drupal_add_css($path . '/css/jquery.bxslider.css', $options);
 
   $options = array(
     'group' => JS_DEFAULT,
     'scope' => 'footer',
   );
 
-  drupal_add_js($path . '/js/jquery.bxslider-rahisified.js', $options);
-  drupal_add_js($path . '/js/bxsliderInit.js', $options);
+  // drupal_add_js($path . '/js/jquery.bxslider-rahisified.js', $options);
+  // drupal_add_js($path . '/js/bxsliderInit.js', $options);
 
   return theme('kmaps_explorer_subjects_landing', array(
     'path' => $path . '/images',
@@ -402,16 +402,16 @@ function kmaps_explorer_places_landing($type) {
     'group' => CSS_THEME,
   );
 
-  drupal_add_css('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', 'external');
-  drupal_add_css($path . '/css/jquery.bxslider.css', $options);
+  // drupal_add_css('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', 'external');
+  // drupal_add_css($path . '/css/jquery.bxslider.css', $options);
 
   $options = array(
     'group' => JS_DEFAULT,
     'scope' => 'footer',
   );
 
-  drupal_add_js($path . '/js/jquery.bxslider-rahisified.js', $options);
-  drupal_add_js($path . '/js/bxsliderInit.js', $options);
+  // drupal_add_js($path . '/js/jquery.bxslider-rahisified.js', $options);
+  // drupal_add_js($path . '/js/bxsliderInit.js', $options);
 
   return theme('kmaps_explorer_places_landing', array(
     'path' => $path . '/images',
