@@ -402,7 +402,7 @@ function kmaps_explorer_places_landing($type) {
     'group' => CSS_THEME,
   );
 
-  // drupal_add_css('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', 'external');
+  drupal_add_css('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', 'external');
   // drupal_add_css($path . '/css/jquery.bxslider.css', $options);
 
   $options = array(
