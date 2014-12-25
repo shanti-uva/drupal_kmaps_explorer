@@ -161,27 +161,6 @@ function processPlacesData(data) {
         $('.renderGmaps').removeClass('active');
       });
 
-      
-      // *** NAVIGATION *** accordion toggle
-      $.fn.accordionFx = function() {
-          return this.each(function(i, accordion) {
-              $(".accordion-toggle", accordion).click(function(ev) {
-                  var link = ev.target;
-                  var header = $(link).closest(".panel-heading");
-                  var chevState = $("i.glyphicon", header)
-                      .toggleClass('glyphicon-minus glyphicon-plus');
-                  $("i.glyphicon", accordion)
-                      .not(chevState)
-                      .removeClass("glyphicon-minus")
-                      .addClass("glyphicon-plus");
-              });
-          });
-      };
-      $('#accordion').accordionFx();
-
-     
-
-
       //Trigger remote call for overview accordion Names
       $("#collapseOne").one('show.bs.collapse', function() {
         var namesURL = Settings.baseUrl + "/features/" + data.feature.id + "/names.json";
