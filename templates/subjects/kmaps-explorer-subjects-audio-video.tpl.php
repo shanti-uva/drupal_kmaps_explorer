@@ -3,7 +3,7 @@
     <li class="shanti-thumbnail video">
       <div class="shanti-thumbnail-image shanti-field-video">
         <a href="<?php print base_path() . 'audio-video/node/' . $aItem->nid; ?>/nojs" class="shanti-thumbnail-link use-ajax">
-          <span class="overlay"><span cla;ss="icon"></span></span>
+          <span class="overlay"><span class="icon"></span></span>
           <img src="<?php print $aItem->thumbnail; ?>/width/360/height/270/type/2/bgcolor/000000" alt="Video" typeof="foaf:Image" class="k-no-rotate">
           <span class="icon shanticon-video"></span>
         </a>
