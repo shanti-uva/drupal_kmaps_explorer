@@ -1,6 +1,6 @@
-<div class="related-audio-video">
+<ul class="related-audio-video shanti-gallery">
   <?php foreach($data as $aItem): ?>
-    <div class="shanti-thumbnail video col-lg-2 col-md-3 col-sm-4 col-xs-12">
+    <li class="shanti-thumbnail video col-lg-2 col-md-3 col-sm-4 col-xs-12">
       <div class="shanti-thumbnail-image shanti-field-video">
         <a href="<?php print base_path() . 'audio-video/node/' . $aItem->nid; ?>/nojs" class="shanti-thumbnail-link use-ajax">
           <span class="overlay"><span cla;ss="icon"></span></span>
@@ -29,6 +29,6 @@
         <div class="footer-wrap">
         </div>
       </div>
-    </div>
+    </li>
   <?php endforeach; ?>
-</div>
+</ul>

@@ -297,6 +297,40 @@ jQuery(function ($) {
     $.fn.popover.Constructor.DEFAULTS.delay.hide = '5000';
     $.fn.popover.Constructor.DEFAULTS.container = 'body';
 
+/*
+    $.fn.overlayMask = function (action) {
+        var mask = this.find('.overlay-mask');
+
+        // Create the required mask
+
+        if (!mask.length) {
+
+
+            mask = $('<div class="overlay-mask"><div class="loading-container"><div class="loading"></div><div id="loading-text">Searching&#133;</div></div></div>');
+            mask.css({
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                top: '0px',
+                left: '0px',
+                zIndex: 10000,
+                opacity: 9,
+                backgroundColor: 'white'
+            }).appendTo(this).fadeTo(0, 0.5).find('div').position( { my: 'center center', at: 'center center', of: '.overlay-mask' } );
+        }
+
+        // Act based on params
+
+        if (!action || action === 'show') {
+            mask.show();
+        } else if (action === 'hide') {
+            mask.hide();
+        }
+
+        return this;
+    };
+*/
+
 
 /*
 //    console.log(new Error().stack);
