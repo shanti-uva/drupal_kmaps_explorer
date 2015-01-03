@@ -3,7 +3,7 @@
 /**
  * Implemente hook_menu
  */
- 
+
 define('SUBJECTS_URL', 'http://subjects.kmaps.virginia.edu');
 define('PLACES_URL', 'http://places.kmaps.virginia.edu');
 
@@ -244,7 +244,7 @@ function _is_js_loaded($jsname) {
 	}
 }
 
- 
+
 /**
  * Implements hook_theme().
  */
@@ -457,6 +457,7 @@ function kmaps_explorer_overview($type = 'ajax', $id, $app) {
 
   //custom javascript
   drupal_add_js($path . '/js/custom.js', $options);
+  drupal_add_js(array('kmaps_explorer' => array('app' => ucfirst($app))), 'setting');
 
   drupal_add_library('system', 'drupal.ajax');
 
@@ -718,7 +719,7 @@ function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num=1, $total
     $page = array('#type' => 'ajax', '#commands' => $commands);
     if($subpage) {
       return $page;
-    } else {  
+    } else {
       ajax_deliver($page);
     }
   } else {
@@ -733,7 +734,7 @@ function kmaps_explorer_places_places($type = 'ajax', $id, $page_num = 1, $total
   if($type == 'ajax') {
     $placesURL = "http://places.kmaps.virginia.edu/features/" . $id . "/related.json";
     $placesObj = json_decode(file_get_contents($placesURL));
-    
+
     $output = theme('kmaps_explorer_places_places_ajax', array(
       'data' => $placesObj,
       'title' => variable_get('kmaps_explorer_node_title', ''),
@@ -744,7 +745,7 @@ function kmaps_explorer_places_places($type = 'ajax', $id, $page_num = 1, $total
     $page = array('#type' => 'ajax', '#commands' => $commands);
     if($subpage) {
       return $page;
-    } else {  
+    } else {
       ajax_deliver($page);
     }
   } else {
@@ -837,7 +838,7 @@ function kmaps_explorer_subjects_photos($type = 'ajax', $id, $page_num=1, $total
     $page = array('#type' => 'ajax', '#commands' => $commands);
     if($subpage) {
       return $page;
-    } else {  
+    } else {
       ajax_deliver($page);
     }
   } else {
@@ -882,7 +883,7 @@ function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num=1, $total_p
     $page = array('#type' => 'ajax', '#commands' => $commands);
     if($subpage) {
       return $page;
-    } else {  
+    } else {
       ajax_deliver($page);
     }
   } else {
@@ -908,7 +909,7 @@ function kmaps_explorer_subjects_texts($type = 'ajax', $id, $page_num=1, $total_
     $page = array('#type' => 'ajax', '#commands' => $commands);
     if($subpage) {
       return $page;
-    } else {  
+    } else {
       ajax_deliver($page);
     }
   } else {
@@ -942,7 +943,7 @@ function kmaps_explorer_places_texts($type = 'ajax', $id, $page_num=1, $total_pa
     $page = array('#type' => 'ajax', '#commands' => $commands);
     if($subpage) {
       return $page;
-    } else {  
+    } else {
       ajax_deliver($page);
     }
   } else {
@@ -987,7 +988,7 @@ function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_nu
     $page = array('#type' => 'ajax', '#commands' => $commands);
     if($subpage) {
       return $page;
-    } else {  
+    } else {
       ajax_deliver($page);
     }
   } else {

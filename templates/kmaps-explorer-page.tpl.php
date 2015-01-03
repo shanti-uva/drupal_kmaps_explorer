@@ -1,5 +1,5 @@
 <div id="<?php print $ajax ? $type . '-ajax' : $type . '-main' ?>">
-  <!-- Column Resources  -->              
+  <!-- Column Resources  -->
   <aside class="content-resources col-xs-6 col-sm-3 sidebar-offcanvas equal-height">
     <ul class="nav nav-pills nav-stacked">
       <li class="overview active"><a href="<?php print base_path() . $type . '/' . $kid; ?>/overview/nojs" class="use-ajax">
@@ -105,13 +105,13 @@
           <span class="icon shanticon-sources"></span>Sources<span class="badge"></span></a>
         </li>
       <?php endif; ?>
-    </ul> 
-  </aside> 
+    </ul>
+  </aside>
 
-  <!-- Column Main  -->                   
+  <!-- Column Main  -->
   <section  class="content-section col-xs-12 col-sm-9 equal-height">
     <div class="tab-content">
-        
+
       <article class="active" id="tab-main">
         <?php if ($type == 'subjects'): ?>
           <h6><?php print $obj->feature->header; ?></h6>
@@ -189,7 +189,7 @@
 
         <?php endif; ?>
       </article>
-        
+
     </div><!-- END tab-content -->
   </section><!-- END content-section -->
 </div>
