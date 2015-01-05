@@ -384,6 +384,7 @@ function kmaps_explorer_subjects_landing($type) {
   );
 
   drupal_add_js($path . '/js/jquery.bxslider-rahisified.js', $options);
+  drupal_add_js($path . '/js/custom.js', $options);
   // drupal_add_js($path . '/js/bxsliderInit.js', $options);
 
   return theme('kmaps_explorer_subjects_landing', array(
@@ -411,6 +412,7 @@ function kmaps_explorer_places_landing($type) {
   );
 
   drupal_add_js($path . '/js/jquery.bxslider-rahisified.js', $options);
+  drupal_add_js($path . '/js/custom.js', $options);
   // drupal_add_js($path . '/js/bxsliderInit.js', $options);
 
   return theme('kmaps_explorer_places_landing', array(
@@ -1037,15 +1039,35 @@ function kmaps_explorer_menu_breadcrumb_alter(&$active_trail, $item) {
   $active_trail = array();
 
   $ancestors = variable_get('kmaps_explorer_ancestors', array());
-  $app = variable_get('kmaps_explorer_app', '');
-  foreach ($ancestors as $key => $ancestor) {
-    $link = array(
-      'title' => $ancestor->header,
-      'href' => $app . '/' . $ancestor->id . '/overview/nojs',
+
+  if (current_path() == 'subjects') {
+    $link1 = array(
+      'title' => 'Home',
+      'href' => '',
       'localized_options' => array(),
       'type' => 0,
     );
+    array_push($active_trail, $link1);
+  } elseif (current_path() == 'places') {
+    $link1 = array(
+      'title' => 'Home',
+      'href' => '',
+      'localized_options' => array(),
+      'type' => 0,
+    );
+    array_push($active_trail, $link1);
+  } else {
+    $app = variable_get('kmaps_explorer_app', '');
+    foreach ($ancestors as $key => $ancestor) {
+      $link = array(
+        'title' => $ancestor->header,
+        'href' => $app . '/' . $ancestor->id . '/overview/nojs',
+        'localized_options' => array(),
+        'type' => 0,
+      );
 
-    array_push($active_trail, $link);
+      array_push($active_trail, $link);
+    }
   }
+
 }

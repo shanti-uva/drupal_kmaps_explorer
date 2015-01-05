@@ -8,7 +8,11 @@
       });
 
       //Include index item to breadcrumbs for normal page loads
-      $('ol.breadcrumb li:first-child a').html(Drupal.settings.kmaps_explorer.app + ': ');
+      if (Drupal.settings.kmaps_explorer) {
+        $('ol.breadcrumb li:first-child a').html(Drupal.settings.kmaps_explorer.app + ': ');
+      } else {
+        $('ol.breadcrumb li:first-child a').html('');
+      }
     }
   };
 
