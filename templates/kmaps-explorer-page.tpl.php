@@ -135,9 +135,20 @@
             <p>
               <h6 class="custom-inline">FEATURE TYPE &nbsp;&nbsp;</h6>
               <?php foreach($obj->feature->feature_types as $pl_feat_type): ?>
-                <a href="<?php print base_path() . $reverse_type . '/' . $pl_feat_type->id; ?>/overview/nojs">
-                  <?php print $pl_feat_type->title; ?>
-                </a>&nbsp;
+                <?php print shanti_sarvaka_info_popover(array(
+                  'label' => $pl_feat_type->title,
+                  'desc' => '<p>Currently no description available</p>',
+                  'tree' => array(
+                    'label' => 'Places',
+                    'items' => array('t' => ''),
+                  ),
+                  'links' => array(
+                    'Full Entry' => array(
+                      'icon' => 'places',
+                      'href' => 'places/' . $pl_feat_type->id . '/overview/nojs',
+                    ),
+                  ),
+                )); ?>&nbsp;
               <?php endforeach; ?>
             </p>
           <?php endif; ?>
