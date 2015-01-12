@@ -1,5 +1,5 @@
 <li>
-  <a href="<?php print base_path(); ?>"><?php print ucfirst($app); ?>: </a>
+  <a href="<?php print base_path() . $app; ?>"><?php print ucfirst($app); ?>: </a>
 </li>
 <?php foreach($data as $aItem): ?>
   <li>

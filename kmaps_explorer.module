@@ -478,7 +478,7 @@ function kmaps_explorer_overview($type = 'ajax', $id, $app) {
   if($app == 'subjects') {
     variable_set('kmaps_explorer_ancestors', $obj->feature->ancestors);
   } elseif($app == 'places') {
-    variable_set('kmaps_explorer_ancestors', $obj->feature->parents);
+    variable_set('kmaps_explorer_ancestors', $obj->feature->perspectives[0]->ancestors);
   }
 
   //Set and Store the title of this node for other functions to use
