@@ -640,10 +640,6 @@ function kmaps_explorer_subjects_essays($type = 'ajax', $id, $solr, $textId) {
           $output = '<iframe height="700" width="100%" frameBorder="0" src="' . $solrValue->doclist->docs[0]->url_ajax . '"></iframe>';
         }
       }
-    } else {
-      $essaysURL = "http://subjects.kmaps.virginia.edu/features/" . $id . "/descriptions.json";
-      $essayObj = json_decode(file_get_contents($essaysURL));
-      $output = theme('kmaps_explorer_places_essays_ajax', array('data' => $essayObj));
     }
 
     $commands = array();
@@ -669,10 +665,6 @@ function kmaps_explorer_places_essays($type = 'ajax', $id, $solr, $textId) {
           $output = '<iframe height="700" width="100%" frameBorder="0" src="' . $solrValue->doclist->docs[0]->url_ajax . '"></iframe>';
         }
       }
-    } else {
-      $essayURL = "http://places.kmaps.virginia.edu/features/" . $id . "/descriptions/" . $textId . ".json";
-      $essayObj = json_decode(file_get_contents($essayURL));
-      $output = theme('kmaps_explorer_places_essays_ajax', array('data' => $essayObj->description));
     }
 
     $commands = array();

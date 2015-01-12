@@ -24,14 +24,6 @@
             <span class="badge"><?php print $solr_text_count; ?></span>
           </a>
         </li>
-      <?php elseif($obj->feature->associated_resources->description_count > 0): ?>
-        <li class="essays">
-          <a href="<?php print base_path() . $type . '/' . $kid; ?>/essays/nojs/nosolr<?php print isset($obj->feature->nested_descriptions) ? '/' . $obj->feature->nested_descriptions[0]->id : ''; ?>" class="use-ajax">
-            <span class="icon shanticon-essays"></span>
-            Texts
-            <span class="badge"><?php print $obj->feature->associated_resources->description_count; ?></span>
-          </a>
-        </li>
       <?php endif; ?>
 
       <?php if($obj->feature->associated_resources->{substr($reverse_type, 0, -1) . '_count'} > 0): ?>
