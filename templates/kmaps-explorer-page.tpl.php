@@ -2,12 +2,12 @@
   <!-- Column Resources  -->
   <aside class="content-resources col-xs-6 col-sm-3 sidebar-offcanvas equal-height">
     <ul class="nav nav-pills nav-stacked">
-      <li class="overview active"><a href="<?php print base_path() . $type . '/' . $kid; ?>/overview/nojs" class="use-ajax">
+      <li class="overview <?php print isset($overview) ? 'active' : ''; ?>"><a href="<?php print base_path() . $type . '/' . $kid; ?>/overview/nojs" class="use-ajax">
         <span class="icon shanticon-overview"></span>Overview</a>
       </li>
 
       <?php if($obj->feature->associated_resources->related_feature_count > 0): ?>
-        <li class="<?php print $type; ?>">
+        <li class="<?php print $type; ?> <?php print isset($subject) ? 'active' : ''; ?>">
           <a href="<?php print base_path() . $type . '/' . $kid; ?>/<?php print $type; ?>/nojs" class="use-ajax">
             <span class="icon shanticon-<?php print $type; ?>"></span>
             <?php print ucfirst($type); ?>
@@ -17,8 +17,8 @@
       <?php endif; ?>
 
       <?php if($solr_text_count > 0): ?>
-        <li class="essays">
-          <a href="<?php print base_path() . $type . '/' . $kid; ?>/essays/nojs/solr/<?php print isset($obj->feature->descriptions) ? '/' . $obj->feature->descriptions[0]->id : ''; ?>" class="use-ajax">
+        <li class="essays <?php print isset($text) ? 'active' : ''; ?>">
+          <a href="<?php print base_path() . $type . '/' . $kid; ?>/essays/nojs" class="use-ajax">
             <span class="icon shanticon-essays"></span>
             Texts
             <span class="badge"><?php print $solr_text_count; ?></span>
@@ -105,91 +105,8 @@
     <div class="tab-content">
 
       <article class="active" id="tab-main">
-        <?php if ($type == 'subjects'): ?>
-          <h6><?php print $obj->feature->header; ?></h6>
-          <?php if(count($obj->feature->summaries) > 0): ?>
-            <?php print $obj->feature->summaries[0]->content; ?>
-          <?php endif; ?>
-          <?php
-            if (count($obj->feature->illustrations) > 0 && $obj->feature->illustrations[0]->type != 'external') {
-              $imgObj = json_decode(file_get_contents($obj->feature->illustrations[0]->url));
-              print theme('kmaps_explorer_subjects_overview_image', array('data' => $imgObj));
-            }
-          ?>
-        <?php endif; ?>
-
-        <?php if ($type == 'places'): ?>
-          <?php if (count($obj->feature->summaries) > 0): ?>
-            <div class="summary-overview"><?php print $obj->feature->summaries[0]->content; ?></div>
-          <?php endif; ?>
-
-          <?php if (count($obj->feature->feature_types) > 0): ?>
-            <p>
-              <h6 class="custom-inline">FEATURE TYPE &nbsp;&nbsp;</h6>
-              <?php foreach($obj->feature->feature_types as $pl_feat_type): ?>
-                <?php print shanti_sarvaka_info_popover(array(
-                  'label' => $pl_feat_type->title,
-                  'desc' => '<p>Currently no description available</p>',
-                  'tree' => array(
-                    'label' => 'Places',
-                    'items' => array('t' => ''),
-                  ),
-                  'links' => array(
-                    'Full Entry' => array(
-                      'icon' => 'places',
-                      'href' => 'places/' . $pl_feat_type->id . '/overview/nojs',
-                    ),
-                  ),
-                )); ?>&nbsp;
-              <?php endforeach; ?>
-            </p>
-          <?php endif; ?>
-
-          <?php print $places_overview_image; ?>
-
-          <?php if(isset($obj->feature->closest_fid_with_shapes)): ?>
-            <div class="google-maps">
-              <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=http:%2F%2Fplaces.thlib.org%2Ffeatures%2Fgis_resources%2F<?php print $obj->feature->closest_fid_with_shapes; ?>.kmz&amp;ie=UTF8&amp;t=p&amp;output=embed"></iframe>
-              <div class="btn-group btn-group-gmaps">
-                <button class="btn btn-default renderGmaps active">Google Map</button>
-                <button class="btn btn-default renderOpenLayerMaps">Custom Map</button>
-              </div>
-            </div>
-          <?php endif; ?>
-
-          <aside class="panel-group" id="accordion">
-            <section class="panel panel-default">
-              <div class="panel-heading">
-                <h6>
-                  <a href="#collapseOne" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">
-                    <span class="glyphicon glyphicon-plus"></span> Names
-                  </a>
-                </h6>
-              </div>
-              <div id="collapseOne" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <?php print $accordionName; ?>
-                </div>
-              </div>
-            </section>
-            <?php if(!empty($accordionEtymology)): ?>
-            <section class="panel panel-default">
-              <div class="panel-heading">
-                <h6>
-                  <a href="#collapseTwo" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">
-                    <span class="glyphicon glyphicon-plus"></span> ETYMOLOGY
-                  </a>
-                </h6>
-              </div>
-              <div id="collapseTwo" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <?php print $accordionEtymology; ?>
-                </div>
-              </div>
-            </section>
-            <?php endif; ?>
-          </aside>
-
+        <?php if($active_content): ?>
+          <?php print $active_content; ?>
         <?php endif; ?>
       </article>
 

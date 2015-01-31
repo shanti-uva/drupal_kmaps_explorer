@@ -13,8 +13,12 @@
       } else {
         $('ol.breadcrumb li:first-child a').html('');
       }
+
+      //Functionality for history popstate
+      window.onpopstate = function(event) {
+        window.location = location.href;
+      };
     }
   };
-
 
 })(jQuery);

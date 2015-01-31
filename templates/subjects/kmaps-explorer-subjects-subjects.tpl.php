@@ -1,7 +1,7 @@
 <h6><?php print $title; ?></h6>
 <ul>
   <?php foreach($data->feature_relation_types as $aItem): ?>
-    <li><?php print ucfirst($aItem->label); ?> (<?php print $aItem->features->length; ?>):</li>
+    <li><?php print ucfirst($aItem->label); ?> (<?php print count($aItem->features); ?>):</li>
     <ul>
       <?php foreach($aItem->features as $bItem): ?>
         <li>
