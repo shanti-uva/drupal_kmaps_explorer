@@ -41,7 +41,7 @@
       }
 
       //Add the html5 pushstate to change the url before ajax switch
-      window.history.pushState(null, null, response.url_path);
+      window.history.pushState({tag: true}, null, response.url_path);
 
       // Add the new content to the page.
       wrapper[method](new_content);

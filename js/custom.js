@@ -15,9 +15,10 @@
       }
 
       //Functionality for history popstate
-      window.onpopstate = function(event) {
-        window.location = location.href;
-      };
+      $(window).on('popstate', function(e) {
+        if (!e.originalEvent.state.tag) return;
+        window.location.href = location.href;
+      });
     }
   };
 
