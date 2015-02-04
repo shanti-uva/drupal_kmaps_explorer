@@ -27,7 +27,7 @@
       <?php endif; ?>
 
       <?php if($obj->feature->associated_resources->{substr($reverse_type, 0, -1) . '_count'} > 0): ?>
-        <li class="<?php print $reverse_type ?>">
+        <li class="<?php print $reverse_type ?> <?php print isset($place) ? 'active' : ''; ?>">
           <a href="<?php print base_path() . $type . '/' . $kid; ?>/<?php print $reverse_type ?>/nojs" class="use-ajax">
             <span class="icon shanticon-<?php print $reverse_type ?>"></span>
             <?php print ucfirst($reverse_type); ?>

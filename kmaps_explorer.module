@@ -701,7 +701,7 @@ function kmaps_explorer_places_subjects($type = 'ajax', $id, $app) {
     $setup += array(
       'active_content' => $output,
       'ajax' => $type == 'ajax' ? TRUE : FALSE,
-      'subject' => TRUE,
+      'place' => TRUE,
     );
 
     $content = theme('kmaps_explorer_initial_template', $setup);

@@ -6,12 +6,20 @@
   <p>
     <h6 class="custom-inline">FEATURE TYPE &nbsp;&nbsp;</h6>
     <?php foreach($obj->feature->feature_types as $pl_feat_type): ?>
+      <?php
+        $bcrumbs = array();
+        foreach($pl_feat_type->ancestors->feature_type as $bItem) {
+          $bcrumbs[$bItem->id] = '<a href="#">' . ucfirst($bItem->title) . '</a>';
+        }
+
+        $desc = empty($pl_feat_type->caption) ? '<p>Currently no description available</p>' : '<p>' . $pl_feat_type->caption . '</p>';
+      ?>
       <?php print shanti_sarvaka_info_popover(array(
         'label' => $pl_feat_type->title,
-        'desc' => '<p>Currently no description available</p>',
+        'desc' => $desc,
         'tree' => array(
-          'label' => 'Places',
-          'items' => array('t' => ''),
+          'label' => 'Subjects',
+          'items' => $bcrumbs,
         ),
         'links' => array(
           'Full Entry' => array(
