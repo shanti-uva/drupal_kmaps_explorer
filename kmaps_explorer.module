@@ -617,7 +617,7 @@ function kmaps_explorer_setup_page($id, $app) {
   $solr_text_count = 0;
 
   foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
-    if (is_null($solrValue->groupValue) && $solrValue->doclist->numFound > 0) {
+    if ($solrValue->groupValue == "audio-video" && $solrValue->doclist->numFound > 0) {
       $video_count = $solrValue->doclist->numFound;
     }
     if ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound > 0) {
