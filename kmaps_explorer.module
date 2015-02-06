@@ -146,6 +146,24 @@ function kmaps_explorer_menu() {
     'access callback' => TRUE,
   );
 
+  $items['subjects/%/text_node/%/%'] = array(
+    'title' => 'Subjects',
+    'description' => 'Creates a callback that shows individual text nodes',
+    'page callback' => 'kmaps_explorer_each_text_node',
+    'page arguments' => array(4, 1, 3, 'subjects'),
+    'access arguments' => TRUE,
+    'access callback' => TRUE,
+  );
+
+  $items['places/%/text_node/%/%'] = array(
+    'title' => 'Places',
+    'description' => 'Creates a callback that shows individual text nodes',
+    'page callback' => 'kmaps_explorer_each_text_node',
+    'page arguments' => array(4, 1, 3, 'places'),
+    'access arguments' => TRUE,
+    'access callback' => TRUE,
+  );
+
   $items['subjects/%/audio-video/%'] = array(
     'title' => 'Subjects',
     'description' => 'Creates a callback that shows audio-video in subjects via ajax',
@@ -358,6 +376,16 @@ function kmaps_explorer_theme() {
       'arguments' => array(),
       'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates',
     ),
+    'kmaps_explorer_texts_summary' => array(
+      'template' => 'kmaps-explorer-texts-display',
+      'arguments' => array(),
+      'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates',
+    ),
+    'kmaps_explorer_texts_individual_node' => array(
+      'template' => 'kmaps-explorer-texts-node',
+      'arguments' => array(),
+      'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates',
+    ),
   );
 }
 
@@ -457,7 +485,7 @@ function kmaps_explorer_subjects_overview($type = 'ajax', $id, $app) {
     ));
 
     $commands = array();
-    $commands[] = custom_ajax_command_html('#' . $app . '-main', $content, null, '../overview/nojs');
+    $commands[] = custom_ajax_command_html('#' . $app . '-main', $content, null, base_path() . 'subjects/' . $id .  '/overview/nojs');
     $commands[] = ajax_command_html('.page-title span:last-child', $obj->feature->header);
     $commands[] = ajax_command_html('ol.breadcrumb', $breadcrumb);
     $page = array('#type' => 'ajax', '#commands' => $commands);
@@ -539,7 +567,7 @@ function kmaps_explorer_places_overview($type = 'ajax', $id, $app) {
     ));
 
     $commands = array();
-    $commands[] = custom_ajax_command_html('#' . $app . '-main', $content, null, '../overview/nojs');
+    $commands[] = custom_ajax_command_html('#' . $app . '-main', $content, null, base_path() . 'places/' . $id .  '/overview/nojs');
     $commands[] = ajax_command_html('.page-title span:last-child', $obj->feature->header);
     $commands[] = ajax_command_html('ol.breadcrumb', $breadcrumb);
     $page = array('#type' => 'ajax', '#commands' => $commands);
@@ -659,7 +687,7 @@ function kmaps_explorer_subjects_subjects($type = 'ajax', $id, $app) {
 
   if($type == 'ajax') {
     $commands = array();
-    $commands[] = custom_ajax_command_html('#tab-main', $output, null, '../subjects/nojs');
+    $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'subjects/' . $id . '/subjects/nojs');
     $page = array('#type' => 'ajax', '#commands' => $commands);
     ajax_deliver($page);
   } else {
@@ -693,7 +721,7 @@ function kmaps_explorer_places_subjects($type = 'ajax', $id, $app) {
 
   if($type == 'ajax') {
     $commands = array();
-    $commands[] = custom_ajax_command_html('#tab-main', $output, null, '../subjects/nojs');
+    $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'places/' . $id . '/subjects/nojs');
     $page = array('#type' => 'ajax', '#commands' => $commands);
     ajax_deliver($page);
   } else {
@@ -714,18 +742,27 @@ function kmaps_explorer_places_subjects($type = 'ajax', $id, $app) {
  * Function to create the ajax content for essays in subjects
  */
 function kmaps_explorer_subjects_essays($type = 'ajax', $id, $app) {
+  //Retrieve the title of the node
+  $title = variable_get('kmaps_explorer_node_title', '');
+
   $solrObj = variable_get('kmaps_explorer_solr', '');
+
   foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
     if ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound == 1) {
       $output = '<iframe height="700" width="100%" frameBorder="0" src="' . $solrValue->doclist->docs[0]->url_ajax . '"></iframe>';
     } elseif($solrValue->groupValue == "texts" && $solrValue->doclist->numFound > 1) {
-      $output = '<iframe height="700" width="100%" frameBorder="0" src="' . $solrValue->doclist->docs[0]->url_ajax . '"></iframe>';
+      $output = theme('kmaps_explorer_texts_summary', array(
+        'data' => $solrValue,
+        'sid' => $id,
+        'app' => $app,
+        'title' => $title,
+      ));
     }
   }
 
   if($type == 'ajax') {
     $commands = array();
-    $commands[] = custom_ajax_command_html('#tab-main', $output, null, '../essays/nojs');
+    $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'subjects/' . $id . '/essays/nojs');
     $page = array('#type' => 'ajax', '#commands' => $commands);
     ajax_deliver($page);
   } else {
@@ -746,18 +783,27 @@ function kmaps_explorer_subjects_essays($type = 'ajax', $id, $app) {
  * Function to create the ajax content for esssays in places
  */
 function kmaps_explorer_places_essays($type = 'ajax', $id, $app) {
+  //Retrieve the title of the node
+  $title = variable_get('kmaps_explorer_node_title', '');
+
   $solrObj = variable_get('kmaps_explorer_solr', '');
+
   foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
     if ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound == 1) {
       $output = '<iframe height="700" width="100%" frameBorder="0" src="' . $solrValue->doclist->docs[0]->url_ajax . '"></iframe>';
     } elseif($solrValue->groupValue == "texts" && $solrValue->doclist->numFound > 1) {
-      $output = '<iframe height="700" width="100%" frameBorder="0" src="' . $solrValue->doclist->docs[0]->url_ajax . '"></iframe>';
+      $output = theme('kmaps_explorer_texts_summary', array(
+        'data' => $solrValue,
+        'sid' => $id,
+        'app' => $app,
+        'title' => $title,
+      ));
     }
   }
 
   if($type == 'ajax') {
     $commands = array();
-    $commands[] = custom_ajax_command_html('#tab-main', $output, null, '../essays/nojs');
+    $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'places/' . $id . '/essays/nojs');
     $page = array('#type' => 'ajax', '#commands' => $commands);
     ajax_deliver($page);
   } else {
@@ -772,6 +818,88 @@ function kmaps_explorer_places_essays($type = 'ajax', $id, $app) {
 
     return $content;
   }
+}
+
+/**
+ * Function to implement the ajax content for individual text nodes
+ */
+function kmaps_explorer_each_text_node($type = 'ajax', $id, $tid, $app) {
+  if($type == 'ajax') {
+    $solrObj = variable_get('kmaps_explorer_solr', '');
+
+    if($solrObj == '') {
+      $solrObj = call_solr_index($id, $app);
+    }
+
+    $output = '';
+
+    foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
+      if ($solrValue->groupValue == "texts") {
+        foreach ($solrValue->doclist->docs as $tnode) {
+          if($tnode->id == $tid) {
+            $output = theme('kmaps_explorer_texts_individual_node', array(
+              'data' => $tnode->url_ajax,
+            ));
+          }
+        }
+      }
+    }
+
+    $commands = array();
+    $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . $app . '/' . $id . '/text_node/' . $tid . '/nojs');
+    $page = array('#type' => 'ajax', '#commands' => $commands);
+    ajax_deliver($page);
+
+  } else {
+    $setup = kmaps_explorer_setup_page($id, $app);
+
+    $solrObj = variable_get('kmaps_explorer_solr', '');
+
+    if($solrObj == '') {
+      $solrObj = call_solr_index($id, $app);
+    }
+
+    $output = '';
+
+    foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
+      if ($solrValue->groupValue == "texts") {
+        foreach ($solrValue->doclist->docs as $tnode) {
+          if($tnode->id == $tid) {
+            $output = theme('kmaps_explorer_texts_individual_node', array(
+              'data' => $tnode->url_ajax,
+            ));
+          }
+        }
+      }
+    }
+    $setup += array(
+      'active_content' => $output,
+      'ajax' => $type == 'ajax' ? TRUE : FALSE,
+      'text' => TRUE,
+    );
+
+    $content = theme('kmaps_explorer_initial_template', $setup);
+
+    return $content;
+  }
+}
+
+/**
+ * Function to make a call to the solr index
+ */
+function call_solr_index($id, $app) {
+  //Create the url for the solr related assets for subjects and places
+  $solrURL = 'http://kidx.shanti.virginia.edu/solr/kmindex/select?q=kmapid:' . $app . '-' . $id . '&fq=&start=0&facets=on&group=true&group.field=asset_type&group.facet=true&group.ngroups=true&group.limit=1000&wt=json';
+
+  //Get solr data
+  $solrJSON = file_get_contents($solrURL);
+  $solrObj = json_decode($solrJSON);
+  //dpm($solrObj);
+
+  //Store the solr object to be used in essays.
+  variable_set('kmaps_explorer_solr', $solrObj);
+
+  return $solrObj;
 }
 
 /**
