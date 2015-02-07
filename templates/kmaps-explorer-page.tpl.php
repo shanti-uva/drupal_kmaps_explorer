@@ -8,7 +8,7 @@
 
       <?php if($obj->feature->associated_resources->related_feature_count > 0): ?>
         <li class="<?php print $type; ?> <?php print isset($subject) ? 'active' : ''; ?>">
-          <a href="<?php print base_path() . $type . '/' . $kid; ?>/<?php print $type; ?>/nojs" class="use-ajax">
+          <a href="<?php print base_path() . $type . '/' . $kid; ?>/<?php print substr($type, 0, -1); ?>/nojs" class="use-ajax">
             <span class="icon shanticon-<?php print $type; ?>"></span>
             <?php print ucfirst($type); ?>
             <span class="badge"><?php print $obj->feature->associated_resources->related_feature_count; ?></span>
@@ -28,7 +28,7 @@
 
       <?php if($obj->feature->associated_resources->{substr($reverse_type, 0, -1) . '_count'} > 0): ?>
         <li class="<?php print $reverse_type ?> <?php print isset($place) ? 'active' : ''; ?>">
-          <a href="<?php print base_path() . $type . '/' . $kid; ?>/<?php print $reverse_type ?>/nojs" class="use-ajax">
+          <a href="<?php print base_path() . $type . '/' . $kid; ?>/<?php print substr($reverse_type, 0, -1); ?>/nojs" class="use-ajax">
             <span class="icon shanticon-<?php print $reverse_type ?>"></span>
             <?php print ucfirst($reverse_type); ?>
             <span class="badge"><?php print $obj->feature->associated_resources->{substr($reverse_type, 0, -1) . '_count'}; ?></span>

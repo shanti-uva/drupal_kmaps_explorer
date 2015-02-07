@@ -56,7 +56,7 @@ function kmaps_explorer_menu() {
     'access callback' => TRUE,
   );
 
-  $items['subjects/%/subjects/%'] = array(
+  $items['subjects/%/subject/%'] = array(
     'title' => 'Subjects',
     'description' => 'Creates a callback that shows subjects in subjects via ajax',
     'page callback' => 'kmaps_explorer_subjects_subjects',
@@ -65,7 +65,7 @@ function kmaps_explorer_menu() {
     'access callback' => TRUE,
   );
 
-  $items['places/%/subjects/%'] = array(
+  $items['places/%/subject/%'] = array(
     'title' => 'Places',
     'description' => 'Creates a callback that shows subjects in places via ajax',
     'page callback' => 'kmaps_explorer_places_subjects',
@@ -92,7 +92,7 @@ function kmaps_explorer_menu() {
     'access callback' => TRUE,
   );
 
-  $items['subjects/%/places/%'] = array(
+  $items['subjects/%/place/%'] = array(
     'title' => 'Subjects',
     'description' => 'Creates a callback that shows places in subjects via ajax',
     'page callback' => 'kmaps_explorer_subjects_places',
@@ -101,7 +101,7 @@ function kmaps_explorer_menu() {
     'access callback' => TRUE,
   );
 
-  $items['places/%/places/%'] = array(
+  $items['places/%/place/%'] = array(
     'title' => 'Places',
     'description' => 'Creates a callback that shows places in places via ajax',
     'page callback' => 'kmaps_explorer_places_places',
@@ -687,7 +687,7 @@ function kmaps_explorer_subjects_subjects($type = 'ajax', $id, $app) {
 
   if($type == 'ajax') {
     $commands = array();
-    $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'subjects/' . $id . '/subjects/nojs');
+    $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'subjects/' . $id . '/subject/nojs');
     $page = array('#type' => 'ajax', '#commands' => $commands);
     ajax_deliver($page);
   } else {
@@ -721,7 +721,7 @@ function kmaps_explorer_places_subjects($type = 'ajax', $id, $app) {
 
   if($type == 'ajax') {
     $commands = array();
-    $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'places/' . $id . '/subjects/nojs');
+    $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'places/' . $id . '/subject/nojs');
     $page = array('#type' => 'ajax', '#commands' => $commands);
     ajax_deliver($page);
   } else {
