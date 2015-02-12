@@ -1305,3 +1305,10 @@ function custom_ajax_command_html($selector, $html, $settings = NULL, $url_path 
     'url_path' => $url_path,
   );
 }
+
+/**
+ * Function for kaltura transcripts
+ */
+function kmaps_explorer_transcripts_ui_js_alter(&$scripts) {
+  $scripts['ui'] = drupal_get_path('module', 'kmaps_explorer') . '/js/transcripts_ui.js';
+}
