@@ -1226,6 +1226,7 @@ function kmaps_explorer_audio_video_node($type = 'ajax', $id) {
 
     $commands = array();
     $commands[] = ajax_command_html('#tab-main', $output);
+    $commands[] = ajax_command_invoke('body', 'addClass', array('max-col-widths'));
     $page = array('#type' => 'ajax', '#commands' => $commands);
     ajax_deliver($page);
   } else {
