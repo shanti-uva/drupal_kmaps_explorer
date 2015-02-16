@@ -505,17 +505,54 @@ function kmaps_explorer_places_overview($type = 'ajax', $id, $app) {
   $options = array(
     'group' => CSS_THEME,
   );
-  drupal_add_css($path . '/css/openlayers.css', $options);
+  /*drupal_add_css($path . '/css/thdl-style.css', $options);*/
+  drupal_add_css($path . '/css/jquery.checktree.css', $options);
+  drupal_add_css($path . '/css/main.css', $options);
+  drupal_add_css($path . '/css/jquery.autocomplete.css', $options);
+  drupal_add_css($path . '/css/smoothness/ui.all.css', $options);
 
   $options = array(
     'group' => JS_DEFAULT,
     'scope' => 'footer'
   );
 
-  drupal_add_js('//maps.googleapis.com/maps/api/js?key=AIzaSyAXpnXkPS39-Bo5ovHQWvyIk6eMgcvc1q4&amp;sensor=false', 'external');
-  drupal_add_js('http://openlayers.org/api/OpenLayers.js', 'external');
-  drupal_add_js('http://www.thlib.org/places/maps/interactive/scripts/THLWMS.js', 'external');
-  drupal_add_js($path . '/js/inset-map.js', $options);
+  drupal_add_js($path . '/scripts/cookies.min.js', $options);
+  drupal_add_js($path . '/scripts/jquery-latest.js', $options);
+  drupal_add_js($path . '/scripts/accordion.min.js', $options);
+  drupal_add_js($path . '/scripts/fn.min.js', $options);
+  drupal_add_js($path . '/scripts/jquery.history1.0beta.min.js', $options);
+  drupal_add_js($path . '/scripts/class_external.min.js', $options);
+  drupal_add_js($path . '/scripts/class_wikiloader.min.js', $options);
+  drupal_add_js($path . '/scripts/jquery.thdl.min.js', $options);
+  drupal_add_js($path . '/scripts/jquery.checkbox.min.js', $options);
+  drupal_add_js($path . '/scripts/jquery.watermarkinput.min.js', $options);
+  drupal_add_js($path . '/scripts/jquery.menus.utilities.min.js', $options);
+  drupal_add_js($path . '/scripts/jquery.menus.min.js', $options);
+  drupal_add_js($path . '/scripts/jquery.position.min.js', $options);
+  drupal_add_js($path . '/scripts/jquery.toXML.min.js', $options);
+  drupal_add_js($path . '/scripts/jquery-ui-themeless.min.js', $options);
+  drupal_add_js($path . '/scripts/app_plug.min.js', $options);
+  drupal_add_js($path . '/scripts/jqModal.min.js', $options);
+  drupal_add_js($path . '/scripts/jquery.thl.popup.min.js', $options);
+  drupal_add_js($path . '/scripts/thl-tt-plugin.min.js', $options);
+  drupal_add_js($path . '/scripts/OpenLayers_2011-08-30.js', $options);
+  drupal_add_js('//maps.googleapis.com/maps/api/js?v=3&amp;sensor=false&amp;key=AIzaSyB7IlhcOYVWmvJOPZDYWCBAc4ZXDlH7r6Q', 'external');
+  drupal_add_js($path . '/scripts/THLMap.js', $options);
+  drupal_add_js($path . '/scripts/THLWMS.js', $options);
+  drupal_add_js($path . '/scripts/Format.WMSGetFeatureInfo.js', $options);
+  drupal_add_js($path . '/scripts/WMSGetFeatureInfo.js', $options);
+  drupal_add_js($path . '/scripts/GroupedLayerSwitcher.js', $options);
+  drupal_add_js($path . '/scripts/CustomOverviewMap.js', $options);
+  drupal_add_js($path . '/scripts/jquery.checktree.js', $options);
+  drupal_add_js($path . '/scripts/jquery.dialog.js', $options);
+  drupal_add_js($path . '/scripts/jquery.autocomplete.js', $options);
+  drupal_add_js($path . '/scripts/jquery.ui.slider.js', $options);
+  drupal_add_js($path . '/scripts/json2.js', $options);
+  drupal_add_js($path . '/scripts/ol_custom_classes.js', $options);
+  drupal_add_js($path . '/scripts/main.js', $options);
+  drupal_add_js($path . '/scripts/LoadingPanel.js', $options);
+  drupal_add_js($path . '/scripts/model-searcher.js', $options);
+  drupal_add_js($path . '/scripts/characteristic-selector.js', $options);
 
   //Places Overview setup
   $obj = $setup['obj'];
@@ -921,7 +958,7 @@ function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num=1, $total
   $page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'places', 'subject');
   $input_el = render($page_input_array);
 
-  $pageBaseUrl = base_path() . 'subjects/' . $id . '/places/nojs/';
+  $pageBaseUrl = base_path() . 'subjects/' . $id . '/place/nojs/';
   $pagination = theme('kmaps_explorer_pagination_template', array(
     'first_link' => $pageBaseUrl . '1/' . $total_pages,
     'previous_link' => $pageBaseUrl . ($page_num <= 1 ? '1' : ($page_num - 1)) . '/' . $total_pages,
@@ -1311,4 +1348,89 @@ function custom_ajax_command_html($selector, $html, $settings = NULL, $url_path 
  */
 function kmaps_explorer_transcripts_ui_js_alter(&$scripts) {
   $scripts['ui'] = drupal_get_path('module', 'kmaps_explorer') . '/js/transcripts_ui.js';
+}
+
+/**
+ * Function to retrieve counts from solr index and Rails API
+ */
+function kmaps_explorer_retrieve_counts($app, $id) {
+  //Create the url for related assets for subjects and places
+  $mURL = "http://" . $app . ".kmaps.virginia.edu/features/" . $id . ".json";
+
+  //Create the url for the solr related assets for subjects and places
+  $solrURL = 'http://kidx.shanti.virginia.edu/solr/kmindex/select?q=kmapid:' . $app . '-' . $id . '&fq=&start=0&facets=on&group=true&group.field=asset_type&group.facet=true&group.ngroups=true&group.limit=1000&wt=json';
+
+  //Get related data
+  $json = file_get_contents($mURL);
+  $obj = json_decode($json);
+  //dpm($obj);
+
+  $results = array();
+
+  if($app == 'subjects') {
+    //Store the count for the related subject in subjects
+    if(isset($obj->feature->associated_resources->related_feature_count) && intval($obj->feature->associated_resources->related_feature_count) > 0) {
+      $results['Related Subjects (' . $obj->feature->associated_resources->related_feature_count . ')'] = array(
+        'icon' => 'subjects',
+        'href' => '#',
+      );
+    }
+  }
+
+  if($app == 'places') {
+    //Store the count for the related places in places
+    if(isset($obj->feature->associated_resources->related_feature_count) && intval($obj->feature->associated_resources->related_feature_count) > 0) {
+      $results['Related Places (' . $obj->feature->associated_resources->related_feature_count . ')'] = array(
+        'icon' => 'places',
+        'href' => '#',
+      );
+    }
+  }
+
+  //Store the count for the related places in subjects
+  if(isset($obj->feature->associated_resources->place_count) && intval($obj->feature->associated_resources->place_count) > 0) {
+    $results['Related Places (' . $obj->feature->associated_resources->place_count . ')'] = array(
+      'icon' => 'places',
+      'href' => '#',
+    );
+  }
+
+  //Store the count for the related subjects in places
+  if(isset($obj->feature->associated_resources->subject_count) && intval($obj->feature->associated_resources->subject_count) > 0) {
+    $results['Related Subjects (' . $obj->feature->associated_resources->subject_count . ')'] = array(
+      'icon' => 'subjects',
+      'href' => '#',
+    );
+  }
+
+  //Store the count for the related texts in subjects
+  if(isset($obj->feature->associated_resources->description_count) && intval($obj->feature->associated_resources->description_count) > 0) {
+    $results['Related Texts (' . $obj->feature->associated_resources->description_count . ')'] = array(
+      'icon' => 'texts',
+      'href' => '#',
+    );
+  }
+
+  //Store the count for the related photos in subjects
+  if(isset($obj->feature->associated_resources->picture_count) && intval($obj->feature->associated_resources->picture_count) > 0) {
+    $results['Related Photos (' . $obj->feature->associated_resources->picture_count . ')'] = array(
+      'icon' => 'photos',
+      'href' => '#',
+    );
+  }
+
+  //Store the count for the related videos in subjects
+  if(isset($obj->feature->associated_resources->video_count) && intval($obj->feature->associated_resources->video_count) > 0) {
+    $results['Related Audio-Video (' . $obj->feature->associated_resources->video_count . ')'] = array(
+      'icon' => 'audio-video',
+      'href' => '#',
+    );
+  }
+
+  //Get solr data
+  /*$solrJSON = file_get_contents($solrURL);*/
+  /*$solrObj = json_decode($solrJSON);*/
+  //dpm($solrObj);
+
+  return $results;
 }

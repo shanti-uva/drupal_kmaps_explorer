@@ -1,0 +1,103 @@
+ul.tree, ul.tree * {
+	list-style-type: none;
+	margin: 0;
+	padding: 0 0 2px 0;
+}
+ul.tree img.arrow {
+	padding: 2px 0 0 0;
+	border: 0;
+	width: 20px;
+}
+ul.tree li {
+    margin-top: 4px;
+    padding: 0;
+}
+ul.tree li ul {
+	padding: 0 0 0 20px;
+	margin: 0;
+}
+#feature_types_accordion > li {
+	padding: 0 0 0 0;
+	margin: 2px 0 0 0;
+}
+#feature_types_accordion > li > .arrow {
+	margin: 4px 0 0 6px;
+	width: 12px;
+}
+#feature_types_accordion > li > .checkbox {
+	margin: 2px 0 0 3px;
+}
+#feature_types_accordion > li > .single_checkbox {
+	margin: 2px 0 0 0;
+}
+#feature_types_accordion > li > ul {
+	padding: 0 0 8px 0;
+}
+#feature_types_accordion > li > label {
+	display: block;
+	font-weight: bold;
+	background-color: #dadada;
+	font-size: 1.1em;
+	font-family: tahoma;
+	padding: 4px;
+	margin: 0 0 0 0;
+	color: #404040;
+	border: 1px solid #aaa;
+}
+#feature_types_accordion > li li .arrow {
+	background-position: 6px 5px;
+}
+ul.tree label {
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 1.15em;
+	padding: 2px 0;
+}
+ul.tree label.hover {
+	color: red;
+}
+ul.tree li .arrow {
+	width: 20px;
+	height: 20px;
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
+	float: left;
+	background: transparent no-repeat 0 4px;
+	margin-left: 6px;
+}
+ul.tree li .collapsed {
+	background-image: url(images/btn-plus-lg.gif);
+}
+ul.tree li .expanded {
+	background-image: url(images/btn-minus-lg.gif);
+}
+#feature_types_accordion > li > .collapsed {
+	background-image: url(images/btn-plus-lg.gif);
+}
+#feature_types_accordion > li > .expanded {
+	background-image: url(images/btn-minus-lg.gif);
+}
+ul.tree li .checkbox, ul.tree li .single_checkbox {
+	width: 18px;
+	height: 18px;
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
+	float: left;
+	background: url(images/check0.gif) no-repeat 0 0px;
+}
+ul.tree li .checkbox_placeholder {
+	float:left;
+	padding-left:2px;
+	padding-right:0;
+	width:16px;
+	height:16px;
+	background: url(/global/images/btn-empty-lg.gif) no-repeat 2px 5px;
+}
+ul.tree li .checked {
+	background-image: url(images/check2.gif);
+}
+ul.tree li .half_checked {
+	background-image: url(images/check1.gif);
+}

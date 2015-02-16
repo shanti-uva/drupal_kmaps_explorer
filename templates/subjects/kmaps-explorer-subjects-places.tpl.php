@@ -8,6 +8,15 @@
       }
 
       $desc = empty($aItem->caption) ? '<p>Currently no description available</p>' : '<p>' . $aItem->caption . '</p>';
+
+      $links = array(
+        'Full Entry' => array(
+          'icon' => 'link-external',
+          'href' => 'places/' . $aItem->id . '/overview/nojs',
+        ),
+      );
+
+      $links += kmaps_explorer_retrieve_counts('places', $aItem->id);
     ?>
     <li>
       <?php print shanti_sarvaka_info_popover(array(
@@ -17,12 +26,7 @@
           'label' => 'Places',
           'items' => $bcrumbs,
         ),
-        'links' => array(
-          'Full Entry' => array(
-            'icon' => 'places',
-            'href' => 'places/' . $aItem->id . '/overview/nojs',
-          ),
-        ),
+        'links' => $links,
       )); ?>
     </li>
   <?php endforeach; ?>
