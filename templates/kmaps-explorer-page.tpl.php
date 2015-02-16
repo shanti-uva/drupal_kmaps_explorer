@@ -1,6 +1,6 @@
 <div id="<?php print $ajax ? $type . '-ajax' : $type . '-main' ?>">
   <!-- Column Resources  -->
-  <aside class="content-resources col-xs-6 col-sm-3 col-lg-2 sidebar-offcanvas equal-height">
+  <aside class="content-resources col-xs-6 col-sm-3 col-md-3 col-lg-2 sidebar-offcanvas equal-height">
     <ul class="nav nav-pills nav-stacked">
       <li class="overview <?php print isset($overview) ? 'active' : ''; ?>"><a href="<?php print base_path() . $type . '/' . $kid; ?>/overview/nojs" class="use-ajax">
         <span class="icon shanticon-overview"></span>Overview</a>
@@ -101,7 +101,7 @@
   </aside>
 
   <!-- Column Main  -->
-  <section  class="content-section col-xs-12 col-sm-9 col-lg-10 equal-height">
+  <section  class="content-section col-xs-12 col-sm-12 col-md-9 col-lg-10 equal-height">
     <div class="tab-content">
 
       <article class="active" id="tab-main">
