@@ -19,6 +19,99 @@
         if (!e.originalEvent.state.tag) return;
         window.location.href = location.href;
       });
+
+      //Functionality for popovers
+      $('.popover-kmaps', context).each(function() {
+        var $that = $(this);
+        var app = $that.data("app");
+        var kid = $that.data("id");
+        $that.popover({
+          html: true,
+          title: '<span id="pop-title-' + kid + '">Loading ...</span>',
+          content: '<span id="pop-content-' + kid + '">Please wait while captions and related assets load. Loading ...</span>'
+        });
+        $that.on('show.bs.popover', function() {
+          $('#pop-title-' + kid, context).html('');
+          $('#pop-content-' + kid, context).html('');
+          $('div.popover').hide();
+          var url = 'http://' + app + '.kmaps.virginia.edu/features/' + kid + '.json';
+          $.get(url, function(data) {
+            $('#pop-title-' + kid, context).html(data.feature.header);
+            $('#pop-content-' + kid, context).html(populatePopover(data, app));
+          });
+        });
+      });
+
+      function populatePopover(data, app) {
+        var html = '';
+        html += '<div class="popover-body">';
+        html += '<div class="desc">';
+        html += '<p>';
+        html += data.feature.nested_captions.length > 0 ? 'Nested Captions' : 'Currently no description available';
+        html += '</p>';
+        html += '</div>';
+        html += '<div class="parents clearfix">';
+        html += '<p>';
+        html += '<strong>' + app.charAt(0).toUpperCase() + app.slice(1) + '</strong>';
+        var ancestors = data.feature.ancestors ? data.feature.ancestors : data.feature.perspectives[0].ancestors;
+        $.each(ancestors, function(ancestorK, ancestorV) {
+          html += '<a href="#">' + ancestorV.header + '</a>';
+        });
+        html += '</p>';
+        html += '</div>';
+        html += '</div>';
+        html += '<div class="popover-footer">';
+        html += '<div class="popover-footer-button">';
+        html += '<a href="/' + app + '/' + data.feature.id + '/overview/nojs" class="icon shanticon-link-external" target="_blank">';
+        html += 'Full Entry';
+        html += '</a>';
+        html += '</div>';
+        if (data.feature.associated_resources.related_feature_count > 0) {
+          html += '<div class="popover-footer-button">';
+          html += '<a href="/' + app + '/' + data.feature.id + '/' + app + '/nojs" class="icon shanticon-' + app + '">';
+          html += 'Related ' + app.charAt(0).toUpperCase() + app.slice(1) + ' (' + data.feature.associated_resources.related_feature_count + ')';
+          html += '</a>';
+          html += '</div>';
+        }
+        if (data.feature.associated_resources.subject_count > 0) {
+          html += '<div class="popover-footer-button">';
+          html += '<a href="/' + app + '/' + data.feature.id + '/' + 'subjects' + '/nojs" class="icon shanticon-' + 'subjects' + '">';
+          html += 'Related ' + 'Subjects' + ' (' + data.feature.associated_resources.subject_count + ')';
+          html += '</a>';
+          html += '</div>';
+        }
+        if (data.feature.associated_resources.place_count > 0) {
+          html += '<div class="popover-footer-button">';
+          html += '<a href="/' + app + '/' + data.feature.id + '/' + 'places' + '/nojs" class="icon shanticon-' + 'places' + '">';
+          html += 'Related ' + 'Places' + ' (' + data.feature.associated_resources.place_count + ')';
+          html += '</a>';
+          html += '</div>';
+        }
+        if (data.feature.associated_resources.document_count > 0) {
+          html += '<div class="popover-footer-button">';
+          html += '<a href="/' + app + '/' + data.feature.id + '/' + 'texts' + '/nojs" class="icon shanticon-' + 'texts' + '">';
+          html += 'Related ' + 'Texts' + ' (' + data.feature.associated_resources.document_count + ')';
+          html += '</a>';
+          html += '</div>';
+        }
+        if (data.feature.associated_resources.picture_count > 0) {
+          html += '<div class="popover-footer-button">';
+          html += '<a href="/' + app + '/' + data.feature.id + '/' + 'photos' + '/nojs" class="icon shanticon-' + 'photos' + '">';
+          html += 'Related ' + 'Photos' + ' (' + data.feature.associated_resources.picture_count + ')';
+          html += '</a>';
+          html += '</div>';
+        }
+        if (data.feature.associated_resources.video_count > 0) {
+          html += '<div class="popover-footer-button">';
+          html += '<a href="/' + app + '/' + data.feature.id + '/' + 'audio-video' + '/nojs" class="icon shanticon-' + 'audio-video' + '">';
+          html += 'Related ' + 'Audio-Video' + ' (' + data.feature.associated_resources.video_count + ')';
+          html += '</a>';
+          html += '</div>';
+        }
+        html += '</div>';
+
+        return html;
+      }
     }
   };
 

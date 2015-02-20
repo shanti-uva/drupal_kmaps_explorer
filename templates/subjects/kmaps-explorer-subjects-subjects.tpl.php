@@ -4,34 +4,12 @@
     <li><?php print ucfirst($aItem->label); ?> (<?php print count($aItem->features); ?>):</li>
     <ul>
       <?php foreach($aItem->features as $bItem): ?>
-        <?php
-          $bcrumbs = array();
-          foreach($bItem->ancestors as $cItem) {
-            $bcrumbs[$cItem->id] = '<a href="#">' . ucfirst($cItem->header) . '</a>';
-          }
-
-          $desc = empty($bItem->caption) ? '<p>Currently no description available</p>' : '<p>' . $bItem->caption . '</p>';
-
-          $links = array(
-            'Full Entry' => array(
-              'icon' => 'link-external',
-              'href' => 'subjects/' . $bItem->id . '/overview/nojs',
-            ),
-          );
-
-          $links += kmaps_explorer_retrieve_counts('subjects', $bItem->id);
-
-        ?>
         <li>
-        <?php print shanti_sarvaka_info_popover(array(
-          'label' => $bItem->header . ' (From the General Perspective)',
-          'desc' => $desc,
-          'tree' => array(
-            'label' => 'Subjects',
-            'items' => $bcrumbs,
-          ),
-          'links' => $links,
-        )); ?>
+          <span><?php print $bItem->header; ?> (From the General Perspective)</span>
+          <span class="popover-kmaps" data-app="subjects" data-id="<?php print $bItem->id; ?>">
+            <span class="popover-kmaps-tip"></span>
+            <span class="icon shanticon-menu3"></span>
+          </span>
         </li>
       <?php endforeach; ?>
     </ul>
