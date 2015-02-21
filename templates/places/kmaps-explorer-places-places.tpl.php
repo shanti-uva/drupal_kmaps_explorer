@@ -6,29 +6,12 @@
         <?php print $bItem->header; ?> (<?php print count($bItem->features); ?>)
         <ul>
           <?php foreach($bItem->features as $cItem): ?>
-            <?php
-              $bcrumbs = array();
-              foreach($cItem->ancestors as $dItem) {
-                $bcrumbs[$dItem->id] = '<a href="#">' . ucfirst($dItem->header) . '</a>';
-              }
-
-              $desc = empty($cItem->caption) ? '<p>Currently no description available</p>' : '<p>' . $cItem->caption . '</p>';
-            ?>
             <li>
-              <?php print shanti_sarvaka_info_popover(array(
-                'label' => $cItem->header,
-                'desc' => $desc,
-                'tree' => array(
-                  'label' => 'Places',
-                  'items' => $bcrumbs,
-                ),
-                'links' => array(
-                  'Full Entry' => array(
-                    'icon' => 'places',
-                    'href' => 'places/' . $cItem->id . '/overview/nojs',
-                  ),
-                ),
-              )); ?>
+              <span><?php print $cItem->header; ?></span>
+              <span class="popover-kmaps" data-app="places" data-id="<?php print $cItem->id; ?>">
+                <span class="popover-kmaps-tip"></span>
+                <span class="icon shanticon-menu3"></span>
+              </span>
             </li>
           <?php endforeach; ?>
         </ul>
