@@ -6,28 +6,11 @@
   <p>
     <h6 class="custom-inline">FEATURE TYPE &nbsp;&nbsp;</h6>
     <?php foreach($obj->feature->feature_types as $pl_feat_type): ?>
-      <?php
-        $bcrumbs = array();
-        foreach($pl_feat_type->ancestors->feature_type as $bItem) {
-          $bcrumbs[$bItem->id] = '<a href="#">' . ucfirst($bItem->title) . '</a>';
-        }
-
-        $desc = empty($pl_feat_type->caption) ? '<p>Currently no description available</p>' : '<p>' . $pl_feat_type->caption . '</p>';
-      ?>
-      <?php print shanti_sarvaka_info_popover(array(
-        'label' => $pl_feat_type->title,
-        'desc' => $desc,
-        'tree' => array(
-          'label' => 'Subjects',
-          'items' => $bcrumbs,
-        ),
-        'links' => array(
-          'Full Entry' => array(
-            'icon' => 'places',
-            'href' => 'places/' . $pl_feat_type->id . '/overview/nojs',
-          ),
-        ),
-      )); ?>&nbsp;
+      <span><?php print $pl_feat_type->title; ?></span>
+      <span class="popover-kmaps" data-app="subjects" data-id="<?php print $pl_feat_type->id; ?>">
+        <span class="popover-kmaps-tip"></span>
+        <span class="icon shanticon-menu3"></span>
+      </span>&nbsp;
     <?php endforeach; ?>
   </p>
 <?php endif; ?>
