@@ -502,58 +502,6 @@ function kmaps_explorer_places_overview($type = 'ajax', $id, $app) {
 
   $setup = kmaps_explorer_setup_page($id, $app);
 
-  $options = array(
-    'group' => CSS_THEME,
-  );
-  /*drupal_add_css($path . '/css/thdl-style.css', $options);*/
-  drupal_add_css($path . '/css/jquery.checktree.css', $options);
-  drupal_add_css($path . '/css/main.css', $options);
-  drupal_add_css($path . '/css/jquery.autocomplete.css', $options);
-  drupal_add_css($path . '/css/smoothness/ui.all.css', $options);
-
-  $options = array(
-    'group' => JS_DEFAULT,
-    'scope' => 'footer'
-  );
-
-  drupal_add_js($path . '/scripts/cookies.min.js', $options);
-  drupal_add_js($path . '/scripts/jquery-latest.js', $options);
-  drupal_add_js($path . '/scripts/accordion.min.js', $options);
-  drupal_add_js($path . '/scripts/fn.min.js', $options);
-  drupal_add_js($path . '/scripts/jquery.history1.0beta.min.js', $options);
-  drupal_add_js($path . '/scripts/class_external.min.js', $options);
-  drupal_add_js($path . '/scripts/class_wikiloader.min.js', $options);
-  drupal_add_js($path . '/scripts/jquery.thdl.min.js', $options);
-  drupal_add_js($path . '/scripts/jquery.checkbox.min.js', $options);
-  drupal_add_js($path . '/scripts/jquery.watermarkinput.min.js', $options);
-  drupal_add_js($path . '/scripts/jquery.menus.utilities.min.js', $options);
-  drupal_add_js($path . '/scripts/jquery.menus.min.js', $options);
-  drupal_add_js($path . '/scripts/jquery.position.min.js', $options);
-  drupal_add_js($path . '/scripts/jquery.toXML.min.js', $options);
-  drupal_add_js($path . '/scripts/jquery-ui-themeless.min.js', $options);
-  drupal_add_js($path . '/scripts/app_plug.min.js', $options);
-  drupal_add_js($path . '/scripts/jqModal.min.js', $options);
-  drupal_add_js($path . '/scripts/jquery.thl.popup.min.js', $options);
-  drupal_add_js($path . '/scripts/thl-tt-plugin.min.js', $options);
-  drupal_add_js($path . '/scripts/OpenLayers_2011-08-30.js', $options);
-  drupal_add_js('//maps.googleapis.com/maps/api/js?v=3&amp;sensor=false&amp;key=AIzaSyB7IlhcOYVWmvJOPZDYWCBAc4ZXDlH7r6Q', 'external');
-  drupal_add_js($path . '/scripts/THLMap.js', $options);
-  drupal_add_js($path . '/scripts/THLWMS.js', $options);
-  drupal_add_js($path . '/scripts/Format.WMSGetFeatureInfo.js', $options);
-  drupal_add_js($path . '/scripts/WMSGetFeatureInfo.js', $options);
-  drupal_add_js($path . '/scripts/GroupedLayerSwitcher.js', $options);
-  drupal_add_js($path . '/scripts/CustomOverviewMap.js', $options);
-  drupal_add_js($path . '/scripts/jquery.checktree.js', $options);
-  drupal_add_js($path . '/scripts/jquery.dialog.js', $options);
-  drupal_add_js($path . '/scripts/jquery.autocomplete.js', $options);
-  drupal_add_js($path . '/scripts/jquery.ui.slider.js', $options);
-  drupal_add_js($path . '/scripts/json2.js', $options);
-  drupal_add_js($path . '/scripts/ol_custom_classes.js', $options);
-  drupal_add_js($path . '/scripts/main.js', $options);
-  drupal_add_js($path . '/scripts/LoadingPanel.js', $options);
-  drupal_add_js($path . '/scripts/model-searcher.js', $options);
-  drupal_add_js($path . '/scripts/characteristic-selector.js', $options);
-
   //Places Overview setup
   $obj = $setup['obj'];
   if (count($obj->feature->illustrations) > 0 && $obj->feature->illustrations[0]->type =='mms') {
