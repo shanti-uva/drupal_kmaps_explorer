@@ -4,6 +4,7 @@ core = 7.x
 package = Shanti
 
 files[] = kmaps-explorer.module
+dependencies[] = shanti_kmaps_admin
 
 stylesheets[all][] = css/kmaps-explorer.css
 scripts[] = js/custom-ajax.js

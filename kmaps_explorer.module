@@ -595,7 +595,7 @@ function kmaps_explorer_setup_page($id, $app) {
   $mURL = "http://" . $app . ".kmaps.virginia.edu/features/" . $id . ".json";
 
   //Create the url for the solr related assets for subjects and places
-  $solrURL = 'http://kidx.shanti.virginia.edu/solr/kmindex/select?q=kmapid:' . $app . '-' . $id . '&fq=&start=0&facets=on&group=true&group.field=asset_type&group.facet=true&group.ngroups=true&group.limit=1000&wt=json';
+  $solrURL = variable_get('shanti_kmaps_admin_server_solr', SHANTI_KMAPS_ADMIN_SERVER_SOLR) . '/select?q=kmapid:' . $app . '-' . $id . '&fq=&start=0&facets=on&group=true&group.field=asset_type&group.facet=true&group.ngroups=true&group.limit=1000&wt=json';
 
   //Get related data
   $json = file_get_contents($mURL);
@@ -874,7 +874,7 @@ function kmaps_explorer_each_text_node($type = 'ajax', $id, $tid, $app) {
  */
 function call_solr_index($id, $app) {
   //Create the url for the solr related assets for subjects and places
-  $solrURL = 'http://kidx.shanti.virginia.edu/solr/kmindex/select?q=kmapid:' . $app . '-' . $id . '&fq=&start=0&facets=on&group=true&group.field=asset_type&group.facet=true&group.ngroups=true&group.limit=1000&wt=json';
+  $solrURL = variable_get('shanti_kmaps_admin_server_solr', SHANTI_KMAPS_ADMIN_SERVER_SOLR) . '/select?q=kmapid:' . $app . '-' . $id . '&fq=&start=0&facets=on&group=true&group.field=asset_type&group.facet=true&group.ngroups=true&group.limit=1000&wt=json';
 
   //Get solr data
   $solrJSON = file_get_contents($solrURL);
@@ -1306,7 +1306,7 @@ function kmaps_explorer_retrieve_counts($app, $id) {
   $mURL = "http://" . $app . ".kmaps.virginia.edu/features/" . $id . ".json";
 
   //Create the url for the solr related assets for subjects and places
-  $solrURL = 'http://kidx.shanti.virginia.edu/solr/kmindex/select?q=kmapid:' . $app . '-' . $id . '&fq=&start=0&facets=on&group=true&group.field=asset_type&group.facet=true&group.ngroups=true&group.limit=1000&wt=json';
+  $solrURL = variable_get('shanti_kmaps_admin_server_solr', SHANTI_KMAPS_ADMIN_SERVER_SOLR) . '/select?q=kmapid:' . $app . '-' . $id . '&fq=&start=0&facets=on&group=true&group.field=asset_type&group.facet=true&group.ngroups=true&group.limit=1000&wt=json';
 
   //Get related data
   $json = file_get_contents($mURL);
