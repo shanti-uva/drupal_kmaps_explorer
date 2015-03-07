@@ -8,7 +8,7 @@
 
       <?php if($obj->feature->associated_resources->related_feature_count > 0): ?>
         <li class="<?php print $type; ?> <?php print isset($subject) ? 'active' : ''; ?>">
-          <a href="<?php print base_path() . $type . '/' . $kid; ?>/<?php print substr($type, 0, -1); ?>/nojs" class="use-ajax">
+          <a href="<?php print base_path() . $type . '/' . $kid; ?>/<?php print $type; ?>/nojs" class="use-ajax">
             <span class="icon shanticon-<?php print $type; ?>"></span>
             <?php print ucfirst($type); ?>
             <span class="badge"><?php print $obj->feature->associated_resources->related_feature_count; ?></span>
@@ -18,7 +18,7 @@
 
       <?php if($solr_text_count > 0): ?>
         <li class="essays <?php print isset($text) ? 'active' : ''; ?>">
-          <a href="<?php print base_path() . $type . '/' . $kid; ?>/essays/nojs" class="use-ajax">
+          <a href="<?php print base_path() . $type . '/' . $kid; ?>/texts/nojs" class="use-ajax">
             <span class="icon shanticon-essays"></span>
             Texts
             <span class="badge"><?php print $solr_text_count; ?></span>
@@ -28,7 +28,7 @@
 
       <?php if($obj->feature->associated_resources->{substr($reverse_type, 0, -1) . '_count'} > 0): ?>
         <li class="<?php print $reverse_type ?> <?php print isset($place) ? 'active' : ''; ?>">
-          <a href="<?php print base_path() . $type . '/' . $kid; ?>/<?php print substr($reverse_type, 0, -1); ?>/nojs" class="use-ajax">
+          <a href="<?php print base_path() . $type . '/' . $kid; ?>/<?php print $reverse_type; ?>/nojs" class="use-ajax">
             <span class="icon shanticon-<?php print $reverse_type ?>"></span>
             <?php print ucfirst($reverse_type); ?>
             <span class="badge"><?php print $obj->feature->associated_resources->{substr($reverse_type, 0, -1) . '_count'}; ?></span>
@@ -49,7 +49,7 @@
       <?php endif; ?>
 
       <?php if($obj->feature->associated_resources->picture_count > 0): ?>
-        <li class="photos">
+        <li class="photos <?php print isset($photo) ? 'active' : ''; ?>">
           <a href="<?php print base_path() . $type . '/' . $kid; ?>/photos/nojs" class="use-ajax">
             <span class="icon shanticon-photos"></span>
             Photos
@@ -59,7 +59,7 @@
       <?php endif; ?>
 
       <?php if($video_count > 0): ?>
-        <li class="audio-video">
+        <li class="audio-video <?php print isset($audio_video) ? 'active' : ''; ?>">
           <a href="<?php print base_path() . $type . '/' . $kid; ?>/audio-video/nojs" class="use-ajax">
             <span class="icon shanticon-audio-video"></span>
             Audio-Video
