@@ -19,7 +19,7 @@
 
 <?php if(isset($obj->feature->closest_fid_with_shapes)): ?>
   <div class="openlayermap">
-    <iframe width="100%" height="600" frameborder="0" src="http://www.thlib.org/places/maps/interactive_ajax/#fid:<?php print $obj->feature->closest_fid_with_shapes; ?>">
+    <iframe sandbox="allow-forms allow-scripts allow-same-origin" width="100%" height="600" frameborder="0" src="http://www.thlib.org/places/maps/interactive_ajax/#fid:<?php print $obj->feature->closest_fid_with_shapes; ?>">
     </iframe>
   </div>
 <?php endif; ?>
