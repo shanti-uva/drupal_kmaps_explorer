@@ -408,10 +408,11 @@ function kmaps_explorer_subjects_landing($type) {
   // drupal_add_css($path . '/css/jquery.bxslider.css', $options);
 
   $options = array(
-    'group' => JS_DEFAULT,
-    'scope' => 'footer',
+    'group' => JS_THEME,
+    'weight' => 1000,
   );
 
+  drupal_add_library('system', 'drupal.ajax');
   drupal_add_js(array('kmaps_explorer' => array('app' => 'subjects')), 'setting');
   drupal_add_js($path . '/js/jquery.bxslider-rahisified.js', $options);
   drupal_add_js($path . '/js/custom.js', $options);
@@ -437,10 +438,11 @@ function kmaps_explorer_places_landing($type) {
   // drupal_add_css($path . '/css/jquery.bxslider.css', $options);
 
   $options = array(
-    'group' => JS_DEFAULT,
-    'scope' => 'footer',
+    'group' => JS_THEME,
+    'weight' => 1000,
   );
 
+  drupal_add_library('system', 'drupal.ajax');
   drupal_add_js(array('kmaps_explorer' => array('app' => 'places')), 'setting');
   drupal_add_js($path . '/js/jquery.bxslider-rahisified.js', $options);
   drupal_add_js($path . '/js/custom.js', $options);
