@@ -17,6 +17,7 @@
                 </a>
               </span>
             </div>
+            <?php if(false): ?>
             <div class="shanti-thumbnail-field shanti-field-created">
               <span class="shanti-field-content">
                 <?php print date('F j, Y'); ?>
@@ -25,6 +26,7 @@
             <div class="shanti-thumbnail-field shanti-field-duration">
               <span class="field-content"><?php //print $aItem->duration->formatted; ?></span>
             </div>
+            <?php endif; ?>
             <div class="shanti-thumbnail-field shanti-field-group-audience">
               <span class="field-content"></span>
             </div>
