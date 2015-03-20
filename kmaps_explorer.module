@@ -627,6 +627,7 @@ function kmaps_explorer_setup_page($id, $app) {
   foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
     if ($solrValue->groupValue == "audio-video" && $solrValue->doclist->numFound > 0) {
       $video_count = $solrValue->doclist->numFound;
+      variable_set('kmaps_explorer_audio_video', $solrValue->doclist);
     }
     if ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound > 0) {
       $solr_text_count = $solrValue->doclist->numFound;
@@ -1130,15 +1131,80 @@ function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num=1, $total_p
 /**
  * Function to create ajax content for audio-video in subjects
  */
-function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_num=1, $total_pages=1, $subpage=FALSE) {
-  $avURL = variable_get('shanti_kmaps_admin_server_audio_video', SHANTI_KMAPS_ADMIN_SERVER_AUDIO_VIDEO) . '/services/' . $app . '/' . $id . '?rows=12&pg=' . $page_num;
-  $avObj = json_decode(file_get_contents($avURL));
+/*function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_num=1, $total_pages=1, $subpage=FALSE) {*/
+  /*$avURL = variable_get('shanti_kmaps_admin_server_audio_video', SHANTI_KMAPS_ADMIN_SERVER_AUDIO_VIDEO) . '/services/' . $app . '/' . $id . '?rows=12&pg=' . $page_num;*/
+  /*$avObj = json_decode(file_get_contents($avURL));*/
 
-  $page_num = $avObj->page;
-  $total_pages = intval($avObj->total / $avObj->rows);
+  /*$page_num = $avObj->page;*/
+  /*$total_pages = intval($avObj->total / $avObj->rows);*/
+
+  /*$output = theme('kmaps_explorer_subjects_audio_video_ajax', array(*/
+    /*'data' => $avObj->media,*/
+    /*'title' => variable_get('kmaps_explorer_node_title', ''),*/
+    /*'app' => $app . 's',*/
+    /*'main_id' => $id,*/
+  /*));*/
+
+  /*//create the pager input element*/
+  /*$page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'audiovideo', $app);*/
+  /*$input_el = render($page_input_array);*/
+
+  /*$pageBaseUrl = base_path() . $app . 's/' . $id . '/audio-video/nojs/';*/
+  /*$pagination = theme('kmaps_explorer_pagination_template', array(*/
+    /*'first_link' => $pageBaseUrl . '1/' . $total_pages,*/
+    /*'previous_link' => $pageBaseUrl . ($page_num <= 1 ? '1' : ($page_num - 1)) . '/' . $total_pages,*/
+    /*'next_link' => $pageBaseUrl . ($page_num >= $total_pages ? $total_pages : ($page_num + 1)) . '/' . $total_pages,*/
+    /*'last_link' => $pageBaseUrl . $total_pages . '/' . $total_pages,*/
+    /*'total_pages' => $total_pages,*/
+    /*'page_num' => $page_num,*/
+    /*'input_el' => $input_el,*/
+  /*));*/
+
+  /*if($type == 'ajax') {*/
+    /*$commands = array();*/
+    /*$commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . $app . 's/' . $id . '/audio-video/nojs/' . $page_num . '/' . $total_pages);*/
+    /*$commands[] = ajax_command_append('#tab-main', $pagination);*/
+    /*$page = array('#type' => 'ajax', '#commands' => $commands);*/
+    /*if($subpage) {*/
+      /*return $page;*/
+    /*} else {*/
+      /*ajax_deliver($page);*/
+    /*}*/
+  /*} else {*/
+    /*$setup = kmaps_explorer_setup_page($id, $app . 's');*/
+    /*$setup += array(*/
+      /*'active_content' => $output . $pagination,*/
+      /*'ajax' => $type == 'ajax' ? TRUE : FALSE,*/
+      /*'audio_video' => TRUE,*/
+    /*);*/
+
+    /*$content = theme('kmaps_explorer_initial_template', $setup);*/
+
+    /*return $content;*/
+  /*}*/
+/*}*/
+
+/**
+ * Function to create ajax content for audio-video in subjects
+ */
+function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_num=1, $total_pages=1, $subpage=FALSE) {
+  $avObj = variable_get('kmaps_explorer_audio_video');
+
+  $show_items = 12;
+  $total_pages = intval(ceil($avObj->numFound / floatval($show_items)));
+  $total_items = intval($avObj->numFound);
+  $page_num = intval($page_num);
+  $start_ind = ($page_num - 1) * $show_items;
+  $end_length = ($page_num * $show_items) >= $total_items ? ($total_items - $start_ind) : $show_items;
+
+  //Error checking to stop pages that do not exist from impoding the code base
+  if ($page_num > $total_pages) {
+    $start_ind = $total_items - 1;
+    $end_length = 0;
+  }
 
   $output = theme('kmaps_explorer_subjects_audio_video_ajax', array(
-    'data' => $avObj->media,
+    'data' => array_slice($avObj->docs, $start_ind, $end_length),
     'title' => variable_get('kmaps_explorer_node_title', ''),
     'app' => $app . 's',
     'main_id' => $id,
@@ -1187,7 +1253,13 @@ function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_nu
  * Function to create ajax content for audio-video individual node items
  */
 function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid) {
-  $avNodeURL = variable_get('shanti_kmaps_admin_server_audio_video', SHANTI_KMAPS_ADMIN_SERVER_AUDIO_VIDEO) . '/services/node/ajax/' . $vid;
+  $avNodeURL = '';
+  $avObj = variable_get('kmaps_explorer_audio_video');
+  foreach($avObj->docs as $avNodeObj) {
+    if ($avNodeObj->id == $vid) {
+      $avNodeURL = $avNodeObj->url_ajax;
+    }
+  }
   $output = file_get_contents($avNodeURL);
 
   if($type == 'ajax') {
