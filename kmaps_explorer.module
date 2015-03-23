@@ -181,76 +181,16 @@ function kmaps_explorer_menu() {
     'access arguments' => TRUE,
     'access callback' => TRUE,
   );
+  $items['admin/config/content/kmaps_explorer'] = array(
+    'title' => 'SHANTI KMAPS EXPLORER ADMIN',
+    'description'       => 'Specify settings to clear caches for the kmaps explorer module',
+    'page callback'     => 'drupal_get_form',
+    'page arguments'    => array('kmaps_explorer_admin'),
+    'access arguments'  => array('administer content types'),
+    'type'              => MENU_NORMAL_ITEM,
+  );
 
 	return $items;
-}
-
-function kmaps_explorer_get_template() {
-	$location = drupal_get_path('module', 'shanti_kmaps');
-	$tmpl = file_get_contents($location . '/templates/kmaps-explorer-page.tpl.php');
-	$json = array(
-		'template' => $tmpl,
-	);
-	drupal_json_output($json);
-}
-
-/**
- * Kmap Tree Navigation Block functions
- */
-
-/**
- * Implements hook_block_info
- */
-function kmaps_explorer_block_info() {
-	$blocks = array();
-	$blocks['kmaps_tree_block'] = array(
-		'info' => t('KMaps Navigation Tree'),
-	 );
-	return $blocks;
-}
-
-/**
- * Implements hook_block_view
- */
-function kmaps_explorer_block_view($delta='') {
-	$block = array();
-
-	switch($delta) {
-		case 'kmaps_tree_block':
-			$block['content'] = array(
-				'#theme' => 'kmaps_explorer_tree_block',
-				'#trees' => array('Places', 'Subjects'),
-			);
-			break;
-	}
-
-	return $block;
-}
-
-/**
- * Function for creating kmaps tree block content. Only returns the empty div. Content supplied through JS Ajax calls.
- */
-function kmaps_explorer_block_content() {
-  return '<div id="kmaps-trees" class="view-wrap">
-  					<div id="km-places-tree">
-  						<h2>Places</h2><div class="tree"></div>
-  					</div>
-  					<div id="km-subjects-tree">
-  						<h2>Subjects</h2><div class="tree"></div>
-  					</div>
-  				</div>';
-}
-
-/**
- * Gets current js declaration string and searches for js name in it. Returns TRUE if found; FALSE if not.
- */
-function _is_js_loaded($jsname) {
-	$jsloaded = drupal_get_js();
-	if(strpos($jsloaded, $jsname) > -1) {
-		return TRUE;
-	} else {
-		return FALSE;
-	}
 }
 
 
@@ -500,7 +440,8 @@ function kmaps_explorer_places_overview($type = 'ajax', $id, $app) {
   //Places Overview setup
   $obj = $setup['obj'];
   if (count($obj->feature->illustrations) > 0 && $obj->feature->illustrations[0]->type =='mms') {
-    $placesOverviewImageOBJ = json_decode(file_get_contents($obj->feature->illustrations[0]->url));
+    $illustrations = save_to_cache('illustrations', $app, $id, $obj->feature->illustrations[0]->url);
+    $placesOverviewImageOBJ = json_decode($illustrations);
     $placesOverviewImage = theme('kmaps_explorer_places_overview_image', array(
       'url' => $placesOverviewImageOBJ->picture->images[3]->url,
     ));
@@ -512,7 +453,8 @@ function kmaps_explorer_places_overview($type = 'ajax', $id, $app) {
 
   //Accordion setup
   $accordionURL = "http://places.kmaps.virginia.edu/features/" . $id . "/names.json";
-  $accordionOBJ = json_decode(file_get_contents($accordionURL));
+  $accordion = save_to_cache('accordion', $app, $id, $accordionURL);
+  $accordionOBJ = json_decode($accordion);
   //dpm($accordionOBJ);
   $accordionName = theme('kmaps_explorer_places_overview_names', array(
     'data' => $accordionOBJ,
@@ -592,9 +534,11 @@ function kmaps_explorer_setup_page($id, $app) {
   //Create the url for the solr related assets for subjects and places
   $solrURL = variable_get('shanti_kmaps_admin_server_solr', SHANTI_KMAPS_ADMIN_SERVER_SOLR) . '/select?q=kmapid:' . $app . '-' . $id . '&fq=&start=0&facets=on&group=true&group.field=asset_type&group.facet=true&group.ngroups=true&group.limit=1000&wt=json';
 
-  //Get related data
-  $json = file_get_contents($mURL);
-  $obj = json_decode($json);
+  //Get related data and saving in cache
+  $c_name= 'json';
+  $related_url = save_to_cache($c_name, $app, $id, $mURL);
+
+  $obj = json_decode($related_url);
   //dpm($obj);
 
   //Store the ancestors to be used for breadcrumbs
@@ -614,8 +558,9 @@ function kmaps_explorer_setup_page($id, $app) {
   }
 
   //Get solr data
-  $solrJSON = file_get_contents($solrURL);
-  $solrObj = json_decode($solrJSON);
+  $c_name_solr = 'solrJSON';
+  $related_solr = save_to_cache($c_name_solr, $app, $id, $solrURL);
+  $solrObj = json_decode($related_solr);
   //dpm($solrObj);
 
   //Store the solr object to be used in essays.
@@ -656,7 +601,8 @@ function kmaps_explorer_setup_page($id, $app) {
  */
 function kmaps_explorer_subjects_subjects($type = 'ajax', $id, $app) {
   $subjectsURL = "http://subjects.kmaps.virginia.edu/features/" . $id . "/related.json";
-  $subjObj = json_decode(file_get_contents($subjectsURL));
+  $subjects_fetch = save_to_cache('subjects', $app, $id, $subjectsURL);
+  $subjObj = json_decode($subjects_fetch);
 
   //Retrieve the title of the node
   $title = variable_get('kmaps_explorer_node_title', '');
@@ -690,7 +636,8 @@ function kmaps_explorer_subjects_subjects($type = 'ajax', $id, $app) {
  */
 function kmaps_explorer_places_subjects($type = 'ajax', $id, $app) {
   $subjectsURL = "http://places.kmaps.virginia.edu/features/" . $id . "/topics.json";
-  $subjObj = json_decode(file_get_contents($subjectsURL));
+  $subjects_fetch = save_to_cache('subjects', $app, $id, $subjectsURL);
+  $subjObj = json_decode($subjects_fetch);
 
   //Retrieve the title of the node
   $title = variable_get('kmaps_explorer_node_title', '');
@@ -888,7 +835,8 @@ function call_solr_index($id, $app) {
  */
 function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num=1, $total_pages=1, $subpage=FALSE) {
   $placesURL = "http://places.kmaps.virginia.edu/topics/" . $id . ".json?page=" . $page_num;
-  $placesObj = json_decode(file_get_contents($placesURL));
+  $places_fetch = save_to_cache('places', 'subjects', $id, $placesURL, $page_num);
+  $placesObj = json_decode($places_fetch);
 
   $page_num = $placesObj->topic->current_page;
   $total_pages = $placesObj->topic->total_pages;
@@ -942,7 +890,8 @@ function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num=1, $total
  */
 function kmaps_explorer_places_places($type = 'ajax', $id, $page_num = 1, $total_pages = 1, $subpage = FALSE) {
   $placesURL = "http://places.kmaps.virginia.edu/features/" . $id . "/related.json";
-  $placesObj = json_decode(file_get_contents($placesURL));
+  $places_fetch = save_to_cache('places', 'places', $id, $placesURL);
+  $placesObj = json_decode($places_fetch);
 
   $output = theme('kmaps_explorer_places_places_ajax', array(
     'data' => $placesObj,
@@ -1025,7 +974,8 @@ function kmaps_explore_pager_ajax($form, &$form_state) {
  */
 function kmaps_explorer_subjects_photos($type = 'ajax', $id, $page_num=1, $total_pages=1, $subpage=FALSE) {
   $photosURL = 'http://mms.thlib.org/topics/' . $id . '/pictures.json?per_page=30&page=' . $page_num;
-  $photosObj = json_decode(file_get_contents($photosURL));
+  $photos_fetch = save_to_cache('photos', 'subjects', $id, $photosURL, $page_num);
+  $photosObj = json_decode($photos_fetch);
 
   $page_num = $photosObj->topic->current_page;
   $total_pages = $photosObj->topic->total_pages;
@@ -1079,7 +1029,8 @@ function kmaps_explorer_subjects_photos($type = 'ajax', $id, $page_num=1, $total
  */
 function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num=1, $total_pages=1, $subpage=FALSE) {
   $photosURL = 'http://mms.thlib.org/places/' . $id . '/pictures.json?per_page=30&page=' . $page_num;
-  $photosObj = json_decode(file_get_contents($photosURL));
+  $photos_fetch = save_to_cache('photos', 'places', $id, $photosURL, $page_num);
+  $photosObj = json_decode($photos_fetch);
 
   $total_items = intval(variable_get('kmaps_explorer_places_photos_count', 0));
   $total_pages = intval($total_items / 32);
@@ -1260,7 +1211,8 @@ function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid) {
       $avNodeURL = $avNodeObj->url_ajax;
     }
   }
-  $output = file_get_contents($avNodeURL);
+  $av_node_fetch = save_to_cache('audio_video', $app, $mid, $avNodeURL, $vid);
+  $output = $av_node_fetch;
 
   if($type == 'ajax') {
     $commands = array();
@@ -1444,4 +1396,163 @@ function kmaps_explorer_retrieve_counts($app, $id) {
   //dpm($solrObj);
 
   return $results;
+}
+
+/**
+* Function to save all calls into cache_kmaps_explorer table
+*/
+function save_to_cache($c_name_var, $app, $id, $url, $page_num = 1) {
+  //${$c_name_var . '_' . $app . '_' . $id} = &drupal_static(__FUNCTION__);
+  if (!isset(${$c_name_var . '_' . $app . '_' . $id . '_' . $page_num})) {
+    if ($cache = cache_get($c_name_var . $app . $id . '_' . $page_num, 'cache_kmaps_explorer')) {
+      ${$c_name_var . '_' . $app . '_' . $id . '_' . $page_num} = $cache->data;
+    }
+    else {
+      ${$c_name_var . '_' . $app . '_' . $id . '_' . $page_num} = file_get_contents($url);
+      cache_set($c_name_var . $app . $id . '_' . $page_num, ${$c_name_var . '_' . $app . '_' . $id . '_' . $page_num}, 'cache_kmaps_explorer');
+    }
+  }
+  return ${$c_name_var . '_' . $app . '_' . $id . '_' . $page_num};
+}
+
+/**
+* Function to implement the kmaps admin form
+*/
+function kmaps_explorer_admin() {
+  $form['kmaps_explorer_solr'] = array(
+    '#type' => 'submit',
+    '#value' => t('Clear all solr api caches'),
+    '#submit' => array('kmaps_explorer_solr_clear_cache_submit'),
+    '#prefix' => '<div>',
+    '#suffix' => '</div>',
+  );
+  $form['kmaps_explorer_overview'] = array(
+    '#type' => 'submit',
+    '#value' => t('Clear all overview caches'),
+    '#submit' => array('kmaps_explorer_overview_clear_cache_submit'),
+    '#prefix' => '<div>',
+    '#suffix' => '</div>',
+  );
+  $form['kmaps_explorer_illustrations'] = array(
+    '#type' => 'submit',
+    '#value' => t('Clear all illustration caches'),
+    '#submit' => array('kmaps_explorer_illustrations_clear_cache_submit'),
+    '#prefix' => '<div>',
+    '#suffix' => '</div>',
+  );
+  $form['kmaps_explorer_accordion'] = array(
+    '#type' => 'submit',
+    '#value' => t('Clear all accordion caches'),
+    '#submit' => array('kmaps_explorer_accordion_clear_cache_submit'),
+    '#prefix' => '<div>',
+    '#suffix' => '</div>',
+  );
+  $form['kmaps_explorer_subjects'] = array(
+    '#type' => 'submit',
+    '#value' => t('Clear all subjects caches'),
+    '#submit' => array('kmaps_explorer_subjects_clear_cache_submit'),
+    '#prefix' => '<div>',
+    '#suffix' => '</div>',
+  );
+  $form['kmaps_explorer_places'] = array(
+    '#type' => 'submit',
+    '#value' => t('Clear all places caches'),
+    '#submit' => array('kmaps_explorer_places_clear_cache_submit'),
+    '#prefix' => '<div>',
+    '#suffix' => '</div>',
+  );
+  $form['kmaps_explorer_photos'] = array(
+    '#type' => 'submit',
+    '#value' => t('Clear all photos caches'),
+    '#submit' => array('kmaps_explorer_photos_clear_cache_submit'),
+    '#prefix' => '<div>',
+    '#suffix' => '</div>',
+  );
+  $form['kmaps_explorer_audio_video'] = array(
+    '#type' => 'submit',
+    '#value' => t('Clear all audio_video caches'),
+    '#submit' => array('kmaps_explorer_audio_video_clear_cache_submit'),
+    '#prefix' => '<div>',
+    '#suffix' => '</div>',
+  );
+  $form['kmaps_explorer_all'] = array(
+    '#type' => 'submit',
+    '#value' => t('Clear all caches'),
+    '#submit' => array('kmaps_explorer_all_clear_cache_submit'),
+    '#prefix' => '<div>',
+    '#suffix' => '</div>',
+  );
+  return system_settings_form($form);
+}
+
+/**
+* Callback to clear all solr api calls from the cache_kmaps_explorer table
+*/
+function kmaps_explorer_solr_clear_cache_submit($form, &$form_state) {
+  cache_clear_all('solrJSON', 'cache_kmaps_explorer', TRUE);
+  drupal_set_message(t('Solr caches cleared from the kmaps explorer cache table.'));
+}
+
+/**
+* Callback to clear all overview(main api from Rails) calls from the cache_kmaps_explorer table
+*/
+function kmaps_explorer_overview_clear_cache_submit($form, &$form_state) {
+  cache_clear_all('json', 'cache_kmaps_explorer', TRUE);
+  drupal_set_message(t('Main overview caches cleared from the kmaps explorer cache table.'));
+}
+
+/**
+* Callback to clear all api calls from the cache_kmaps_explorer table
+*/
+function kmaps_explorer_all_clear_cache_submit($form, &$form_state) {
+  cache_clear_all('*', 'cache_kmaps_explorer', TRUE);
+  drupal_set_message(t('All caches cleared from the kmaps explorer cache table.'));
+}
+
+/**
+* Callback to clear illustration calls from the cache_kmaps_explorer table
+*/
+function kmaps_explorer_illustrations_clear_cache_submit($form, &$form_state) {
+  cache_clear_all('illustrations', 'cache_kmaps_explorer', TRUE);
+  drupal_set_message(t('Illustrations cleared from the kmaps explorer cache table.'));
+}
+
+/**
+* Callback to clear accordion calls from the cache_kmaps_explorer table
+*/
+function kmaps_explorer_accordion_clear_cache_submit($form, &$form_state) {
+  cache_clear_all('accordion', 'cache_kmaps_explorer', TRUE);
+  drupal_set_message(t('Accordion cleared from the kmaps explorer cache table.'));
+}
+
+/**
+* Callback to clear subjects calls from the cache_kmaps_explorer table
+*/
+function kmaps_explorer_subjects_clear_cache_submit($form, &$form_state) {
+  cache_clear_all('subjects', 'cache_kmaps_explorer', TRUE);
+  drupal_set_message(t('Subjects cleared from the kmaps explorer cache table.'));
+}
+
+/**
+* Callback to clear places calls from the cache_kmaps_explorer table
+*/
+function kmaps_explorer_places_clear_cache_submit($form, &$form_state) {
+  cache_clear_all('places', 'cache_kmaps_explorer', TRUE);
+  drupal_set_message(t('Places cleared from the kmaps explorer cache table.'));
+}
+
+/**
+* Callback to clear photos calls from the cache_kmaps_explorer table
+*/
+function kmaps_explorer_photos_clear_cache_submit($form, &$form_state) {
+  cache_clear_all('photos', 'cache_kmaps_explorer', TRUE);
+  drupal_set_message(t('Photos cleared from the kmaps explorer cache table.'));
+}
+
+/**
+* Callback to clear audio_video calls from the cache_kmaps_explorer table
+*/
+function kmaps_explorer_audio_video_clear_cache_submit($form, &$form_state) {
+  cache_clear_all('audio_video', 'cache_kmaps_explorer', TRUE);
+  drupal_set_message(t('Audio-video cleared from the kmaps explorer cache table.'));
 }
