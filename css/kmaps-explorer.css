@@ -38,7 +38,7 @@ figcaption .center-caption {
   opacity: 1;
 }
 
-.subjects-overview-image figure:before {
+.subjects-overview-image figure::before {
   content: "?";
   position: absolute;
   font-weight: 800;
@@ -58,11 +58,11 @@ figcaption .center-caption {
   opacity: 0.75;
 }
 
-.subjects-overview-image figure:hover:before {
+.subjects-overview-image figure:hover::before {
   opacity: 0;
 }
 
-.subjects-overview-image .cap-bot:before { bottom: 10px; left: 10px; }
+.subjects-overview-image .cap-bot::before { bottom: 10px; left: 10px; }
 .subjects-overview-image .cap-bot figcaption { left: 0; bottom: -30%;}
 .subjects-overview-image .cap-bot:hover figcaption { bottom: 0; }
 
