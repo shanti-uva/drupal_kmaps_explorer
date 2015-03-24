@@ -68,42 +68,42 @@
         html += '</div>';
         if (data.feature.associated_resources.related_feature_count > 0) {
           html += '<div class="popover-footer-button">';
-          html += '<a href="/' + app + '/' + data.feature.id + '/' + app + '/nojs" class="icon shanticon-' + app + '">';
+          html += '<a href="/' + app + '/' + data.feature.id + '/' + app + '/nojs" class="icon shanticon-' + app + '" target="_blank">';
           html += 'Related ' + app.charAt(0).toUpperCase() + app.slice(1) + ' (' + data.feature.associated_resources.related_feature_count + ')';
           html += '</a>';
           html += '</div>';
         }
         if (data.feature.associated_resources.subject_count > 0) {
           html += '<div class="popover-footer-button">';
-          html += '<a href="/' + app + '/' + data.feature.id + '/' + 'subjects' + '/nojs" class="icon shanticon-' + 'subjects' + '">';
+          html += '<a href="/' + app + '/' + data.feature.id + '/' + 'subjects' + '/nojs" class="icon shanticon-' + 'subjects' + '" target="_blank">';
           html += 'Related ' + 'Subjects' + ' (' + data.feature.associated_resources.subject_count + ')';
           html += '</a>';
           html += '</div>';
         }
         if (data.feature.associated_resources.place_count > 0) {
           html += '<div class="popover-footer-button">';
-          html += '<a href="/' + app + '/' + data.feature.id + '/' + 'places' + '/nojs" class="icon shanticon-' + 'places' + '">';
+          html += '<a href="/' + app + '/' + data.feature.id + '/' + 'places' + '/nojs" class="icon shanticon-' + 'places' + '" target="_blank">';
           html += 'Related ' + 'Places' + ' (' + data.feature.associated_resources.place_count + ')';
           html += '</a>';
           html += '</div>';
         }
         if (data.feature.associated_resources.document_count > 0) {
           html += '<div class="popover-footer-button">';
-          html += '<a href="/' + app + '/' + data.feature.id + '/' + 'texts' + '/nojs" class="icon shanticon-' + 'texts' + '">';
+          html += '<a href="/' + app + '/' + data.feature.id + '/' + 'texts' + '/nojs" class="icon shanticon-' + 'texts' + '" target="_blank">';
           html += 'Related ' + 'Texts' + ' (' + data.feature.associated_resources.document_count + ')';
           html += '</a>';
           html += '</div>';
         }
         if (data.feature.associated_resources.picture_count > 0) {
           html += '<div class="popover-footer-button">';
-          html += '<a href="/' + app + '/' + data.feature.id + '/' + 'photos' + '/nojs" class="icon shanticon-' + 'photos' + '">';
+          html += '<a href="/' + app + '/' + data.feature.id + '/' + 'photos' + '/nojs" class="icon shanticon-' + 'photos' + '" target="_blank">';
           html += 'Related ' + 'Photos' + ' (' + data.feature.associated_resources.picture_count + ')';
           html += '</a>';
           html += '</div>';
         }
         if (data.feature.associated_resources.video_count > 0) {
           html += '<div class="popover-footer-button">';
-          html += '<a href="/' + app + '/' + data.feature.id + '/' + 'audio-video' + '/nojs" class="icon shanticon-' + 'audio-video' + '">';
+          html += '<a href="/' + app + '/' + data.feature.id + '/' + 'audio-video' + '/nojs" class="icon shanticon-' + 'audio-video' + '" target="_blank">';
           html += 'Related ' + 'Audio-Video' + ' (' + data.feature.associated_resources.video_count + ')';
           html += '</a>';
           html += '</div>';
