@@ -415,7 +415,7 @@ function kmaps_explorer_subjects_overview($type = 'ajax', $id, $app) {
 
   if($type == 'ajax') {
     $breadcrumb = theme('kmaps_explorer_breadcrumbs', array(
-      'data' => variable_get('kmaps_explorer_ancestors', array()),
+      'data' => $_SESSION['kmaps_explorer']['kmaps_explorer_ancestors'],
       'app' => $app,
     ));
 
@@ -484,7 +484,7 @@ function kmaps_explorer_places_overview($type = 'ajax', $id, $app) {
 
   if($type == 'ajax') {
     $breadcrumb = theme('kmaps_explorer_breadcrumbs', array(
-      'data' => variable_get('kmaps_explorer_ancestors', array()),
+      'data' => $_SESSION['kmaps_explorer']['kmaps_explorer_ancestors'],
       'app' => $app,
     ));
 
@@ -508,7 +508,7 @@ function kmaps_explorer_setup_page($id, $app) {
   $path = drupal_get_path('module', 'kmaps_explorer');
 
   //Store the type of the application(subjects or places)
-  variable_set('kmaps_explorer_app', $app);
+  $_SESSION['kmaps_explorer']['kmaps_explorer_app'] = $app;
 
   $options = array(
     'group' => CSS_THEME,
@@ -543,18 +543,18 @@ function kmaps_explorer_setup_page($id, $app) {
 
   //Store the ancestors to be used for breadcrumbs
   if($app == 'subjects') {
-    variable_set('kmaps_explorer_ancestors', $obj->feature->ancestors);
+    $_SESSION['kmaps_explorer']['kmaps_explorer_ancestors'] = $obj->feature->ancestors;
   } elseif($app == 'places') {
-    variable_set('kmaps_explorer_ancestors', $obj->feature->perspectives[0]->ancestors);
+    $_SESSION['kmaps_explorer']['kmaps_explorer_ancestors'] = $obj->feature->perspectives[0]->ancestors;
   }
 
   //Set and Store the title of this node for other functions to use
-  variable_set('kmaps_explorer_node_title', $obj->feature->header);
+  $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'] = $obj->feature->header;
   drupal_set_title($obj->feature->header);
 
   //Store the count for the places photos if available
   if(isset($obj->feature->associated_resources->picture_count) && intval($obj->feature->associated_resources->picture_count) > 0) {
-    variable_set('kmaps_explorer_places_photos_count', $obj->feature->associated_resources->picture_count);
+    $_SESSION['kmaps_explorer']['kmaps_explorer_places_photos_count'] = $obj->feature->associated_resources->picture_count;
   }
 
   //Get solr data
@@ -564,7 +564,7 @@ function kmaps_explorer_setup_page($id, $app) {
   //dpm($solrObj);
 
   //Store the solr object to be used in essays.
-  variable_set('kmaps_explorer_solr', $solrObj);
+  $_SESSION['kmaps_explorer']['kmaps_explorer_solr'] = $solrObj;
 
   $video_count = 0;
   $solr_text_count = 0;
@@ -572,7 +572,7 @@ function kmaps_explorer_setup_page($id, $app) {
   foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
     if ($solrValue->groupValue == "audio-video" && $solrValue->doclist->numFound > 0) {
       $video_count = $solrValue->doclist->numFound;
-      variable_set('kmaps_explorer_audio_video', $solrValue->doclist);
+      $_SESSION['kmaps_explorer']['kmaps_explorer_audio_video'] = $solrValue->doclist;
     }
     if ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound > 0) {
       $solr_text_count = $solrValue->doclist->numFound;
@@ -605,7 +605,7 @@ function kmaps_explorer_subjects_subjects($type = 'ajax', $id, $app) {
   $subjObj = json_decode($subjects_fetch);
 
   //Retrieve the title of the node
-  $title = variable_get('kmaps_explorer_node_title', '');
+  $title = $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'];
 
   $output = theme('kmaps_explorer_subjects_subjects_ajax', array(
     'data' => $subjObj,
@@ -640,7 +640,7 @@ function kmaps_explorer_places_subjects($type = 'ajax', $id, $app) {
   $subjObj = json_decode($subjects_fetch);
 
   //Retrieve the title of the node
-  $title = variable_get('kmaps_explorer_node_title', '');
+  $title = $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'];
 
   $output = theme('kmaps_explorer_places_subjects_ajax', array(
     'data' => $subjObj,
@@ -671,9 +671,9 @@ function kmaps_explorer_places_subjects($type = 'ajax', $id, $app) {
  */
 function kmaps_explorer_subjects_essays($type = 'ajax', $id, $app) {
   //Retrieve the title of the node
-  $title = variable_get('kmaps_explorer_node_title', '');
+  $title = $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'];
 
-  $solrObj = variable_get('kmaps_explorer_solr', '');
+  $solrObj = $_SESSION['kmaps_explorer']['kmaps_explorer_solr'];
 
   foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
     if ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound == 1) {
@@ -712,9 +712,9 @@ function kmaps_explorer_subjects_essays($type = 'ajax', $id, $app) {
  */
 function kmaps_explorer_places_essays($type = 'ajax', $id, $app) {
   //Retrieve the title of the node
-  $title = variable_get('kmaps_explorer_node_title', '');
+  $title = $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'];
 
-  $solrObj = variable_get('kmaps_explorer_solr', '');
+  $solrObj = $_SESSION['kmaps_explorer']['kmaps_explorer_solr'];
 
   foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
     if ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound == 1) {
@@ -753,7 +753,7 @@ function kmaps_explorer_places_essays($type = 'ajax', $id, $app) {
  */
 function kmaps_explorer_each_text_node($type = 'ajax', $id, $tid, $app) {
   if($type == 'ajax') {
-    $solrObj = variable_get('kmaps_explorer_solr', '');
+    $solrObj = $_SESSION['kmaps_explorer']['kmaps_explorer_solr'];
 
     if($solrObj == '') {
       $solrObj = call_solr_index($id, $app);
@@ -781,7 +781,7 @@ function kmaps_explorer_each_text_node($type = 'ajax', $id, $tid, $app) {
   } else {
     $setup = kmaps_explorer_setup_page($id, $app);
 
-    $solrObj = variable_get('kmaps_explorer_solr', '');
+    $solrObj = $_SESSION['kmaps_explorer']['kmaps_explorer_solr'];
 
     if($solrObj == '') {
       $solrObj = call_solr_index($id, $app);
@@ -825,7 +825,7 @@ function call_solr_index($id, $app) {
   //dpm($solrObj);
 
   //Store the solr object to be used in essays.
-  variable_set('kmaps_explorer_solr', $solrObj);
+  $_SESSION['kmaps_explorer']['kmaps_explorer_solr'] = $solrObj;
 
   return $solrObj;
 }
@@ -843,7 +843,7 @@ function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num=1, $total
 
   $output = theme('kmaps_explorer_subjects_places_ajax', array(
     'data' => $placesObj,
-    'title' => variable_get('kmaps_explorer_node_title', ''),
+    'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
   ));
 
   //create the pager input element
@@ -895,7 +895,7 @@ function kmaps_explorer_places_places($type = 'ajax', $id, $page_num = 1, $total
 
   $output = theme('kmaps_explorer_places_places_ajax', array(
     'data' => $placesObj,
-    'title' => variable_get('kmaps_explorer_node_title', ''),
+    'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
   ));
 
   if($type == 'ajax') {
@@ -982,7 +982,7 @@ function kmaps_explorer_subjects_photos($type = 'ajax', $id, $page_num=1, $total
 
   $output = theme('kmaps_explorer_subjects_photos_ajax', array(
     'data' => $photosObj->topic->media,
-    'title' => variable_get('kmaps_explorer_node_title', ''),
+    'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
   ));
 
   //create the pager input element
@@ -1032,12 +1032,12 @@ function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num=1, $total_p
   $photos_fetch = save_to_cache('photos', 'places', $id, $photosURL, $page_num);
   $photosObj = json_decode($photos_fetch);
 
-  $total_items = intval(variable_get('kmaps_explorer_places_photos_count', 0));
+  $total_items = intval($_SESSION['kmaps_explorer']['kmaps_explorer_places_photos_count']);
   $total_pages = intval($total_items / 32);
 
   $output = theme('kmaps_explorer_subjects_photos_ajax', array(
     'data' => $photosObj->place->media,
-    'title' => variable_get('kmaps_explorer_node_title', ''),
+    'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
   ));
 
   //create the pager input element
@@ -1139,7 +1139,7 @@ function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num=1, $total_p
  * Function to create ajax content for audio-video in subjects
  */
 function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_num=1, $total_pages=1, $subpage=FALSE) {
-  $avObj = variable_get('kmaps_explorer_audio_video');
+  $avObj = $_SESSION['kmaps_explorer']['kmaps_explorer_audio_video'];
 
   $show_items = 12;
   $total_pages = intval(ceil($avObj->numFound / floatval($show_items)));
@@ -1156,7 +1156,7 @@ function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_nu
 
   $output = theme('kmaps_explorer_subjects_audio_video_ajax', array(
     'data' => array_slice($avObj->docs, $start_ind, $end_length),
-    'title' => variable_get('kmaps_explorer_node_title', ''),
+    'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
     'app' => $app . 's',
     'main_id' => $id,
   ));
@@ -1205,7 +1205,7 @@ function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_nu
  */
 function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid) {
   $avNodeURL = '';
-  $avObj = variable_get('kmaps_explorer_audio_video');
+  $avObj = $_SESSION['kmaps_explorer']['kmaps_explorer_audio_video'];
   foreach($avObj->docs as $avNodeObj) {
     if ($avNodeObj->id == $vid) {
       $avNodeURL = $avNodeObj->url_ajax;
@@ -1257,7 +1257,7 @@ function search_etymology($obj) {
 function kmaps_explorer_menu_breadcrumb_alter(&$active_trail, $item) {
   $active_trail = array();
 
-  $ancestors = variable_get('kmaps_explorer_ancestors', array());
+  $ancestors = $_SESSION['kmaps_explorer']['kmaps_explorer_ancestors'];
 
   if (current_path() == 'subjects') {
     $link1 = array(
@@ -1276,7 +1276,7 @@ function kmaps_explorer_menu_breadcrumb_alter(&$active_trail, $item) {
     );
     array_push($active_trail, $link1);
   } else {
-    $app = variable_get('kmaps_explorer_app', '');
+    $app = $_SESSION['kmaps_explorer']['kmaps_explorer_app'];
     foreach ($ancestors as $key => $ancestor) {
       $link = array(
         'title' => $ancestor->header,
