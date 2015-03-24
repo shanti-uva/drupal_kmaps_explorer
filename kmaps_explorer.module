@@ -423,6 +423,7 @@ function kmaps_explorer_subjects_overview($type = 'ajax', $id, $app) {
     $commands[] = custom_ajax_command_html('#' . $app . '-main', $content, null, base_path() . 'subjects/' . $id .  '/overview/nojs');
     $commands[] = ajax_command_html('.page-title span:last-child', $obj->feature->header);
     $commands[] = ajax_command_html('ol.breadcrumb', $breadcrumb);
+    $commands[] = ajax_command_invoke('ol.breadcrumb', 'css', array('display', 'block'));
     $page = array('#type' => 'ajax', '#commands' => $commands);
     ajax_deliver($page);
   } else {
@@ -492,6 +493,7 @@ function kmaps_explorer_places_overview($type = 'ajax', $id, $app) {
     $commands[] = custom_ajax_command_html('#' . $app . '-main', $content, null, base_path() . 'places/' . $id .  '/overview/nojs');
     $commands[] = ajax_command_html('.page-title span:last-child', $obj->feature->header);
     $commands[] = ajax_command_html('ol.breadcrumb', $breadcrumb);
+    $commands[] = ajax_command_invoke('ol.breadcrumb', 'css', array('display', 'block'));
     $page = array('#type' => 'ajax', '#commands' => $commands);
     ajax_deliver($page);
   } else {
