@@ -604,21 +604,30 @@ function kmaps_explorer_subjects_subjects($type = 'ajax', $id, $app) {
   $subjects_fetch = save_to_cache('subjects', $app, $id, $subjectsURL);
   $subjObj = json_decode($subjects_fetch);
 
-  //Retrieve the title of the node
-  $title = $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'];
-
-  $output = theme('kmaps_explorer_subjects_subjects_ajax', array(
-    'data' => $subjObj,
-    'title' => $title,
-  ));
-
   if($type == 'ajax') {
+    //Retrieve the title of the node
+    $title = isset($_SESSION['kmaps_explorer']['kmaps_explorer_node_title']) ? $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'] : '';
+
+    $output = theme('kmaps_explorer_subjects_subjects_ajax', array(
+      'data' => $subjObj,
+      'title' => $title,
+    ));
+
     $commands = array();
     $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'subjects/' . $id . '/subjects/nojs');
     $page = array('#type' => 'ajax', '#commands' => $commands);
     ajax_deliver($page);
   } else {
     $setup = kmaps_explorer_setup_page($id, $app);
+
+    //Retrieve the title of the node
+    $title = isset($_SESSION['kmaps_explorer']['kmaps_explorer_node_title']) ? $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'] : '';
+
+    $output = theme('kmaps_explorer_subjects_subjects_ajax', array(
+      'data' => $subjObj,
+      'title' => $title,
+    ));
+
     $setup += array(
       'active_content' => $output,
       'ajax' => $type == 'ajax' ? TRUE : FALSE,
@@ -639,21 +648,30 @@ function kmaps_explorer_places_subjects($type = 'ajax', $id, $app) {
   $subjects_fetch = save_to_cache('subjects', $app, $id, $subjectsURL);
   $subjObj = json_decode($subjects_fetch);
 
-  //Retrieve the title of the node
-  $title = $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'];
-
-  $output = theme('kmaps_explorer_places_subjects_ajax', array(
-    'data' => $subjObj,
-    'title' => $title,
-  ));
-
   if($type == 'ajax') {
+    //Retrieve the title of the node
+    $title = $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'];
+
+    $output = theme('kmaps_explorer_places_subjects_ajax', array(
+      'data' => $subjObj,
+      'title' => $title,
+    ));
+
     $commands = array();
     $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'places/' . $id . '/subjects/nojs');
     $page = array('#type' => 'ajax', '#commands' => $commands);
     ajax_deliver($page);
   } else {
     $setup = kmaps_explorer_setup_page($id, $app);
+
+    //Retrieve the title of the node
+    $title = $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'];
+
+    $output = theme('kmaps_explorer_places_subjects_ajax', array(
+      'data' => $subjObj,
+      'title' => $title,
+    ));
+
     $setup += array(
       'active_content' => $output,
       'ajax' => $type == 'ajax' ? TRUE : FALSE,
@@ -670,31 +688,50 @@ function kmaps_explorer_places_subjects($type = 'ajax', $id, $app) {
  * Function to create the ajax content for essays in subjects
  */
 function kmaps_explorer_subjects_essays($type = 'ajax', $id, $app) {
-  //Retrieve the title of the node
-  $title = $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'];
-
-  $solrObj = $_SESSION['kmaps_explorer']['kmaps_explorer_solr'];
-
-  foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
-    if ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound == 1) {
-      $output = '<iframe height="700" width="100%" frameBorder="0" src="' . $solrValue->doclist->docs[0]->url_ajax . '"></iframe>';
-    } elseif($solrValue->groupValue == "texts" && $solrValue->doclist->numFound > 1) {
-      $output = theme('kmaps_explorer_texts_summary', array(
-        'data' => $solrValue,
-        'sid' => $id,
-        'app' => $app,
-        'title' => $title,
-      ));
-    }
-  }
-
   if($type == 'ajax') {
+    //Retrieve the title of the node
+    $title = $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'];
+
+    $solrObj = $_SESSION['kmaps_explorer']['kmaps_explorer_solr'];
+
+    foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
+      if ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound == 1) {
+        $output = '<iframe height="700" width="100%" frameBorder="0" src="' . $solrValue->doclist->docs[0]->url_ajax . '"></iframe>';
+      } elseif($solrValue->groupValue == "texts" && $solrValue->doclist->numFound > 1) {
+        $output = theme('kmaps_explorer_texts_summary', array(
+          'data' => $solrValue,
+          'sid' => $id,
+          'app' => $app,
+          'title' => $title,
+        ));
+      }
+    }
+
     $commands = array();
     $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'subjects/' . $id . '/texts/nojs');
     $page = array('#type' => 'ajax', '#commands' => $commands);
     ajax_deliver($page);
   } else {
     $setup = kmaps_explorer_setup_page($id, $app);
+
+    //Retrieve the title of the node
+    $title = $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'];
+
+    $solrObj = $_SESSION['kmaps_explorer']['kmaps_explorer_solr'];
+
+    foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
+      if ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound == 1) {
+        $output = '<iframe height="700" width="100%" frameBorder="0" src="' . $solrValue->doclist->docs[0]->url_ajax . '"></iframe>';
+      } elseif($solrValue->groupValue == "texts" && $solrValue->doclist->numFound > 1) {
+        $output = theme('kmaps_explorer_texts_summary', array(
+          'data' => $solrValue,
+          'sid' => $id,
+          'app' => $app,
+          'title' => $title,
+        ));
+      }
+    }
+
     $setup += array(
       'active_content' => $output,
       'ajax' => $type == 'ajax' ? TRUE : FALSE,
@@ -711,31 +748,50 @@ function kmaps_explorer_subjects_essays($type = 'ajax', $id, $app) {
  * Function to create the ajax content for esssays in places
  */
 function kmaps_explorer_places_essays($type = 'ajax', $id, $app) {
-  //Retrieve the title of the node
-  $title = $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'];
-
-  $solrObj = $_SESSION['kmaps_explorer']['kmaps_explorer_solr'];
-
-  foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
-    if ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound == 1) {
-      $output = '<iframe height="700" width="100%" frameBorder="0" src="' . $solrValue->doclist->docs[0]->url_ajax . '"></iframe>';
-    } elseif($solrValue->groupValue == "texts" && $solrValue->doclist->numFound > 1) {
-      $output = theme('kmaps_explorer_texts_summary', array(
-        'data' => $solrValue,
-        'sid' => $id,
-        'app' => $app,
-        'title' => $title,
-      ));
-    }
-  }
-
   if($type == 'ajax') {
+    //Retrieve the title of the node
+    $title = $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'];
+
+    $solrObj = $_SESSION['kmaps_explorer']['kmaps_explorer_solr'];
+
+    foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
+      if ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound == 1) {
+        $output = '<iframe height="700" width="100%" frameBorder="0" src="' . $solrValue->doclist->docs[0]->url_ajax . '"></iframe>';
+      } elseif($solrValue->groupValue == "texts" && $solrValue->doclist->numFound > 1) {
+        $output = theme('kmaps_explorer_texts_summary', array(
+          'data' => $solrValue,
+          'sid' => $id,
+          'app' => $app,
+          'title' => $title,
+        ));
+      }
+    }
+
     $commands = array();
     $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'places/' . $id . '/texts/nojs');
     $page = array('#type' => 'ajax', '#commands' => $commands);
     ajax_deliver($page);
   } else {
     $setup = kmaps_explorer_setup_page($id, $app);
+
+    //Retrieve the title of the node
+    $title = $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'];
+
+    $solrObj = $_SESSION['kmaps_explorer']['kmaps_explorer_solr'];
+
+    foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
+      if ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound == 1) {
+        $output = '<iframe height="700" width="100%" frameBorder="0" src="' . $solrValue->doclist->docs[0]->url_ajax . '"></iframe>';
+      } elseif($solrValue->groupValue == "texts" && $solrValue->doclist->numFound > 1) {
+        $output = theme('kmaps_explorer_texts_summary', array(
+          'data' => $solrValue,
+          'sid' => $id,
+          'app' => $app,
+          'title' => $title,
+        ));
+      }
+    }
+
     $setup += array(
       'active_content' => $output,
       'ajax' => $type == 'ajax' ? TRUE : FALSE,
@@ -841,11 +897,6 @@ function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num=1, $total
   $page_num = $placesObj->topic->current_page;
   $total_pages = $placesObj->topic->total_pages;
 
-  $output = theme('kmaps_explorer_subjects_places_ajax', array(
-    'data' => $placesObj,
-    'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
-  ));
-
   //create the pager input element
   $page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'places', 'subject');
   $input_el = render($page_input_array);
@@ -862,6 +913,11 @@ function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num=1, $total
   ));
 
   if($type == 'ajax') {
+    $output = theme('kmaps_explorer_subjects_places_ajax', array(
+      'data' => $placesObj,
+      'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+    ));
+
     $commands = array();
     $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'subjects/' . $id . '/places/nojs/' . $page_num . '/' . $total_pages);
     $commands[] = ajax_command_append('#tab-main', $pagination);
@@ -873,6 +929,12 @@ function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num=1, $total
     }
   } else {
     $setup = kmaps_explorer_setup_page($id, 'subjects');
+
+    $output = theme('kmaps_explorer_subjects_places_ajax', array(
+      'data' => $placesObj,
+      'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+    ));
+
     $setup += array(
       'active_content' => $output . $pagination,
       'ajax' => $type == 'ajax' ? TRUE : FALSE,
@@ -893,12 +955,12 @@ function kmaps_explorer_places_places($type = 'ajax', $id, $page_num = 1, $total
   $places_fetch = save_to_cache('places', 'places', $id, $placesURL);
   $placesObj = json_decode($places_fetch);
 
-  $output = theme('kmaps_explorer_places_places_ajax', array(
-    'data' => $placesObj,
-    'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
-  ));
-
   if($type == 'ajax') {
+    $output = theme('kmaps_explorer_places_places_ajax', array(
+      'data' => $placesObj,
+      'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+    ));
+
     $commands = array();
     $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'places/' . $id . '/places/nojs');
     $page = array('#type' => 'ajax', '#commands' => $commands);
@@ -909,6 +971,12 @@ function kmaps_explorer_places_places($type = 'ajax', $id, $page_num = 1, $total
     }
   } else {
     $setup = kmaps_explorer_setup_page($id, 'places');
+
+    $output = theme('kmaps_explorer_places_places_ajax', array(
+      'data' => $placesObj,
+      'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+    ));
+
     $setup += array(
       'active_content' => $output,
       'ajax' => $type == 'ajax' ? TRUE : FALSE,
@@ -980,11 +1048,6 @@ function kmaps_explorer_subjects_photos($type = 'ajax', $id, $page_num=1, $total
   $page_num = $photosObj->topic->current_page;
   $total_pages = $photosObj->topic->total_pages;
 
-  $output = theme('kmaps_explorer_subjects_photos_ajax', array(
-    'data' => $photosObj->topic->media,
-    'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
-  ));
-
   //create the pager input element
   $page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'photos', 'subject');
   $input_el = render($page_input_array);
@@ -1001,6 +1064,11 @@ function kmaps_explorer_subjects_photos($type = 'ajax', $id, $page_num=1, $total
   ));
 
   if($type == 'ajax') {
+    $output = theme('kmaps_explorer_subjects_photos_ajax', array(
+      'data' => $photosObj->topic->media,
+      'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+    ));
+
     $commands = array();
     $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'subjects/' . $id . '/photos/nojs/' . $page_num . '/' . $total_pages);
     $commands[] = ajax_command_append('#tab-main', $pagination);
@@ -1012,6 +1080,12 @@ function kmaps_explorer_subjects_photos($type = 'ajax', $id, $page_num=1, $total
     }
   } else {
     $setup = kmaps_explorer_setup_page($id, 'subjects');
+
+    $output = theme('kmaps_explorer_subjects_photos_ajax', array(
+      'data' => $photosObj->topic->media,
+      'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+    ));
+
     $setup += array(
       'active_content' => $output . $pagination,
       'ajax' => $type == 'ajax' ? TRUE : FALSE,
@@ -1032,30 +1106,30 @@ function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num=1, $total_p
   $photos_fetch = save_to_cache('photos', 'places', $id, $photosURL, $page_num);
   $photosObj = json_decode($photos_fetch);
 
-  $total_items = intval($_SESSION['kmaps_explorer']['kmaps_explorer_places_photos_count']);
-  $total_pages = intval($total_items / 32);
-
-  $output = theme('kmaps_explorer_subjects_photos_ajax', array(
-    'data' => $photosObj->place->media,
-    'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
-  ));
-
-  //create the pager input element
-  $page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'photos', 'place');
-  $input_el = render($page_input_array);
-
-  $pageBaseUrl = base_path() . 'places/' . $id . '/photos/nojs/';
-  $pagination = theme('kmaps_explorer_pagination_template', array(
-    'first_link' => $pageBaseUrl . '1/' . $total_pages,
-    'previous_link' => $pageBaseUrl . ($page_num <= 1 ? '1' : ($page_num - 1)) . '/' . $total_pages,
-    'next_link' => $pageBaseUrl . ($page_num >= $total_pages ? $total_pages : ($page_num + 1)) . '/' . $total_pages,
-    'last_link' => $pageBaseUrl . $total_pages . '/' . $total_pages,
-    'total_pages' => $total_pages,
-    'page_num' => $page_num,
-    'input_el' => $input_el,
-  ));
-
   if($type == 'ajax') {
+    $total_items = intval($_SESSION['kmaps_explorer']['kmaps_explorer_places_photos_count']);
+    $total_pages = intval($total_items / 32);
+
+    $output = theme('kmaps_explorer_subjects_photos_ajax', array(
+      'data' => $photosObj->place->media,
+      'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+    ));
+
+    //create the pager input element
+    $page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'photos', 'place');
+    $input_el = render($page_input_array);
+
+    $pageBaseUrl = base_path() . 'places/' . $id . '/photos/nojs/';
+    $pagination = theme('kmaps_explorer_pagination_template', array(
+      'first_link' => $pageBaseUrl . '1/' . $total_pages,
+      'previous_link' => $pageBaseUrl . ($page_num <= 1 ? '1' : ($page_num - 1)) . '/' . $total_pages,
+      'next_link' => $pageBaseUrl . ($page_num >= $total_pages ? $total_pages : ($page_num + 1)) . '/' . $total_pages,
+      'last_link' => $pageBaseUrl . $total_pages . '/' . $total_pages,
+      'total_pages' => $total_pages,
+      'page_num' => $page_num,
+      'input_el' => $input_el,
+    ));
+
     $commands = array();
     $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'places/' . $id . '/photos/nojs/' . $page_num . '/' . $total_pages);
     $commands[] = ajax_command_append('#tab-main', $pagination);
@@ -1067,6 +1141,30 @@ function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num=1, $total_p
     }
   } else {
     $setup = kmaps_explorer_setup_page($id, 'places');
+
+    $total_items = intval($_SESSION['kmaps_explorer']['kmaps_explorer_places_photos_count']);
+    $total_pages = intval($total_items / 32);
+
+    $output = theme('kmaps_explorer_subjects_photos_ajax', array(
+      'data' => $photosObj->place->media,
+      'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+    ));
+
+    //create the pager input element
+    $page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'photos', 'place');
+    $input_el = render($page_input_array);
+
+    $pageBaseUrl = base_path() . 'places/' . $id . '/photos/nojs/';
+    $pagination = theme('kmaps_explorer_pagination_template', array(
+      'first_link' => $pageBaseUrl . '1/' . $total_pages,
+      'previous_link' => $pageBaseUrl . ($page_num <= 1 ? '1' : ($page_num - 1)) . '/' . $total_pages,
+      'next_link' => $pageBaseUrl . ($page_num >= $total_pages ? $total_pages : ($page_num + 1)) . '/' . $total_pages,
+      'last_link' => $pageBaseUrl . $total_pages . '/' . $total_pages,
+      'total_pages' => $total_pages,
+      'page_num' => $page_num,
+      'input_el' => $input_el,
+    ));
+
     $setup += array(
       'active_content' => $output . $pagination,
       'ajax' => $type == 'ajax' ? TRUE : FALSE,
@@ -1139,44 +1237,44 @@ function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num=1, $total_p
  * Function to create ajax content for audio-video in subjects
  */
 function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_num=1, $total_pages=1, $subpage=FALSE) {
-  $avObj = $_SESSION['kmaps_explorer']['kmaps_explorer_audio_video'];
-
-  $show_items = 12;
-  $total_pages = intval(ceil($avObj->numFound / floatval($show_items)));
-  $total_items = intval($avObj->numFound);
-  $page_num = intval($page_num);
-  $start_ind = ($page_num - 1) * $show_items;
-  $end_length = ($page_num * $show_items) >= $total_items ? ($total_items - $start_ind) : $show_items;
-
-  //Error checking to stop pages that do not exist from impoding the code base
-  if ($page_num > $total_pages) {
-    $start_ind = $total_items - 1;
-    $end_length = 0;
-  }
-
-  $output = theme('kmaps_explorer_subjects_audio_video_ajax', array(
-    'data' => array_slice($avObj->docs, $start_ind, $end_length),
-    'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
-    'app' => $app . 's',
-    'main_id' => $id,
-  ));
-
-  //create the pager input element
-  $page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'audiovideo', $app);
-  $input_el = render($page_input_array);
-
-  $pageBaseUrl = base_path() . $app . 's/' . $id . '/audio-video/nojs/';
-  $pagination = theme('kmaps_explorer_pagination_template', array(
-    'first_link' => $pageBaseUrl . '1/' . $total_pages,
-    'previous_link' => $pageBaseUrl . ($page_num <= 1 ? '1' : ($page_num - 1)) . '/' . $total_pages,
-    'next_link' => $pageBaseUrl . ($page_num >= $total_pages ? $total_pages : ($page_num + 1)) . '/' . $total_pages,
-    'last_link' => $pageBaseUrl . $total_pages . '/' . $total_pages,
-    'total_pages' => $total_pages,
-    'page_num' => $page_num,
-    'input_el' => $input_el,
-  ));
-
   if($type == 'ajax') {
+    $avObj = $_SESSION['kmaps_explorer']['kmaps_explorer_audio_video'];
+
+    $show_items = 12;
+    $total_pages = intval(ceil($avObj->numFound / floatval($show_items)));
+    $total_items = intval($avObj->numFound);
+    $page_num = intval($page_num);
+    $start_ind = ($page_num - 1) * $show_items;
+    $end_length = ($page_num * $show_items) >= $total_items ? ($total_items - $start_ind) : $show_items;
+
+    //Error checking to stop pages that do not exist from impoding the code base
+    if ($page_num > $total_pages) {
+      $start_ind = $total_items - 1;
+      $end_length = 0;
+    }
+
+    $output = theme('kmaps_explorer_subjects_audio_video_ajax', array(
+      'data' => array_slice($avObj->docs, $start_ind, $end_length),
+      'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+      'app' => $app . 's',
+      'main_id' => $id,
+    ));
+
+    //create the pager input element
+    $page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'audiovideo', $app);
+    $input_el = render($page_input_array);
+
+    $pageBaseUrl = base_path() . $app . 's/' . $id . '/audio-video/nojs/';
+    $pagination = theme('kmaps_explorer_pagination_template', array(
+      'first_link' => $pageBaseUrl . '1/' . $total_pages,
+      'previous_link' => $pageBaseUrl . ($page_num <= 1 ? '1' : ($page_num - 1)) . '/' . $total_pages,
+      'next_link' => $pageBaseUrl . ($page_num >= $total_pages ? $total_pages : ($page_num + 1)) . '/' . $total_pages,
+      'last_link' => $pageBaseUrl . $total_pages . '/' . $total_pages,
+      'total_pages' => $total_pages,
+      'page_num' => $page_num,
+      'input_el' => $input_el,
+    ));
+
     $commands = array();
     $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . $app . 's/' . $id . '/audio-video/nojs/' . $page_num . '/' . $total_pages);
     $commands[] = ajax_command_append('#tab-main', $pagination);
@@ -1188,6 +1286,44 @@ function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_nu
     }
   } else {
     $setup = kmaps_explorer_setup_page($id, $app . 's');
+
+    $avObj = $_SESSION['kmaps_explorer']['kmaps_explorer_audio_video'];
+
+    $show_items = 12;
+    $total_pages = intval(ceil($avObj->numFound / floatval($show_items)));
+    $total_items = intval($avObj->numFound);
+    $page_num = intval($page_num);
+    $start_ind = ($page_num - 1) * $show_items;
+    $end_length = ($page_num * $show_items) >= $total_items ? ($total_items - $start_ind) : $show_items;
+
+    //Error checking to stop pages that do not exist from impoding the code base
+    if ($page_num > $total_pages) {
+      $start_ind = $total_items - 1;
+      $end_length = 0;
+    }
+
+    $output = theme('kmaps_explorer_subjects_audio_video_ajax', array(
+      'data' => array_slice($avObj->docs, $start_ind, $end_length),
+      'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+      'app' => $app . 's',
+      'main_id' => $id,
+    ));
+
+    //create the pager input element
+    $page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'audiovideo', $app);
+    $input_el = render($page_input_array);
+
+    $pageBaseUrl = base_path() . $app . 's/' . $id . '/audio-video/nojs/';
+    $pagination = theme('kmaps_explorer_pagination_template', array(
+      'first_link' => $pageBaseUrl . '1/' . $total_pages,
+      'previous_link' => $pageBaseUrl . ($page_num <= 1 ? '1' : ($page_num - 1)) . '/' . $total_pages,
+      'next_link' => $pageBaseUrl . ($page_num >= $total_pages ? $total_pages : ($page_num + 1)) . '/' . $total_pages,
+      'last_link' => $pageBaseUrl . $total_pages . '/' . $total_pages,
+      'total_pages' => $total_pages,
+      'page_num' => $page_num,
+      'input_el' => $input_el,
+    ));
+
     $setup += array(
       'active_content' => $output . $pagination,
       'ajax' => $type == 'ajax' ? TRUE : FALSE,
@@ -1204,17 +1340,17 @@ function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_nu
  * Function to create ajax content for audio-video individual node items
  */
 function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid) {
-  $avNodeURL = '';
-  $avObj = $_SESSION['kmaps_explorer']['kmaps_explorer_audio_video'];
-  foreach($avObj->docs as $avNodeObj) {
-    if ($avNodeObj->id == $vid) {
-      $avNodeURL = $avNodeObj->url_ajax;
-    }
-  }
-  $av_node_fetch = save_to_cache('audio_video', $app, $mid, $avNodeURL, $vid);
-  $output = $av_node_fetch;
-
   if($type == 'ajax') {
+    $avNodeURL = '';
+    $avObj = $_SESSION['kmaps_explorer']['kmaps_explorer_audio_video'];
+    foreach($avObj->docs as $avNodeObj) {
+      if ($avNodeObj->id == $vid) {
+        $avNodeURL = $avNodeObj->url_ajax;
+      }
+    }
+    $av_node_fetch = save_to_cache('audio_video', $app, $mid, $avNodeURL, $vid);
+    $output = $av_node_fetch;
+
     $commands = array();
     $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . $app  . '/' . $mid . '/audio-video-node/' . $vid . '/nojs');
     $commands[] = ajax_command_invoke('body', 'addClass', array('max-col-widths'));
@@ -1222,6 +1358,17 @@ function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid) {
     ajax_deliver($page);
   } else {
     $setup = kmaps_explorer_setup_page($mid, $app);
+
+    $avNodeURL = '';
+    $avObj = $_SESSION['kmaps_explorer']['kmaps_explorer_audio_video'];
+    foreach($avObj->docs as $avNodeObj) {
+      if ($avNodeObj->id == $vid) {
+        $avNodeURL = $avNodeObj->url_ajax;
+      }
+    }
+    $av_node_fetch = save_to_cache('audio_video', $app, $mid, $avNodeURL, $vid);
+    $output = $av_node_fetch;
+
     $setup += array(
       'active_content' => $output,
       'ajax' => $type == 'ajax' ? TRUE : FALSE,
