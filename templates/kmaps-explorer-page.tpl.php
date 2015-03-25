@@ -52,7 +52,7 @@
         <li class="photos <?php print isset($photo) ? 'active' : ''; ?>">
           <a href="<?php print base_path() . $type . '/' . $kid; ?>/photos/nojs" class="use-ajax">
             <span class="icon shanticon-photos"></span>
-            Photos
+            Images
             <span class="badge"><?php print $obj->feature->associated_resources->picture_count; ?></span>
           </a>
         </li>
