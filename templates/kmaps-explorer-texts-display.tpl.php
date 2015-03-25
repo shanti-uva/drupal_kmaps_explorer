@@ -1,4 +1,4 @@
-<h6>Texts associated with <?php print $title; ?></h6>
+<h5><?php print $title; ?></h5><br>
 
 <?php foreach($data->doclist->docs as $aItem): ?>
   <li>

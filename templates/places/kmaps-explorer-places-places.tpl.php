@@ -1,3 +1,4 @@
+<h5>Places Related to <?php print $title; ?></h5><br>
 <?php foreach($data->feature_relation_types as $aItem): ?>
   <h6><?php print $title; ?> <?php print $aItem->label; ?> (<?php print $aItem->count; ?>):</h6>
   <ul>

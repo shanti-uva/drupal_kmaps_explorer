@@ -612,7 +612,7 @@ function kmaps_explorer_subjects_subjects($type = 'ajax', $id, $app) {
 
     $output = theme('kmaps_explorer_subjects_subjects_ajax', array(
       'data' => $subjObj,
-      'title' => $title,
+      'title' => 'Subjects Related to ' . $title,
     ));
 
     $commands = array();
@@ -627,7 +627,7 @@ function kmaps_explorer_subjects_subjects($type = 'ajax', $id, $app) {
 
     $output = theme('kmaps_explorer_subjects_subjects_ajax', array(
       'data' => $subjObj,
-      'title' => $title,
+      'title' => 'Subjects Related to ' . $title,
     ));
 
     $setup += array(
@@ -656,7 +656,7 @@ function kmaps_explorer_places_subjects($type = 'ajax', $id, $app) {
 
     $output = theme('kmaps_explorer_places_subjects_ajax', array(
       'data' => $subjObj,
-      'title' => $title,
+      'title' => 'Subjects Related to ' . $title,
     ));
 
     $commands = array();
@@ -671,7 +671,7 @@ function kmaps_explorer_places_subjects($type = 'ajax', $id, $app) {
 
     $output = theme('kmaps_explorer_places_subjects_ajax', array(
       'data' => $subjObj,
-      'title' => $title,
+      'title' => 'Subjects Related to ' . $title,
     ));
 
     $setup += array(
@@ -704,7 +704,7 @@ function kmaps_explorer_subjects_essays($type = 'ajax', $id, $app) {
           'data' => $solrValue,
           'sid' => $id,
           'app' => $app,
-          'title' => $title,
+          'title' => 'Texts Related to ' . $title,
         ));
       }
     }
@@ -729,7 +729,7 @@ function kmaps_explorer_subjects_essays($type = 'ajax', $id, $app) {
           'data' => $solrValue,
           'sid' => $id,
           'app' => $app,
-          'title' => $title,
+          'title' => 'Texts Related to ' . $title,
         ));
       }
     }
@@ -764,7 +764,7 @@ function kmaps_explorer_places_essays($type = 'ajax', $id, $app) {
           'data' => $solrValue,
           'sid' => $id,
           'app' => $app,
-          'title' => $title,
+          'title' => 'Texts Related to ' . $title,
         ));
       }
     }
@@ -789,7 +789,7 @@ function kmaps_explorer_places_essays($type = 'ajax', $id, $app) {
           'data' => $solrValue,
           'sid' => $id,
           'app' => $app,
-          'title' => $title,
+          'title' => 'Texts Related to ' . $title,
         ));
       }
     }
@@ -917,7 +917,7 @@ function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num=1, $total
   if($type == 'ajax') {
     $output = theme('kmaps_explorer_subjects_places_ajax', array(
       'data' => $placesObj,
-      'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+      'title' => 'Places Related to ' . $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
     ));
 
     $commands = array();
@@ -934,7 +934,7 @@ function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num=1, $total
 
     $output = theme('kmaps_explorer_subjects_places_ajax', array(
       'data' => $placesObj,
-      'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+      'title' => 'Places Related to ' . $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
     ));
 
     $setup += array(
@@ -1068,7 +1068,7 @@ function kmaps_explorer_subjects_photos($type = 'ajax', $id, $page_num=1, $total
   if($type == 'ajax') {
     $output = theme('kmaps_explorer_subjects_photos_ajax', array(
       'data' => $photosObj->topic->media,
-      'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+      'title' => 'Images Related to ' . $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
     ));
 
     $commands = array();
@@ -1085,7 +1085,7 @@ function kmaps_explorer_subjects_photos($type = 'ajax', $id, $page_num=1, $total
 
     $output = theme('kmaps_explorer_subjects_photos_ajax', array(
       'data' => $photosObj->topic->media,
-      'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+      'title' => 'Images Related to ' . $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
     ));
 
     $setup += array(
@@ -1114,7 +1114,7 @@ function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num=1, $total_p
 
     $output = theme('kmaps_explorer_subjects_photos_ajax', array(
       'data' => $photosObj->place->media,
-      'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+      'title' => 'Images Related to ' . $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
     ));
 
     //create the pager input element
@@ -1149,7 +1149,7 @@ function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num=1, $total_p
 
     $output = theme('kmaps_explorer_subjects_photos_ajax', array(
       'data' => $photosObj->place->media,
-      'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+      'title' => 'Images Related to ' . $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
     ));
 
     //create the pager input element
@@ -1257,7 +1257,7 @@ function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_nu
 
     $output = theme('kmaps_explorer_subjects_audio_video_ajax', array(
       'data' => array_slice($avObj->docs, $start_ind, $end_length),
-      'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+      'title' => 'Audio-Video Related to ' . $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
       'app' => $app . 's',
       'main_id' => $id,
     ));
@@ -1306,7 +1306,7 @@ function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_nu
 
     $output = theme('kmaps_explorer_subjects_audio_video_ajax', array(
       'data' => array_slice($avObj->docs, $start_ind, $end_length),
-      'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+      'title' => 'Audio-Video Related to ' . $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
       'app' => $app . 's',
       'main_id' => $id,
     ));

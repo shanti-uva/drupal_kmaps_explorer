@@ -1,4 +1,4 @@
-<h6><?php print $title; ?></h6>
+<h5><?php print $title; ?></h5><br>
 <ul>
   <?php foreach($data->feature_relation_types as $aItem): ?>
     <li><?php print ucfirst($aItem->label); ?> (<?php print count($aItem->features); ?>):</li>

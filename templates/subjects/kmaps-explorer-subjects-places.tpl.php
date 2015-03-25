@@ -1,4 +1,4 @@
-<h6>Features Associated with <?php print $title; ?></h6>
+<h5><?php print $title; ?></h5><br>
 <ul class="related-places">
   <?php foreach($data->topic->features as $aItem): ?>
     <li>

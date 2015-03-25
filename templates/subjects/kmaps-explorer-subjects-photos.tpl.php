@@ -1,4 +1,4 @@
-<h6>Photographs in <?php print $title; ?></h6>
+<h5><?php print $title; ?></h5><br>
 <div class="related-photos">
   <?php foreach($data as $aItem): ?>
     <div class="each-photo">
