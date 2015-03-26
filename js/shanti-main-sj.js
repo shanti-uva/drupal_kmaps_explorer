@@ -61,47 +61,7 @@ jQuery(function($) {
   // $("advanced-view").css('height','275px'); 
 */
 
-jQuery(function($) {
-	// *** SEARCH *** adapt search panel height to viewport
-  var height = $(window).height();
-  var kmapsrch = (height) - 70;  
-  
-  function kmaps_placesHeight() {
-  // *** places search
-    var places_viewHeight = (height) -  221;
-    var places_comboHeight = (places_viewHeight) - 207;        
-    kmapsrch = parseInt(kmapsrch) + 'px';
-    $("#kmaps-search").find(".text").css('height',kmapsrch);
-    places_viewHeight = parseInt(places_viewHeight) + 'px';
-    places_comboHeight = parseInt(places_comboHeight) + 'px';
-    $(".page-places .view-wrap").css('height', places_viewHeight);
-		$(".page-places .view-wrap.short-wrap").css('height', places_comboHeight);           
-  } 
-  function kmaps_subjectsHeight() {  
-  // *** subjects search    
-    var subjects_viewHeight = (height) -  211;
-    var subjects_comboHeight = (subjects_viewHeight) - 126;        
-    kmapsrch = parseInt(kmapsrch) + 'px';
-    $("#kmaps-search").find(".text").css('height',kmapsrch);    
-    subjects_viewHeight = parseInt(subjects_viewHeight) + 'px';
-    subjects_comboHeight = parseInt(subjects_comboHeight) + 'px';
-    $(".page-subjects .view-wrap").css('height', subjects_viewHeight);
-		$(".page-subjects .view-wrap.short-wrap").css('height', subjects_comboHeight);          
-  }    
-	 // --- autoadjust the height of search panel, call function TEMP placed in bottom of equalheights js
-    kmaps_placesHeight();
-    $(window).bind('load orientationchange resize', kmaps_placesHeight);
-	 // --- autoadjust the height of search panel, call function TEMP placed in bottom of equalheights js
-    kmaps_subjectsHeight();
-    $(window).bind('load orientationchange resize', kmaps_subjectsHeight);
 
-
-
-//    console.log(new Error().stack);
-//    console.dir($._data($('#searchy').get(0).events));
-
-
-});
 
 // *** SEARCH *** corrections for widths
 jQuery(function($) {
