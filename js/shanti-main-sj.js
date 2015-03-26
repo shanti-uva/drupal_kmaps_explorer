@@ -68,7 +68,7 @@ jQuery(function($) {
   
   function kmaps_placesHeight() {
   // *** places search
-    var places_viewHeight = (height) -  211;
+    var places_viewHeight = (height) -  221;
     var places_comboHeight = (places_viewHeight) - 207;        
     kmapsrch = parseInt(kmapsrch) + 'px';
     $("#kmaps-search").find(".text").css('height',kmapsrch);
