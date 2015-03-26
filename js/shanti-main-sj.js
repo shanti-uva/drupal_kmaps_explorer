@@ -64,11 +64,11 @@ jQuery(function($) {
 jQuery(function($) {
 	// *** SEARCH *** adapt search panel height to viewport
   var height = $(window).height();
-  var kmapsrch = (height) - 80;  
+  var kmapsrch = (height) - 70;  
   
   function kmaps_placesHeight() {
   // *** places search
-    var places_viewHeight = (height) -  200;
+    var places_viewHeight = (height) -  211;
     var places_comboHeight = (places_viewHeight) - 207;        
     kmapsrch = parseInt(kmapsrch) + 'px';
     $("#kmaps-search").find(".text").css('height',kmapsrch);
