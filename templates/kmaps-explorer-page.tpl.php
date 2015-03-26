@@ -19,7 +19,7 @@
       <?php if($solr_text_count > 0): ?>
         <li class="essays <?php print isset($text) ? 'active' : ''; ?>">
           <a href="<?php print base_path() . $type . '/' . $kid; ?>/texts/nojs" class="use-ajax">
-            <span class="icon shanticon-essays"></span>
+            <span class="icon shanticon-texts"></span>
             Texts
             <span class="badge"><?php print $solr_text_count; ?></span>
           </a>
