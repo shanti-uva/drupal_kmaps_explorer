@@ -1558,7 +1558,9 @@ function save_to_cache($c_name_var, $app, $id, $url, $page_num = 1) {
     }
     else {
       ${$c_name_var . '_' . $app . '_' . $id . '_' . $page_num} = file_get_contents($url);
-      cache_set($c_name_var . $app . $id . '_' . $page_num, ${$c_name_var . '_' . $app . '_' . $id . '_' . $page_num}, 'cache_kmaps_explorer');
+      if(!empty(${$c_name_var . '_' . $app . '_' . $id . '_' . $page_num})) {
+        cache_set($c_name_var . $app . $id . '_' . $page_num, ${$c_name_var . '_' . $app . '_' . $id . '_' . $page_num}, 'cache_kmaps_explorer');
+      }
     }
   }
   return ${$c_name_var . '_' . $app . '_' . $id . '_' . $page_num};
