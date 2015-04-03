@@ -1353,6 +1353,24 @@ function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid) {
     $av_node_fetch = save_to_cache('audio_video', $app, $mid, $avNodeURL, $vid);
     $output = $av_node_fetch;
 
+    //Remove all script tags and load them separately
+    $dom = new DOMDocument();
+    @$dom->loadHTML($output);
+    $scripts = $dom->getElementsByTagName('script');
+
+    $remove = [];
+    $sources = [];
+
+    foreach($scripts as $item) {
+      $sources[] = $item->getAttribute('src');
+    }
+
+    foreach($sources as $src) {
+      drupal_add_js($src, 'external');
+    }
+
+    $output = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $output);
+
     $commands = array();
     $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . $app  . '/' . $mid . '/audio-video-node/' . $vid . '/nojs');
     $commands[] = ajax_command_invoke('body', 'addClass', array('max-col-widths'));
@@ -1370,6 +1388,29 @@ function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid) {
     }
     $av_node_fetch = save_to_cache('audio_video', $app, $mid, $avNodeURL, $vid);
     $output = $av_node_fetch;
+
+    //Remove all script tags and load them separately
+    $dom = new DOMDocument();
+    @$dom->loadHTML($output);
+    $scripts = $dom->getElementsByTagName('script');
+
+    $remove = [];
+    $sources = [];
+
+    foreach($scripts as $item) {
+      $sources[] = $item->getAttribute('src');
+      $remove[] = $item;
+    }
+
+    foreach($remove as $item) {
+      $item->parentNode->removeChild($item);
+    }
+
+    foreach($sources as $src) {
+      drupal_add_js($src, 'external');
+    }
+
+    $output = $dom->saveHTML();
 
     $setup += array(
       'active_content' => $output,
