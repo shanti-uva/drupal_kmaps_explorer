@@ -1358,7 +1358,6 @@ function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid) {
     @$dom->loadHTML($output);
     $scripts = $dom->getElementsByTagName('script');
 
-    $remove = [];
     $sources = [];
 
     foreach($scripts as $item) {
@@ -1394,7 +1393,6 @@ function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid) {
     @$dom->loadHTML($output);
     $scripts = $dom->getElementsByTagName('script');
 
-    $remove = [];
     $sources = [];
 
     foreach($scripts as $item) {
