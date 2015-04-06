@@ -1399,18 +1399,13 @@ function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid) {
 
     foreach($scripts as $item) {
       $sources[] = $item->getAttribute('src');
-      $remove[] = $item;
-    }
-
-    foreach($remove as $item) {
-      $item->parentNode->removeChild($item);
     }
 
     foreach($sources as $src) {
       drupal_add_js($src, 'external');
     }
 
-    $output = $dom->saveHTML();
+    $output = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $output);
 
     $setup += array(
       'active_content' => $output,
