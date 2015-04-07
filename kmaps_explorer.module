@@ -119,10 +119,28 @@ function kmaps_explorer_menu() {
     'access callback' => TRUE,
   );
 
+  $items['subjects/%/photos_node/%'] = array(
+    'title' => 'Subjects',
+    'description' => 'Creates a callback that shows individual photos in subjects via ajax',
+    'page callback' => 'kmaps_explorer_subjects_photos_node',
+    'page arguments' => array(3, 1),
+    'access arguments' => TRUE,
+    'access callback' => TRUE,
+  );
+
   $items['places/%/photos/%'] = array(
     'title' => 'Places',
     'description' => 'Creates a callback that shows photos in places via ajax',
     'page callback' => 'kmaps_explorer_places_photos',
+    'page arguments' => array(3, 1),
+    'access arguments' => TRUE,
+    'access callback' => TRUE,
+  );
+
+  $items['places/%/photos_node/%'] = array(
+    'title' => 'Places',
+    'description' => 'Creates a callback that shows individual photos in places via ajax',
+    'page callback' => 'kmaps_explorer_places_photos_node',
     'page arguments' => array(3, 1),
     'access arguments' => TRUE,
     'access callback' => TRUE,
@@ -239,6 +257,11 @@ function kmaps_explorer_theme() {
     ),
     'kmaps_explorer_subjects_photos_ajax' => array(
       'template' => 'kmaps-explorer-subjects-photos',
+      'arguments' => array(),
+      'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/subjects',
+    ),
+    'kmaps_explorer_subjects_photos_node' => array(
+      'template' => 'kmaps-explorer-subjects-photos-node',
       'arguments' => array(),
       'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/subjects',
     ),
@@ -1101,6 +1124,38 @@ function kmaps_explorer_subjects_photos($type = 'ajax', $id, $page_num=1, $total
 }
 
 /**
+ * Function to show individual images in a separate page
+ */
+function kmaps_explorer_subjects_photos_node($type = 'ajax', $id, $page_num = 1, $total_pages, $pid) {
+  $photosURL = 'http://mms.thlib.org/topics/' . $id . '/pictures.json?per_page=30&page=' . $page_num;
+  $photos_fetch = save_to_cache('photos', 'subjects', $id, $photosURL, $page_num);
+  $photosObj = json_decode($photos_fetch);
+
+  $aItem = new stdClass();
+  foreach($photosObj->topic->media as $eachMedia) {
+    if ($eachMedia->id == intval(substr($pid, 3))) {
+      $aItem = $eachMedia;
+    }
+  }
+
+  $setup = kmaps_explorer_setup_page($id, 'subjects');
+
+  $output = theme('kmaps_explorer_subjects_photos_node', array(
+    'aItem' => $aItem,
+  ));
+
+  $setup += array(
+    'active_content' => $output,
+    'ajax' => $type == 'ajax' ? TRUE : FALSE,
+    'photo' => TRUE,
+  );
+
+  $content = theme('kmaps_explorer_initial_template', $setup);
+
+  return $content;
+}
+
+/**
  * Function to create ajax content for photos in places
  */
 function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num=1, $total_pages=1, $subpage=FALSE) {
@@ -1177,6 +1232,38 @@ function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num=1, $total_p
 
     return $content;
   }
+}
+
+/**
+ * Function to show individual images in a separate page
+ */
+function kmaps_explorer_places_photos_node($type = 'ajax', $id, $page_num = 1, $total_pages, $pid) {
+  $photosURL = 'http://mms.thlib.org/places/' . $id . '/pictures.json?per_page=30&page=' . $page_num;
+  $photos_fetch = save_to_cache('photos', 'places', $id, $photosURL, $page_num);
+  $photosObj = json_decode($photos_fetch);
+
+  $aItem = new stdClass();
+  foreach($photosObj->place->media as $eachMedia) {
+    if ($eachMedia->id == intval(substr($pid, 3))) {
+      $aItem = $eachMedia;
+    }
+  }
+
+  $setup = kmaps_explorer_setup_page($id, 'places');
+
+  $output = theme('kmaps_explorer_subjects_photos_node', array(
+    'aItem' => $aItem,
+  ));
+
+  $setup += array(
+    'active_content' => $output,
+    'ajax' => $type == 'ajax' ? TRUE : FALSE,
+    'photo' => TRUE,
+  );
+
+  $content = theme('kmaps_explorer_initial_template', $setup);
+
+  return $content;
 }
 
 /**
@@ -1394,10 +1481,20 @@ function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid) {
     $scripts = $dom->getElementsByTagName('script');
 
     $sources = array();
+    $insides = array();
 
     foreach($scripts as $item) {
       $sources[] = $item->getAttribute('src');
+      $insides[] = $item->textContent;
     }
+
+    $embed = array_pop($insides);
+    $embed = str_replace("<!--//--><![CDATA[//><!--", "", $embed);
+    $embed = str_replace("//--><!]]>", "", $embed);
+
+    drupal_add_js($embed, array(
+      'type' => 'inline',
+    ));
 
     foreach($sources as $src) {
       drupal_add_js($src, 'external');
