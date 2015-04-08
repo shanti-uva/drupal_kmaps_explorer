@@ -117,7 +117,6 @@
         var $form = $(this);
         var trid = $form.attr('data-transcripts-id');
         var base = 'transcript-search-button-' + trid;
-        alert(trid);
 
         var element_settings = {
           url: 'http://' + window.location.hostname +  settings.basePath + settings.pathPrefix + 'system/ajax',
