@@ -8,7 +8,7 @@ define('SUBJECTS_URL', 'http://subjects.kmaps.virginia.edu');
 define('PLACES_URL', 'http://places.kmaps.virginia.edu');
 
 function kmaps_explorer_menu() {
-	$items = array();
+  $items = array();
 
   $items['kmaps/template'] = array(
     'title' => 'Kmaps Content Template',
@@ -123,7 +123,7 @@ function kmaps_explorer_menu() {
     'title' => 'Subjects',
     'description' => 'Creates a callback that shows individual photos in subjects via ajax',
     'page callback' => 'kmaps_explorer_subjects_photos_node',
-    'page arguments' => array(3, 1),
+    'page arguments' => array(1, 3),
     'access arguments' => TRUE,
     'access callback' => TRUE,
   );
@@ -141,7 +141,7 @@ function kmaps_explorer_menu() {
     'title' => 'Places',
     'description' => 'Creates a callback that shows individual photos in places via ajax',
     'page callback' => 'kmaps_explorer_places_photos_node',
-    'page arguments' => array(3, 1),
+    'page arguments' => array(1, 3),
     'access arguments' => TRUE,
     'access callback' => TRUE,
   );
@@ -1126,27 +1126,20 @@ function kmaps_explorer_subjects_photos($type = 'ajax', $id, $page_num=1, $total
 /**
  * Function to show individual images in a separate page
  */
-function kmaps_explorer_subjects_photos_node($type = 'ajax', $id, $page_num = 1, $total_pages, $pid) {
-  $photosURL = 'http://mms.thlib.org/topics/' . $id . '/pictures.json?per_page=30&page=' . $page_num;
-  $photos_fetch = save_to_cache('photos', 'subjects', $id, $photosURL, $page_num);
+function kmaps_explorer_subjects_photos_node($id, $pid) {
+  $photosURL = 'http://mms.thlib.org/media_objects/' . $pid . '.json';
+  $photos_fetch = save_to_cache('photos_node', 'subjects', $pid, $photosURL);
   $photosObj = json_decode($photos_fetch);
-
-  $aItem = new stdClass();
-  foreach($photosObj->topic->media as $eachMedia) {
-    if ($eachMedia->id == intval(substr($pid, 3))) {
-      $aItem = $eachMedia;
-    }
-  }
 
   $setup = kmaps_explorer_setup_page($id, 'subjects');
 
   $output = theme('kmaps_explorer_subjects_photos_node', array(
-    'aItem' => $aItem,
+    'photo' => $photosObj,
   ));
 
   $setup += array(
     'active_content' => $output,
-    'ajax' => $type == 'ajax' ? TRUE : FALSE,
+    'ajax' => FALSE,
     'photo' => TRUE,
   );
 
@@ -1237,27 +1230,20 @@ function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num=1, $total_p
 /**
  * Function to show individual images in a separate page
  */
-function kmaps_explorer_places_photos_node($type = 'ajax', $id, $page_num = 1, $total_pages, $pid) {
-  $photosURL = 'http://mms.thlib.org/places/' . $id . '/pictures.json?per_page=30&page=' . $page_num;
-  $photos_fetch = save_to_cache('photos', 'places', $id, $photosURL, $page_num);
+function kmaps_explorer_places_photos_node($id, $pid) {
+  $photosURL = 'http://mms.thlib.org/media_objects/' . $pid . '.json';
+  $photos_fetch = save_to_cache('photos_node', 'places', $pid, $photosURL);
   $photosObj = json_decode($photos_fetch);
-
-  $aItem = new stdClass();
-  foreach($photosObj->place->media as $eachMedia) {
-    if ($eachMedia->id == intval(substr($pid, 3))) {
-      $aItem = $eachMedia;
-    }
-  }
 
   $setup = kmaps_explorer_setup_page($id, 'places');
 
   $output = theme('kmaps_explorer_subjects_photos_node', array(
-    'aItem' => $aItem,
+    'photo' => $photosObj,
   ));
 
   $setup += array(
     'active_content' => $output,
-    'ajax' => $type == 'ajax' ? TRUE : FALSE,
+    'ajax' => FALSE,
     'photo' => TRUE,
   );
 
