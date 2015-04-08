@@ -1437,6 +1437,8 @@ function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid) {
       $sources[] = $item->getAttribute('src');
     }
 
+    array_pop($sources);
+
     foreach($sources as $src) {
       drupal_add_js($src, 'external');
     }

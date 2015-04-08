@@ -112,6 +112,24 @@
 
         return html;
       }
+
+      $('.transcripts-ui-search-form', context).once('transcript-search-wrapper', function() {
+        var $form = $(this);
+        var trid = $form.attr('data-transcripts-id');
+        var base = 'transcript-search-button-' + trid;
+        alert(trid);
+
+        var element_settings = {
+          url: 'http://' + window.location.hostname +  settings.basePath + settings.pathPrefix + 'system/ajax',
+          event: 'click',
+          progress: { type: 'throbber' },
+          callback: 'transcripts_ui_ajax_hits',
+        };
+
+        Drupal.ajax[base] = new Drupal.ajax(base, this, element_settings);
+        $(this).click();
+      });
+
     }
   };
 
