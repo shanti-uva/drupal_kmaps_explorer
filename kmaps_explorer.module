@@ -1420,30 +1420,10 @@ function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid) {
     $avObj = $_SESSION['kmaps_explorer']['kmaps_explorer_audio_video'];
     foreach($avObj->docs as $avNodeObj) {
       if ($avNodeObj->id == $vid) {
-        $avNodeURL = $avNodeObj->url_ajax;
+        $avNodeURL = $avNodeObj->url_html;
       }
     }
-    $av_node_fetch = save_to_cache('audio_video', $app, $mid, $avNodeURL, $vid);
-    $output = $av_node_fetch;
-
-    //Remove all script tags and load them separately
-    $dom = new DOMDocument();
-    @$dom->loadHTML($output);
-    $scripts = $dom->getElementsByTagName('script');
-
-    $sources = array();
-
-    foreach($scripts as $item) {
-      $sources[] = $item->getAttribute('src');
-    }
-
-    array_pop($sources);
-
-    foreach($sources as $src) {
-      drupal_add_js($src, 'external');
-    }
-
-    $output = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $output);
+    $output = '<iframe height="1300" width="100%" frameBorder="0" src="' . $avNodeURL . '?mbframe=on' . '"></iframe>';
 
     $commands = array();
     $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . $app  . '/' . $mid . '/audio-video-node/' . $vid . '/nojs');
@@ -1457,38 +1437,11 @@ function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid) {
     $avObj = $_SESSION['kmaps_explorer']['kmaps_explorer_audio_video'];
     foreach($avObj->docs as $avNodeObj) {
       if ($avNodeObj->id == $vid) {
-        $avNodeURL = $avNodeObj->url_ajax;
+        $avNodeURL = $avNodeObj->url_html;
       }
     }
-    $av_node_fetch = save_to_cache('audio_video', $app, $mid, $avNodeURL, $vid);
-    $output = $av_node_fetch;
 
-    //Remove all script tags and load them separately
-    $dom = new DOMDocument();
-    @$dom->loadHTML($output);
-    $scripts = $dom->getElementsByTagName('script');
-
-    $sources = array();
-    $insides = array();
-
-    foreach($scripts as $item) {
-      $sources[] = $item->getAttribute('src');
-      $insides[] = $item->textContent;
-    }
-
-    $embed = array_pop($insides);
-    $embed = str_replace("<!--//--><![CDATA[//><!--", "", $embed);
-    $embed = str_replace("//--><!]]>", "", $embed);
-
-    drupal_add_js($embed, array(
-      'type' => 'inline',
-    ));
-
-    foreach($sources as $src) {
-      drupal_add_js($src, 'external');
-    }
-
-    $output = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $output);
+    $output = '<iframe height="1300" width="100%" frameBorder="0" src="' . $avNodeURL . '?mbframe=on' . '"></iframe>';
 
     $setup += array(
       'active_content' => $output,
