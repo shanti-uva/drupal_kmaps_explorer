@@ -1,17 +1,18 @@
 <h5><?php print $title; ?></h5><br>
+<p>From the General Perspective:</p>
 <ul>
   <?php foreach($data->feature_relation_types as $aItem): ?>
-    <li><?php print ucfirst($aItem->label); ?> (<?php print count($aItem->features); ?>):</li>
+    <li style="list-style-type: none;"><em><?php print ucfirst($aItem->label); ?></em> (<?php print count($aItem->features); ?>):
     <ul>
       <?php foreach($aItem->features as $bItem): ?>
         <li>
-          <span><?php print $bItem->header; ?> (From the General Perspective) 
+          <span><?php print $bItem->header; ?>  
           	<?php if(!empty($bItem->descendant_count)): ?>
-          		&#8212; <?php print $bItem->descendant_count; ?> 
+          		(<?php print $bItem->descendant_count; ?> 
           		<?php if($bItem->descendant_count == 1): ?>
-          			Subcategory
+          			Subcategory)
           		<?php else: ?>
-          			Subcategories
+          			Subcategories)
           		<?php endif; ?>
           	<?php endif; ?>
           </span>
@@ -21,6 +22,6 @@
           </span>
         </li>
       <?php endforeach; ?>
-    </ul>
+    </ul></li>
   <?php endforeach; ?>
 </ul>
