@@ -5,7 +5,11 @@
     <ul>
       <?php foreach($aItem->features as $bItem): ?>
         <li>
-          <span><?php print $bItem->header; ?> (From the General Perspective)</span>
+          <span><?php print $bItem->header; ?> (From the General Perspective) 
+          	<?php if(!empty($bItem->descendant_count)): ?>
+          		&#8212; <?php print $bItem->descendant_count; ?> Subjects
+          	<?php endif; ?>
+          </span>
           <span class="popover-kmaps" data-app="subjects" data-id="<?php print $bItem->id; ?>">
             <span class="popover-kmaps-tip"></span>
             <span class="icon shanticon-menu3"></span>
