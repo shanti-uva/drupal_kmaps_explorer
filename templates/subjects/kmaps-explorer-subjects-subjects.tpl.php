@@ -7,7 +7,12 @@
         <li>
           <span><?php print $bItem->header; ?> (From the General Perspective) 
           	<?php if(!empty($bItem->descendant_count)): ?>
-          		&#8212; <?php print $bItem->descendant_count; ?> Subjects
+          		&#8212; <?php print $bItem->descendant_count; ?> 
+          		<?php if($bItem->descendant_count == 1): ?>
+          			Subcategory
+          		<?php else: ?>
+          			Subcategories
+          		<?php endif; ?>
           	<?php endif; ?>
           </span>
           <span class="popover-kmaps" data-app="subjects" data-id="<?php print $bItem->id; ?>">
