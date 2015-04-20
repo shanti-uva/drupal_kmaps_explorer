@@ -1486,9 +1486,7 @@ function search_etymology($obj) {
  */
 function kmaps_explorer_menu_breadcrumb_alter(&$active_trail, $item) {
   $active_trail = array();
-
-  $ancestors = $_SESSION['kmaps_explorer']['kmaps_explorer_ancestors'];
-
+	
   if (current_path() == 'subjects') {
     $link1 = array(
       'title' => 'Home',
@@ -1505,7 +1503,9 @@ function kmaps_explorer_menu_breadcrumb_alter(&$active_trail, $item) {
       'type' => 0,
     );
     array_push($active_trail, $link1);
-  } else {
+		
+  } else if(!empty($_SESSION['kmaps_explorer']['kmaps_explorer_ancestors'])) {
+  	$ancestors = $_SESSION['kmaps_explorer']['kmaps_explorer_ancestors'];
     $app = $_SESSION['kmaps_explorer']['kmaps_explorer_app'];
     foreach ($ancestors as $key => $ancestor) {
       $link = array(
@@ -1518,7 +1518,6 @@ function kmaps_explorer_menu_breadcrumb_alter(&$active_trail, $item) {
       array_push($active_trail, $link);
     }
   }
-
 }
 
 /**
