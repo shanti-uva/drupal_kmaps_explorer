@@ -471,6 +471,15 @@ function kmaps_explorer_places_overview($type = 'ajax', $id, $app) {
 
   //Places Overview setup
   $obj = $setup['obj'];
+  if(isset($obj->feature->closest_fid_with_shapes)) {
+    $options = array(
+      'group' => JS_THEME,
+      'weight' => 1000,
+    );
+    drupal_add_js('https://maps.googleapis.com/maps/api/js?v=3.exp', 'external');
+    drupal_add_js($path . '/js/google_maps.js', $options);
+  }
+
   if (count($obj->feature->illustrations) > 0 && $obj->feature->illustrations[0]->type =='mms') {
     $illustrations = save_to_cache('illustrations', $app, $id, $obj->feature->illustrations[0]->url);
     $placesOverviewImageOBJ = json_decode($illustrations);
@@ -565,15 +574,15 @@ function kmaps_explorer_setup_page($id, $app) {
   //Create the url for related assets for subjects and places
   $mURL = "http://" . $app . ".kmaps.virginia.edu/features/" . $id . ".json";
   if($app == 'subjects') { $mURL = "{$base_url}/api/subject/mod/{$id}"; }
-	
+
   //Create the url for the solr related assets for subjects and places
   $solrURL = variable_get('shanti_kmaps_admin_server_solr', SHANTI_KMAPS_ADMIN_SERVER_SOLR) . '/select?q=kmapid:' . $app . '-' . $id . '&fq=&start=0&facets=on&group=true&group.field=asset_type&group.facet=true&group.ngroups=true&group.limit=1000&wt=json';
 
   //Get related data and saving in cache
   $c_name= 'json';
-	
+
   $related_url = save_to_cache($c_name, $app, $id, $mURL);
-	
+
   $obj = json_decode($related_url);
   //Store the ancestors to be used for breadcrumbs
   if($app == 'subjects') {
@@ -1486,7 +1495,7 @@ function search_etymology($obj) {
  */
 function kmaps_explorer_menu_breadcrumb_alter(&$active_trail, $item) {
   $active_trail = array();
-	
+
   if (current_path() == 'subjects') {
     $link1 = array(
       'title' => 'Home',
@@ -1503,7 +1512,7 @@ function kmaps_explorer_menu_breadcrumb_alter(&$active_trail, $item) {
       'type' => 0,
     );
     array_push($active_trail, $link1);
-		
+
   } else if(!empty($_SESSION['kmaps_explorer']['kmaps_explorer_ancestors'])) {
   	$ancestors = $_SESSION['kmaps_explorer']['kmaps_explorer_ancestors'];
     $app = $_SESSION['kmaps_explorer']['kmaps_explorer_app'];

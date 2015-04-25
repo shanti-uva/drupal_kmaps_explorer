@@ -18,9 +18,17 @@
 <?php print $places_overview_image; ?>
 
 <?php if(isset($obj->feature->closest_fid_with_shapes)): ?>
-  <div class="openlayermap">
-    <iframe sandbox="allow-forms allow-scripts allow-same-origin" width="100%" height="600" frameborder="0" src="http://www.thlib.org/places/maps/interactive_ajax/#fid:<?php print $obj->feature->closest_fid_with_shapes; ?>">
-    </iframe>
+  <div class="map-renditions">
+    <div id="map-canvas">
+    </div>
+    <div class="openlayermap">
+      <iframe sandbox="allow-forms allow-scripts allow-same-origin" width="100%" height="600" frameborder="0" data-src="http://www.thlib.org/places/maps/interactive_ajax/#fid:<?php print $obj->feature->closest_fid_with_shapes; ?>" src="about:blank">
+      </iframe>
+    </div>
+    <div class="btn-group btn-group-gmaps">
+      <button class="btn btn-default renderGmaps active">Google Map</button>
+      <button class="btn btn-default renderOpenLayerMaps">Custom Map</button>
+    </div>
   </div>
 <?php endif; ?>
 

@@ -73,3 +73,9 @@ figcaption .center-caption {
 .popover-kmaps .popover-footer-button a{ color:#ddd; font-weight:normal; font-family: "museo-sans-500",helvetica,arial,sans-serif !important; border-bottom:none; display:block; width:100%; font-size:1.06em; line-height:2.25em; height: 2.75em;}
 .popover-kmaps .parents strong{ color: #555; font-family:'museo-sans-500',helvetica,arial,sans-serif;}
 
+/* Google maps */
+#map-canvas {
+  height: 600px;
+  margin: 0px;
+  padding: 0px;
+}
