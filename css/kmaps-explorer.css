@@ -39,7 +39,7 @@ figcaption .center-caption {
 }
 
 .subjects-overview-image figure::before {
-  content: "?";
+  content: '?';
   position: absolute;
   font-weight: 800;
   background: black;
@@ -70,7 +70,7 @@ figcaption .center-caption {
 .popover-kmaps{background:#5a65d1;border:none;height:1rem;width:1.05rem;color:white;padding:0;display:inline-block;position:relative;left:0;top:.1rem;margin-left:.6rem;margin-right:.4rem;font-size:1rem;}
 .popover-kmaps-tip{border-bottom:.5rem solid transparent;border-top:0 solid transparent;border-right:.5rem solid #5a65d1;font-size:0;position:relative;bottom:1rem;right:.5rem;height:0;width:0;}
 .popover-kmaps .icon{ color:white; /*font-size:.7rem*/;position:absolute;bottom: 0.2rem; right: 0.2rem; font-size:0.7em;}
-.popover-kmaps .popover-footer-button a{ color:#ddd; font-weight:normal; font-family: "museo-sans-500",helvetica,arial,sans-serif !important; border-bottom:none; display:block; width:100%; font-size:1.06em; line-height:2.25em; height: 2.75em;}
+.popover-kmaps .popover-footer-button a{ color:#ddd; font-weight:normal; font-family: 'museo-sans-500',helvetica,arial,sans-serif !important; border-bottom:none; display:block; width:100%; font-size:1.06em; line-height:2.25em; height: 2.75em;}
 .popover-kmaps .parents strong{ color: #555; font-family:'museo-sans-500',helvetica,arial,sans-serif;}
 
 /* Google maps */

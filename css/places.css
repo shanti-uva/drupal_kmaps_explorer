@@ -1,18 +1,1 @@
-.map-renditions {
-  position: relative;
-}
-
-/*--- modal popup for thumbnail grids ---*/
-.modal img{margin-bottom:10px;}
-.modal-header{ min-height:5.5rem;}
-.modal-header button.close{ color:#777; font-size:4em !important; position:relative; top:-10px;}
-
-/* --- gmaps-buttons is example of class set on div wrapper ---*/
-.btn-group-gmaps{ display:inline-block;	position:absolute;bottom:30px;left:80px;-moz-box-shadow: 0px 0px 15px 0px rgba(50, 50, 50, 0.6);box-shadow: 0px 0px 15px 0px rgba(50, 50, 50, 0.6);}
-.btn-group-gmaps.btn-group > .btn.btn-default{ border:none;font-size: 0.75em;font-family:'droidserif',palatino,'Palatino Linotype',georgia,serif;}
-.btn-group-gmaps .btn.btn-default.active{ color:#fff; background:#333; }
-
-.google-maps {position: relative;padding-bottom: 75%; margin-top:1.5rem; margin-bottom:1.5rem; /* aspect ratio fix - temp */ height: 0;overflow: hidden;}
-.google-maps iframe {position: absolute;top: 0;left: 0;width: 100% !important;height: 100% !important;}
-
 
