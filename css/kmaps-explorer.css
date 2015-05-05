@@ -1,18 +1,10 @@
-.kmaps-hidden {
-	visibility: hidden;
-	display: none;
-}
+.kmaps-hidden { visibility: hidden;display: none;}
 
-body {
-  font-size: inherit;
-}
+body { font-size: inherit;}
 
 /* Subject Overview image subsection */
 
-figcaption .center-caption {
-  text-align: center;
-  margin-bottom: 0.50em;
-}
+figcaption .center-caption { text-align: center;margin-bottom: 0.50em;}
 
 .subjects-overview-image figure {
   display: block;

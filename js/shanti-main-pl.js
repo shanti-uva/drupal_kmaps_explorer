@@ -340,10 +340,10 @@ function relatedPlacesPhotos(data) {
     contentPh += '<div class="modal-content">';
     contentPh += '<div class="modal-header">';
     contentPh += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
-    contentPh += '<h4 class="modal-title" id="myModalLabel">' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '</h4>';
+    contentPh += '<p class="modal-title" id="myModalLabel">' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '</p>';
     contentPh += '</div>';
     contentPh += '<div class="modal-body">';
-    contentPh += '<img src="' + rElm.images[4].url + '" alt="' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '">';
+    contentPh += '<img src="' + rElm.images[4].url + '" class="img-responsive" alt="' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '">';
     contentPh += '<p><strong>Resource #:</strong> ' + rElm.id + '</p>';
     contentPh += '<p><strong>Description:</strong></p>';
     contentPh += (rElm.descriptions.length > 0 ? rElm.descriptions[0].title : "");
