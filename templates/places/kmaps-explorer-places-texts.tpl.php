@@ -12,10 +12,10 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title" id="myModalLabel"><?php print (count($aItem->captions) > 0 ? $aItem->captions[0]->title : ''); ?></h4>
+              <p class="modal-title" id="myModalLabel"><?php print (count($aItem->captions) > 0 ? $aItem->captions[0]->title : ''); ?></p>
             </div>
             <div class="modal-body">
-              <img src="<?php print $aItem->images[6]->url; ?>" alt="<?php print (count($aItem->captions) > 0 ? $aItem->captions[0]->title : ''); ?>">
+              <img src="<?php print $aItem->images[6]->url; ?>" class="img-responsive" alt="<?php print (count($aItem->captions) > 0 ? $aItem->captions[0]->title : ''); ?>">
               <p><strong>Resource #:</strong> <?php print $aItem->id; ?></p>
             </div>
           </div>

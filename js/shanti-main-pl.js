@@ -513,10 +513,10 @@ function paginatedPlacesPhotos(data) {
     contentPh += '<div class="modal-content">';
     contentPh += '<div class="modal-header">';
     contentPh += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
-    contentPh += '<h4 class="modal-title" id="myModalLabel">' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '</h4>';
+    contentPh += '<p class="modal-title" id="myModalLabel">' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '</p>';
     contentPh += '</div>';
     contentPh += '<div class="modal-body">';
-    contentPh += '<img src="' + rElm.images[4].url + '" alt="' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '">';
+    contentPh += '<img src="' + rElm.images[4].url + '" class="img-responsive" alt="' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '">';
     contentPh += '<p><strong>Resource #:</strong> ' + rElm.id + '</p>';
     contentPh += '<p><strong>Description:</strong></p>';
     contentPh += (rElm.descriptions.length > 0 ? rElm.descriptions[0].title : "");
@@ -630,10 +630,10 @@ function relatedPlacesTexts(data) {
         contentTX += '<div class="modal-content">';
         contentTX += '<div class="modal-header">';
         contentTX += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
-        contentTX += '<h4 class="modal-title" id="myModalLabel">' + (data.document.captions.length > 0 ? data.document.captions[0].title : "") + '</h4>';
+        contentTX += '<p class="modal-title" id="myModalLabel">' + (data.document.captions.length > 0 ? data.document.captions[0].title : "") + '</p>';
         contentTX += '</div>';
         contentTX += '<div class="modal-body">';
-        contentTX += '<img src="' + data.document.images[6].url + '" alt="' + (data.document.captions.length > 0 ? data.document.captions[0].title : "") + '">';
+        contentTX += '<img src="' + data.document.images[6].url + '" class="img-responsive" alt="' + (data.document.captions.length > 0 ? data.document.captions[0].title : "") + '">';
         contentTX += '<p><strong>Resource #:</strong> ' + data.document.id + '</p>';
         contentTX += '</div>';
         contentTX += '</div>';
