@@ -4,7 +4,7 @@
 
 <?php if (count($obj->feature->feature_types) > 0): ?>
   <p>
-    <h6 class="custom-inline">FEATURE TYPE</h6>
+    <h6 class="custom-inline">FEATURE TYPE:</h6>
     <?php foreach($obj->feature->feature_types as $pl_feat_type): ?>
       <span><?php print $pl_feat_type->title; ?></span>
       <span class="popover-kmaps" data-app="subjects" data-id="<?php print $pl_feat_type->id; ?>">
@@ -37,7 +37,7 @@
     <div class="panel-heading">
       <h6>
         <a href="#collapseOne" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">
-          <span class="glyphicon glyphicon-plus"></span> Names
+          <span class="glyphicon glyphicon-plus"></span>Names
         </a>
       </h6>
     </div>
@@ -52,7 +52,7 @@
     <div class="panel-heading">
       <h6>
         <a href="#collapseTwo" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">
-          <span class="glyphicon glyphicon-plus"></span> ETYMOLOGY
+          <span class="glyphicon glyphicon-plus"></span>ETYMOLOGY
         </a>
       </h6>
     </div>

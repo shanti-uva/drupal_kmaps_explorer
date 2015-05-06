@@ -73,7 +73,7 @@ function processPlacesData(data) {
         $tabOverview.append('<div class="summary-overview">' + data.feature.summaries[0].content + '</div>');
       }
       if (data.feature.feature_types.length > 0) {
-        var featureTitle = '<h6 class="custom-inline">FEATURE TYPE</h6>';
+        var featureTitle = '<h6 class="custom-inline">FEATURE TYPE:</h6>';
         $.each(data.feature.feature_types, function(ind, val) {
           featureTitle += '<a href="' + Settings.subjectsPath + "#id=" + val.id + '&que=overview-tab">';
           featureTitle += val.title;
@@ -116,7 +116,7 @@ function processPlacesData(data) {
       overviewContent += '<div class="panel-heading">';
       overviewContent += '<h6>';
       overviewContent += '<a href="#collapseOne" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">';
-      overviewContent += '<i class="glyphicon glyphicon-plus"></i> Names';
+      overviewContent += '<i class="glyphicon glyphicon-plus"></i>Names';
       overviewContent += '</a>';
       overviewContent += '</h6>';
       overviewContent += '</div>';
@@ -131,7 +131,7 @@ function processPlacesData(data) {
         overviewContent += '<div class="panel-heading">';
         overviewContent += '<h6>';
         overviewContent += '<a href="#collapseTwo" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">';
-        overviewContent += '<i class="glyphicon glyphicon-plus"></i> ETYMOLOGY';
+        overviewContent += '<i class="glyphicon glyphicon-plus"></i>ETYMOLOGY';
         overviewContent += '</a>';
         overviewContent += '</h6>';
         overviewContent += '</div>';
