@@ -4,13 +4,13 @@
 
 <?php if (count($obj->feature->feature_types) > 0): ?>
   <p>
-    <h6 class="custom-inline">FEATURE TYPE &nbsp;&nbsp;</h6>
+    <h6 class="custom-inline">FEATURE TYPE</h6>
     <?php foreach($obj->feature->feature_types as $pl_feat_type): ?>
       <span><?php print $pl_feat_type->title; ?></span>
       <span class="popover-kmaps" data-app="subjects" data-id="<?php print $pl_feat_type->id; ?>">
         <span class="popover-kmaps-tip"></span>
         <span class="icon shanticon-menu3"></span>
-      </span>&nbsp;
+      </span>
     <?php endforeach; ?>
   </p>
 <?php endif; ?>

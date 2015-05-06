@@ -73,7 +73,7 @@ function processPlacesData(data) {
         $tabOverview.append('<div class="summary-overview">' + data.feature.summaries[0].content + '</div>');
       }
       if (data.feature.feature_types.length > 0) {
-        var featureTitle = '<p><h6 class="custom-inline">FEATURE TYPE &nbsp;&nbsp;</h6>';
+        var featureTitle = '<h6 class="custom-inline">FEATURE TYPE</h6>';
         $.each(data.feature.feature_types, function(ind, val) {
           featureTitle += '<a href="' + Settings.subjectsPath + "#id=" + val.id + '&que=overview-tab">';
           featureTitle += val.title;
@@ -82,7 +82,7 @@ function processPlacesData(data) {
             featureTitle += '; ';  
           }
         });
-        featureTitle += '</p>';
+        featureTitle += '';
         $tabOverview.append(featureTitle);
       }
 
