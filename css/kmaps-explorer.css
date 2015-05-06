@@ -2,6 +2,8 @@
 
 body { font-size: inherit;}
 
+article > h6.custom-inline:nth-of-type(1){ margin-right:0.5rem;}
+
 /* Subject Overview image subsection */
 
 figcaption .center-caption { text-align: center;margin-bottom: 0.50em;}
