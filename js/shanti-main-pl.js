@@ -116,7 +116,7 @@ function processPlacesData(data) {
       overviewContent += '<div class="panel-heading">';
       overviewContent += '<h6>';
       overviewContent += '<a href="#collapseOne" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">';
-      overviewContent += '<i class="glyphicon glyphicon-plus"></i>Names';
+      overviewContent += '<span class="glyphicon glyphicon-plus"></span>Names';
       overviewContent += '</a>';
       overviewContent += '</h6>';
       overviewContent += '</div>';
@@ -131,7 +131,7 @@ function processPlacesData(data) {
         overviewContent += '<div class="panel-heading">';
         overviewContent += '<h6>';
         overviewContent += '<a href="#collapseTwo" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">';
-        overviewContent += '<i class="glyphicon glyphicon-plus"></i>ETYMOLOGY';
+        overviewContent += '<span class="glyphicon glyphicon-plus"></span>ETYMOLOGY';
         overviewContent += '</a>';
         overviewContent += '</h6>';
         overviewContent += '</div>';
@@ -310,7 +310,7 @@ function processPlacesData(data) {
 //Populate Breadcrumbs
 function populatePlacesBreadcrumbs(bInd, bVal) {
   $breadcrumbOl = $("ol.breadcrumb");
-  $breadcrumbOl.append('<li><a href="#id=' + bVal.id + '&que=overview-tab">' + bVal.header + '</a><i class="fa fa-angle-right"></i></li>');
+  $breadcrumbOl.append('<li><a href="#id=' + bVal.id + '&que=overview-tab">' + bVal.header + '</a><span class="fa fa-angle-right"></span></li>');
 }
 
 //Function to show related photos in places
@@ -357,15 +357,15 @@ function relatedPlacesPhotos(data) {
 
   contentPh += '</div>';
   contentPh += '<ul id="photo-pagination" class="pager">';
-  contentPh += '<li class="first-page pager-first first"><a href="' + shantiPlaces.photosURL + '&page=1' + '"><i class="icon"></i></a></li>';
-  contentPh += '<li class="previous-page pager-previous"><a href="' + shantiPlaces.photosURL + '&page=1' + '"><i class="icon"></i></a></li>';
+  contentPh += '<li class="first-page pager-first first"><a href="' + shantiPlaces.photosURL + '&page=1' + '"><span class="icon"></span></a></li>';
+  contentPh += '<li class="previous-page pager-previous"><a href="' + shantiPlaces.photosURL + '&page=1' + '"><span class="icon"></span></a></li>';
   contentPh += '<li>PAGE</li>';
   contentPh += '<li class="pager-current widget"><input type="text" value="1" class="page-input"></li>';
   contentPh += '<li>OF ' + shantiPlaces.total_pages + '</li>';
-  contentPh += '<li class="next-page pager-next"><a href="' + shantiPlaces.photosURL + '&page=2' + '"><i class="icon"></i></a></li>';
-  contentPh += '<li class="last-page pager-last last"><a href="' + shantiPlaces.photosURL + '&page=' + shantiPlaces.total_pages + '"><i class="icon"></i></a></li>';
+  contentPh += '<li class="next-page pager-next"><a href="' + shantiPlaces.photosURL + '&page=2' + '"><span class="icon"></span></a></li>';
+  contentPh += '<li class="last-page pager-last last"><a href="' + shantiPlaces.photosURL + '&page=' + shantiPlaces.total_pages + '"><span class="icon"></span></a></li>';
   contentPh += '</ul>';
-  contentPh += '<div class="paginated-spin"><i class="fa fa-spinner"></i></div>';
+  contentPh += '<div class="paginated-spin"><span class="fa fa-spinner"></span></div>';
   $("#tab-photos").append(contentPh);
 
   //Add the event listener for the first-page element
