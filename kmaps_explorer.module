@@ -313,6 +313,21 @@ function kmaps_explorer_theme() {
       'arguments' => array(),
       'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
     ),
+    'kmaps_explorer_places_overview_ids' => array(
+      'template' => 'kmaps-explorer-places-overview-ids',
+      'arguments' => array(),
+      'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
+    ),
+    'kmaps_explorer_places_overview_location' => array(
+      'template' => 'kmaps-explorer-places-overview-location',
+      'arguments' => array(),
+      'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
+    ),
+    'kmaps_explorer_places_overview_gis' => array(
+      'template' => 'kmaps-explorer-places-overview-gis',
+      'arguments' => array(),
+      'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
+    ),
     'kmaps_explorer_places_places_ajax' => array(
       'template' => 'kmaps-explorer-places-places',
       'arguments' => array(),
@@ -432,8 +447,16 @@ function kmaps_explorer_subjects_overview($type = 'ajax', $id, $app) {
 
   $obj = $setup['obj'];
 
+  $accordionNameContent = array();
+  foreach($obj->feature->names as $lang_name) {
+    array_push($accordionNameContent, $lang_name->name);
+  }
+
+  $accordionNameContent = array_unique($accordionNameContent);
+
   $overview_content = theme('kmaps_explorer_subjects_overview_ajax', array(
     'obj' => $obj,
+    'accordionNameContent' => $accordionNameContent,
   ));
 
   $setup += array(
@@ -509,11 +532,37 @@ function kmaps_explorer_places_overview($type = 'ajax', $id, $app) {
     ));
   }
 
+  //Accordion ID's
+  $accordionId = "http://places.kmaps.virginia.edu/features/" . $id . "/codes.json";
+  $accordionIdJson = save_to_cache('accordionId', $app, $id, $accordionId);
+  $accordionIdOBJ = json_decode($accordionIdJson);
+  $accordionIdContent = theme('kmaps_explorer_places_overview_ids', array(
+    'data' => $accordionIdOBJ,
+  ));
+
+  //Accordion Location
+  $accordionLocation = "http://places.kmaps.virginia.edu/features/" . $id . "/locations.json";
+  $accordionLocationJson = save_to_cache('accordionLocation', $app, $id, $accordionLocation);
+  $accordionLocationOBJ = json_decode($accordionLocationJson);
+  $accordionLocationContent = theme('kmaps_explorer_places_overview_location', array(
+    'data' => $accordionLocationOBJ,
+  ));
+
+  //Accordion GIS
+  if(!empty($accordionLocationOBJ->feature->resources)) {
+    $accordionGisContent = theme('kmaps_explorer_places_overview_gis', array(
+      'data' => $accordionLocationOBJ,
+    ));
+  }
+
   $overview_content = theme('kmaps_explorer_places_overview_ajax', array(
     'obj' => $setup['obj'],
     'places_overview_image' => isset($placesOverviewImage) ? $placesOverviewImage : '',
     'accordionName' => isset($accordionName) ? $accordionName : '',
     'accordionEtymology' => isset($accordionEtymology) ? $accordionEtymology : '',
+    'accordionIdContent' => isset($accordionIdContent) ? $accordionIdContent : '',
+    'accordionLocationContent' => isset($accordionLocationContent) ? $accordionLocationContent : '',
+    'accordionGisContent' => isset($accordionGisContent) ? $accordionGisContent : '',
   ));
 
   $setup += array(
@@ -1085,7 +1134,7 @@ function kmaps_explore_pager_ajax($form, &$form_state) {
  * Function to create ajax content for photos in subjects
  */
 function kmaps_explorer_subjects_photos($type = 'ajax', $id, $page_num=1, $total_pages=1, $subpage=FALSE) {
-  $photosURL = 'http://mms.thlib.org/topics/' . $id . '/pictures.json?per_page=30&page=' . $page_num;
+  $photosURL = 'http://mms.thlib.org/topics/' . $id . '/pictures.json?per_page=60&page=' . $page_num;
   $photos_fetch = save_to_cache('photos', 'subjects', $id, $photosURL, $page_num);
   $photosObj = json_decode($photos_fetch);
 
@@ -1171,7 +1220,7 @@ function kmaps_explorer_subjects_photos_node($id, $pid) {
  * Function to create ajax content for photos in places
  */
 function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num=1, $total_pages=1, $subpage=FALSE) {
-  $photosURL = 'http://mms.thlib.org/places/' . $id . '/pictures.json?per_page=30&page=' . $page_num;
+  $photosURL = 'http://mms.thlib.org/places/' . $id . '/pictures.json?per_page=60&page=' . $page_num;
   $photos_fetch = save_to_cache('photos', 'places', $id, $photosURL, $page_num);
   $photosObj = json_decode($photos_fetch);
 
@@ -1334,7 +1383,7 @@ function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_nu
   if($type == 'ajax') {
     $avObj = $_SESSION['kmaps_explorer']['kmaps_explorer_audio_video'];
 
-    $show_items = 12;
+    $show_items = 24;
     $total_pages = intval(ceil($avObj->numFound / floatval($show_items)));
     $total_items = intval($avObj->numFound);
     $page_num = intval($page_num);
@@ -1383,7 +1432,7 @@ function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_nu
 
     $avObj = $_SESSION['kmaps_explorer']['kmaps_explorer_audio_video'];
 
-    $show_items = 12;
+    $show_items = 24;
     $total_pages = intval(ceil($avObj->numFound / floatval($show_items)));
     $total_items = intval($avObj->numFound);
     $page_num = intval($page_num);

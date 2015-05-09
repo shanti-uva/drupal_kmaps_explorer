@@ -63,4 +63,52 @@
     </div>
   </section>
   <?php endif; ?>
+  <?php if(!empty($accordionIdContent)): ?>
+  <section class="panel panel-default">
+    <div class="panel-heading">
+      <h6>
+        <a href="#collapseThree" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">
+          <span class="glyphicon glyphicon-plus"></span>IDs
+        </a>
+      </h6>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse">
+      <div class="panel-body">
+        <?php print $accordionIdContent; ?>
+      </div>
+    </div>
+  </section>
+  <?php endif; ?>
+  <?php if(!empty($accordionLocationContent)): ?>
+  <section class="panel panel-default">
+    <div class="panel-heading">
+      <h6>
+        <a href="#collapseFour" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">
+          <span class="glyphicon glyphicon-plus"></span>Location
+        </a>
+      </h6>
+    </div>
+    <div id="collapseFour" class="panel-collapse collapse">
+      <div class="panel-body">
+        <?php print $accordionLocationContent; ?>
+      </div>
+    </div>
+  </section>
+  <?php endif; ?>
+  <?php if(!empty($accordionGisContent)): ?>
+  <section class="panel panel-default">
+    <div class="panel-heading">
+      <h6>
+        <a href="#collapseFive" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">
+          <span class="glyphicon glyphicon-plus"></span>GIS Resources
+        </a>
+      </h6>
+    </div>
+    <div id="collapseFive" class="panel-collapse collapse">
+      <div class="panel-body">
+        <?php print $accordionGisContent; ?>
+      </div>
+    </div>
+  </section>
+  <?php endif; ?>
 </aside>
