@@ -7,4 +7,5 @@ files[] = kmaps-explorer.module
 dependencies[] = shanti_kmaps_admin
 
 stylesheets[all][] = css/kmaps-explorer.css
+scripts[] = js/jquery.columnizer.min.js
 scripts[] = js/custom-ajax.js

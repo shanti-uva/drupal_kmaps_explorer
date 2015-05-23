@@ -42,6 +42,22 @@
         });
       });
 
+      //Functionality for images to add location and id
+      $('.related-photos > .modal', context).each(function() {
+        var $that = $(this);
+        var id = $that.attr('id');
+        var pid = $that.data('place');
+        $that.on('show.bs.modal', function(e) {
+          var url = 'http://places.kmaps.virginia.edu/features/' + pid + '.json';
+          $.get(url, function(data) {
+            $('#' + id + ' .modal-body .image-modal-location .places-loc', context).html(data.feature.header);
+          });
+        });
+      });
+
+      //Functionality for columnizer
+      $('ul.texts-list', context).columnize({columns: 2});
+
       function populatePopover(data, app) {
         var html = '';
         html += '<div class="popover-body">';
