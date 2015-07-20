@@ -56,7 +56,7 @@
       });
 
       //Functionality for columnizer
-      $('ul.texts-list', context).columnize({columns: 2});
+      $('ul.texts-list,div.places-in-places', context).columnize({width: 350});
 
       function populatePopover(data, app) {
         var html = '';
