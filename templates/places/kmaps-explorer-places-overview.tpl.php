@@ -51,7 +51,7 @@
   <section class="panel panel-default">
     <div class="panel-heading">
       <h6>
-        <a href="#collapseTwo" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">
+        <a href="#collapseTwo" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle collapsed">
           <span class="glyphicon glyphicon-plus"></span>ETYMOLOGY
         </a>
       </h6>
@@ -67,7 +67,7 @@
   <section class="panel panel-default">
     <div class="panel-heading">
       <h6>
-        <a href="#collapseThree" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">
+        <a href="#collapseThree" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle collapsed">
           <span class="glyphicon glyphicon-plus"></span>IDs
         </a>
       </h6>
@@ -83,7 +83,7 @@
   <section class="panel panel-default">
     <div class="panel-heading">
       <h6>
-        <a href="#collapseFour" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">
+        <a href="#collapseFour" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle collapsed">
           <span class="glyphicon glyphicon-plus"></span>Location
         </a>
       </h6>
@@ -99,7 +99,7 @@
   <section class="panel panel-default">
     <div class="panel-heading">
       <h6>
-        <a href="#collapseFive" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">
+        <a href="#collapseFive" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle collapsed">
           <span class="glyphicon glyphicon-plus"></span>GIS Resources
         </a>
       </h6>
