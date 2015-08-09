@@ -16,7 +16,7 @@ if (count($obj->feature->illustrations) > 0 && $obj->feature->illustrations[0]->
   <section class="panel panel-default">
     <div class="panel-heading">
       <h6>
-        <a href="#collapseOne" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">
+        <a href="#collapseOne" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle collapsed">
           <span class="glyphicon glyphicon-plus"></span>Names
         </a>
       </h6>
