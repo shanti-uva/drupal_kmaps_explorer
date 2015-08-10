@@ -463,6 +463,7 @@ function kmaps_explorer_subjects_overview($type = 'ajax', $id, $app) {
     'active_content' => $overview_content,
     'ajax' => $type == 'ajax' ? TRUE : FALSE,
     'overview' => TRUE,
+    'edit_url' => variable_get('shanti_kmaps_admin_server_subjects', SHANTI_KMAPS_ADMIN_SERVER_SUBJECTS) . '/admin/feature/' . $obj->feature->db_id,
   );
 
   $content = theme('kmaps_explorer_initial_template', $setup);
@@ -569,6 +570,7 @@ function kmaps_explorer_places_overview($type = 'ajax', $id, $app) {
     'active_content' => $overview_content,
     'ajax' => $type == 'ajax' ? TRUE : FALSE,
     'overview' => TRUE,
+    'edit_url' => variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . '/admin/feature/' . $obj->feature->db_id,
   );
 
   $content = theme('kmaps_explorer_initial_template', $setup);

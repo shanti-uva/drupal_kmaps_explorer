@@ -104,10 +104,19 @@ figcaption .center-caption { text-align: center;margin-bottom: 0.50em;}
   outline: 0;
   -webkit-tap-highlight-color: transparent;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.subjects-bg {
   background-color: #dc3c47;
 }
 
+.places-bg {
+  background-color: #4ca6fb;
+}
+
 .content-section a.round-btn-fixed:hover,
+.content-section a.round-btn-fixed:focus,
+.content-section a.round-btn-fixed:visited,
 .content-section a.round-btn-fixed:active {
   color: #fff;
 }
