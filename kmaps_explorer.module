@@ -517,7 +517,7 @@ function kmaps_explorer_places_overview($type = 'ajax', $id, $app) {
   }
 
   //Accordion setup
-  $accordionURL = "http://places.kmaps.virginia.edu/features/" . $id . "/names.json";
+  $accordionURL = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . "/features/" . $id . "/names.json";
   $accordion = save_to_cache('accordion', $app, $id, $accordionURL);
   $accordionOBJ = json_decode($accordion);
   //dpm($accordionOBJ);
@@ -533,7 +533,7 @@ function kmaps_explorer_places_overview($type = 'ajax', $id, $app) {
   }
 
   //Accordion ID's
-  $accordionId = "http://places.kmaps.virginia.edu/features/" . $id . "/codes.json";
+  $accordionId = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . "/features/" . $id . "/codes.json";
   $accordionIdJson = save_to_cache('accordionId', $app, $id, $accordionId);
   $accordionIdOBJ = json_decode($accordionIdJson);
   $accordionIdContent = theme('kmaps_explorer_places_overview_ids', array(
@@ -541,7 +541,7 @@ function kmaps_explorer_places_overview($type = 'ajax', $id, $app) {
   ));
 
   //Accordion Location
-  $accordionLocation = "http://places.kmaps.virginia.edu/features/" . $id . "/locations.json";
+  $accordionLocation = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . "/features/" . $id . "/locations.json";
   $accordionLocationJson = save_to_cache('accordionLocation', $app, $id, $accordionLocation);
   $accordionLocationOBJ = json_decode($accordionLocationJson);
   $accordionLocationContent = theme('kmaps_explorer_places_overview_location', array(
@@ -622,8 +622,14 @@ function kmaps_explorer_setup_page($id, $app) {
   drupal_add_library('system', 'drupal.ajax');
 
   //Create the url for related assets for subjects and places
-  $mURL = "http://" . $app . ".kmaps.virginia.edu/features/" . $id . ".json";
-  if($app == 'subjects') { $mURL = "{$base_url}/api/subject/mod/{$id}"; }
+  if ($app == 'subjects') {
+    $mURL = "{$base_url}/api/subject/mod/{$id}";
+  } elseif ($app == 'places') {
+    $mURL = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . '/features/' . $id . '.json';
+  } else {
+    $mURL = "http://" . $app . ".kmaps.virginia.edu/features/" . $id . ".json";
+  }
+  /* if($app == 'subjects') { $mURL = "{$base_url}/api/subject/mod/{$id}"; } */ // not sure what this is but will remove for now
 
   //Create the url for the solr related assets for subjects and places
   $solrURL = variable_get('shanti_kmaps_admin_server_solr', SHANTI_KMAPS_ADMIN_SERVER_SOLR) . '/select?q=kmapid:' . $app . '-' . $id . '&fq=&start=0&facets=on&group=true&group.field=asset_type&group.facet=true&group.ngroups=true&group.limit=1000&wt=json';
@@ -693,7 +699,7 @@ function kmaps_explorer_setup_page($id, $app) {
  * Function to create the ajax content for subjects in subjects
  */
 function kmaps_explorer_subjects_subjects($type = 'ajax', $id, $app) {
-  $subjectsURL = "http://subjects.kmaps.virginia.edu/features/" . $id . "/related.json";
+  $subjectsURL = variable_get('shanti_kmaps_admin_server_subjects', SHANTI_KMAPS_ADMIN_SERVER_SUBJECTS) . "/features/" . $id . "/related.json";
   $subjects_fetch = save_to_cache('subjects', $app, $id, $subjectsURL);
   $subjObj = json_decode($subjects_fetch);
 	$subjObj = _add_subject_child_counts($subjObj, $id);
@@ -737,7 +743,7 @@ function kmaps_explorer_subjects_subjects($type = 'ajax', $id, $app) {
  * Function to create the ajax content for subjects in places
  */
 function kmaps_explorer_places_subjects($type = 'ajax', $id, $app) {
-  $subjectsURL = "http://places.kmaps.virginia.edu/features/" . $id . "/topics.json";
+  $subjectsURL = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . "/features/" . $id . "/topics.json";
   $subjects_fetch = save_to_cache('subjects', $app, $id, $subjectsURL);
   $subjObj = json_decode($subjects_fetch);
 
@@ -983,7 +989,7 @@ function call_solr_index($id, $app) {
  * Function to create the ajax content for places in subjects
  */
 function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num=1, $total_pages=1, $subpage=FALSE) {
-  $placesURL = "http://places.kmaps.virginia.edu/topics/" . $id . ".json?page=" . $page_num;
+  $placesURL = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . "/topics/" . $id . ".json?page=" . $page_num;
   $places_fetch = save_to_cache('places', 'subjects', $id, $placesURL, $page_num);
   $placesObj = json_decode($places_fetch);
 
@@ -1044,7 +1050,7 @@ function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num=1, $total
  * Function to create the ajax content for the places in places
  */
 function kmaps_explorer_places_places($type = 'ajax', $id, $page_num = 1, $total_pages = 1, $subpage = FALSE) {
-  $placesURL = "http://places.kmaps.virginia.edu/features/" . $id . "/related.json";
+  $placesURL = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . "/features/" . $id . "/related.json";
   $places_fetch = save_to_cache('places', 'places', $id, $placesURL);
   $placesObj = json_decode($places_fetch);
 
@@ -1606,7 +1612,13 @@ function kmaps_explorer_transcripts_ui_js_alter(&$scripts) {
  */
 function kmaps_explorer_retrieve_counts($app, $id) {
   //Create the url for related assets for subjects and places
-  $mURL = "http://" . $app . ".kmaps.virginia.edu/features/" . $id . ".json";
+  if ($app == 'subjects') {
+    $mURL = "{$base_url}/api/subject/mod/{$id}";
+  } elseif ($app == 'places') {
+    $mURL = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . '/features/' . $id . '.json';
+  } else {
+    $mURL = "http://" . $app . ".kmaps.virginia.edu/features/" . $id . ".json";
+  }
 
   //Create the url for the solr related assets for subjects and places
   $solrURL = variable_get('shanti_kmaps_admin_server_solr', SHANTI_KMAPS_ADMIN_SERVER_SOLR) . '/select?q=kmapid:' . $app . '-' . $id . '&fq=&start=0&facets=on&group=true&group.field=asset_type&group.facet=true&group.ngroups=true&group.limit=1000&wt=json';
@@ -1852,7 +1864,7 @@ function kmaps_explorer_audio_video_clear_cache_submit($form, &$form_state) {
  * Adds total counts to feature tree and descendants
  */
 function kmaps_explorer_modified_subject_api($id) {
-	$furl = "http://subjects.kmaps.virginia.edu/features/__ID__.json";
+	$furl = variable_get('shanti_kmaps_admin_server_subjects', SHANTI_KMAPS_ADMIN_SERVER_SUBJECTS) . "/features/__ID__.json";
 	$url = str_replace('__ID__', $id . '/nested', $furl);
 	$rel = file_get_contents($url);
 	$nested = json_decode($rel);

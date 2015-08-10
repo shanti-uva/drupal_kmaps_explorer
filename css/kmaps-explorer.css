@@ -73,3 +73,41 @@ figcaption .center-caption { text-align: center;margin-bottom: 0.50em;}
   margin: 0px;
   padding: 0px;
 }
+
+/* Edit Button for Kmaps Nodes */
+.fixed-action-button {
+  display: inline-block;
+  bottom: 5px;
+  right: 18px;
+  position: fixed;
+  padding-top: 15px;
+  margin-bottom: 0;
+  z-index: 999;
+}
+
+.round-btn-fixed {
+  width: 40px;
+  height: 40px;
+  line-height: 48px;
+  display: inline-block;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  border-radius: 50%;
+  transition: .3s;
+  cursor: pointer;
+  vertical-align: middle;
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  outline: 0;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  background-color: #dc3c47;
+}
+
+.content-section a.round-btn-fixed:hover,
+.content-section a.round-btn-fixed:active {
+  color: #fff;
+}

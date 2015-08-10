@@ -112,4 +112,11 @@
 
     </div><!-- END tab-content -->
   </section><!-- END content-section -->
+
+  <!-- Edit button for Rails App -->
+  <div class="fixed-action-button clearfix">
+    <a href="" class="round-btn-fixed">
+      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+    </a>
+  </div>
 </div>
