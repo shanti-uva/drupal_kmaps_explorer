@@ -82,7 +82,7 @@ figcaption .center-caption { text-align: center;margin-bottom: 0.50em;}
   position: fixed;
   padding-top: 15px;
   margin-bottom: 0;
-  z-index: 999;
+  z-index: 10200;
 }
 
 .round-btn-fixed {
