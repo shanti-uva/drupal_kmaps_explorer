@@ -4,7 +4,7 @@
 
 <?php if (count($obj->feature->feature_types) > 0): ?>
   <p>
-    <h5 class="custom-inline">FEATURE TYPE:</h5>
+    <h6 class="custom-inline">FEATURE TYPE:</h6>
     <?php foreach($obj->feature->feature_types as $pl_feat_type): ?>
       <span><?php print $pl_feat_type->title; ?></span>
       <span class="popover-kmaps" data-app="subjects" data-id="<?php print $pl_feat_type->id; ?>">
@@ -35,11 +35,11 @@
 <aside class="panel-group" id="accordion">
   <section class="panel panel-default">
     <div class="panel-heading">
-      <h5>
+      <h6>
         <a href="#collapseOne" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle collapsed">
           <span class="glyphicon glyphicon-plus"></span>Names
         </a>
-      </h5>
+      </h6>
     </div>
     <div id="collapseOne" class="panel-collapse collapse">
       <div class="panel-body">
@@ -50,11 +50,11 @@
   <?php if(!empty($accordionEtymology)): ?>
   <section class="panel panel-default">
     <div class="panel-heading">
-      <h5>
+      <h6>
         <a href="#collapseTwo" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle collapsed">
           <span class="glyphicon glyphicon-plus"></span>ETYMOLOGY
         </a>
-      </h5>
+      </h6>
     </div>
     <div id="collapseTwo" class="panel-collapse collapse">
       <div class="panel-body">
@@ -66,11 +66,11 @@
   <?php if(!empty($accordionIdContent)): ?>
   <section class="panel panel-default">
     <div class="panel-heading">
-      <h5>
+      <h6>
         <a href="#collapseThree" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle collapsed">
           <span class="glyphicon glyphicon-plus"></span>IDs
         </a>
-      </h5>
+      </h6>
     </div>
     <div id="collapseThree" class="panel-collapse collapse">
       <div class="panel-body">
@@ -82,11 +82,11 @@
   <?php if(!empty($accordionLocationContent)): ?>
   <section class="panel panel-default">
     <div class="panel-heading">
-      <h5>
+      <h6>
         <a href="#collapseFour" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle collapsed">
           <span class="glyphicon glyphicon-plus"></span>Location
         </a>
-      </h5>
+      </h6>
     </div>
     <div id="collapseFour" class="panel-collapse collapse">
       <div class="panel-body">
@@ -98,11 +98,11 @@
   <?php if(!empty($accordionGisContent)): ?>
   <section class="panel panel-default">
     <div class="panel-heading">
-      <h5>
+      <h6>
         <a href="#collapseFive" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle collapsed">
           <span class="glyphicon glyphicon-plus"></span>GIS Resources
         </a>
-      </h5>
+      </h6>
     </div>
     <div id="collapseFive" class="panel-collapse collapse">
       <div class="panel-body">
