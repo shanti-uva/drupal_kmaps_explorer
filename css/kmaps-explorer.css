@@ -24,8 +24,7 @@ figcaption .center-caption { text-align: center;margin-bottom: 0.50em;}
   padding: 10px 20px;
   opacity: 0;
   -webkit-transition: all 0.6s ease;
-  -moz-transition:    all 0.6s ease;
-  -o-transition:      all 0.6s ease;
+  transition:      all 0.6s ease;
 }
 
 .subjects-overview-image figure:hover figcaption {
@@ -42,13 +41,13 @@ figcaption .center-caption { text-align: center;margin-bottom: 0.50em;}
   color: black;
   width: 24px;
   height: 24px;
-  -webkit-border-radius: 12px;
-  -moz-border-radius:    12px;
-  border-radius:         12px;
+  border-radius: 12px;
+  background-clip:padding-box;
   text-align: center;
   font-size: 14px;
   line-height: 24px;
-  -moz-transition: all 0.6s ease;
+  -webkit-transition: all 0.6s ease;
+  transition: all 0.6s ease;
   opacity: 0.75;
 }
 
@@ -82,7 +81,7 @@ figcaption .center-caption { text-align: center;margin-bottom: 0.50em;}
   position: fixed;
   padding-top: 15px;
   margin-bottom: 0;
-  z-index: 11000;
+  z-index: 10200; /* position above searc fly-out */
 }
 
 .round-btn-fixed {
@@ -95,6 +94,8 @@ figcaption .center-caption { text-align: center;margin-bottom: 0.50em;}
   overflow: hidden;
   z-index: 1;
   border-radius: 50%;
+  background-clip:padding-box;
+  -webkit-transition: .3s;
   transition: .3s;
   cursor: pointer;
   vertical-align: middle;
@@ -103,8 +104,12 @@ figcaption .center-caption { text-align: center;margin-bottom: 0.50em;}
   border: none;
   outline: 0;
   -webkit-tap-highlight-color: transparent;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  -webkit-box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  border-collapse:separate;
 }
+
+span.glyphicon.glyphicon-pencil{ font-size:1.32em;}
 
 .subjects-bg {
   background-color: #dc3c47;
