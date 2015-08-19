@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     Drupal.ajax.prototype.commands.insert_history = function(ajax, response, status) {
 
       // Get information from the response. If it is not there, default to
