@@ -465,7 +465,6 @@ function kmaps_explorer_subjects_overview($type = 'ajax', $id, $app) {
     'active_content' => $overview_content,
     'ajax' => $type == 'ajax' ? TRUE : FALSE,
     'overview' => TRUE,
-    'edit_url' => variable_get('shanti_kmaps_admin_server_subjects', SHANTI_KMAPS_ADMIN_SERVER_SUBJECTS) . '/admin/features/' . $obj->feature->db_id,
   );
 
   $content = theme('kmaps_explorer_initial_template', $setup);
@@ -497,15 +496,6 @@ function kmaps_explorer_places_overview($type = 'ajax', $id, $app) {
 
   //Places Overview setup
   $obj = $setup['obj'];
-  if(isset($obj->feature->closest_fid_with_shapes)) {
-    $options = array(
-      'group' => JS_THEME,
-      'weight' => 1000,
-    );
-    drupal_add_js(array('kmaps_explorer' => array('closest_fid_with_shapes' => $obj->feature->closest_fid_with_shapes)), 'setting');
-    drupal_add_js('https://maps.googleapis.com/maps/api/js?v=3.exp', 'external');
-    drupal_add_js($path . '/js/google_maps.js', $options);
-  }
 
   if (count($obj->feature->illustrations) > 0 && $obj->feature->illustrations[0]->type =='mms') {
     $illustrations = save_to_cache('illustrations', $app, $id, $obj->feature->illustrations[0]->url);
@@ -572,7 +562,6 @@ function kmaps_explorer_places_overview($type = 'ajax', $id, $app) {
     'active_content' => $overview_content,
     'ajax' => $type == 'ajax' ? TRUE : FALSE,
     'overview' => TRUE,
-    'edit_url' => variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . '/admin/features/' . $obj->feature->db_id,
   );
 
   $content = theme('kmaps_explorer_initial_template', $setup);
@@ -644,6 +633,19 @@ function kmaps_explorer_setup_page($id, $app) {
   $related_url = save_to_cache($c_name, $app, $id, $mURL);
 
   $obj = json_decode($related_url);
+
+  if ($app === 'places') {
+    if(isset($obj->feature->closest_fid_with_shapes)) {
+      $options = array(
+        'group' => JS_THEME,
+        'weight' => 1000,
+      );
+      drupal_add_js(array('kmaps_explorer' => array('closest_fid_with_shapes' => $obj->feature->closest_fid_with_shapes)), 'setting');
+      drupal_add_js('https://maps.googleapis.com/maps/api/js?v=3.exp', 'external');
+      drupal_add_js($path . '/js/google_maps.js', $options);
+    }
+  }
+
   //Store the ancestors to be used for breadcrumbs
   if($app == 'subjects') {
     $_SESSION['kmaps_explorer']['kmaps_explorer_ancestors'] = $obj->feature->ancestors;
@@ -688,6 +690,15 @@ function kmaps_explorer_setup_page($id, $app) {
   // $avObj = json_decode(file_get_contents($avURL));
   // dpm($avObj);
 
+  //Link for edit_url variable
+  if ($app == 'subjects') {
+    $edit_url = variable_get('shanti_kmaps_admin_server_subjects', SHANTI_KMAPS_ADMIN_SERVER_SUBJECTS) . '/admin/features/' . $obj->feature->db_id;
+  } elseif ($app == 'places') {
+    $edit_url = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . '/admin/features/' . $obj->feature->db_id;
+  } else {
+    $edit_url = '';
+  }
+
   return array(
     'type' => $app,
     'kid' => $id,
@@ -695,6 +706,7 @@ function kmaps_explorer_setup_page($id, $app) {
     'reverse_type' => $app == 'subjects' ? 'places' : 'subjects',
     'video_count' => $video_count,
     'solr_text_count' => $solr_text_count,
+    'edit_url' => $edit_url,
   );
 
 }
@@ -778,7 +790,7 @@ function kmaps_explorer_places_subjects($type = 'ajax', $id, $app) {
     $setup += array(
       'active_content' => $output,
       'ajax' => $type == 'ajax' ? TRUE : FALSE,
-      'place' => TRUE,
+      'subject' => TRUE,
     );
 
     $content = theme('kmaps_explorer_initial_template', $setup);

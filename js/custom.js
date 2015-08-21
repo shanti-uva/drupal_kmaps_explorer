@@ -20,6 +20,9 @@
         window.location.href = location.href;
       });
 
+      //Functionality for columnizer
+      $('ul.texts-list,div.places-in-places', context).columnize({width: 350});
+
       //Functionality for popovers
       $('.popover-kmaps', context).each(function() {
         var $that = $(this);
@@ -54,9 +57,6 @@
           });
         });
       });
-
-      //Functionality for columnizer
-      $('ul.texts-list,div.places-in-places', context).columnize({width: 350});
 
       function populatePopover(data, app) {
         var html = '';
