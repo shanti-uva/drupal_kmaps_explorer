@@ -1571,7 +1571,7 @@ function kmaps_explorer_menu_breadcrumb_alter(&$active_trail, $item) {
   if (current_path() == 'subjects') {
     $link1 = array(
       'title' => 'Home',
-      'href' => '',
+      'href' => '/subjects',
       'localized_options' => array(),
       'type' => 0,
     );
@@ -1579,7 +1579,7 @@ function kmaps_explorer_menu_breadcrumb_alter(&$active_trail, $item) {
   } elseif (current_path() == 'places') {
     $link1 = array(
       'title' => 'Home',
-      'href' => '',
+      'href' => '/places',
       'localized_options' => array(),
       'type' => 0,
     );
