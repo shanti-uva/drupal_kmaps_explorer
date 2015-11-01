@@ -1,3 +1,7 @@
+<table class="pagerer">
+<tbody>
+<tr>
+<td class="pagerer pagerer-right">
 <ul id="photo-pagination" class="pager">
   <li class="pager-first first"><a href="<?php print $first_link; ?>" class="use-ajax"><span class="icon"></span></a></li>
   <li class="pager-previous"><a href="<?php print $previous_link; ?>" class="use-ajax"><span class="icon"></span></a></li>
@@ -7,3 +11,7 @@
   <li class="pager-next"><a href="<?php print $next_link; ?>" class="use-ajax"><span class="icon"></span></a></li>
   <li class="pager-last last"><a href="<?php print $last_link; ?>" class="use-ajax"><span class="icon"></span></a></li>
 </ul>
+</td>
+</tr>
+</tbody>
+</table>

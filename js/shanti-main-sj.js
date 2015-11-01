@@ -1700,6 +1700,11 @@ function relatedPhotos(data) {
   });
 
   contentPh += '</div>';
+
+  contentPh += '<table class="pagerer">';
+  contentPh += '<tbody>';
+  contentPh += '<tr>';
+  contentPh += '<td class="pagerer" pagerer-right>';
   contentPh += '<div class="pagerer-pager">';
   contentPh += '<ul id="photo-pagination" class="pager">';
   contentPh += '<li class="pager-first first"><a href="' + shanti.photosURL + '&page=1' + '"><span class="icon"></span></a></li>';
@@ -1711,7 +1716,12 @@ function relatedPhotos(data) {
   contentPh += '<li class="pager-last active last"><a href="' + shanti.photosURL + '&page=' + data.topic.total_pages + '"><span class="icon"></span></a></li>';
   contentPh += '</ul>';
   contentPh += '</div>';
-  contentPh += '<div class="paginated-spin"><span class="fa fa-spinner"></span></div>';
+  contentPh += '</td>';
+  contentPh += '</tr>';
+  contentPh += '</tbody>';
+  contentPh += '</table>';
+
+  // contentPh += '<div class="paginated-spin"><span class="fa fa-spinner"></span></div>';
   $("#tab-photos").append(contentPh);
 
   //Add the event listener for the pager-first element
@@ -1927,6 +1937,10 @@ function relatedVideos(data) {
   var avURL = Settings.mediabaseURL + '/services/' + Settings.app + '/' + Settings.hash_obj.id + '?rows=12';
   var total_pages = parseInt(data.total / data.rows);
   
+  contentAV += '<table class="pagerer">';
+  contentAV += '<tbody>';
+  contentAV += '<tr>';
+  contentAV += '<td class="pagerer" pagerer-right>';  
   contentAV += '<div class="pagerer-pager">';
   contentAV += '<ul id="photo-pagination" class="pager">';
   contentAV += '<li class="pager-first first"><a href="' + avURL + '&pg=1' + '"><span class="icon"></span></a></li>';
@@ -1938,8 +1952,12 @@ function relatedVideos(data) {
   contentAV += '<li class="pager-last active last"><a href="' + avURL + '&pg=' + total_pages + '"><span class="icon"></span></a></li>';
   contentAV += '</ul>';
   contentAV += '</div>';
-  // contentAV += '<div class="paginated-spin"><span class="fa fa-spinner"></span></div>';
+  contentAV += '</td>';
+  contentAV += '</tr>';
+  contentAV += '</tbody>';
+  contentAV += '</table>';  
 
+  // contentAV += '<div class="paginated-spin"><span class="fa fa-spinner"></span></div>';
 
   $("#tab-audio-video").append(contentAV);
 
@@ -2172,6 +2190,10 @@ function relatedPlaces(data) {
   var avURL = Settings.placesUrl + '/topics/' + shanti.shanti_data.feature.id + '.json';
   var total_pages = data.total_pages;
 
+  contentPl += '<table class="pagerer">';
+  contentPl += '<tbody>';
+  contentPl += '<tr>';
+  contentPl += '<td class="pagerer" pagerer-right>';
   contentPl += '<div class="pagerer-pager">';
   contentPl += '<ul id="photo-pagination" class="pager">';
   contentPl += '<li class="pager-first first"><a href="' + avURL + '?page=1' + '"><span class="icon"></span></a></li>';
@@ -2183,8 +2205,12 @@ function relatedPlaces(data) {
   contentPl += '<li class="pager-last active last"><a href="' + avURL + '?page=' + total_pages + '"><span class="icon"></span></a></li>';
   contentPl += '</ul>';
   contentPl += '<div>';
+  contentPl += '</td>';
+  contentPl += '</tr>';
+  contentPl += '</tbody>';
+  contentPl += '</table>';
 
-  contentPl += '<div class="paginated-spin"><span class="fa fa-spinner"></span></div>';
+  // contentPl += '<div class="paginated-spin"><span class="fa fa-spinner"></span></div>';
 
   $("#tab-places").append(contentPl);
 
