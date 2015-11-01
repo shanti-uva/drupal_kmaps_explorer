@@ -1710,7 +1710,7 @@ function relatedPhotos(data) {
   contentPh += '<li class="pager-first first"><a href="' + shanti.photosURL + '&page=1' + '"><span class="icon"></span></a></li>';
   contentPh += '<li class="pager-previous"><a href="' + shanti.photosURL + '&page=1' + '"><span class="icon"></span></a></li>';
   contentPh += '<li class="pager-item">Page</li>';
-  contentPh += '<li class="pager-item widget active"><input type="text" value="1" class="pager-page"></li>';
+  contentPh += '<li class="pager-item widget active"><input type="text" value="1" class="pagerer-page"></li>';
   contentPh += '<li class="pager-item">Of ' + data.topic.total_pages + '</li>';
   contentPh += '<li class="pager-next active"><a href="' + shanti.photosURL + '&page=2' + '"><span class="icon"></span></a></li>';
   contentPh += '<li class="pager-last active last"><a href="' + shanti.photosURL + '&page=' + data.topic.total_pages + '"><span class="icon"></span></a></li>';
@@ -1946,7 +1946,7 @@ function relatedVideos(data) {
   contentAV += '<li class="pager-first first"><a href="' + avURL + '&pg=1' + '"><span class="icon"></span></a></li>';
   contentAV += '<li class="pager-previous"><a href="' + avURL + '&pg=1' + '"><span class="icon"></span></a></li>';
   contentAV += '<li class="pager-item">Page</li>';
-  contentAV += '<li class="pager-item active widget"><input type="text" value="1" class="pager-page"></li>';
+  contentAV += '<li class="pager-item active widget"><input type="text" value="1" class="pagerer-page"></li>';
   contentAV += '<li class="pager-item">Of ' + total_pages + '</li>';
   contentAV += '<li class="pager-next active"><a href="' + avURL + '&pg=2' + '"><span class="icon"></span></a></li>';
   contentAV += '<li class="pager-last active last"><a href="' + avURL + '&pg=' + total_pages + '"><span class="icon"></span></a></li>';
@@ -2199,7 +2199,7 @@ function relatedPlaces(data) {
   contentPl += '<li class="pager-first first"><a href="' + avURL + '?page=1' + '"><span class="icon"></span></a></li>';
   contentPl += '<li class="pager-previous"><a href="' + avURL + '?page=1' + '"><span class="icon"></span></a></li>';
   contentPl += '<li class="pager-item">Page</li>';
-  contentPl += '<li class="pager-item widget active"><input type="text" value="1" class="pager-page"></li>';
+  contentPl += '<li class="pager-item widget active"><input type="text" value="1" class="pagerer-page"></li>';
   contentPl += '<li class="pager-item">Of ' + total_pages + '</li>';
   contentPl += '<li class="pager-next active"><a href="' + avURL + '?page=2' + '"><span class="icon"></span></a></li>';
   contentPl += '<li class="pager-last active last"><a href="' + avURL + '?page=' + total_pages + '"><span class="icon"></span></a></li>';

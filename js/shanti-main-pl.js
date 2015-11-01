@@ -366,7 +366,7 @@ function relatedPlacesPhotos(data) {
   contentPh += '<li class="pager-first first"><a href="' + shantiPlaces.photosURL + '&page=1' + '"><span class="icon"></span></a></li>';
   contentPh += '<li class="pager-previous"><a href="' + shantiPlaces.photosURL + '&page=1' + '"><span class="icon"></span></a></li>';
   contentPh += '<li class="pager-item">Page</li>';
-  contentPh += '<li class="pager-item widget active"><input type="text" value="1" class="pager-page"></li>';
+  contentPh += '<li class="pager-item widget active"><input type="text" value="1" class="pagerer-page"></li>';
   contentPh += '<li class="pager-item">Of ' + shantiPlaces.total_pages + '</li>';
   contentPh += '<li class="pager-next active"><a href="' + shantiPlaces.photosURL + '&page=2' + '"><span class="icon"></span></a></li>';
   contentPh += '<li class="pager-last active last"><a href="' + shantiPlaces.photosURL + '&page=' + shantiPlaces.total_pages + '"><span class="icon"></span></a></li>';
