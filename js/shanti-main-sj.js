@@ -1706,7 +1706,7 @@ function relatedPhotos(data) {
   contentPh += '<table class="pagerer">';
   contentPh += '<tbody>';
   contentPh += '<tr>';
-  contentPh += '<td class="pagerer" pagerer-right>';
+  contentPh += '<td class="pagerer pagerer-right">';
   contentPh += '<div class="pagerer-pager">';
   contentPh += '<ul id="photo-pagination" class="pager">';
   contentPh += '<li class="pager-first first"><a href="' + shanti.photosURL + '&page=1' + '"><span class="icon"></span></a></li>';
@@ -1942,7 +1942,7 @@ function relatedVideos(data) {
   contentAV += '<table class="pagerer">';
   contentAV += '<tbody>';
   contentAV += '<tr>';
-  contentAV += '<td class="pagerer" pagerer-right>';  
+  contentAV += '<td class="pagerer pagerer-right">';  
   contentAV += '<div class="pagerer-pager">';
   contentAV += '<ul id="photo-pagination" class="pager">';
   contentAV += '<li class="pager-first first"><a href="' + avURL + '&pg=1' + '"><span class="icon"></span></a></li>';
@@ -2195,7 +2195,7 @@ function relatedPlaces(data) {
   contentPl += '<table class="pagerer">';
   contentPl += '<tbody>';
   contentPl += '<tr>';
-  contentPl += '<td class="pagerer" pagerer-right>';
+  contentPl += '<td class="pagerer pagerer-right">';
   contentPl += '<div class="pagerer-pager">';
   contentPl += '<ul id="photo-pagination" class="pager">';
   contentPl += '<li class="pager-first first"><a href="' + avURL + '?page=1' + '"><span class="icon"></span></a></li>';
