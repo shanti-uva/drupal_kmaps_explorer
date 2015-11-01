@@ -3,7 +3,7 @@
 <?php endif; ?>
 
 <?php if (count($obj->feature->feature_types) > 0): ?>
-  <p>
+  <div class="feature-type-wrapper">
     <h6 class="custom-inline">FEATURE TYPE:</h6>
     <?php foreach($obj->feature->feature_types as $pl_feat_type): ?>
       <span><?php print $pl_feat_type->title; ?></span>
@@ -12,7 +12,7 @@
         <span class="icon shanticon-menu3"></span>
       </span>
     <?php endforeach; ?>
-  </p>
+  </div>
 <?php endif; ?>
 
 <?php print $places_overview_image; ?>
