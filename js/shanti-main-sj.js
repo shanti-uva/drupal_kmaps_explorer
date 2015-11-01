@@ -1946,7 +1946,7 @@ function relatedVideos(data) {
   contentAV += '<div class="pagerer-pager">';
   contentAV += '<ul id="photo-pagination" class="pager">';
   contentAV += '<li class="pager-first first"><a href="' + avURL + '&pg=1' + '"><span class="icon"></span></a></li>';
-  contentAV += '<li class="pager-previous pager-previous"><a href="' + avURL + '&pg=1' + '"><span class="icon"></span></a></li>';
+  contentAV += '<li class="pager-previous"><a href="' + avURL + '&pg=1' + '"><span class="icon"></span></a></li>';
   contentAV += '<li class="pager-item">Page</li>';
   contentAV += '<li class="pager-item active widget"><input type="text" value="1" class="pager-page"></li>';
   contentAV += '<li class="pager-item">Of ' + total_pages + '</li>';
