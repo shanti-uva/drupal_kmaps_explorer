@@ -1440,8 +1440,6 @@ function processSubjectsData(data) {
   $("ol.breadcrumb li").remove();
   $("ol.breadcrumb").append('<li><a href="">Subjects:</a></li>');
   $.each(data.feature.ancestors, populateBreadcrumbs);
-  // fix for Subjects homepage
-  $(".front.page-subjects ol.breadcrumb").hide();
 
   //First Hide all the elements from the left hand navigation and then show relevant ones
   $(".content-resources ul.nav-pills li").hide();
