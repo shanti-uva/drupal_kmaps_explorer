@@ -1739,7 +1739,7 @@ function relatedPhotos(data) {
     .always(function() {
       // $('.paginated-spin span').removeClass('fa-spin');
       // $('.paginated-spin').hide();
-      $('li input.pager-page').val('1');
+      $('li input.page-input pagerer-page').val('1');
       $('li.pager-previous a').attr('href', currentTarget);
       var nextTarget = currentTarget.substr(0, currentTarget.lastIndexOf('=') + 1) + 2;
       $('li.pager-next a').attr('href', nextTarget);
@@ -1751,7 +1751,7 @@ function relatedPhotos(data) {
     e.preventDefault();
     var currentTarget = $(e.currentTarget).attr('href');
     currentTarget = currentTarget.substr(0, currentTarget.lastIndexOf('=') + 1);
-    var newpage = parseInt($('li input.pager-page').val()) - 1;
+    var newpage = parseInt($('li input.page-input pagerer-page').val()) - 1;
     if (newpage < 1) { newpage = 1; }
     var currentURL = currentTarget + newpage;
     var previousTarget = currentTarget + ((newpage - 1) < 1 ? 1 : (newpage - 1));
@@ -1767,7 +1767,7 @@ function relatedPhotos(data) {
     .always(function() {
       // $('.paginated-spin span').removeClass('fa-spin');
       // $('.paginated-spin').hide();
-      $('li input.pager-page').val(newpage);
+      $('li input.page-input pagerer-page').val(newpage);
       $(e.currentTarget).attr('href', previousTarget);
       $('li.pager-next a').attr('href', nextTarget);
     });
@@ -1778,7 +1778,7 @@ function relatedPhotos(data) {
     e.preventDefault();
     var currentTarget = $(e.currentTarget).attr('href');
     currentTarget = currentTarget.substr(0, currentTarget.lastIndexOf('=') + 1);
-    var newpage = parseInt($('li input.pager-page').val()) + 1;
+    var newpage = parseInt($('li input.page-input pagerer-page').val()) + 1;
     if (newpage > parseInt(data.topic.total_pages)) { newpage = parseInt(data.topic.total_pages); }
     var currentURL = currentTarget + newpage;
     var previousTarget = currentTarget + ((newpage - 1) < 1 ? 1 : (newpage - 1));
@@ -1794,14 +1794,14 @@ function relatedPhotos(data) {
     .always(function() {
       // $('.paginated-spin').show();
       // $('.paginated-spin').hide();
-      $('li input.pager-page').val(newpage);
+      $('li input.page-input pagerer-page').val(newpage);
       $('li.pager-previous a').attr('href', previousTarget);
       $(e.currentTarget).attr('href', nextTarget);
     });
   });
 
   //Add the listener for the pager text input element
-  $("li input.pager-page").change(function(e) {
+  $("li input.page-input pagerer-page").change(function(e) {
     e.preventDefault();
     var currentTarget = shanti.photosURL + '&page=';
     var newpage = parseInt($(this).val());
@@ -1821,7 +1821,7 @@ function relatedPhotos(data) {
     .always(function() {
       // $('.paginated-spin span').removeClass('fa-spin');
       // $('.paginated-spin').hide();
-      $('li input.pager-page').val(newpage);
+      $('li input.page-input pagerer-page').val(newpage);
       $('li.pager-previous a').attr('href', previousTarget);
       $('li.pager-next a').attr('href', nextTarget);
     });
@@ -1844,7 +1844,7 @@ function relatedPhotos(data) {
     .always(function() {
       // $('.paginated-spin span').removeClass('fa-spin');
       // $('.paginated-spin').hide();
-      $('li input.pager-page').val(newpage);
+      $('li input.page-input pagerer-page').val(newpage);
       $('li.pager-previous a').attr('href', previousTarget);
       $('li.pager-next a').attr('href', currentTarget);
     });
@@ -1976,7 +1976,7 @@ function relatedVideos(data) {
     .always(function() {
       // $('.paginated-spin span').removeClass('fa-spin');
       // $('.paginated-spin').hide();
-      $('li input.pager-page').val('1');
+      $('li input.page-input pagerer-page').val('1');
       $('li.pager-previous a').attr('href', currentTarget);
       var nextTarget = currentTarget.substr(0, currentTarget.lastIndexOf('=') + 1) + 2;
       $('li.pager-next a').attr('href', nextTarget);
@@ -1988,7 +1988,7 @@ function relatedVideos(data) {
     e.preventDefault();
     var currentTarget = $(e.currentTarget).attr('href');
     currentTarget = currentTarget.substr(0, currentTarget.lastIndexOf('=') + 1);
-    var newpage = parseInt($('li input.pager-page').val()) - 1;
+    var newpage = parseInt($('li input.page-input pagerer-page').val()) - 1;
     if (newpage < 1) { newpage = 1; }
     var currentURL = currentTarget + newpage;
     var previousTarget = currentTarget + ((newpage - 1) < 1 ? 1 : (newpage - 1));
@@ -2004,7 +2004,7 @@ function relatedVideos(data) {
     .always(function() {
       // $('.paginated-spin span').removeClass('fa-spin');
       // $('.paginated-spin').hide();
-      $('li input.pager-page').val(newpage);
+      $('li input.page-input pagerer-page').val(newpage);
       $(e.currentTarget).attr('href', previousTarget);
       $('li.pager-next a').attr('href', nextTarget);
     });
@@ -2015,7 +2015,7 @@ function relatedVideos(data) {
     e.preventDefault();
     var currentTarget = $(e.currentTarget).attr('href');
     currentTarget = currentTarget.substr(0, currentTarget.lastIndexOf('=') + 1);
-    var newpage = parseInt($('li input.pager-page').val()) + 1;
+    var newpage = parseInt($('li input.page-input pagerer-page').val()) + 1;
     if (newpage > parseInt(total_pages)) { newpage = parseInt(total_pages); }
     var currentURL = currentTarget + newpage;
     var previousTarget = currentTarget + ((newpage - 1) < 1 ? 1 : (newpage - 1));
@@ -2031,14 +2031,14 @@ function relatedVideos(data) {
     .always(function() {
       // $('.paginated-spin span').removeClass('fa-spin');
       // $('.paginated-spin').hide();
-      $('li input.pager-page').val(newpage);
+      $('li input.page-input pagerer-page').val(newpage);
       $('li.pager-previous a').attr('href', previousTarget);
       $(e.currentTarget).attr('href', nextTarget);
     });
   });
 
   //Add the listener for the pager text input element
-  $("li input.pager-page").change(function(e) {
+  $("li input.page-input pagerer-page").change(function(e) {
     e.preventDefault();
     var currentTarget = avURL + '&pg=';
     var newpage = parseInt($(this).val());
@@ -2058,7 +2058,7 @@ function relatedVideos(data) {
     .always(function() {
       // $('.paginated-spin span').removeClass('fa-spin');
       // $('.paginated-spin').hide();
-      $('li input.pager-page').val(newpage);
+      $('li input.page-input pagerer-page').val(newpage);
       $('li.pager-previous a').attr('href', previousTarget);
       $('li.pager-next a').attr('href', nextTarget);
     });
@@ -2081,7 +2081,7 @@ function relatedVideos(data) {
     .always(function() {
       // $('.paginated-spin span').removeClass('fa-spin');
       // $('.paginated-spin').hide();
-      $('li input.pager-page').val(newpage);
+      $('li input.page-input pagerer-page').val(newpage);
       $('li.pager-previous a').attr('href', previousTarget);
       $('li.pager-next a').attr('href', currentTarget);
     });
@@ -2229,7 +2229,7 @@ function relatedPlaces(data) {
     .always(function() {
       // $('.paginated-spin span').removeClass('fa-spin');
       // $('.paginated-spin').hide();
-      $('li input.pager-page').val('1');
+      $('li input.page-input pagerer-page').val('1');
       $('li.pager-previous a').attr('href', currentTarget);
       var nextTarget = currentTarget.substr(0, currentTarget.lastIndexOf('=') + 1) + 2;
       $('li.pager-next a').attr('href', nextTarget);
@@ -2241,7 +2241,7 @@ function relatedPlaces(data) {
     e.preventDefault();
     var currentTarget = $(e.currentTarget).attr('href');
     currentTarget = currentTarget.substr(0, currentTarget.lastIndexOf('=') + 1);
-    var newpage = parseInt($('li input.pager-page').val()) - 1;
+    var newpage = parseInt($('li input.page-input pagerer-page').val()) - 1;
     if (newpage < 1) { newpage = 1; }
     var currentURL = currentTarget + newpage;
     var previousTarget = currentTarget + ((newpage - 1) < 1 ? 1 : (newpage - 1));
@@ -2257,7 +2257,7 @@ function relatedPlaces(data) {
     .always(function() {
       // $('.paginated-spin span').removeClass('fa-spin');
       // $('.paginated-spin').hide();
-      $('li input.pager-page').val(newpage);
+      $('li input.page-input pagerer-page').val(newpage);
       $(e.currentTarget).attr('href', previousTarget);
       $('li.pager-next a').attr('href', nextTarget);
     });
@@ -2268,7 +2268,7 @@ function relatedPlaces(data) {
     e.preventDefault();
     var currentTarget = $(e.currentTarget).attr('href');
     currentTarget = currentTarget.substr(0, currentTarget.lastIndexOf('=') + 1);
-    var newpage = parseInt($('li input.pager-page').val()) + 1;
+    var newpage = parseInt($('li input.page-input pagerer-page').val()) + 1;
     if (newpage > parseInt(total_pages)) { newpage = parseInt(total_pages); }
     var currentURL = currentTarget + newpage;
     var previousTarget = currentTarget + ((newpage - 1) < 1 ? 1 : (newpage - 1));
@@ -2284,14 +2284,14 @@ function relatedPlaces(data) {
     .always(function() {
       // $('.paginated-spin span').removeClass('fa-spin');
       // $('.paginated-spin').hide();
-      $('li input.pager-page').val(newpage);
+      $('li input.page-input pagerer-page').val(newpage);
       $('li.pager-previous a').attr('href', previousTarget);
       $(e.currentTarget).attr('href', nextTarget);
     });
   });
 
   //Add the listener for the pager text input element
-  $("li input.pager-page").change(function(e) {
+  $("li input.page-input pagerer-page").change(function(e) {
     e.preventDefault();
     var currentTarget = avURL + '?page=';
     var newpage = parseInt($(this).val());
@@ -2311,7 +2311,7 @@ function relatedPlaces(data) {
     .always(function() {
       // $('.paginated-spin span').removeClass('fa-spin');
       // $('.paginated-spin').hide();
-      $('li input.pager-page').val(newpage);
+      $('li input.page-input pagerer-page').val(newpage);
       $('li.pager-previous a').attr('href', previousTarget);
       $('li.pager-next a').attr('href', nextTarget);
     });
@@ -2334,7 +2334,7 @@ function relatedPlaces(data) {
     .always(function() {
       // $('.paginated-spin span').removeClass('fa-spin');
       // $('.paginated-spin').hide();
-      $('li input.pager-page').val(newpage);
+      $('li input.page-input pagerer-page').val(newpage);
       $('li.pager-previous a').attr('href', previousTarget);
       $('li.pager-next a').attr('href', currentTarget);
     });

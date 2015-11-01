@@ -382,33 +382,33 @@ function relatedPlacesPhotos(data) {
     $("#tab-photos").append(contentPh);
 
   //Add the event listener for the first-page element
-  $("li.first-page a").click(function(e) {
+  $("li.pager-first a").click(function(e) {
     e.preventDefault();
     var currentTarget = $(e.currentTarget).attr('href');
     $.ajax({
       url: currentTarget,
       beforeSend: function(xhr) {
-        $('.paginated-spin i.fa').addClass('fa-spin');
-        $('.paginated-spin').show();
+        // $('.paginated-spin i.fa').addClass('fa-spin');
+        // $('.paginated-spin').show();
       }
     })
     .done(paginatedPlacesPhotos)
     .always(function() {
-      $('.paginated-spin i').removeClass('fa-spin');
-      $('.paginated-spin').hide();
-      $('li input.page-input').val('1');
-      $('li.previous-page a').attr('href', currentTarget);
+      // $('.paginated-spin span').removeClass('fa-spin');
+      // $('.paginated-spin').hide();
+      $('li input.page-input pagerer-page').val('1');
+      $('li.pager-previous a').attr('href', currentTarget);
       var nextTarget = currentTarget.substr(0, currentTarget.lastIndexOf('=') + 1) + 2;
-      $('li.next-page a').attr('href', nextTarget);
+      $('li.pager-next a').attr('href', nextTarget);
     });
   });
 
   //Add the listener for the previous-page element
-  $("li.previous-page a").click(function(e) {
+  $("li.pager-previous a").click(function(e) {
     e.preventDefault();
     var currentTarget = $(e.currentTarget).attr('href');
     currentTarget = currentTarget.substr(0, currentTarget.lastIndexOf('=') + 1);
-    var newpage = parseInt($('li input.page-input').val()) - 1;
+    var newpage = parseInt($('li input.page-input pagerer-page').val()) - 1;
     if (newpage < 1) { newpage = 1; }
     var currentURL = currentTarget + newpage;
     var previousTarget = currentTarget + ((newpage - 1) < 1 ? 1 : (newpage - 1));
@@ -416,26 +416,26 @@ function relatedPlacesPhotos(data) {
     $.ajax({
       url: currentURL,
       beforeSend: function(xhr) {
-        $('.paginated-spin i.fa').addClass('fa-spin');
-        $('.paginated-spin').show();
+        // $('.paginated-spin span.fa').addClass('fa-spin');
+        // $('.paginated-spin').show();
       }
     })
     .done(paginatedPlacesPhotos)
     .always(function() {
-      $('.paginated-spin i').removeClass('fa-spin');
-      $('.paginated-spin').hide();
-      $('li input.page-input').val(newpage);
+      // $('.paginated-spin span').removeClass('fa-spin');
+      // $('.paginated-spin').hide();
+      $('li input.page-input pagerer-page').val(newpage);
       $(e.currentTarget).attr('href', previousTarget);
-      $('li.next-page a').attr('href', nextTarget);
+      $('li.pager-next a').attr('href', nextTarget);
     });
   });
 
   //Add the listener for the next-page element
-  $("li.next-page a").click(function(e) {
+  $("li.pager-next a").click(function(e) {
     e.preventDefault();
     var currentTarget = $(e.currentTarget).attr('href');
     currentTarget = currentTarget.substr(0, currentTarget.lastIndexOf('=') + 1);
-    var newpage = parseInt($('li input.page-input').val()) + 1;
+    var newpage = parseInt($('li input.page-input pagerer-page').val()) + 1;
     if (newpage > parseInt(shantiPlaces.total_pages)) { newpage = parseInt(shantiPlaces.total_pages); }
     var currentURL = currentTarget + newpage;
     var previousTarget = currentTarget + ((newpage - 1) < 1 ? 1 : (newpage - 1));
@@ -443,22 +443,22 @@ function relatedPlacesPhotos(data) {
     $.ajax({
       url: currentURL,
       beforeSend: function(xhr) {
-        $('.paginated-spin i.fa').addClass('fa-spin');
-        $('.paginated-spin').show();
+        // $('.paginated-spin span.fa').addClass('fa-spin');
+        // $('.paginated-spin').show();
       }
     })
     .done(paginatedPlacesPhotos)
     .always(function() {
       // $('.paginated-spin span').removeClass('fa-spin');
       // $('.paginated-spin').hide();
-      $('li input.page-input').val(newpage);
-      $('li.previous-page a').attr('href', previousTarget);
+      $('li input.page-input pagerer-page').val(newpage);
+      $('li.pager-previous a').attr('href', previousTarget);
       $(e.currentTarget).attr('href', nextTarget);
     });
   });
 
   //Add the listener for the pager text input element
-  $("li input.pager-page").change(function(e) {
+  $("li input.page-input pagerer-page").change(function(e) {
     e.preventDefault();
     var currentTarget = shantiPlaces.photosURL + '&page=';
     var newpage = parseInt($(this).val());
@@ -478,7 +478,7 @@ function relatedPlacesPhotos(data) {
     .always(function() {
       // $('.paginated-spin span').removeClass('fa-spin');
       // $('.paginated-spin').hide();
-      $('li input.pager-page').val(newpage);
+      $('li input.page-input pagerer-page').val(newpage);
       $('li.pager-previous a').attr('href', previousTarget);
       $('li.pager-next a').attr('href', nextTarget);
     });
@@ -501,9 +501,9 @@ function relatedPlacesPhotos(data) {
     .always(function() {
       // $('.paginated-spin span').removeClass('fa-spin');
       // $('.paginated-spin').hide();
-      $('li input.pager-page').val(newpage);
-      $('li.previous-page a').attr('href', previousTarget);
-      $('li.next-page a').attr('href', currentTarget);
+      $('li input.page-input pagerer-page').val(newpage);
+      $('li.pager-previous a').attr('href', previousTarget);
+      $('li.pager-next a').attr('href', currentTarget);
     });
   });
 }
