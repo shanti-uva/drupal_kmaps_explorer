@@ -1,3 +1,3 @@
 <div class="main-overview-image">
-  <img class="img-responsive img-thumbnail" src="<?php print $url; ?>">
+  <img class="img-responsive" src="<?php print $url; ?>">
 </div>

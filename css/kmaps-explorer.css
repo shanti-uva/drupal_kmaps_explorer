@@ -144,42 +144,44 @@ figcaption .center-caption {
 /* Edit Button for Kmaps Nodes */
 .fixed-action-button {
   display: inline-block;
-  bottom: 5px;
-  right: 18px;
+  bottom: .5rem;
+  right: 1rem;
   position: fixed;
-  padding-top: 15px;
-  margin-bottom: 0;
   z-index: 10200;
- /* position above searc fly-out */
+  width: 4rem;
+  height: 4rem;
 }
 
 .round-btn-fixed {
-  width: 40px;
-  height: 40px;
-  line-height: 48px;
   display: inline-block;
   color: #fff;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
+  width: 4rem;
+  height: 4rem;
   border-radius: 50%;
   background-clip: padding-box;
-  -webkit-transition: .3s;
-  transition: .3s;
-  cursor: pointer;
-  vertical-align: middle;
-  text-decoration: none;
   text-align: center;
   border: none;
-  outline: 0;
   -webkit-tap-highlight-color: transparent;
-  -webkit-box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   border-collapse: separate;
+  filter: alpha(opacity:85);
+  opacity:0.85;
 }
 
-span.glyphicon.glyphicon-pencil {
-  font-size: 1.32em;
+.content-section .round-btn-fixed:hover,
+.content-section .round-btn-fixed:active {
+  filter: alpha(opacity=100);
+  opacity:1;
+  color:white;
+}
+
+.glyphicon.glyphicon-pencil {
+  font-size: 1.9rem;
+}
+
+.glyphicon.glyphicon-pencil::before {
+  position: relative;
+  top: 0.9rem;
 }
 
 .subjects-bg {
@@ -190,10 +192,5 @@ span.glyphicon.glyphicon-pencil {
   background-color: #4ca6fb;
 }
 
-.content-section a.round-btn-fixed:hover,
-.content-section a.round-btn-fixed:focus,
-.content-section a.round-btn-fixed:visited,
-.content-section a.round-btn-fixed:active {
-  color: #fff;
-}
+
 

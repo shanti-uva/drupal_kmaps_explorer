@@ -1113,7 +1113,7 @@ function kmaps_explorer_text_field($form, &$form_state, $id, $page_num, $total_p
     '#value' => isset($form_state['input']['page_num_text']) ? $form_state['input']['page_num_text'] : $page_num,
     '#size' => 10,
     '#attributes' => array(
-      'class' => array('page-input'),
+      'class' => array('page-input pagerer-page'),
       'data-arg' => $id . '-' . $total_pages . '-' . $related_assoc . '-' . $app,
     ),
     '#ajax' => array(
