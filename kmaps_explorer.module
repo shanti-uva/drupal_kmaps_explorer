@@ -481,8 +481,15 @@ function kmaps_explorer_subjects_overview($type = 'ajax', $id, $app) {
     $commands[] = ajax_command_html('ol.breadcrumb', $breadcrumb);
     $commands[] = ajax_command_invoke('ol.breadcrumb', 'css', array('display', 'block'));
     $page = array('#type' => 'ajax', '#commands' => $commands);
+
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
+
     ajax_deliver($page);
   } else {
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
+
     return $content;
   }
 
@@ -578,8 +585,15 @@ function kmaps_explorer_places_overview($type = 'ajax', $id, $app) {
     $commands[] = ajax_command_html('ol.breadcrumb', $breadcrumb);
     $commands[] = ajax_command_invoke('ol.breadcrumb', 'css', array('display', 'block'));
     $page = array('#type' => 'ajax', '#commands' => $commands);
+
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
+
     ajax_deliver($page);
   } else {
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
+
     return $content;
   }
 
@@ -715,6 +729,8 @@ function kmaps_explorer_setup_page($id, $app) {
  * Function to create the ajax content for subjects in subjects
  */
 function kmaps_explorer_subjects_subjects($type = 'ajax', $id, $app) {
+  $setup = kmaps_explorer_setup_page($id, $app);
+
   $subjectsURL = variable_get('shanti_kmaps_admin_server_subjects', SHANTI_KMAPS_ADMIN_SERVER_SUBJECTS) . "/features/" . $id . "/related.json";
   $subjects_fetch = save_to_cache('subjects', $app, $id, $subjectsURL);
   $subjObj = json_decode($subjects_fetch);
@@ -731,6 +747,10 @@ function kmaps_explorer_subjects_subjects($type = 'ajax', $id, $app) {
     $commands = array();
     $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'subjects/' . $id . '/subjects/nojs');
     $page = array('#type' => 'ajax', '#commands' => $commands);
+
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
+
     ajax_deliver($page);
   } else {
     $setup = kmaps_explorer_setup_page($id, $app);
@@ -751,6 +771,9 @@ function kmaps_explorer_subjects_subjects($type = 'ajax', $id, $app) {
 
     $content = theme('kmaps_explorer_initial_template', $setup);
 
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
+
     return $content;
   }
 }
@@ -759,6 +782,8 @@ function kmaps_explorer_subjects_subjects($type = 'ajax', $id, $app) {
  * Function to create the ajax content for subjects in places
  */
 function kmaps_explorer_places_subjects($type = 'ajax', $id, $app) {
+  $setup = kmaps_explorer_setup_page($id, $app);
+
   $subjectsURL = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . "/features/" . $id . "/topics.json";
   $subjects_fetch = save_to_cache('subjects', $app, $id, $subjectsURL);
   $subjObj = json_decode($subjects_fetch);
@@ -775,6 +800,10 @@ function kmaps_explorer_places_subjects($type = 'ajax', $id, $app) {
     $commands = array();
     $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'places/' . $id . '/subjects/nojs');
     $page = array('#type' => 'ajax', '#commands' => $commands);
+
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
+
     ajax_deliver($page);
   } else {
     $setup = kmaps_explorer_setup_page($id, $app);
@@ -795,6 +824,9 @@ function kmaps_explorer_places_subjects($type = 'ajax', $id, $app) {
 
     $content = theme('kmaps_explorer_initial_template', $setup);
 
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
+
     return $content;
   }
 }
@@ -803,6 +835,8 @@ function kmaps_explorer_places_subjects($type = 'ajax', $id, $app) {
  * Function to create the ajax content for essays in subjects
  */
 function kmaps_explorer_subjects_essays($type = 'ajax', $id, $app) {
+  $setup = kmaps_explorer_setup_page($id, $app);
+
   if($type == 'ajax') {
     //Retrieve the title of the node
     $title = $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'];
@@ -825,6 +859,10 @@ function kmaps_explorer_subjects_essays($type = 'ajax', $id, $app) {
     $commands = array();
     $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'subjects/' . $id . '/texts/nojs');
     $page = array('#type' => 'ajax', '#commands' => $commands);
+
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
+
     ajax_deliver($page);
   } else {
     $setup = kmaps_explorer_setup_page($id, $app);
@@ -855,6 +893,9 @@ function kmaps_explorer_subjects_essays($type = 'ajax', $id, $app) {
 
     $content = theme('kmaps_explorer_initial_template', $setup);
 
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
+
     return $content;
   }
 }
@@ -863,6 +904,8 @@ function kmaps_explorer_subjects_essays($type = 'ajax', $id, $app) {
  * Function to create the ajax content for esssays in places
  */
 function kmaps_explorer_places_essays($type = 'ajax', $id, $app) {
+  $setup = kmaps_explorer_setup_page($id, $app);
+
   if($type == 'ajax') {
     //Retrieve the title of the node
     $title = $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'];
@@ -885,6 +928,10 @@ function kmaps_explorer_places_essays($type = 'ajax', $id, $app) {
     $commands = array();
     $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'places/' . $id . '/texts/nojs');
     $page = array('#type' => 'ajax', '#commands' => $commands);
+
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
+
     ajax_deliver($page);
   } else {
     $setup = kmaps_explorer_setup_page($id, $app);
@@ -915,6 +962,9 @@ function kmaps_explorer_places_essays($type = 'ajax', $id, $app) {
 
     $content = theme('kmaps_explorer_initial_template', $setup);
 
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
+
     return $content;
   }
 }
@@ -923,6 +973,8 @@ function kmaps_explorer_places_essays($type = 'ajax', $id, $app) {
  * Function to implement the ajax content for individual text nodes
  */
 function kmaps_explorer_each_text_node($type = 'ajax', $id, $tid, $app) {
+  $setup = kmaps_explorer_setup_page($id, $app);
+
   if($type == 'ajax') {
     $solrObj = $_SESSION['kmaps_explorer']['kmaps_explorer_solr'];
 
@@ -947,6 +999,10 @@ function kmaps_explorer_each_text_node($type = 'ajax', $id, $tid, $app) {
     $commands = array();
     $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . $app . '/' . $id . '/text_node/' . $tid . '/nojs');
     $page = array('#type' => 'ajax', '#commands' => $commands);
+
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
+
     ajax_deliver($page);
 
   } else {
@@ -978,6 +1034,9 @@ function kmaps_explorer_each_text_node($type = 'ajax', $id, $tid, $app) {
     );
 
     $content = theme('kmaps_explorer_initial_template', $setup);
+
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
 
     return $content;
   }
@@ -1005,6 +1064,8 @@ function call_solr_index($id, $app) {
  * Function to create the ajax content for places in subjects
  */
 function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num=1, $total_pages=1, $subpage=FALSE) {
+  $setup = kmaps_explorer_setup_page($id, 'subjects');
+
   $placesURL = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . "/topics/" . $id . ".json?page=" . $page_num;
   $places_fetch = save_to_cache('places', 'subjects', $id, $placesURL, $page_num);
   $placesObj = json_decode($places_fetch);
@@ -1037,6 +1098,10 @@ function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num=1, $total
     $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'subjects/' . $id . '/places/nojs/' . $page_num . '/' . $total_pages);
     $commands[] = ajax_command_append('#tab-main', $pagination);
     $page = array('#type' => 'ajax', '#commands' => $commands);
+
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
+
     if($subpage) {
       return $page;
     } else {
@@ -1058,6 +1123,9 @@ function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num=1, $total
 
     $content = theme('kmaps_explorer_initial_template', $setup);
 
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
+
     return $content;
   }
 }
@@ -1066,6 +1134,8 @@ function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num=1, $total
  * Function to create the ajax content for the places in places
  */
 function kmaps_explorer_places_places($type = 'ajax', $id, $page_num = 1, $total_pages = 1, $subpage = FALSE) {
+  $setup = kmaps_explorer_setup_page($id, 'places');
+
   $placesURL = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . "/features/" . $id . "/related.json";
   $places_fetch = save_to_cache('places', 'places', $id, $placesURL);
   $placesObj = json_decode($places_fetch);
@@ -1079,6 +1149,10 @@ function kmaps_explorer_places_places($type = 'ajax', $id, $page_num = 1, $total
     $commands = array();
     $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'places/' . $id . '/places/nojs');
     $page = array('#type' => 'ajax', '#commands' => $commands);
+
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
+
     if($subpage) {
       return $page;
     } else {
@@ -1099,6 +1173,9 @@ function kmaps_explorer_places_places($type = 'ajax', $id, $page_num = 1, $total
     );
 
     $content = theme('kmaps_explorer_initial_template', $setup);
+
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
 
     return $content;
   }
@@ -1156,6 +1233,8 @@ function kmaps_explore_pager_ajax($form, &$form_state) {
  * Function to create ajax content for photos in subjects
  */
 function kmaps_explorer_subjects_photos($type = 'ajax', $id, $page_num=1, $total_pages=1, $subpage=FALSE) {
+  $setup = kmaps_explorer_setup_page($id, 'subjects');
+
   $photosURL = 'http://mms.thlib.org/topics/' . $id . '/pictures.json?per_page=60&page=' . $page_num;
   $photos_fetch = save_to_cache('photos', 'subjects', $id, $photosURL, $page_num);
   $photosObj = json_decode($photos_fetch);
@@ -1188,6 +1267,10 @@ function kmaps_explorer_subjects_photos($type = 'ajax', $id, $page_num=1, $total
     $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'subjects/' . $id . '/photos/nojs/' . $page_num . '/' . $total_pages);
     $commands[] = ajax_command_append('#tab-main', $pagination);
     $page = array('#type' => 'ajax', '#commands' => $commands);
+
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
+
     if($subpage) {
       return $page;
     } else {
@@ -1208,6 +1291,9 @@ function kmaps_explorer_subjects_photos($type = 'ajax', $id, $page_num=1, $total
     );
 
     $content = theme('kmaps_explorer_initial_template', $setup);
+
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
 
     return $content;
   }
@@ -1235,6 +1321,9 @@ function kmaps_explorer_subjects_photos_node($id, $pid) {
 
   $content = theme('kmaps_explorer_initial_template', $setup);
 
+  //Remove the kmaps_explorer variable from the sessions table
+  unset($_SESSION['kmaps_explorer']);
+
   return $content;
 }
 
@@ -1242,6 +1331,8 @@ function kmaps_explorer_subjects_photos_node($id, $pid) {
  * Function to create ajax content for photos in places
  */
 function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num=1, $total_pages=1, $subpage=FALSE) {
+  $setup = kmaps_explorer_setup_page($id, 'places');
+
   $photosURL = 'http://mms.thlib.org/places/' . $id . '/pictures.json?per_page=60&page=' . $page_num;
   $photos_fetch = save_to_cache('photos', 'places', $id, $photosURL, $page_num);
   $photosObj = json_decode($photos_fetch);
@@ -1274,6 +1365,10 @@ function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num=1, $total_p
     $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'places/' . $id . '/photos/nojs/' . $page_num . '/' . $total_pages);
     $commands[] = ajax_command_append('#tab-main', $pagination);
     $page = array('#type' => 'ajax', '#commands' => $commands);
+
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
+
     if($subpage) {
       return $page;
     } else {
@@ -1313,6 +1408,9 @@ function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num=1, $total_p
 
     $content = theme('kmaps_explorer_initial_template', $setup);
 
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
+
     return $content;
   }
 }
@@ -1339,69 +1437,18 @@ function kmaps_explorer_places_photos_node($id, $pid) {
 
   $content = theme('kmaps_explorer_initial_template', $setup);
 
+  //Remove the kmaps_explorer variable from the sessions table
+  unset($_SESSION['kmaps_explorer']);
+
   return $content;
 }
 
 /**
  * Function to create ajax content for audio-video in subjects
  */
-/*function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_num=1, $total_pages=1, $subpage=FALSE) {*/
-  /*$avURL = variable_get('shanti_kmaps_admin_server_audio_video', SHANTI_KMAPS_ADMIN_SERVER_AUDIO_VIDEO) . '/services/' . $app . '/' . $id . '?rows=12&pg=' . $page_num;*/
-  /*$avObj = json_decode(file_get_contents($avURL));*/
-
-  /*$page_num = $avObj->page;*/
-  /*$total_pages = intval($avObj->total / $avObj->rows);*/
-
-  /*$output = theme('kmaps_explorer_subjects_audio_video_ajax', array(*/
-    /*'data' => $avObj->media,*/
-    /*'title' => variable_get('kmaps_explorer_node_title', ''),*/
-    /*'app' => $app . 's',*/
-    /*'main_id' => $id,*/
-  /*));*/
-
-  /*//create the pager input element*/
-  /*$page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'audiovideo', $app);*/
-  /*$input_el = render($page_input_array);*/
-
-  /*$pageBaseUrl = base_path() . $app . 's/' . $id . '/audio-video/nojs/';*/
-  /*$pagination = theme('kmaps_explorer_pagination_template', array(*/
-    /*'first_link' => $pageBaseUrl . '1/' . $total_pages,*/
-    /*'previous_link' => $pageBaseUrl . ($page_num <= 1 ? '1' : ($page_num - 1)) . '/' . $total_pages,*/
-    /*'next_link' => $pageBaseUrl . ($page_num >= $total_pages ? $total_pages : ($page_num + 1)) . '/' . $total_pages,*/
-    /*'last_link' => $pageBaseUrl . $total_pages . '/' . $total_pages,*/
-    /*'total_pages' => $total_pages,*/
-    /*'page_num' => $page_num,*/
-    /*'input_el' => $input_el,*/
-  /*));*/
-
-  /*if($type == 'ajax') {*/
-    /*$commands = array();*/
-    /*$commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . $app . 's/' . $id . '/audio-video/nojs/' . $page_num . '/' . $total_pages);*/
-    /*$commands[] = ajax_command_append('#tab-main', $pagination);*/
-    /*$page = array('#type' => 'ajax', '#commands' => $commands);*/
-    /*if($subpage) {*/
-      /*return $page;*/
-    /*} else {*/
-      /*ajax_deliver($page);*/
-    /*}*/
-  /*} else {*/
-    /*$setup = kmaps_explorer_setup_page($id, $app . 's');*/
-    /*$setup += array(*/
-      /*'active_content' => $output . $pagination,*/
-      /*'ajax' => $type == 'ajax' ? TRUE : FALSE,*/
-      /*'audio_video' => TRUE,*/
-    /*);*/
-
-    /*$content = theme('kmaps_explorer_initial_template', $setup);*/
-
-    /*return $content;*/
-  /*}*/
-/*}*/
-
-/**
- * Function to create ajax content for audio-video in subjects
- */
 function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_num=1, $total_pages=1, $subpage=FALSE) {
+  $setup = kmaps_explorer_setup_page($id, $app . 's');
+
   if($type == 'ajax') {
     $avObj = $_SESSION['kmaps_explorer']['kmaps_explorer_audio_video'];
 
@@ -1444,6 +1491,10 @@ function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_nu
     $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . $app . 's/' . $id . '/audio-video/nojs/' . $page_num . '/' . $total_pages);
     $commands[] = ajax_command_append('#tab-main', $pagination);
     $page = array('#type' => 'ajax', '#commands' => $commands);
+
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
+
     if($subpage) {
       return $page;
     } else {
@@ -1497,6 +1548,9 @@ function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_nu
 
     $content = theme('kmaps_explorer_initial_template', $setup);
 
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
+
     return $content;
   }
 }
@@ -1505,6 +1559,8 @@ function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_nu
  * Function to create ajax content for audio-video individual node items
  */
 function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid) {
+  $setup = kmaps_explorer_setup_page($mid, $app);
+
   if($type == 'ajax') {
     $avNodeURL = '';
     $avObj = $_SESSION['kmaps_explorer']['kmaps_explorer_audio_video'];
@@ -1519,6 +1575,10 @@ function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid) {
     $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . $app  . '/' . $mid . '/audio-video-node/' . $vid . '/nojs');
     $commands[] = ajax_command_invoke('body', 'addClass', array('max-col-widths'));
     $page = array('#type' => 'ajax', '#commands' => $commands);
+
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
+
     ajax_deliver($page);
   } else {
     $setup = kmaps_explorer_setup_page($mid, $app);
@@ -1540,6 +1600,9 @@ function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid) {
     );
 
     $content = theme('kmaps_explorer_initial_template', $setup);
+
+    //Remove the kmaps_explorer variable from the sessions table
+    unset($_SESSION['kmaps_explorer']);
 
     return $content;
   }
@@ -1936,4 +1999,35 @@ function _add_subject_child_counts($obj, $id) {
 		}
 	}
 	return $obj;
+}
+
+/**
+ * Implements hook_cron().
+ */
+function kmaps_explorer_cron() {
+    //Check if it is the first time this hook fires.
+    $last_run_time = variable_get('kmaps_explorer_last', 0);
+    if (!$last_run_time) {
+        //Set the time
+        variable_set('kmaps_explorer_last', REQUEST_TIME);
+    }
+
+    //Check if we should run, this should only be once a day
+    if (REQUEST_TIME > $last_run_time + 86400) {
+        $timestamp = REQUEST_TIME - 86400;
+
+        //Perform the deletion
+        $query = db_delete('sessions');
+        $query->condition('timestamp', $timestamp, '<');
+        $query->condition('uid', '0', '=');
+
+        //Delete the sessions
+        $num_updated = $query->execute();
+
+        //Write to the watchdog
+        watchdog('cron', 'Number of anonymous sessions deleted: @num.', array('@num' => $num_updated));
+
+        //Set the last time we deleted
+        variable_set('kmaps_explorer_last', REQUEST_TIME);
+    }
 }
