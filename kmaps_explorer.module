@@ -401,6 +401,7 @@ function kmaps_explorer_subjects_landing($type) {
   drupal_add_library('system', 'drupal.ajax');
   drupal_add_js(array('kmaps_explorer' => array('app' => 'subjects')), 'setting');
   drupal_add_js($path . '/js/jquery.bxslider-rahisified.js', $options);
+  drupal_add_js($path . '/js/bxslider-initialize.js', $options);
   drupal_add_js($path . '/js/custom.js', $options);
   // drupal_add_js($path . '/js/bxsliderInit.js', $options);
 
@@ -433,6 +434,7 @@ function kmaps_explorer_places_landing($type) {
   drupal_add_js('https://maps.googleapis.com/maps/api/js?v=3.exp', 'external');
   drupal_add_js($path . '/js/google_maps.js', $options);
   drupal_add_js($path . '/js/jquery.bxslider-rahisified.js', $options);
+  drupal_add_js($path . '/js/bxslider-initialize.js', $options);
   drupal_add_js($path . '/js/custom.js', $options);
   // drupal_add_js($path . '/js/bxsliderInit.js', $options);
 
