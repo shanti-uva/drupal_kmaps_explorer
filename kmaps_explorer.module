@@ -1593,7 +1593,7 @@ function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid) {
       }
     }
 
-    $output = '<iframe seamless height="2000" width="100%" frameBorder="0" src="' . $avNodeURL . '?mbframe=on' . '"></iframe>';
+    $output = '<iframe seamless="seamless" height="2000" width="100%" frameBorder="0" src="' . $avNodeURL . '?mbframe=on' . '"></iframe>';
 
     $setup += array(
       'active_content' => $output,
