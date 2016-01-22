@@ -1571,7 +1571,7 @@ function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid) {
         $avNodeURL = $avNodeObj->url_html;
       }
     }
-    $output = '<iframe scrolling="no" height="2000" width="100%" frameBorder="0" src="' . $avNodeURL . '?mbframe=on' . '" seamless ></iframe>';
+    $output = '<iframe scrolling="no" height="2400" width="100%" frameBorder="0" src="' . $avNodeURL . '?mbframe=on' . '" seamless ></iframe>';
 
     $commands = array();
     $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . $app  . '/' . $mid . '/audio-video-node/' . $vid . '/nojs');
@@ -1593,7 +1593,7 @@ function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid) {
       }
     }
 
-    $output = '<iframe scrolling="no" height="2000" width="100%" frameBorder="0" src="' . $avNodeURL . '?mbframe=on' . '" seamless ></iframe>';
+    $output = '<iframe scrolling="no" height="2400" width="100%" frameBorder="0" src="' . $avNodeURL . '?mbframe=on' . '" seamless ></iframe>';
 
     $setup += array(
       'active_content' => $output,
