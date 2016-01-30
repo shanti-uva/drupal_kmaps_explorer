@@ -489,9 +489,6 @@ function kmaps_explorer_subjects_overview($type = 'ajax', $id, $app) {
 
     ajax_deliver($page);
   } else {
-    //Remove the kmaps_explorer variable from the sessions table
-    unset($_SESSION['kmaps_explorer']);
-
     return $content;
   }
 
@@ -593,9 +590,6 @@ function kmaps_explorer_places_overview($type = 'ajax', $id, $app) {
 
     ajax_deliver($page);
   } else {
-    //Remove the kmaps_explorer variable from the sessions table
-    unset($_SESSION['kmaps_explorer']);
-
     return $content;
   }
 
@@ -773,9 +767,6 @@ function kmaps_explorer_subjects_subjects($type = 'ajax', $id, $app) {
 
     $content = theme('kmaps_explorer_initial_template', $setup);
 
-    //Remove the kmaps_explorer variable from the sessions table
-    unset($_SESSION['kmaps_explorer']);
-
     return $content;
   }
 }
@@ -825,9 +816,6 @@ function kmaps_explorer_places_subjects($type = 'ajax', $id, $app) {
     );
 
     $content = theme('kmaps_explorer_initial_template', $setup);
-
-    //Remove the kmaps_explorer variable from the sessions table
-    unset($_SESSION['kmaps_explorer']);
 
     return $content;
   }
@@ -895,9 +883,6 @@ function kmaps_explorer_subjects_essays($type = 'ajax', $id, $app) {
 
     $content = theme('kmaps_explorer_initial_template', $setup);
 
-    //Remove the kmaps_explorer variable from the sessions table
-    unset($_SESSION['kmaps_explorer']);
-
     return $content;
   }
 }
@@ -963,9 +948,6 @@ function kmaps_explorer_places_essays($type = 'ajax', $id, $app) {
     );
 
     $content = theme('kmaps_explorer_initial_template', $setup);
-
-    //Remove the kmaps_explorer variable from the sessions table
-    unset($_SESSION['kmaps_explorer']);
 
     return $content;
   }
@@ -1036,9 +1018,6 @@ function kmaps_explorer_each_text_node($type = 'ajax', $id, $tid, $app) {
     );
 
     $content = theme('kmaps_explorer_initial_template', $setup);
-
-    //Remove the kmaps_explorer variable from the sessions table
-    unset($_SESSION['kmaps_explorer']);
 
     return $content;
   }
@@ -1125,9 +1104,6 @@ function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num=1, $total
 
     $content = theme('kmaps_explorer_initial_template', $setup);
 
-    //Remove the kmaps_explorer variable from the sessions table
-    unset($_SESSION['kmaps_explorer']);
-
     return $content;
   }
 }
@@ -1175,9 +1151,6 @@ function kmaps_explorer_places_places($type = 'ajax', $id, $page_num = 1, $total
     );
 
     $content = theme('kmaps_explorer_initial_template', $setup);
-
-    //Remove the kmaps_explorer variable from the sessions table
-    unset($_SESSION['kmaps_explorer']);
 
     return $content;
   }
@@ -1294,9 +1267,6 @@ function kmaps_explorer_subjects_photos($type = 'ajax', $id, $page_num=1, $total
 
     $content = theme('kmaps_explorer_initial_template', $setup);
 
-    //Remove the kmaps_explorer variable from the sessions table
-    unset($_SESSION['kmaps_explorer']);
-
     return $content;
   }
 }
@@ -1322,9 +1292,6 @@ function kmaps_explorer_subjects_photos_node($id, $pid) {
   );
 
   $content = theme('kmaps_explorer_initial_template', $setup);
-
-  //Remove the kmaps_explorer variable from the sessions table
-  unset($_SESSION['kmaps_explorer']);
 
   return $content;
 }
@@ -1410,9 +1377,6 @@ function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num=1, $total_p
 
     $content = theme('kmaps_explorer_initial_template', $setup);
 
-    //Remove the kmaps_explorer variable from the sessions table
-    unset($_SESSION['kmaps_explorer']);
-
     return $content;
   }
 }
@@ -1438,9 +1402,6 @@ function kmaps_explorer_places_photos_node($id, $pid) {
   );
 
   $content = theme('kmaps_explorer_initial_template', $setup);
-
-  //Remove the kmaps_explorer variable from the sessions table
-  unset($_SESSION['kmaps_explorer']);
 
   return $content;
 }
@@ -1550,9 +1511,6 @@ function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_nu
 
     $content = theme('kmaps_explorer_initial_template', $setup);
 
-    //Remove the kmaps_explorer variable from the sessions table
-    unset($_SESSION['kmaps_explorer']);
-
     return $content;
   }
 }
@@ -1603,9 +1561,6 @@ function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid) {
 
     $content = theme('kmaps_explorer_initial_template', $setup);
 
-    //Remove the kmaps_explorer variable from the sessions table
-    unset($_SESSION['kmaps_explorer']);
-
     return $content;
   }
 }
@@ -1651,7 +1606,7 @@ function kmaps_explorer_menu_breadcrumb_alter(&$active_trail, $item) {
     array_push($active_trail, $link1);
 
   } else if(!empty($_SESSION['kmaps_explorer']['kmaps_explorer_ancestors'])) {
-  	$ancestors = $_SESSION['kmaps_explorer']['kmaps_explorer_ancestors'];
+    $ancestors = $_SESSION['kmaps_explorer']['kmaps_explorer_ancestors'];
     $app = $_SESSION['kmaps_explorer']['kmaps_explorer_app'];
     foreach ($ancestors as $key => $ancestor) {
       $link = array(
