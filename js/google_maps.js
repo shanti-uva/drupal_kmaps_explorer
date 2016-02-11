@@ -4,7 +4,7 @@
 
       if ($('#map-canvas').length) {
         var ctaLayer = new google.maps.KmlLayer({
-          url: 'http://places.thlib.org/features/gis_resources/' + Drupal.settings.kmaps_explorer.closest_fid_with_shapes + '.kmz'
+          url: 'http://places.thlib.org/features/gis_resources/' + Drupal.settings.kmaps_explorer.closest_fid_with_shapes + '.kml'
         });
 
         var mapOptions = {
