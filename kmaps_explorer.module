@@ -1302,17 +1302,55 @@ function kmaps_explorer_subjects_photos_node($id, $pid) {
 function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num=1, $total_pages=1, $subpage=FALSE) {
   $setup = kmaps_explorer_setup_page($id, 'places');
 
-  $photosURL = 'http://mms.thlib.org/places/' . $id . '/pictures.json?per_page=60&page=' . $page_num;
+  //css and js files to include for the image slider view
+  $path = drupal_get_path('module', 'kmaps_explorer');
+
+  $options = array(
+    'group' => CSS_THEME,
+  );
+
+  drupal_add_css($path . '/css/grid-components.css', $options);
+  drupal_add_css($path . '/css/photoswipe.css', $options);
+  drupal_add_css($path . '/css/pswp-default-skin.css', $options);
+  drupal_add_css($path . '/css/shanti-main-images.css', $options);
+
+  $options = array(
+    'group' => JS_THEME,
+    'weight' => 1000,
+  );
+
+  drupal_add_js($path . '/js/vendor/jquery.actual.min.js', $options);
+  drupal_add_js($path . '/js/vendor/photoswipe.js', $options);
+  drupal_add_js($path . '/js/vendor/photoswipe-ui-default.js', $options);
+  drupal_add_js($path . '/js/vendor/jquery.row-grid.js', $options);
+  drupal_add_js($path . '/js/vendor/grid.js', $options);
+  drupal_add_js($path . '/js/shanti-main-images.js', $options);
+
+  $photosURL = 'http://mms.thlib.org/places/' . $id . '/pictures.json?per_page=64&page=' . $page_num;
   $photos_fetch = save_to_cache('photos', 'places', $id, $photosURL, $page_num);
   $photosObj = json_decode($photos_fetch);
 
+  // Load Page JS Settings
+  $countsettings = array(
+    'sarvaka_image_gallery' => array(
+      'total_items' => intval($_SESSION['kmaps_explorer']['kmaps_explorer_places_photos_count']),
+      'items_per_page' => $photosObj->place->per_page,
+      'page_number' => intval($page_num),
+      'item_count' => count($photosObj->place->media),
+    ),
+  );
+
+  drupal_add_js($countsettings, 'setting');
+
   if($type == 'ajax') {
     $total_items = intval($_SESSION['kmaps_explorer']['kmaps_explorer_places_photos_count']);
-    $total_pages = intval($total_items / 32);
+    $total_pages = intval($total_items / $photosObj->place->per_page);
 
     $output = theme('kmaps_explorer_subjects_photos_ajax', array(
       'data' => $photosObj->place->media,
       'title' => 'Images Related to ' . $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+      'type' => 'places',
+      'id' => $id,
     ));
 
     //create the pager input element
@@ -1335,23 +1373,22 @@ function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num=1, $total_p
     $commands[] = ajax_command_append('#tab-main', $pagination);
     $page = array('#type' => 'ajax', '#commands' => $commands);
 
-    //Remove the kmaps_explorer variable from the sessions table
-    unset($_SESSION['kmaps_explorer']);
-
     if($subpage) {
       return $page;
     } else {
       ajax_deliver($page);
     }
   } else {
-    $setup = kmaps_explorer_setup_page($id, 'places');
+    //$setup = kmaps_explorer_setup_page($id, 'places');
 
     $total_items = intval($_SESSION['kmaps_explorer']['kmaps_explorer_places_photos_count']);
-    $total_pages = intval($total_items / 32);
+    $total_pages = intval($total_items / $photosObj->place->per_page);
 
     $output = theme('kmaps_explorer_subjects_photos_ajax', array(
       'data' => $photosObj->place->media,
       'title' => 'Images Related to ' . $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+      'type' => 'places',
+      'id' => $id,
     ));
 
     //create the pager input element
