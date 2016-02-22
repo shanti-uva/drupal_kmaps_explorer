@@ -1,11 +1,12 @@
 <h5><?php print $title; ?></h5><br>
 <div id="og-grid" class="og-grid clearfix">
   <?php foreach($data as $aItem): ?>
+    <?php $formats = kmaps_explorer_correct_images($aItem); ?>
     <div class="item">
       <a
         href="<?php print base_path() . $type . '/' . $id . '/photos_node/' . $aItem->id; ?>"
-        data-largesrc="<?php print $aItem->images[3]->url; ?>"
-        data-hugesrc="<?php print $aItem->images[2]->url . '::' . $aItem->images[2]->width . '::' . $aItem->images[2]->height; ?>"
+        data-largesrc="<?php print $formats['large']->url; ?>"
+        data-hugesrc="<?php print $formats['huge']->url . '::' . $formats['huge']->width . '::' . $formats['huge']->height; ?>"
         data-title="<?php print (count($aItem->captions) > 0 ? check_plain($aItem->captions[0]->title) : ''); ?>"
         data-description="<?php print (count($aItem->descriptions) > 0 ? check_plain(strip_tags($aItem->descriptions[0]->title)) : 'No description currently available.'); ?>"
         data-creator="<?php print (count($aItem->copyrights) > 0 ? check_plain($aItem->copyrights[0]->copyright_holder->title) : 'Not available'); ?>"
@@ -17,7 +18,7 @@
         class="thumbnail"
         data-toggle="modal"
       >
-        <img src="<?php print $aItem->images[0]->url; ?>" alt="<?php print (count($aItem->captions) > 0 ? $aItem->captions[0]->title : ''); ?>">
+        <img src="<?php print $formats['essay']->url; ?>" alt="<?php print (count($aItem->captions) > 0 ? $aItem->captions[0]->title : ''); ?>">
       </a>
     </div>
   <?php endforeach; ?>

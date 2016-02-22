@@ -1603,6 +1603,28 @@ function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid) {
 }
 
 /**
+ * Select the correct images to use in photos grid
+ */
+function kmaps_explorer_correct_images($item) {
+    $formats = array();
+    foreach($item->images as $id => $image) {
+        if ($image->thumbnail === "search") {
+            $formats['search'] = $image;
+        }
+        if ($image->thumbnail === "large") {
+            $formats['large'] = $image;
+        }
+        if ($image->thumbnail === "huge") {
+            $formats['huge'] = $image;
+        }
+        if ($image->thumbnail === "essay") {
+            $formats['essay'] = $image;
+        }
+    }
+    return $formats;
+}
+
+/**
  * Recursive function to search for etymology from an object
  */
 function search_etymology($obj) {

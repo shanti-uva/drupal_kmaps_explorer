@@ -100,10 +100,12 @@ var Grid = (function($) {
 	function initGridLayout() {
 		var res = $("#og-grid").rowGrid({itemSelector: ".item", minMargin: 10, resize: true, maxMargin: 10, firstItemClass: "first-item"});
 		// iterate through grid children (= div.item) and set their <a> heights
-		//res.children('.item').each(function() {
-			//var mya = $(this).children('a').eq(0);
-			//mya.css( {"height" : $(this).height(), "display" : "block" } );
-		//});
+        console.log(res);
+        res.children('.item').each(function(key, value) {
+            $(this).css({"height": "165px"});
+            var mya = $(this).children('a').eq(0);
+            mya.css( {"height" : "165px", "display" : "block" } );
+        });
 	}
 
 	// Initialization of lightbox by creating list of items.
