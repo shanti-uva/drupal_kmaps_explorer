@@ -1,7 +1,7 @@
 (function ($) {
 	Drupal.behaviors.shantiImages = {
 	    attach: function (context, settings) {
-            if ($("#og-grid").length > 0) {
+            if ($("#og-grid", context).length > 0) {
                 Grid.init();
             }
 	    }

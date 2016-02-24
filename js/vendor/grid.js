@@ -100,7 +100,6 @@ var Grid = (function($) {
 	function initGridLayout() {
 		var res = $("#og-grid").rowGrid({itemSelector: ".item", minMargin: 10, resize: true, maxMargin: 10, firstItemClass: "first-item"});
 		// iterate through grid children (= div.item) and set their <a> heights
-        console.log(res);
         res.children('.item').each(function(key, value) {
             $(this).css({"height": "165px"});
             var mya = $(this).children('a').eq(0);
@@ -148,7 +147,7 @@ var Grid = (function($) {
 
 	// saves the item´s offset top and height (if saveheight is true)
 	function saveItemInfo( saveheight ) {
-		$items.each( function() {
+		$('#og-grid > .item').each( function() {
 			var $item = $( this );
 			$item.data( 'offsetTop', $item.offset().top );
 			if( saveheight ) {
@@ -162,7 +161,7 @@ var Grid = (function($) {
 		// when clicking an item, show the preview with the item´s info and large image.
 		// close the item if already expanded.
 		// also close if clicking on the item´s cross
-		initItemsEvents( $items );
+		initItemsEvents( $('#og-grid > .item') );
 
 		// on window resize get the window´s size again
 		// reset some values..
@@ -182,7 +181,7 @@ var Grid = (function($) {
 	}
 
 	function initItemsEvents( $items ) {
-		$items.on( 'click', 'span.og-close', function() {
+        $('#og-grid > .item').on( 'click', 'span.og-close', function() {
 			hidePreview();
 			return false;
 		} ).children( 'a' ).on( 'click', function(e) {
@@ -324,7 +323,7 @@ var Grid = (function($) {
 
 			// if already expanded remove class "og-expanded" from current item and add it to new item
 			if( current !== -1 ) {
-				var $currentItem = $items.eq( current );
+				var $currentItem = $('#og-grid > .item').eq( current );
 				$currentItem.removeClass( 'og-expanded' );
 				this.$item.addClass( 'og-expanded' );
 				// position the preview correctly
@@ -449,7 +448,7 @@ var Grid = (function($) {
 				}
 				this.$previewEl.css( 'height', 0 );
 				// the current expanded item (might be different from this.$item)
-				var $expandedItem = $items.eq( this.expandedIdx );
+				var $expandedItem = $('#og-grid > .item').eq( this.expandedIdx );
 				$expandedItem.css( 'height', $expandedItem.data( 'height' ) ).on( transEndEventName, onEndFn );
 
 				if( !support ) {
