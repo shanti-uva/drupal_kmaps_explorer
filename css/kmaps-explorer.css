@@ -84,7 +84,7 @@ figcaption .center-caption {
   background: #5a65d1;
   border: none;
   height: 1rem;
-  width: 1.05rem;
+  width: 1.2rem;
   color: white;
   padding: 0;
   display: inline-block;
@@ -95,6 +95,11 @@ figcaption .center-caption {
   margin-right: .4rem;
   font-size: 1rem;
   cursor:pointer;
+  opacity: 0.95;
+}
+
+.popover-kmaps:hover{
+  opacity: 1.0;
 }
 
 .popover-kmaps-tip {
@@ -114,7 +119,7 @@ figcaption .center-caption {
  /*font-size:.7rem*/
   position: absolute;
   bottom: 0.2rem;
-  right: 0.2rem;
+  right: 0.25rem;
   font-size: 0.7em;
 }
 
