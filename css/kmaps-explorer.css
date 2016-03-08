@@ -153,7 +153,7 @@ figcaption .center-caption {
   bottom: .5rem;
   right: 1rem;
   position: fixed;
-  z-index: 10200;
+  z-index: 200;
   width: 4rem;
   height: 4rem;
 }
