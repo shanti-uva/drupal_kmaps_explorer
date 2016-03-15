@@ -15,7 +15,6 @@
         data-place="Not available"
         data-type="jpg"
         data-ssid="<?php print $aItem->id; ?>"
-        class="thumbnail"
         data-toggle="modal"
       >
         <img src="<?php print $formats['essay']->url; ?>" alt="<?php print (count($aItem->captions) > 0 ? $aItem->captions[0]->title : ''); ?>">
