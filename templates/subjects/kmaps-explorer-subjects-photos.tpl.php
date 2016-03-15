@@ -1,4 +1,4 @@
-<h5><?php print $title; ?></h5><br>
+<h5><?php print $title; ?></h5>
 <div id="og-grid" class="og-grid clearfix">
   <?php foreach($data as $aItem): ?>
     <?php $formats = kmaps_explorer_correct_images($aItem); ?>
