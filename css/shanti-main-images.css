@@ -50,6 +50,15 @@
 
 
 
+.front .wrap-all > .container-fluid{  
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.front .page-title .icon{
+  margin: 0 1rem 0 1.2rem;
+}
+
 
 
 ul.pager{ margin: 0 0 0.5rem;}
@@ -128,6 +137,42 @@ table.pagerer {
 /*------------------------------------------------*/
 /***** BEGIN gallery grid, dropdown, lightbox *****/
 /*------------------------------------------------*/
+  .container:before,
+    .container:after {
+        content: "";
+        display: table;
+    }
+    .container:after {
+        clear: both;
+    }
+    .item {
+      float: left;
+      margin-bottom: 15px; 
+    }
+    .item img {
+      max-width: 100%;
+      max-height: 100%;
+      vertical-align: bottom;
+    }
+    .first-item {
+      clear: both;
+    }
+    /* remove margin bottom on last row */
+    .last-row, .last-row ~ .item {
+      margin-bottom: 0;
+    }
+    
+    .clearfix {
+      zoom: 1;
+    }
+    .clearfix:before, .clearfix:after {
+      content: " ";
+      display: table;
+    }
+    .clearfix:after {
+      clear: both;
+    }
+    
 .og-grid{
   list-style: none;
   padding:0;
@@ -176,12 +221,12 @@ table.pagerer {
 }
 
 .og-expander-inner {
-  background: #222;
+  background: #303030;
   padding: 2.5rem 5.5rem;
   height: 100%;
-  -webkit-box-shadow: inset 0 0 130px 50px rgba(0,0,1,0);
-  -moz-box-shadow: inset 0 0 130px 50px rgba(0,0,1,0);
-  box-shadow: inset 0 0 130px 50px rgba(0,0,0,1.0);
+  -webkit-box-shadow: inset 0 0 130px 50px rgba(0,0,0,7);
+  -moz-box-shadow: inset 0 0 130px 50px rgba(0,0,0,7);
+  box-shadow: inset 0 0 130px 50px rgba(0,0,0,0.7);
 }
 
 .og-close {
@@ -263,8 +308,10 @@ table.pagerer {
 .og-details {
   padding: 0;
   width: 45%;
+    width:44%;
   float:left;
   margin:0;
+    margin: 0 0 0 1rem;
   -webkit-transition: margin .3s ease-out;
   transition: margin .3s ease-out;
 }
@@ -283,6 +330,7 @@ table.pagerer {
 }
 
 .row-offcanvas > section.content-section .og-details .tab-content:nth-of-type(1){
+  padding-left: 2.5rem !important;
   padding-right: 1rem !important;
   padding-bottom: 0 !important;
 }
@@ -337,9 +385,11 @@ table.pagerer {
   color: #999;
   background: #222;
   text-transform: uppercase;
-  font-size: 1em;
+  font-size: 0.88em;
+  letter-spacing: 0.12rem;
   font-weight:bold;
   font-family: 'Helvetica Neue',helvetica,arial,sans-serif;
+  padding: 12px 21px;
 }
 
 .og-details .nav-tabs>li>a:hover,
@@ -358,7 +408,7 @@ table.pagerer {
 .og-details .nav-tabs>li.active>a:hover,
 .og-details .nav-tabs>li.active>a:active {
   color: #c0c0c0;
-  background: #171717;
+  background: #1b1b1b;
   border-width: 2px 1px 1px;
   border-color: #909090 #555 transparent #555;
 }
@@ -390,7 +440,7 @@ table.pagerer {
 
 .og-details #info li label {
   color: #ccc;
-  font-size: 90%;
+  font-size: 0.88em;
   margin-left: 0;
   margin-right: .5rem;
   display:inline;
@@ -409,9 +459,9 @@ table.pagerer {
 
 .og-details h3 {
   color:#d6d6d6;
-  font-size: 1.25em;
-  font-weight:normal;
-  line-height:1.32em;
+  font-size: 1.12em;
+  font-weight: bold !important;
+  line-height:1.44em;
   padding: 0;
   margin: 0.5em 0;
 }
@@ -519,7 +569,8 @@ table.pagerer {
 }
 
 .og-details .og-view-more > span {
-  font-size: 1.55rem;
+  font-size: 1.44rem;
+  letter-spacing: 0.05rem;
   color: #999;
   position: relative;
   bottom: 0.6rem;
@@ -562,9 +613,10 @@ table.pagerer {
 .og-details .og-view-more.btn-lightbox > span::before{
   content: '\f065'; /* icon for full-screen */
   font-family: 'FontAwesome';
+  font-size:1.12em;
   position: relative;
-  top: -0.04rem;
-  left: -1.62rem;
+  top: 0.03rem;
+  left: -1.65rem;
 }
 
 
@@ -572,7 +624,7 @@ table.pagerer {
   content: '\e61f'; /* unique icon for Read more... */
   font-family: 'shanticon';
   position: relative;
-  top: -0.1rem;
+  top: 0;
   right: 1.6rem;
   font-size: 1.4rem
 }
@@ -612,7 +664,7 @@ table.pagerer {
 
 @media screen and (max-width: 830px){
 
-  .og-expander h3 { font-size: 32px;}
+  .og-expander h3 { font-size: 18px;}
   .og-expander p { font-size: 13px;}
   .og-expander a { font-size: 12px;}
 }
@@ -700,7 +752,7 @@ div.pdfextlink { float: right;}
 
 /* lightbox hiding search tab */
 .pswp{
-  z-index:105000
+  z-index:1000;
 }
 
 .pswp__button{
@@ -708,7 +760,18 @@ div.pdfextlink { float: right;}
 }
 
 .pswp__caption__center{
+  text-align: center;
   font-family: 'museo-sans-500',helvetica,arial,sans-serif;
+}
+
+.pswp__bg{
+  filter: alpha(opacity=100);
+  opacity: 1;
+  background: #222 !important;
+}
+.pswp__ui--fit .pswp__top-bar, 
+.pswp__ui--fit .pswp__caption{
+  background: transparent;
 }
 
 /**** lightbox 
@@ -727,6 +790,8 @@ div.pdfextlink { float: right;}
 
 
 
+
+
 /*-------------------------*/
 /*=== max-width (first) ===*/
 /*-------------------------*/
@@ -736,6 +801,10 @@ div.pdfextlink { float: right;}
   .page-file .file-image img {
     float: none;
     margin: 2rem auto;
+  }
+
+  .og-fullimg{
+    width:51%;
   }
 }
 
@@ -755,9 +824,9 @@ div.pdfextlink { float: right;}
   }
 
   .og-details{
-    padding-right: 0;
+    padding-right: 0.6rem;
     padding-top: 2.5rem;
-    padding-left: 1rem;
+    /*padding-left: 1rem;*/
     margin-top:0;
     width:100%;
     height: auto;
@@ -809,10 +878,22 @@ div.pdfextlink { float: right;}
 
 
 @media screen and (max-width: 991px) {
+  
   .front .content-section .tab-content:nth-of-type(1){
     padding-left:25px;
     padding-right: 25px;
   }
+
+  .og-nav-arrow.next{
+    position: absolute;
+    right:0;
+  }
+
+  .og-nav-arrow.prev{
+    position: absolute;
+    left: 0;
+  }
+
 }
 
 
@@ -848,7 +929,3 @@ div.pdfextlink { float: right;}
     background-color: #555;
 }
 
-/* Additional Styles to make kmaps images work */
-.item a.thumbnail {
-     margin-bottom: 0px;
-}
