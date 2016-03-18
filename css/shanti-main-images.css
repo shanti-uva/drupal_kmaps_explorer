@@ -929,3 +929,8 @@ div.pdfextlink { float: right;}
     background-color: #555;
 }
 
+
+/* Additional Styles to make kmaps images work */
+.kmaps .item a.thumbnail {
+     margin-bottom: 0px;
+}
