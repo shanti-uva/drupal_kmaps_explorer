@@ -13,30 +13,6 @@
     $.fn.popupImageCentering = function() {
 		return this.each(function() {
 
-			// Adjust top margin
-			/*
-			var 	wrapper = $(this).parents('.og-img-wrapper'), // get wrapper
-				 	imght = $(this).height(),
-					cnthgt = $(this).parents('.og-fullimg').height(),
-					tmarg = (cnthgt > imght) ? -imght / 2 : -cnthgt / 2;
-
-			wrapper.css("margin-top",  tmarg  + "px" );
-			*/
-			//console.log("tmarg: " + tmarg);
-
-			// Adjust left margin
-			/*
-			var 	imgwdt = $(this).width(),
-					cntwdt = $(this).parents('.og-fullimg').width(),
-					lmarg = (cntwdt > imgwdt) ? -imgwdt / 2 : -cntwdt / 2;
-			wrapper.css("margin-left",  lmarg  + "px" );
-			*/
-			//console.log("imgwdt: " + imgwdt);
-			//console.log("cntwdt: " + cntwdt);
-			//console.log("lmarg: " + lmarg);*
-
-			// if ($(".og-img-wrapper").css("padding-bottom") == "0" ){
-
 	             var imght = $(this).height(),
 					 cnthgt = $(this).parents('.og-fullimg').height(),
 					 tmarg = (cnthgt > imght) ? -imght / 2 : -cnthgt / 2;
@@ -52,17 +28,7 @@
 				 	$('.og-details').css('margin-top', tmarg + 'px');
 				}
 
-			// }
-
 		});
    };
 
-
-
-
 }) (jQuery);
-
-
-
-
-

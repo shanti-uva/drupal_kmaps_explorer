@@ -1324,7 +1324,7 @@ function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num=1, $total_p
   drupal_add_js($path . '/js/vendor/photoswipe-ui-default.js', $options);
   drupal_add_js($path . '/js/vendor/jquery.row-grid.js', $options);
   drupal_add_js($path . '/js/vendor/grid.js', $options);
-  drupal_add_js($path . '/js/shanti-main-images.js', $options);
+  drupal_add_js($path . '/js/shanti-gallery-images.js', $options);
 
   $photosURL = 'http://mms.thlib.org/places/' . $id . '/pictures.json?per_page=64&page=' . $page_num;
   $photos_fetch = save_to_cache('photos', 'places', $id, $photosURL, $page_num);
