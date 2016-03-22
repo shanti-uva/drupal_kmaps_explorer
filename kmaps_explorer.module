@@ -1308,12 +1308,12 @@ function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num=1, $total_p
   $options = array(
     'group' => CSS_THEME,
   );
-
-  drupal_add_css($path . '/css/grid-components.css', $options);
-  drupal_add_css($path . '/css/photoswipe.css', $options);
-  drupal_add_css($path . '/css/pswp-default-skin.css', $options);
-  drupal_add_css($path . '/css/shanti-images-gallery.css', $options);
-
+/**
+*  drupal_add_css($path . '/css/grid-components.css', $options);
+*  drupal_add_css($path . '/css/photoswipe.css', $options);
+*  drupal_add_css($path . '/css/pswp-default-skin.css', $options);
+*  drupal_add_css($path . '/css/shanti-images-gallery.css', $options);
+**/
   $options = array(
     'group' => JS_THEME,
     'weight' => 1000,
