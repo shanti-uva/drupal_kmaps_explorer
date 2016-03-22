@@ -613,11 +613,11 @@ function kmaps_explorer_setup_page($id, $app) {
   //drupal_add_css($path . '/css/bootstrap.min.css', $options);
   //drupal_add_css($path . '/css/bootstrap-theme.min.css', $options);
   drupal_add_css($path . '/css/kmaps_explorer.css', $options);
-
-  if ($app === 'places') {
-    drupal_add_css($path . '/css/places.css', $options);
-  }
-
+/**
+*  if ($app === 'places') {
+*    drupal_add_css($path . '/css/places.css', $options);
+*  }
+**/
   //custom javascript
   drupal_add_js($path . '/js/custom.js', $options);
   drupal_add_js(array('kmaps_explorer' => array('app' => $app)), 'setting');
