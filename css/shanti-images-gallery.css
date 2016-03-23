@@ -542,6 +542,11 @@
 	color:#fff !important;
 }
 
+.pswp__share-tooltip a:hover:nth-child(n+3),
+.pswp__share-tooltip a:active:nth-child(n+3){
+	color:#333 !important;
+}
+
 /**** lightbox 
 .pswp__counter{
   display:none;
