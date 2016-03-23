@@ -4,7 +4,7 @@
 
 <?php if (count($obj->feature->feature_types) > 0): ?>
   <div class="feature-type-wrapper">
-    <h6 class="custom-inline">FEATURE TYPE:</h6>
+    <h6 class="custom-inline">Feature Type:</h6>
     <?php foreach($obj->feature->feature_types as $pl_feat_type): ?>
       <span><?php print $pl_feat_type->title; ?></span>
       <span class="popover-kmaps" data-app="subjects" data-id="<?php print $pl_feat_type->id; ?>">
