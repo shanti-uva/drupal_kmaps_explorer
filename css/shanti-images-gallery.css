@@ -1,45 +1,4 @@
-/* shanti image gallery */
-
-
-/*------------------------------------------------*/
-/***** BEGIN gallery grid, dropdown, lightbox *****/
-/*------------------------------------------------*/
-  .container:before,
-    .container:after {
-        content: "";
-        display: table;
-    }
-    .container:after {
-        clear: both;
-    }
-    .item {
-      float: left;
-      margin-bottom: 15px; 
-    }
-    .item img {
-      max-width: 100%;
-      max-height: 100%;
-      vertical-align: bottom;
-    }
-    .first-item {
-      clear: both;
-    }
-    /* remove margin bottom on last row */
-    .last-row, .last-row ~ .item {
-      margin-bottom: 0;
-    }
-    
-    .clearfix {
-      zoom: 1;
-    }
-    .clearfix:before, .clearfix:after {
-      content: " ";
-      display: table;
-    }
-    .clearfix:after {
-      clear: both;
-    }
-    
+/* shanti image gallery */ 
 .og-grid{
   list-style: none;
   padding:0;
@@ -53,6 +12,12 @@
   margin:0 5px 10px 0;
   display: inline-block;
   vertical-align: top;
+}
+
+.og-grid .item img {
+  max-width: 100%;
+  max-height: 100%;
+  vertical-align: bottom;
 }
 
 .og-grid .item > a,
@@ -81,7 +46,7 @@
   top: auto;
   left: 0;
   width: 100%;
-  margin-top: 10px;
+  margin-top: 1rem;
   text-align: left;
   height: 0;
   overflow: hidden;
@@ -571,6 +536,12 @@
   background: transparent;
 }
 
+.pswp__share-tooltip a{  border:none;}
+.pswp__share-tooltip a:hover,
+.pswp__share-tooltip a:active{
+	color:#fff !important;
+}
+
 /**** lightbox 
 .pswp__counter{
   display:none;
@@ -688,4 +659,41 @@
 
 
 
+
+.container:before,
+.container:after {
+    content: "";
+    display: table;
+}
+.container:after {
+    clear: both;
+}
+.clearfix {
+  zoom: 1;
+}
+.clearfix:before, .clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+
+/*
+.item {
+  float: left;
+  margin-bottom: 15px; 
+}
+.item img {
+  max-width: 100%;
+  max-height: 100%;
+  vertical-align: bottom;
+}
+.first-item {
+  clear: both;
+}
+.last-row, .last-row ~ .item {
+  margin-bottom: 0;
+}
+*/
 
