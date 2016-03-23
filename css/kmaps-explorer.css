@@ -1,3 +1,15 @@
+
+/* custom theme colors set here */
+.subjects-bg {
+  background-color: #dc3c47;
+}
+
+.places-bg {
+  background-color: #4ca6fb;
+}
+/* END custom colors */
+
+
 .kmaps-hidden {
   visibility: hidden;
   display: none;
@@ -7,12 +19,7 @@ body {
   font-size: inherit;
 }
 
-article > h6.custom-inline:nth-of-type(1) {
-  margin-right: 0.5rem;
-}
-
 /* Subject Overview image subsection */
-
 figcaption .center-caption {
   text-align: center;
   margin-bottom: 0.50em;
@@ -79,8 +86,8 @@ figcaption .center-caption {
   bottom: 0;
 }
 
-/* Popovers for subjects and places */
-.popover-kmaps {
+/* Popovers for subjects and places
+.popover-link {
   background: #5a65d1;
   border: none;
   height: 1rem;
@@ -98,11 +105,11 @@ figcaption .center-caption {
   opacity: 0.95;
 }
 
-.popover-kmaps:hover{
+.popover-link:hover{
   opacity: 1.0;
 }
 
-.popover-kmaps-tip {
+.popover-link-tip {
   border-bottom: .5rem solid transparent;
   border-top: 0 solid transparent;
   border-right: .5rem solid #5a65d1;
@@ -114,16 +121,15 @@ figcaption .center-caption {
   width: 0;
 }
 
-.popover-kmaps .icon {
+.popover-link .icon {
   color: white;
- /*font-size:.7rem*/
   position: absolute;
   bottom: 0.2rem;
   right: 0.25rem;
   font-size: 0.7em;
 }
 
-.popover-kmaps .popover-footer-button a {
+.popover-link .popover-footer-button a {
   color: #ddd;
   font-weight: normal;
   font-family: 'museo-sans-500',helvetica,arial,sans-serif !important;
@@ -135,10 +141,11 @@ figcaption .center-caption {
   height: 2.75em;
 }
 
-.popover-kmaps .parents strong {
+.popover-link .parents strong {
   color: #555;
   font-family: 'museo-sans-500',helvetica,arial,sans-serif;
 }
+ */
 
 /* Google maps */
 #map-canvas {
@@ -190,13 +197,7 @@ figcaption .center-caption {
   top: 0.9rem;
 }
 
-.subjects-bg {
-  background-color: #dc3c47;
-}
 
-.places-bg {
-  background-color: #4ca6fb;
-}
 
 
 

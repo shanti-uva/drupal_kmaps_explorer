@@ -5,8 +5,8 @@
     <?php foreach($data->feature->feature_types as $aItem): ?>
       <li>
         <span><?php print $aItem->title; ?></span>
-        <span class="popover-kmaps" data-app="subjects" data-id="<?php print $aItem->id; ?>">
-          <span class="popover-kmaps-tip"></span>
+        <span class="popover-link" data-app="subjects" data-id="<?php print $aItem->id; ?>">
+          <span class="popover-link-tip"></span>
           <span class="icon shanticon-menu3"></span>
         </span>
       </li>

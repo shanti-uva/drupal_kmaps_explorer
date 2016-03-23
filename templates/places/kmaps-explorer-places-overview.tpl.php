@@ -7,8 +7,8 @@
     <h6 class="custom-inline">Feature Type:</h6>
     <?php foreach($obj->feature->feature_types as $pl_feat_type): ?>
       <span><?php print $pl_feat_type->title; ?></span>
-      <span class="popover-kmaps" data-app="subjects" data-id="<?php print $pl_feat_type->id; ?>">
-        <span class="popover-kmaps-tip"></span>
+      <span class="popover-link" data-app="subjects" data-id="<?php print $pl_feat_type->id; ?>">
+        <span class="popover-link-tip"></span>
         <span class="icon shanticon-menu3"></span>
       </span>
     <?php endforeach; ?>
