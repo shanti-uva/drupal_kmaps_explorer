@@ -229,6 +229,7 @@
   color: #eee;
   border-color: #909090 #555 #555 #555;
   border-width: 2px 1px 1px;
+  background: #222;
 }
 /*
 .og-details .nav-tabs>li>a::before {
