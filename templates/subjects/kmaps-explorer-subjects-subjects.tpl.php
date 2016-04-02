@@ -1,4 +1,4 @@
-<h6><?php print $title; ?></h6><br>
+<h6><?php print $title; ?></h6>
 <p>From the General Perspective:</p>
 <ul>
   <?php foreach($data->feature_relation_types as $aItem): ?>
