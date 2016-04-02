@@ -1,4 +1,4 @@
-<h6><?php print $title; ?></h6><br>
+<h6><?php print $title; ?></h6>
 <ul class="related-audio-video shanti-gallery">
   <?php foreach($data as $aItem): ?>
     <li class="shanti-thumbnail video">
