@@ -89,15 +89,15 @@ function processPlacesData(data) {
       var overviewContent = '';
 
       if (data.feature.illustrations.length > 0 && data.feature.illustrations[0].type =='mms') {
-        overviewContent += '<div class="main-overview-image">';
+        overviewContent += '<div class="main-overview-image resource-overview-image">';
         overviewContent += '</div>';
         $.get(data.feature.illustrations[0].url, function(data) {
-          var imgcontent = '<img class="img-responsive img-thumbnail" src="' + data.picture.images[3].url + '">';
-          $(".main-overview-image").append(imgcontent);
+          var imgcontent = '<img class="img-responsive" src="' + data.picture.images[3].url + '">';
+          $(".main-overview-image resource-overview-image").append(imgcontent);
         });
       } else if (data.feature.illustrations.length > 0 && data.feature.illustrations[0].type =='external') {
-        overviewContent += '<div class="main-overview-image">';
-        overviewContent += '<img class="img-responsive img-thumbnail" src="' + data.feature.illustrations[0].url + '">';
+        overviewContent += '<div class="main-overview-image resource-overview-image">';
+        overviewContent += '<img class="img-responsive" src="' + data.feature.illustrations[0].url + '">';
         overviewContent += '</div>';
       }
 
