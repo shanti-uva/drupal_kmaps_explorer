@@ -1,6 +1,5 @@
 <h6>Subjects Related to <?php print $title; ?></h6>
 <div class="subjects-in-places kmaps-list-columns">
-  <h6><?php print $title; ?></h6>
   <?php if(count($data->feature->feature_types) > 0): ?>
     <h6>FEATURE TYPES:</h6>
     <ul>
