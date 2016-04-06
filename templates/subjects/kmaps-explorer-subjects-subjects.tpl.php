@@ -16,8 +16,8 @@
           		<?php endif; ?>
           	<?php endif; ?>
           </span>
-          <span class="popover-link" data-app="subjects" data-id="<?php print $bItem->id; ?>">
-            <span class="popover-link-tip"></span>
+          <span class="popover-kmaps" data-app="subjects" data-id="<?php print $bItem->id; ?>">
+            <span class="popover-kmaps-tip"></span>
             <span class="icon shanticon-menu3"></span>
           </span>
         </li>

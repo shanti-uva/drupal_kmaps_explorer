@@ -10,8 +10,8 @@
             <?php foreach($bItem->features as $cItem): ?>
               <li>
                 <span><?php print $cItem->header; ?></span>
-                <span class="popover-link" data-app="places" data-id="<?php print $cItem->id; ?>">
-                  <span class="popover-link-tip"></span>
+                <span class="popover-kmaps" data-app="places" data-id="<?php print $cItem->id; ?>">
+                  <span class="popover-kmaps-tip"></span>
                   <span class="icon shanticon-menu3"></span>
                 </span>
               </li>

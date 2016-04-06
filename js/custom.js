@@ -24,7 +24,7 @@
       $('ul.texts-list,div.places-in-places', context).columnize({width: 350});
 
       //Functionality for popovers
-      $('.popover-link', context).each(function() {
+      $('.popover-kmaps', context).each(function() {
         var $that = $(this);
         var app = $that.data("app");
         var kid = $that.data("id");
