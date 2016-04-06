@@ -2139,7 +2139,7 @@ function paginatedVideos(data) {
 
 //Function to process and show related texts
 function relatedTexts(data) {
-  var contentTX = '<div class="related-texts">';
+  var contentTX = '<div class="related-texts texts-in-subjects kmaps-list-columns">';
 
   $.each(data.topic.media, function(rInd, rElm) {
     contentTX += '<div class="each-text">';
