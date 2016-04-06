@@ -1628,7 +1628,7 @@ function populateBreadcrumbs(bInd, bVal) {
 
 function showOverviewImage(data) {
   var retString = '<figure class="cap-bot">';
-  retString += '<img src="' + data.picture.images[3].url + '" class="img-responsive img-thumbnail" alt="' + 
+  retString += '<img src="' + data.picture.images[3].url + '" alt="' + 
     (data.picture.captions.length > 0 ? data.picture.captions[0].title : "") + '">';
   retString += '<figcaption>' + (data.picture.captions.length > 0 ? "<div class=\"center-caption\">" + data.picture.captions[0].title + "</div>" : "") + 
     (data.picture.descriptions.length > 0 ? data.picture.descriptions[0].title : "") + '</figcaption>';
@@ -1671,7 +1671,7 @@ function relatedPhotos(data) {
 
   $.each(data.topic.media, function(rInd, rElm) {
     contentPh += '<div class="each-photo">';
-    contentPh += '<a href="#pid' + rElm.id + '" class="thumbnail" data-toggle="modal">';
+    contentPh += '<a href="#pid' + rElm.id + '" data-toggle="modal">';
     contentPh += '<img src="' + rElm.images[0].url + '" alt="' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '">';
     contentPh += '</a>';
     contentPh += '</div>';
@@ -1685,7 +1685,7 @@ function relatedPhotos(data) {
     contentPh += '<p class="modal-title" id="myModalLabel">' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '</p>';
     contentPh += '</div>';
     contentPh += '<div class="modal-body">';
-    contentPh += '<img src="' + rElm.images[4].url + '" class="img-responsive" alt="' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '">';
+    contentPh += '<img src="' + rElm.images[4].url + '" alt="' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '">';
     contentPh += '<p><strong>Resource #:</strong> ' + rElm.id + '</p>';
     contentPh += '<p><strong>Description:</strong></p>';
     contentPh += (rElm.descriptions.length > 0 ? rElm.descriptions[0].title : "");
@@ -1858,7 +1858,7 @@ function paginatedPhotos(data) {
   var contentPh = '';
   $.each(data.topic.media, function(rInd, rElm) {
     contentPh += '<div class="each-photo">';
-    contentPh += '<a href="#pid' + rElm.id + '" class="thumbnail" data-toggle="modal">';
+    contentPh += '<a href="#pid' + rElm.id + '" data-toggle="modal">';
     contentPh += '<img src="' + rElm.images[0].url + '" alt="' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '">';
     contentPh += '</a>';
     contentPh += '</div>';
@@ -1872,7 +1872,7 @@ function paginatedPhotos(data) {
     contentPh += '<p class="modal-title" id="myModalLabel">' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '</p>';
     contentPh += '</div>';
     contentPh += '<div class="modal-body">';
-    contentPh += '<img src="' + rElm.images[4].url + '" class="img-responsive" alt="' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '">';
+    contentPh += '<img src="' + rElm.images[4].url + '" alt="' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '">';
     contentPh += '<p><strong>Resource #:</strong> ' + rElm.id + '</p>';
     contentPh += '<p><strong>Description:</strong></p>';
     contentPh += (rElm.descriptions.length > 0 ? rElm.descriptions[0].title : "");
@@ -2143,7 +2143,7 @@ function relatedTexts(data) {
 
   $.each(data.topic.media, function(rInd, rElm) {
     contentTX += '<div class="each-text">';
-    contentTX += '<a href="#pid' + rElm.id + '" class="thumbnail" data-toggle="modal">';
+    contentTX += '<a href="#pid' + rElm.id + '" data-toggle="modal">';
     contentTX += '<img src="' + rElm.images[1].url + '" alt="' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '">';
     contentTX += '</a>';
     contentTX += '</div>';
@@ -2157,7 +2157,7 @@ function relatedTexts(data) {
     contentTX += '<p class="modal-title" id="myModalLabel">' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '</p>';
     contentTX += '</div>';
     contentTX += '<div class="modal-body">';
-    contentTX += '<img src="' + rElm.images[6].url + '" class="img-responsive" alt="' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '">';
+    contentTX += '<img src="' + rElm.images[6].url + '" alt="' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '">';
     contentTX += '<p><strong>Resource #:</strong> ' + rElm.id + '</p>';
     contentTX += '</div>';
     contentTX += '</div>';

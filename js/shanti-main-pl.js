@@ -89,15 +89,15 @@ function processPlacesData(data) {
       var overviewContent = '';
 
       if (data.feature.illustrations.length > 0 && data.feature.illustrations[0].type =='mms') {
-        overviewContent += '<div class="main-overview-image resource-overview-image">';
+        overviewContent += '<div class="resource-overview-image">';
         overviewContent += '</div>';
         $.get(data.feature.illustrations[0].url, function(data) {
-          var imgcontent = '<img class="img-responsive" src="' + data.picture.images[3].url + '">';
-          $(".main-overview-image resource-overview-image").append(imgcontent);
+          var imgcontent = '<img src="' + data.picture.images[3].url + '">';
+          $(".resource-overview-image").append(imgcontent);
         });
       } else if (data.feature.illustrations.length > 0 && data.feature.illustrations[0].type =='external') {
-        overviewContent += '<div class="main-overview-image resource-overview-image">';
-        overviewContent += '<img class="img-responsive" src="' + data.feature.illustrations[0].url + '">';
+        overviewContent += '<div class="resource-overview-image">';
+        overviewContent += '<img src="' + data.feature.illustrations[0].url + '">';
         overviewContent += '</div>';
       }
 
@@ -329,8 +329,8 @@ function relatedPlacesPhotos(data) {
 
   $.each(data.place.media, function(rInd, rElm) {
     contentPh += '<div class="each-photo">';
-    contentPh += '<a href="#pid' + rElm.id + '" class="thumbnail" data-toggle="modal">';
-    contentPh += '<img src="' + rElm.images[0].url + '" alt="' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '">';
+    contentPh += '<a href="#pid' + rElm.id + '" data-toggle="modal">';
+    contentPh += '<img src="' + rElm.images[0].url + '"  alt="' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '">';
     contentPh += '</a>';
     contentPh += '</div>';
 
@@ -343,7 +343,7 @@ function relatedPlacesPhotos(data) {
     contentPh += '<p class="modal-title" id="myModalLabel">' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '</p>';
     contentPh += '</div>';
     contentPh += '<div class="modal-body">';
-    contentPh += '<img src="' + rElm.images[4].url + '" class="img-responsive" alt="' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '">';
+    contentPh += '<img src="' + rElm.images[4].url + '" alt="' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '">';
     contentPh += '<p><strong>Resource #:</strong> ' + rElm.id + '</p>';
     contentPh += '<p><strong>Description:</strong></p>';
     contentPh += (rElm.descriptions.length > 0 ? rElm.descriptions[0].title : "");
@@ -515,7 +515,7 @@ function paginatedPlacesPhotos(data) {
   var contentPh = '';
   $.each(data.place.media, function(rInd, rElm) {
     contentPh += '<div class="each-photo">';
-    contentPh += '<a href="#pid' + rElm.id + '" class="thumbnail" data-toggle="modal">';
+    contentPh += '<a href="#pid' + rElm.id + '" data-toggle="modal">';
     contentPh += '<img src="' + rElm.images[0].url + '" alt="' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '">';
     contentPh += '</a>';
     contentPh += '</div>';
@@ -529,7 +529,7 @@ function paginatedPlacesPhotos(data) {
     contentPh += '<p class="modal-title" id="myModalLabel">' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '</p>';
     contentPh += '</div>';
     contentPh += '<div class="modal-body">';
-    contentPh += '<img src="' + rElm.images[4].url + '" class="img-responsive" alt="' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '">';
+    contentPh += '<img src="' + rElm.images[4].url + '" alt="' + (rElm.captions.length > 0 ? rElm.captions[0].title : "") + '">';
     contentPh += '<p><strong>Resource #:</strong> ' + rElm.id + '</p>';
     contentPh += '<p><strong>Description:</strong></p>';
     contentPh += (rElm.descriptions.length > 0 ? rElm.descriptions[0].title : "");
@@ -632,8 +632,8 @@ function relatedPlacesTexts(data) {
     $.get(Settings.mmsUrl + '/media_objects/' + mElm.id + '.json', function(data) {
       if (data.document.images) {
         var contentTX = '<div class="each-text">';
-        contentTX += '<a href="#pid' + data.document.id + '" class="thumbnail" data-toggle="modal">';
-        contentTX += '<img src="' + data.document.images[1].url + '" class="img-responsive" alt="' + (data.document.captions.length > 0 ? data.document.captions[0].title : "") + '">';
+        contentTX += '<a href="#pid' + data.document.id + '" data-toggle="modal">';
+        contentTX += '<img src="' + data.document.images[1].url + '" alt="' + (data.document.captions.length > 0 ? data.document.captions[0].title : "") + '">';
         contentTX += '</a>';
         contentTX += '</div>';
 
@@ -646,7 +646,7 @@ function relatedPlacesTexts(data) {
         contentTX += '<p class="modal-title" id="myModalLabel">' + (data.document.captions.length > 0 ? data.document.captions[0].title : "") + '</p>';
         contentTX += '</div>';
         contentTX += '<div class="modal-body">';
-        contentTX += '<img src="' + data.document.images[6].url + '" class="img-responsive" alt="' + (data.document.captions.length > 0 ? data.document.captions[0].title : "") + '">';
+        contentTX += '<img src="' + data.document.images[6].url + '" alt="' + (data.document.captions.length > 0 ? data.document.captions[0].title : "") + '">';
         contentTX += '<p><strong>Resource #:</strong> ' + data.document.id + '</p>';
         contentTX += '</div>';
         contentTX += '</div>';

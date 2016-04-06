@@ -3,7 +3,7 @@
   <?php foreach($data as $aItem): ?>
     <?php if(isset($aItem->images)): ?>
       <div class="each-text">
-        <a href="#pid<?php print $aItem->id; ?>" class="thumbnail" data-toggle="modal">
+        <a href="#pid<?php print $aItem->id; ?>" data-toggle="modal">
           <img src="<?php print $aItem->images[1]->url; ?>" alt="<?php print (count($aItem->captions) > 0 ? $aItem->captions[0]->title : ''); ?>">
         </a>
       </div>
@@ -15,7 +15,7 @@
               <p class="modal-title" id="myModalLabel"><?php print (count($aItem->captions) > 0 ? $aItem->captions[0]->title : ''); ?></p>
             </div>
             <div class="modal-body">
-              <img src="<?php print $aItem->images[6]->url; ?>" class="img-responsive" alt="<?php print (count($aItem->captions) > 0 ? $aItem->captions[0]->title : ''); ?>">
+              <img src="<?php print $aItem->images[6]->url; ?>" alt="<?php print (count($aItem->captions) > 0 ? $aItem->captions[0]->title : ''); ?>">
               <p><strong>Resource #:</strong> <?php print $aItem->id; ?></p>
             </div>
           </div>
