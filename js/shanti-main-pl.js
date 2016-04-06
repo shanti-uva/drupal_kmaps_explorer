@@ -633,7 +633,7 @@ function relatedPlacesTexts(data) {
       if (data.document.images) {
         var contentTX = '<div class="each-text">';
         contentTX += '<a href="#pid' + data.document.id + '" class="thumbnail" data-toggle="modal">';
-        contentTX += '<img src="' + data.document.images[1].url + '" alt="' + (data.document.captions.length > 0 ? data.document.captions[0].title : "") + '">';
+        contentTX += '<img src="' + data.document.images[1].url + '" class="img-responsive" alt="' + (data.document.captions.length > 0 ? data.document.captions[0].title : "") + '">';
         contentTX += '</a>';
         contentTX += '</div>';
 

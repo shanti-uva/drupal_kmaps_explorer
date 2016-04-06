@@ -1,5 +1,5 @@
-<div class="subjects-in-subjects kmaps-list-columns">
 <h6><?php print $title; ?></h6>
+<div class="subjects-in-subjects kmaps-list-columns">
 <p>From the General Perspective:</p>
 <ul>
   <?php foreach($data->feature_relation_types as $aItem): ?>
