@@ -626,7 +626,7 @@ function relatedPlacesEssays(data) {
 
 //Function to process and show related texts
 function relatedPlacesTexts(data) {
-  var contentTX = '<div class="related-texts">';
+  var contentTX = '<div class="related-texts text-in-places kmaps-list-columns">';
 
   $.each(data.place.media, function(mInd, mElm) {
     $.get(Settings.mmsUrl + '/media_objects/' + mElm.id + '.json', function(data) {

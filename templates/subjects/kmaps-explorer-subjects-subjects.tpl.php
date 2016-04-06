@@ -1,8 +1,9 @@
+<div class="subjects-in-subjects kmaps-list-columns">
 <h6><?php print $title; ?></h6>
 <p>From the General Perspective:</p>
 <ul>
   <?php foreach($data->feature_relation_types as $aItem): ?>
-    <li style="list-style-type: none;"><em><?php print ucfirst($aItem->label); ?></em> (<?php print count($aItem->features); ?>):
+    <li style="list-style-type: none;"><h6><?php print ucfirst($aItem->label); ?></h6> (<?php print count($aItem->features); ?>):
     <ul>
       <?php foreach($aItem->features as $bItem): ?>
         <li>
@@ -25,3 +26,4 @@
     </ul></li>
   <?php endforeach; ?>
 </ul>
+</div>

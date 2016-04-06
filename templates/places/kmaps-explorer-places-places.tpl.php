@@ -1,5 +1,5 @@
-<h6>Places Related to <?php print $title; ?></h6>
-<div class="places-in-places">
+<div class="places-in-places kmaps-list-columns">
+  <h6>Places Related to <?php print $title; ?></h6>
   <?php foreach($data->feature_relation_types as $aItem): ?>
     <h6><?php print $title; ?> <?php print $aItem->label; ?> (<?php print $aItem->count; ?>):</h6>
     <ul>
