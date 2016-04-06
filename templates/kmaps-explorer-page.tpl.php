@@ -115,7 +115,7 @@
 
   <!-- Edit button for Rails App -->
   <div class="fixed-action-button">
-    <a href="<?php print $edit_url; ?>" class="round-btn-fixed <?php print $type; ?>-bg" target="_blank">
+    <a href="<?php print $edit_url; ?>" class="round-btn-fixed" target="_blank">
       <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
     </a>
   </div>
