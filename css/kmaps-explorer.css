@@ -29,7 +29,7 @@ figcaption .center-caption {
   margin-bottom: 0.50em;
 }
 
-.subjects-overview-image figure {
+.resource-overview-image figure {
   display: block;
   position: relative;
   float: left;
@@ -37,7 +37,7 @@ figcaption .center-caption {
   margin: 0 20px 20px 0;
 }
 
-.subjects-overview-image figure::before {
+.resource-overview-image figure::before {
   content: '?';
   position: absolute;
   font-weight: 800;
@@ -57,16 +57,16 @@ figcaption .center-caption {
   opacity: 0.75;
 }
 
-.subjects-overview-image figure:hover::before {
+.resource-overview-image figure:hover::before {
   opacity: 0;
 }
 
-.subjects-overview-image .cap-bot::before {
+.resource-overview-image .cap-bot::before {
   bottom: 10px;
   left: 10px;
 }
 
-.subjects-overview-image figcaption {
+.resource-overview-image figcaption {
   position: absolute;
   background: black;
   background: rgba(0,0,0,0.75);
@@ -77,18 +77,18 @@ figcaption .center-caption {
   transition: all 0.6s ease;
 }
 
-.subjects-overview-image figure:hover figcaption {
+.resource-overview-image figure:hover figcaption {
   opacity: 1;
 }
 
-.subjects-overview-image .cap-bot figcaption {
+.resource-overview-image .cap-bot figcaption {
   left: 0;
   bottom: -30%;
   margin-bottom: 5px;
   margin-left: 5px;
 }
 
-.subjects-overview-image .cap-bot:hover figcaption {
+.resource-overview-image .cap-bot:hover figcaption {
   bottom: 0;
 }
 
