@@ -1,4 +1,4 @@
-<h6><?php print $title; ?></h6><br>
+<h6><?php print $title; ?></h6>
 <ul class="texts-list">
 <?php foreach($data->doclist->docs as $aItem): ?>
   <li>
