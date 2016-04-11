@@ -1,6 +1,6 @@
-<div class="subjects-overview-image">
+<div class="resource-overview-image">
   <figure class="cap-bot">
-    <img src="<?php print $data->picture->images[3]->url; ?>" class="img-responsive img-thumbnail" 
+    <img src="<?php print $data->picture->images[3]->url; ?>"  
     alt="<?php print (count($data->picture->captions) > 0 ? $data->picture->captions[0]->title : ''); ?>">
     <figcaption>
       <?php if(count($data->picture->captions) > 0): ?>

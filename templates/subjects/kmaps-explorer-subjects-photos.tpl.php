@@ -1,4 +1,4 @@
-<h5><?php print $title; ?></h5><br>
+<h6><?php print $title; ?></h6>
 <div id="og-grid" class="og-grid clearfix">
   <?php foreach($data as $aItem): ?>
     <?php $formats = kmaps_explorer_correct_images($aItem); ?>
@@ -15,7 +15,6 @@
         data-place="Not available"
         data-type="jpg"
         data-ssid="<?php print $aItem->id; ?>"
-        class="thumbnail"
         data-toggle="modal"
       >
         <img src="<?php print $formats['essay']->url; ?>" alt="<?php print (count($aItem->captions) > 0 ? $aItem->captions[0]->title : ''); ?>">

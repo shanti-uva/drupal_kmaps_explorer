@@ -3,8 +3,8 @@
   <?php foreach($data as $aItem): ?>
     <?php if(isset($aItem->images)): ?>
       <div class="each-text">
-        <a href="#pid<?php print $aItem->id; ?>" class="thumbnail" data-toggle="modal">
-          <img src="<?php print $aItem->images[1]->url; ?>" alt="<?php print (count($aItem->captions) > 0 ? $aItem->captions[0]->title : ''); ?>">
+        <a href="#pid<?php print $aItem->id; ?>" data-toggle="modal">
+          <img src="<?php print $aItem->images[1]->url; ?>" class="img-responsive" alt="<?php print (count($aItem->captions) > 0 ? $aItem->captions[0]->title : ''); ?>">
         </a>
       </div>
       <div class="modal fade" tabindex="-1" role="dialog" id="pid<?php print $aItem->id; ?>">

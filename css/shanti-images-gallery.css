@@ -1,133 +1,4 @@
-/** Sarvaka sub-theme Color Settings **/
-.titlearea,
-.carousel-control,
-.breadcrumb .icon,
-.nav-justified>li.active a,
-.nav-justified>li.active a:hover,
-.nav-justified>li.active a:active {
-  background-color: #c4be28 !important;
-}
-
-.nav-justified>li.active::before {
-  color: #c4be28 !important;
-}
-    /* darker shades below are used to better define details */
-.bootstrap-select.btn-group.show-tick .dropdown-menu li.selected a .check-mark,
-.bootstrap-select.btn-group.show-tick .dropdown-menu li.selected a:active .check-mark,
-.navbar-brand:hover .site-slogan,
-.main-content .selectpicker .caret::before,
-.view-section .nav-tabs>li.active>a, 
-.view-section .nav-tabs>li.active>a:hover, 
-.view-section .nav-tabs>li.active>a:active,
-.view-section .fancytree-container .glyphicon,
-.view-section .fancytree-container .fancytree-node:hover > .glyphicon,
-.view-section .fancytree-container .fancytree-node:active > .glyphicon,
-.view-section .fancytree-node.fancytree-active > .glyphicon,
-.view-section .fancytree-node.fancytree-selected > .glyphicon {
-  color: rgb(196,190,40) !important;
-}
-
-.view-section .nav-tabs>li.active>a, 
-.view-section .nav-tabs>li.active>a:hover, 
-.view-section .nav-tabs>li.active>a:active {
-  border-top-color: rgb(196,190,40) !important;
-}
-
-.shanti-thumbnail-image.shanti-field-visuals .icon {
-  background: rgba(196,190,40,0.8);
-}
-
-.navbar-brand:active .site-slogan {
-  color: #444 !important;
-}
-/*** END Sarvaka subtheme colors ***/
-
-
-/*
-.titlearea{ box-shadow: inset 0 1px 5px 3px rgba(50, 50, 50, 0.100);}
-.titlearea > div{ box-shadow: inset 0 -2px 10px -4px rgba(0, 0, 0, 0.000);}
-*/
-
-
-
-
-
-ul.pager{ margin: 0 0 0.5rem;}
-
-table.pagerer { 
-  width:100%; 
-  margin-top: -0.7rem;
-}
-
-.view-media-sharedshelf-my-images table.pagerer:last-child{ 
-  margin-bottom: 5rem;
-  margin-top: 1.5rem;
-}
-
-.front .view-media-sharedshelf-my-images table.pagerer:first-of-type{
-  margin-top: -2.4rem;
-}
-
-.front.logged-in .view-media-sharedshelf-my-images table.pagerer:first-of-type{
-  margin-top: 1rem;
-  margin-bottom: -0.5rem;
-}
-
-
-
-.contextual-links-region > h2{
-  white-space:nowrap;
-}
-
-
-
-/*--- Homepage Layout styles ---*/
-.front.logged-in .tab-pane.main-col > div > .block-system,
-.front.logged-in .content-section .contextual-links-region h2,
-.front.logged-in .content-section .contextual-links-region .content{ 
-  max-width: 1050px !important;
-  margin: 0 auto !important;
-}
-
-.front.logged-in .tab-pane.main-col > div > .block-system{ 
-  float:none;
-}
-
-.front.logged-in .content-section .contextual-links-region .content{
-  padding: 0 0 4rem;
-}
-
-.front.logged-in .tab-pane.main-col > div,
-.front.logged-in .main-col .block-views.contextual-links-region{
-  width: 100% !important;
-  max-width: 100% !important;
-  padding: 1.7rem 0 4rem;
-}
-
-.front.logged-in .content-section .contextual-links-region{
-  padding-top: 0.1rem;
-  margin-top: -1rem;
-  position: relative !important;
-}
-
-.front.logged-in .main-content .content-section .view-content{
-  margin-top:-4rem;
-}
-
-/*
-.front .main-wrapper{
-  padding-right:0;
-  padding-left:0;
-}
-*/
-
-
-
-
-
-/*------------------------------------------------*/
-/***** BEGIN gallery grid, dropdown, lightbox *****/
-/*------------------------------------------------*/
+/* shanti image gallery */ 
 .og-grid{
   list-style: none;
   padding:0;
@@ -141,6 +12,12 @@ table.pagerer {
   margin:0 5px 10px 0;
   display: inline-block;
   vertical-align: top;
+}
+
+.og-grid .item img {
+  max-width: 100%;
+  max-height: 100%;
+  vertical-align: bottom;
 }
 
 .og-grid .item > a,
@@ -169,19 +46,19 @@ table.pagerer {
   top: auto;
   left: 0;
   width: 100%;
-  margin-top: 10px;
+  margin-top: 1rem;
   text-align: left;
   height: 0;
   overflow: hidden;
 }
 
 .og-expander-inner {
-  background: #222;
+  background: #303030;
   padding: 2.5rem 5.5rem;
   height: 100%;
-  -webkit-box-shadow: inset 0 0 130px 50px rgba(0,0,1,0);
-  -moz-box-shadow: inset 0 0 130px 50px rgba(0,0,1,0);
-  box-shadow: inset 0 0 130px 50px rgba(0,0,0,1.0);
+  -webkit-box-shadow: inset 0 0 130px 50px rgba(0,0,0,7);
+  -moz-box-shadow: inset 0 0 130px 50px rgba(0,0,0,7);
+  box-shadow: inset 0 0 130px 50px rgba(0,0,0,0.7);
 }
 
 .og-close {
@@ -263,8 +140,10 @@ table.pagerer {
 .og-details {
   padding: 0;
   width: 45%;
+    width:44%;
   float:left;
   margin:0;
+    margin: 0 0 0 1rem;
   -webkit-transition: margin .3s ease-out;
   transition: margin .3s ease-out;
 }
@@ -283,6 +162,7 @@ table.pagerer {
 }
 
 .row-offcanvas > section.content-section .og-details .tab-content:nth-of-type(1){
+  padding-left: 2.5rem !important;
   padding-right: 1rem !important;
   padding-bottom: 0 !important;
 }
@@ -337,9 +217,11 @@ table.pagerer {
   color: #999;
   background: #222;
   text-transform: uppercase;
-  font-size: 1em;
+  font-size: 0.88em;
+  letter-spacing: 0.12rem;
   font-weight:bold;
   font-family: 'Helvetica Neue',helvetica,arial,sans-serif;
+  padding: 12px 21px;
 }
 
 .og-details .nav-tabs>li>a:hover,
@@ -347,6 +229,7 @@ table.pagerer {
   color: #eee;
   border-color: #909090 #555 #555 #555;
   border-width: 2px 1px 1px;
+  background: #222;
 }
 /*
 .og-details .nav-tabs>li>a::before {
@@ -358,7 +241,7 @@ table.pagerer {
 .og-details .nav-tabs>li.active>a:hover,
 .og-details .nav-tabs>li.active>a:active {
   color: #c0c0c0;
-  background: #171717;
+  background: #1b1b1b;
   border-width: 2px 1px 1px;
   border-color: #909090 #555 transparent #555;
 }
@@ -390,7 +273,7 @@ table.pagerer {
 
 .og-details #info li label {
   color: #ccc;
-  font-size: 90%;
+  font-size: 0.88em;
   margin-left: 0;
   margin-right: .5rem;
   display:inline;
@@ -409,9 +292,9 @@ table.pagerer {
 
 .og-details h3 {
   color:#d6d6d6;
-  font-size: 1.25em;
-  font-weight:normal;
-  line-height:1.32em;
+  font-size: 1.12em;
+  font-weight: bold !important;
+  line-height:1.44em;
   padding: 0;
   margin: 0.5em 0;
 }
@@ -519,7 +402,8 @@ table.pagerer {
 }
 
 .og-details .og-view-more > span {
-  font-size: 1.55rem;
+  font-size: 1.44rem;
+  letter-spacing: 0.05rem;
   color: #999;
   position: relative;
   bottom: 0.6rem;
@@ -562,9 +446,10 @@ table.pagerer {
 .og-details .og-view-more.btn-lightbox > span::before{
   content: '\f065'; /* icon for full-screen */
   font-family: 'FontAwesome';
+  font-size:1.12em;
   position: relative;
-  top: -0.04rem;
-  left: -1.62rem;
+  top: 0.03rem;
+  left: -1.65rem;
 }
 
 
@@ -572,7 +457,7 @@ table.pagerer {
   content: '\e61f'; /* unique icon for Read more... */
   font-family: 'shanticon';
   position: relative;
-  top: -0.1rem;
+  top: 0;
   right: 1.6rem;
   font-size: 1.4rem
 }
@@ -612,7 +497,7 @@ table.pagerer {
 
 @media screen and (max-width: 830px){
 
-  .og-expander h3 { font-size: 32px;}
+  .og-expander h3 { font-size: 18px;}
   .og-expander p { font-size: 13px;}
   .og-expander a { font-size: 12px;}
 }
@@ -623,84 +508,14 @@ table.pagerer {
   .og-details { float: none; width: 100%;}
 }
 
-/**** END gallery grid, lightbox ****/
 
 
 
 
-/*------------------------------------------*/
-/*--- Dropdown details tab #info content ---*/
-/*------------------------------------------*/
-/* single image page */
-.page-file .file-image {
-  border-left: 3rem dotted #e3e3e3;
-  border-right: 3rem dotted #e3e3e3;
-  margin-top: 2rem;
-  padding: 0 2rem 2rem;
-}
 
-.page-file .file-image img {
-  float: right;
-  margin: 2rem 1rem 2rem 3rem;
-  padding: 0.7rem;
-  border-radius: 0.2rem;
-  background: #fff;
-  border: 1px solid #d0d0d0;
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.075);
-  box-shadow: 0 1px 2px rgba(0,0,0,.075);
-}
-
-.page-file .file-image .field .field-label {
-  margin-top: 1.5rem;
-  text-transform: uppercase;
-  font-family: 'museo-sans-500',helvetica,arial,sans-serif;
-}
-
-.page-file .main-col .block-system > .content {
-  padding: 0 1.5rem 1.5rem;
-  margin-top: -0.5rem;
-  margin-bottom: 7rem;
-  border: 4px solid #e7e7e7;
-}
-
-.page-file .main-col .file-image > .content:nth-of-type(1) {
-  margin-top: -0.5rem;
-  background: white;
-  border: 1px solid #e9e9e9;
-  border-top: 1rem solid #ccc;
-  padding: 0rem 2rem 2rem 3rem;
-  box-shadow: -1px 2px 5px #e0e0e0;
-  border-collapse: separate;
-}
-
-.field-name-field-sharedshelf-solr-search {
-  display: none;
-}
-
-/*----- PDF Styles -----*/
-body.page-file-pdf .main-col .block-system > .content {
-	border-left: none;
-	border-right: none;
-	border-bottom: none;
-}
-
-div.pdfextlink { float: right;}
-
-/*------ File Page ------*/
-.file-ss-div {
-	margin: 12px auto;
-}
-
-.file-ss-div .field {
-	margin: 4px 0 0 0;
-}
-
-
-
-
-/* lightbox hiding search tab */
+/* lightbox */
 .pswp{
-  z-index:105000
+  z-index:1000;
 }
 
 .pswp__button{
@@ -708,7 +523,29 @@ div.pdfextlink { float: right;}
 }
 
 .pswp__caption__center{
+  text-align: center;
   font-family: 'museo-sans-500',helvetica,arial,sans-serif;
+}
+
+.pswp__bg{
+  filter: alpha(opacity=100);
+  opacity: 1;
+  background: #222 !important;
+}
+.pswp__ui--fit .pswp__top-bar, 
+.pswp__ui--fit .pswp__caption{
+  background: transparent;
+}
+
+.pswp__share-tooltip a{  border:none;}
+.pswp__share-tooltip a:hover,
+.pswp__share-tooltip a:active{
+	color:#fff !important;
+}
+
+.pswp__share-tooltip a:hover:nth-child(n+3),
+.pswp__share-tooltip a:active:nth-child(n+3){
+	color:#333 !important;
 }
 
 /**** lightbox 
@@ -727,15 +564,15 @@ div.pdfextlink { float: right;}
 
 
 
+
 /*-------------------------*/
 /*=== max-width (first) ===*/
 /*-------------------------*/
 
 @media screen and (max-width: 992px) {
 
-  .page-file .file-image img {
-    float: none;
-    margin: 2rem auto;
+  .og-fullimg{
+    width:51%;
   }
 }
 
@@ -755,9 +592,9 @@ div.pdfextlink { float: right;}
   }
 
   .og-details{
-    padding-right: 0;
+    padding-right: 0.6rem;
     padding-top: 2.5rem;
-    padding-left: 1rem;
+    /*padding-left: 1rem;*/
     margin-top:0;
     width:100%;
     height: auto;
@@ -799,32 +636,25 @@ div.pdfextlink { float: right;}
   }
 }
 
-@media screen and (max-width: 600px) {
-
-  .page-file .file-image {
-    border: none;
-    padding: 0;
-  }
-}
-
 
 @media screen and (max-width: 991px) {
-  .front .content-section .tab-content:nth-of-type(1){
-    padding-left:25px;
-    padding-right: 25px;
+
+  .og-nav-arrow.next{
+    position: absolute;
+    right:0;
   }
+
+  .og-nav-arrow.prev{
+    position: absolute;
+    left: 0;
+  }
+
 }
 
 
 /*--------------------------*/
-/*=== min-width (second) ===*/
+/*======== min-width =======*/
 /*--------------------------*/
-
-@media screen and (min-width: 768px) {
-
-
-
-}
 
 @media screen and (min-width: 992px) {
 
@@ -833,22 +663,43 @@ div.pdfextlink { float: right;}
   }
 }
 
-@media screen and (min-width: 1150px) {
 
+
+
+.container:before,
+.container:after {
+    content: "";
+    display: table;
+}
+.container:after {
+    clear: both;
+}
+.clearfix {
+  zoom: 1;
+}
+.clearfix:before, .clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
 }
 
-
-
-
-.og-details p::-webkit-scrollbar {
-    width: 0.5rem;
+/*
+.item {
+  float: left;
+  margin-bottom: 15px; 
 }
- 
-.og-details p::-webkit-scrollbar-thumb {
-    background-color: #555;
+.item img {
+  max-width: 100%;
+  max-height: 100%;
+  vertical-align: bottom;
 }
+.first-item {
+  clear: both;
+}
+.last-row, .last-row ~ .item {
+  margin-bottom: 0;
+}
+*/
 
-/* Additional Styles to make kmaps images work */
-.item a.thumbnail {
-     margin-bottom: 0px;
-}

@@ -1,6 +1,6 @@
 <div id="<?php print $ajax ? $type . '-ajax' : $type . '-main' ?>">
   <!-- Column Resources  -->
-  <aside class="content-resources col-xs-6 col-sm-3 col-md-3 col-lg-2 sidebar-offcanvas equal-height">
+  <nav class="content-resources col-xs-6 col-sm-3 col-md-3 col-lg-2 sidebar-offcanvas equal-height">
     <ul class="nav nav-pills nav-stacked">
       <li class="overview <?php print isset($overview) ? 'active' : ''; ?>"><a href="<?php print base_path() . $type . '/' . $kid; ?>/overview/nojs" class="use-ajax">
         <span class="icon shanticon-overview"></span>Overview</a>
@@ -98,7 +98,7 @@
         </li>
       <?php endif; ?>
     </ul>
-  </aside>
+  </nav>
 
   <!-- Column Main  -->
   <section  class="content-section col-xs-12 col-sm-12 col-md-9 col-lg-10 equal-height">
@@ -115,7 +115,7 @@
 
   <!-- Edit button for Rails App -->
   <div class="fixed-action-button">
-    <a href="<?php print $edit_url; ?>" class="round-btn-fixed <?php print $type; ?>-bg" target="_blank">
+    <a href="<?php print $edit_url; ?>" class="round-btn-fixed" target="_blank">
       <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
     </a>
   </div>
