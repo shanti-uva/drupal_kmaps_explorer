@@ -111,7 +111,7 @@ function processPlacesData(data) {
         overviewContent += '<button class="btn btn-default renderOpenLayerMaps">Custom Map</button>'
         overviewContent += '</div>';
       }
-      overviewContent += '<aside class="panel-group" id="accordion">';
+      overviewContent += '<div class="panel-group" id="accordion">';
       overviewContent += '<section class="panel panel-default">';
       overviewContent += '<div class="panel-heading">';
       overviewContent += '<h6>';
@@ -142,7 +142,7 @@ function processPlacesData(data) {
         overviewContent += '</section>';
       }
 
-      overviewContent += '</aside>';
+      overviewContent += '</div>';
       $tabOverview.append(overviewContent);
 
       //Render the maps based on what is clicked.

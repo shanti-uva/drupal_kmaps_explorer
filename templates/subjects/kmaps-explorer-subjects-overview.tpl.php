@@ -12,7 +12,7 @@ if (count($obj->feature->illustrations) > 0 && $obj->feature->illustrations[0]->
 
 ?>
 
-<aside class="panel-group" id="accordion" style="margin-top:1em; clear:both;">
+<div class="panel-group" id="accordion" style="margin-top:1em; clear:both;">
   <section class="panel panel-default">
     <div class="panel-heading">
       <h6>
@@ -45,4 +45,4 @@ if (count($obj->feature->illustrations) > 0 && $obj->feature->illustrations[0]->
       </div>
     </div>
   </section>
-</aside>
+</div>
