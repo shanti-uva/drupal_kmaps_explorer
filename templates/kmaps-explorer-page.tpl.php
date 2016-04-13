@@ -101,7 +101,7 @@
   </nav>
 
   <!-- Column Main  -->
-  <section  class="content-section col-xs-12 col-sm-12 col-md-9 col-lg-10 equal-height">
+  <section  class="content-section col-sm-12 col-md-9 col-lg-10 equal-height">
     <div class="tab-content">
 
       <article class="active" id="tab-main">
