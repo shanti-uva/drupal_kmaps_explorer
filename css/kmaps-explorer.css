@@ -93,7 +93,7 @@ figcaption .center-caption {
 }
 
 /* Popovers for subjects and places  */
-.popover-link {
+.popover-kmaps {
   background: #5a65d1;
   border: none;
   height: 1rem;
@@ -111,11 +111,11 @@ figcaption .center-caption {
   opacity: 0.95;
 }
 
-.popover-link:hover{
+.popover-kmaps:hover{
   opacity: 1.0;
 }
 
-.popover-link-tip {
+.popover-kmaps-tip {
   border-bottom: .5rem solid transparent;
   border-top: 0 solid transparent;
   border-right: .5rem solid #5a65d1;
@@ -127,7 +127,7 @@ figcaption .center-caption {
   width: 0;
 }
 
-.popover-link .icon {
+.popover-kmaps .icon {
   color: white;
   position: absolute;
   bottom: 0.2rem;
@@ -135,7 +135,7 @@ figcaption .center-caption {
   font-size: 0.7em;
 }
 
-.popover-link .popover-footer-button a {
+.popover-kmaps .popover-footer-button a {
   color: #ddd;
   font-weight: normal;
   font-family: 'museo-sans-500',helvetica,arial,sans-serif !important;
@@ -147,7 +147,7 @@ figcaption .center-caption {
   height: 2.75em;
 }
 
-.popover-link .parents strong {
+.popover-kmaps .parents strong {
   color: #555;
   font-family: 'museo-sans-500',helvetica,arial,sans-serif;
 }
