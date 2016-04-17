@@ -92,7 +92,7 @@ figcaption .center-caption {
   bottom: 0;
 }
 
-/* Popovers for subjects and places
+/* Popovers for subjects and places  */
 .popover-link {
   background: #5a65d1;
   border: none;
@@ -151,7 +151,7 @@ figcaption .center-caption {
   color: #555;
   font-family: 'museo-sans-500',helvetica,arial,sans-serif;
 }
- */
+
 
 /* Google maps */
 #map-canvas {
