@@ -21,16 +21,15 @@
       });
 
       // Functionality for columnizer
-      // dontsplit = don't break these headers
-      $('.places-in-places').find('.column > h6, .column > ul > li, .column ul').addClass("dontsplit");
-      // dontend = don't end column with headers
-      $('.places-in-places').find('.column > h6, .column > ul > li').addClass("dontend");
-
       $('.kmaps-list-columns:not(.subjects-in-places)', context).columnize({
             width: 330,
             lastNeverTallest : true
       });
-
+      // dontsplit = don't break these headers
+      $('.places-in-places').find('.column > h6, .column > ul > li, .column ul').addClass("dontsplit");
+      // dontend = don't end column with headers
+      $('.places-in-places').find('.column > h6, .column > ul > li').addClass("dontend");
+      
 
       //Functionality for popovers
       $('.popover-kmaps', context).each(function() {
