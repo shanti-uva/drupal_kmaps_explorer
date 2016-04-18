@@ -23,7 +23,7 @@
       //Functionality for columnizer
       $('ul.texts-list,.kmaps-list-columns', context).columnize({ width: 350 });
       $('ul.texts-list,.kmaps-list-columns').find('.texts-list .column > ul > li, .kmaps-list-columns .column > ul > li').addClass('dontsplit');
-
+      $('ul.texts-list,.kmaps-list-columns').find('.texts-list .column h6, .kmaps-list-columns .column h6, .texts-list .column > ul > li, .kmaps-list-columns .column > ul > li').addClass('dontend');
 
       //Functionality for popovers
       $('.popover-kmaps', context).each(function() {
