@@ -21,8 +21,8 @@
       });
 
       //Functionality for columnizer
-      $('ul.texts-list,ul.kmaps-list-columns', context).columnize({ width: 350 });
-      $('ul.texts-list,ul.kmaps-list-columns').find('.texts-list .column > ul > li, .kmaps-list-columns .column > ul > li').addClass('dontsplit');
+      $('ul.texts-list,.kmaps-list-columns', context).columnize({ width: 350 });
+      $('ul.texts-list,.kmaps-list-columns').find('.texts-list .column > ul > li, .kmaps-list-columns .column > ul > li').addClass('dontsplit');
 
 
       //Functionality for popovers
