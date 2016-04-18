@@ -21,9 +21,9 @@
       });
 
       //Functionality for columnizer
-      $('ul.texts-list,.kmaps-list-columns', context).columnize({ width: 350 });
-      $('ul.texts-list,.kmaps-list-columns').find('.texts-list .column > ul > li, .kmaps-list-columns .column > ul > li').addClass('dontsplit');
-      $('ul.texts-list,.kmaps-list-columns').find('.texts-list .column h6, .kmaps-list-columns .column h6, .texts-list .column > ul > li, .kmaps-list-columns .column > ul > li').addClass('dontend');
+      $('.kmaps-list-columns', context).columnize({ width: 350 });
+      $('.kmaps-list-columns').find('.kmaps-list-columns h6, .kmaps-list-columns.places-in-places .column > ul > li').addClass('dontsplit');
+      $('.kmaps-list-columns').find('.kmaps-list-columns h6, .kmaps-list-columns.places-in-places .column > ul > li').addClass('dontend');
 
       //Functionality for popovers
       $('.popover-kmaps', context).each(function() {

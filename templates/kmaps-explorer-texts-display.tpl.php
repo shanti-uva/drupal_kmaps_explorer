@@ -1,4 +1,5 @@
 <h6><?php print $title; ?></h6>
+<div class="kmaps-list-columns">
 <ul class="texts-list">
 <?php foreach($data->doclist->docs as $aItem): ?>
   <li>
@@ -8,3 +9,4 @@
   </li>
 <?php endforeach; ?>
 </ul>
+</div>
