@@ -23,9 +23,9 @@
       // Functionality for columnizer
       $(function () {
         // dontsplit = don't break these headers
-        $('.places-in-places').find('.column > h6, .column > ul > li, .column ul').addClass('dontsplit');
+        $('.places-in-places').find('.column > h6, .column > ul > li, .column ul').addClass("dontsplit");
         // dontend = don't end column with headers
-        $('.places-in-places').find('.column > h6, .column > ul > li').addClass('dontend');
+        $('.places-in-places').find('.column > h6, .column > ul > li').addClass("dontend");
 
         $('.kmaps-list-columns:not(.subjects-in-places)', context).columnize({
               width: 330,
