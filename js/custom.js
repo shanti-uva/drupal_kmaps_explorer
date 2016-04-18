@@ -24,7 +24,7 @@
       // lastNeverTallest = last column will not be tallest column
       $('.kmaps-list-columns', context).columnize({ width: 350, lastNeverTallest: true }); 
       // dontsplit = don't break these headers
-      $('.kmaps-list-columns').find('.kmaps-list-columns h6, .kmaps-list-columns.places-in-places .column > ul > li').addClass('dontsplit');
+      $('.kmaps-list-columns').find('.kmaps-list-columns h6, .kmaps-list-columns.places-in-places .column > ul > li, .kmaps-list-columns.places-in-places .column ul ul').addClass('dontsplit');
       // dontend = don't end column with headers
       $('.kmaps-list-columns').find('.kmaps-list-columns h6, .kmaps-list-columns.places-in-places .column > ul > li').addClass('dontend');
 
