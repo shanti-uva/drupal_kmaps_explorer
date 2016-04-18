@@ -21,7 +21,7 @@
       });
 
       //Functionality for columnizer
-      $('.kmaps-list-columns', context).columnize({ width: 350 });
+      $('.kmaps-list-columns', context).columnize({ width: 350, lastNeverTallest: true });
       $('.kmaps-list-columns').find('.kmaps-list-columns h6, .kmaps-list-columns.places-in-places .column > ul > li').addClass('dontsplit');
       $('.kmaps-list-columns').find('.kmaps-list-columns h6, .kmaps-list-columns.places-in-places .column > ul > li').addClass('dontend');
 
