@@ -21,7 +21,9 @@
       });
 
       //Functionality for columnizer
-      $('ul.texts-list,div.places-in-places,div.subjects-in-subjects', context).columnize({width: 350});
+      $('ul.texts-list,ul.kmaps-list-columns', context).columnize({ width: 350 });
+      $('ul.texts-list,ul.kmaps-list-columns').find('.texts-list .column > ul > li, .kmaps-list-columns .column > ul > li').addClass('dontsplit');
+
 
       //Functionality for popovers
       $('.popover-kmaps', context).each(function() {
