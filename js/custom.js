@@ -22,7 +22,7 @@
 
       // Functionality for columnizer
       // lastNeverTallest = last column will not be tallest column
-      $('.kmaps-list-columns', context).columnize({ width: 350, lastNeverTallest: true }); 
+      $('.kmaps-list-columns:not(.subjects-in-places)', context).columnize({ width: 350, lastNeverTallest: true }); 
       // dontsplit = don't break these headers
       $('.places-in-places').find('h6, .column > ul > li, .column ul').addClass('dontsplit');
       // dontend = don't end column with headers
