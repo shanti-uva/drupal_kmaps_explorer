@@ -1,6 +1,6 @@
 <div id="<?php print $ajax ? $type . '-ajax' : $type . '-main' ?>">
   <!-- Column Resources  -->
-  <nav class="content-resources col-xs-6 col-md-3 sidebar-offcanvas equal-height">
+  <nav id="#sidebar-first" class="col-xs-6 col-md-3 sidebar-offcanvas equal-height">
     <ul class="nav nav-pills nav-stacked">
       <li class="overview <?php print isset($overview) ? 'active' : ''; ?>"><a href="<?php print base_path() . $type . '/' . $kid; ?>/overview/nojs" class="use-ajax">
         <span class="icon shanticon-overview"></span>Overview</a>

@@ -88,9 +88,11 @@ jQuery(function($) {
   // Bind event listener
   $(".extruder-content").resize(checkWidth);
   // show-hide resource side-column
-  $("button.view-resources").click( function() {
-          $(this).toggleClass( "show",'fast' );
-   });
+
+// moved this to sarvaka for generic global sidebar function, it's not search-related
+//  $("button.view-resources").click( function() {
+//          $(this).toggleClass( "show",'fast' );
+//   });
 
 
 //    console.log(new Error().stack);
@@ -1431,7 +1433,7 @@ function processSubjectsData(data) {
   $(".page-title span").html(data.feature.header);
 
   //Remove all the active classes from the pills so that their bind functions can trigger
-  $(".content-resources ul.nav-pills li").removeClass("active");
+  $("#sidebar-first ul.nav-pills li").removeClass("active");
 
   //Make the overview tab the default tab on URL Change.
   //$("a[href='#tab-overview']").click();
@@ -1442,7 +1444,7 @@ function processSubjectsData(data) {
   $.each(data.feature.ancestors, populateBreadcrumbs);
 
   //First Hide all the elements from the left hand navigation and then show relevant ones
-  $(".content-resources ul.nav-pills li").hide();
+  $("#sidebar-first ul.nav-pills li").hide();
 
   //Proces the solr index for more left hand content
   var solrURL = 'http://kidx.shanti.virginia.edu/solr/kmindex/select?q=kmapid:subjects-' + Settings.hash_obj.id + '&fq=&start=0&facets=on&group=true&group.field=service&group.facet=true&group.ngroups=true&group.limit=0&wt=json';
@@ -1451,7 +1453,7 @@ function processSubjectsData(data) {
   //Get the element that we want and display to overview.
   //Show overview tab on the left hand column
   if (data.feature) {
-    $(".content-resources ul.nav-pills li.overview").show();
+    $("#sidebar-first ul.nav-pills li.overview").show();
     $('a[href="#tab-overview"]').unbind('show.bs.tab').one('show.bs.tab', function(e) {
       //Push a state to the url hash so we can bookmark it
       $.bbq.pushState({que: $(e.target).attr('href').substr(1)});
@@ -1470,7 +1472,7 @@ function processSubjectsData(data) {
   //Related content section
   if (data.feature.associated_resources.related_feature_count > 0) {
     $("ul.nav li a[href='#tab-subjects'] .badge").text(data.feature.associated_resources.related_feature_count);
-    $(".content-resources ul.nav-pills li.subjects").show();
+    $("#sidebar-first ul.nav-pills li.subjects").show();
     $('a[href="#tab-subjects"]').unbind('show.bs.tab').one('show.bs.tab', function(e) {
       //Push a state to the url hash so we can bookmark it
       $.bbq.pushState({que: $(e.target).attr('href').substr(1)});
@@ -1484,7 +1486,7 @@ function processSubjectsData(data) {
   //Related essays (descriptions) section
   if (data.feature.associated_resources.description_count > 0) {
     $("ul.nav li a[href='#tab-essays'] .badge").text(data.feature.associated_resources.description_count);
-    $(".content-resources ul.nav-pills li.essays").show();
+    $("#sidebar-first ul.nav-pills li.essays").show();
     $('a[href="#tab-essays"]').unbind('show.bs.tab').one('show.bs.tab', function(e) {
       //Push a state to the url hash so we can bookmark it
       $.bbq.pushState({que: $(e.target).attr('href').substr(1)});
@@ -1500,7 +1502,7 @@ function processSubjectsData(data) {
   //Related Places section
   if (data.feature.associated_resources.place_count > 0) {
     $("ul.nav li a[href='#tab-places'] .badge").text(data.feature.associated_resources.place_count);
-    $(".content-resources ul.nav-pills li.places").show();
+    $("#sidebar-first ul.nav-pills li.places").show();
     $('a[href="#tab-places"]').unbind('show.bs.tab').one('show.bs.tab', function(e) {
       //Push a state to the url hash so we can bookmark it
       $.bbq.pushState({que: $(e.target).attr('href').substr(1)});
@@ -1517,7 +1519,7 @@ function processSubjectsData(data) {
   //Related Photos (picture) section
   if (data.feature.associated_resources.picture_count > 0) {
     $("ul.nav li a[href='#tab-photos'] .badge").text(data.feature.associated_resources.picture_count);
-    $(".content-resources ul.nav-pills li.photos").show();
+    $("#sidebar-first ul.nav-pills li.photos").show();
     $('a[href="#tab-photos"]').unbind('show.bs.tab').one('show.bs.tab', function(e) {
       //Push a state to the url hash so we can bookmark it
       $.bbq.pushState({que: $(e.target).attr('href').substr(1)});
@@ -1545,7 +1547,7 @@ function processSubjectsData(data) {
   //Related Audio-Video (videos) section
   // if (true) {
   //   $("ul.nav li a[href='#tab-audio-video'] .badge").text(data.feature.associated_resources.video_count == 0 ? '1' : data.feature.associated_resources.video_count);
-  //   $(".content-resources ul.nav-pills li.audio-video").show();
+  //   $("#sidebar-first ul.nav-pills li.audio-video").show();
   //   $('a[href="#tab-audio-video"]').one('show.bs.tab', function(e) {
   //     var $tabAudioVideo = $("#tab-audio-video");
   //     $tabAudioVideo.empty();
@@ -1558,7 +1560,7 @@ function processSubjectsData(data) {
   //Related Texts section
   if (data.feature.associated_resources.document_count > 0) {
     $("ul.nav li a[href='#tab-texts'] .badge").text(data.feature.associated_resources.document_count);
-    $(".content-resources ul.nav-pills li.texts").show();
+    $("#sidebar-first ul.nav-pills li.texts").show();
     $('a[href="#tab-texts"]').unbind('show.bs.tab').one('show.bs.tab', function(e) {
       //Push a state to the url hash so we can bookmark it
       $.bbq.pushState({que: $(e.target).attr('href').substr(1)});
@@ -1587,7 +1589,7 @@ function processSubjectsSolr(data) {
     //Related Audio-Video (videos) section
     if (solrSection.groupValue == "mediabase" && solrSection.doclist.numFound > 0) {
       $("ul.nav li a[href='#tab-audio-video'] .badge").text(solrSection.doclist.numFound);
-      $(".content-resources ul.nav-pills li.audio-video").show();
+      $("#sidebar-first ul.nav-pills li.audio-video").show();
       $('a[href="#tab-audio-video"]').unbind('show.bs.tab').one('show.bs.tab', function(e) {
         //Push a state to the url hash so we can bookmark it
         $.bbq.pushState({que: $(e.target).attr('href').substr(1)});
@@ -1607,7 +1609,7 @@ function processSubjectsSolr(data) {
     //Related Photos section
     // if (solrSection.groupValue == "sharedshelf" && solrSection.doclist.numFound > 0) {
     //   $("ul.nav li a[href='#tab-photos'] .badge").text(solrSection.doclist.numFound);
-    //   $(".content-resources ul.nav-pills li.photos").show();
+    //   $("#sidebar-first ul.nav-pills li.photos").show();
     // }
   });
 
@@ -1616,7 +1618,7 @@ function processSubjectsSolr(data) {
     var pageURL = Settings.mediabaseURL + '/api/v1/media/node/' + Settings.hash_obj.nid + '.json';
     $.get(pageURL, showAudioVideoPage);
   } else {
-    $('.content-resources').find('a[href="#' + (Settings.hash_obj.que || 'tab-overview') + '"]').click();
+    $('#sidebar-first').find('a[href="#' + (Settings.hash_obj.que || 'tab-overview') + '"]').click();
   }
 
 }
@@ -2387,12 +2389,12 @@ function showAudioVideoPage(data) {
   audioVideoContent += '</video>';
   $tabAudioVideo.append(audioVideoContent);
 
-  $(".content-resources a[href='#" + Settings.hash_obj.que + "']").parent().addClass('active');
+  $("#sidebar-first a[href='#" + Settings.hash_obj.que + "']").parent().addClass('active');
 }
 
 function processPhotos(mtext) {
   $("ul.nav li a[href='#tab-photos'] .badge").text(mtext.match(/(\d+)/)[1]);
-  $(".content-resources ul.nav-pills li.photos").show();
+  $("#sidebar-first ul.nav-pills li.photos").show();
   /*$("#tab-photos").empty();
   $("#tab-photos").append(
     '<p>This is a new test</p>'
@@ -2401,7 +2403,7 @@ function processPhotos(mtext) {
 
 function processVideos(mtext) {
   $("ul.nav li a[href='#tab-audio-video'] .badge").text(mtext.match(/(\d+)/)[1]);
-  $(".content-resources ul.nav-pills li.audio-video").show();
+  $("#sidebar-first ul.nav-pills li.audio-video").show();
   /*$("#tab-photos").empty();
   $("#tab-photos").append(
     '<p>This is a new test</p>'
@@ -2410,7 +2412,7 @@ function processVideos(mtext) {
 
 function processTexts(mtext) {
   $("ul.nav li a[href='#tab-texts'] .badge").text(mtext.match(/(\d+)/)[1]);
-  $(".content-resources ul.nav-pills li.texts").show();
+  $("#sidebar-first ul.nav-pills li.texts").show();
   /*$("#tab-photos").empty();
   $("#tab-photos").append(
     '<p>This is a new test</p>'

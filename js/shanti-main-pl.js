@@ -40,7 +40,7 @@ function processPlacesData(data) {
   $(".page-title span").html(data.feature.header);
 
   //Remove all the active classes from the pills so that their bind functions can trigger
-  $(".content-resources ul.nav-pills li").removeClass("active");
+  $("#sidebar-first ul.nav-pills li").removeClass("active");
 
   //Make the overview tab the default tab on URL Change.
   //$("a[href='#tab-overview']").click();
@@ -52,7 +52,7 @@ function processPlacesData(data) {
   $("ol.breadcrumb").append('<li>' + data.feature.header + '</li>');
 
   //First Hide all the elements from the left hand navigation and then show relevant ones
-  $(".content-resources ul.nav-pills li").hide();
+  $("#sidebar-first ul.nav-pills li").hide();
 
   //Proces the solr index for more left hand content
   var solrURL = 'http://kidx.shanti.virginia.edu/solr/kmindex/select?q=kmapid:places-' + Settings.hash_obj.id + '&fq=&start=0&facets=on&group=true&group.field=service&group.facet=true&group.ngroups=true&group.limit=0&wt=json';
@@ -62,7 +62,7 @@ function processPlacesData(data) {
   //Show overview tab on the left hand column
   
   if (data.feature) {
-    $(".content-resources ul.nav-pills li.overview").show();
+    $("#sidebar-first ul.nav-pills li.overview").show();
     $('a[href="#tab-overview"]').one('show.bs.tab', function(e) {
       $.bbq.pushState({que: $(e.target).attr('href').substr(1)});
       $.bbq.removeState('nid');
@@ -216,7 +216,7 @@ function processPlacesData(data) {
   //Related places within places.
   if (data.feature.associated_resources.related_feature_count > 0) {
     $("ul.nav li a[href='#tab-places'] .badge").text(data.feature.associated_resources.related_feature_count);
-    $(".content-resources ul.nav-pills li.places").show();
+    $("#sidebar-first ul.nav-pills li.places").show();
     $('a[href="#tab-places"]').unbind('show.bs.tab').one('show.bs.tab', function(e) {
       //Push a state to the url hash so we can bookmark it
       $.bbq.pushState({que: $(e.target).attr('href').substr(1)});
@@ -232,7 +232,7 @@ function processPlacesData(data) {
   //Related essays (descriptions) section
   if (data.feature.associated_resources.description_count > 0) {
     $("ul.nav li a[href='#tab-essays'] .badge").text(data.feature.associated_resources.description_count);
-    $(".content-resources ul.nav-pills li.essays").show();
+    $("#sidebar-first ul.nav-pills li.essays").show();
     $('a[href="#tab-essays"]').unbind('show.bs.tab').one('show.bs.tab', function(e) {
       //Push a state to the url hash so we can bookmark it
       $.bbq.pushState({que: $(e.target).attr('href').substr(1)});
@@ -248,7 +248,7 @@ function processPlacesData(data) {
   //Related subjects (descriptions) section
   if (data.feature.associated_resources.subject_count > 0) {
     $("ul.nav li a[href='#tab-subjects'] .badge").text(data.feature.associated_resources.subject_count);
-    $(".content-resources ul.nav-pills li.subjects").show();
+    $("#sidebar-first ul.nav-pills li.subjects").show();
     $('a[href="#tab-subjects"]').unbind('show.bs.tab').one('show.bs.tab', function(e) {
       //Push a state to the url hash so we can bookmark it
       $.bbq.pushState({que: $(e.target).attr('href').substr(1)});
@@ -263,7 +263,7 @@ function processPlacesData(data) {
   //Related photos in places section
   if (data.feature.associated_resources.picture_count > 0) {
     $("ul.nav li a[href='#tab-photos'] .badge").text(data.feature.associated_resources.picture_count);
-    $(".content-resources ul.nav-pills li.photos").show();
+    $("#sidebar-first ul.nav-pills li.photos").show();
     $('a[href="#tab-photos"]').unbind('show.bs.tab').one('show.bs.tab', function(e) {
       //Push a state to the url hash so we can bookmark it
       $.bbq.pushState({que: $(e.target).attr('href').substr(1)});
@@ -292,7 +292,7 @@ function processPlacesData(data) {
   //Related Texts section
   if (data.feature.associated_resources.document_count > 0) {
     $("ul.nav li a[href='#tab-texts'] .badge").text(data.feature.associated_resources.document_count);
-    $(".content-resources ul.nav-pills li.texts").show();
+    $("#sidebar-first ul.nav-pills li.texts").show();
     $('a[href="#tab-texts"]').unbind('show.bs.tab').one('show.bs.tab', function(e) {
       //Push a state to the url hash so we can bookmark it
       $.bbq.pushState({que: $(e.target).attr('href').substr(1)});
