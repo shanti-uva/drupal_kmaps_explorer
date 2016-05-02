@@ -1319,6 +1319,7 @@ function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num=1, $total_p
     'weight' => 1000,
   );
 
+  drupal_add_js($path . '/js/vendor/imagesloaded.pkgd.min.js', $options);
   drupal_add_js($path . '/js/vendor/jquery.actual.min.js', $options);
   drupal_add_js($path . '/js/vendor/photoswipe.js', $options);
   drupal_add_js($path . '/js/vendor/photoswipe-ui-default.js', $options);

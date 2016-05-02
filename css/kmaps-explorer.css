@@ -203,7 +203,6 @@ figcaption .center-caption {
   top: 0.9rem;
 }
 
-
-
-
-
+li.pager-item.widget > form input.form-control {
+  width: 100px !important;
+}

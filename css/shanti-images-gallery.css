@@ -1,4 +1,4 @@
-/* shanti image gallery */ 
+/* shanti image gallery */
 .og-grid{
   list-style: none;
   padding:0;
@@ -29,17 +29,17 @@
 }
 
 .og-grid .item.last-row,
-.og-grid .item.first-item{ 
+.og-grid .item.first-item{
   clear:both;
 }
 
 /* remove margin bottom on last row */
-.last-row, 
+.last-row,
 .last-row ~ .item {
   margin-bottom: 0;
 }
 
-.og-expander{ 
+.og-expander{
   position: absolute !important;
   border-bottom:0.75rem double #eee;
   background: #222;
@@ -237,7 +237,7 @@
   display: none;
 }
 */
-.og-details .nav-tabs>li.active>a,  
+.og-details .nav-tabs>li.active>a,
 .og-details .nav-tabs>li.active>a:hover,
 .og-details .nav-tabs>li.active>a:active {
   color: #c0c0c0;
@@ -254,24 +254,28 @@
 /*-------------------------*/
 /*--- tab #info content ---*/
 /*-------------------------*/
-.og-details #info > ul {
+.og-details #info > ul,
+.og-details #download > ul {
   font-size: 1em;
   margin-top:1rem;
 }
 
-.og-details #info ul {
+.og-details #info ul,
+.og-details #download ul {
   margin: 0 0 0 0.75rem;
   padding: 0;
 }
 
-.og-details #info li {
+.og-details #info li,
+.og-details #download li {
   list-style-type: none;
   color: #aaa;
   margin: 1.5rem 0 0 0;
   padding: 0;
 }
 
-.og-details #info li label {
+.og-details #info li label,
+.og-details #download li label {
   color: #ccc;
   font-size: 0.88em;
   margin-left: 0;
@@ -396,7 +400,7 @@
 }
 
 .og-details .og-view-more:active{
-  background-color:#444;  
+  background-color:#444;
   border: 1px solid #777 !important;
   border-bottom-color: #777 !important;
 }
@@ -532,7 +536,7 @@
   opacity: 1;
   background: #222 !important;
 }
-.pswp__ui--fit .pswp__top-bar, 
+.pswp__ui--fit .pswp__top-bar,
 .pswp__ui--fit .pswp__caption{
   background: transparent;
 }
@@ -548,7 +552,7 @@
 	color:#333 !important;
 }
 
-/**** lightbox 
+/**** lightbox
 .pswp__counter{
   display:none;
 }
@@ -577,7 +581,7 @@
 }
 
 @media screen and (max-width: 750px) {
-  
+
   .og-fullimg {
     padding: 0;
   }
@@ -600,7 +604,7 @@
     height: auto;
   }
 
-  .og-fullimg, 
+  .og-fullimg,
   .og-details {
     display: block;
     width: 100%;
@@ -688,7 +692,7 @@
 /*
 .item {
   float: left;
-  margin-bottom: 15px; 
+  margin-bottom: 15px;
 }
 .item img {
   max-width: 100%;
@@ -702,4 +706,3 @@
   margin-bottom: 0;
 }
 */
-

@@ -2,7 +2,9 @@
 	Drupal.behaviors.shantiImages = {
 	    attach: function (context, settings) {
             if ($("#og-grid", context).length > 0) {
-                Grid.init();
+							$('#og-grid', context).imagesLoaded().always(function(instance) {
+								Grid.init();
+							});
             }
 	    }
 	};

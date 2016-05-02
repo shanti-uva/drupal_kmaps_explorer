@@ -9,38 +9,41 @@
 */
 
 (function ($) {
-var $event = $.event,
-$special,
-resizeTimeout;
+	Drupal.behaviors.kmaps_exlorer_grid2 = {
+		attach: function(context, settings) {
+			var $event = $.event,
+			$special,
+			resizeTimeout;
 
-$special = $event.special.debouncedresize = {
-	setup: function() {
-		$( this ).on( "resize", $special.handler );
-	},
-	teardown: function() {
-		$( this ).off( "resize", $special.handler );
-	},
-	handler: function( event, execAsap ) {
-		// Save the context
-		var context = this,
-			args = arguments,
-			dispatch = function() {
-				// set correct event type
-				event.type = "debouncedresize";
-				$event.dispatch.apply( context, args );
+			$special = $event.special.debouncedresize = {
+				setup: function() {
+					$( this ).on( "resize", $special.handler );
+				},
+				teardown: function() {
+					$( this ).off( "resize", $special.handler );
+				},
+				handler: function( event, execAsap ) {
+					// Save the context
+					var context = this,
+						args = arguments,
+						dispatch = function() {
+							// set correct event type
+							event.type = "debouncedresize";
+							$event.dispatch.apply( context, args );
+						};
+
+					if ( resizeTimeout ) {
+						clearTimeout( resizeTimeout );
+					}
+
+					execAsap ?
+						dispatch() :
+						resizeTimeout = setTimeout( dispatch, $special.threshold );
+				},
+				threshold: 250
 			};
-
-		if ( resizeTimeout ) {
-			clearTimeout( resizeTimeout );
-		}
-
-		execAsap ?
-			dispatch() :
-			resizeTimeout = setTimeout( dispatch, $special.threshold );
-	},
-	threshold: 250
-};
-
+		}//End of attach
+	};
 }) (jQuery);
 
 var Grid = (function($) {
@@ -286,17 +289,23 @@ var Grid = (function($) {
 
 			this.$tabs = $('<ul class="nav nav-tabs" role="tablist">' +
 	   			'<li role="presentation" class="active"><a href="#desc" aria-controls="desc" role="tab" data-toggle="tab">Description</a></li>' +
-	   			'<li role="presentation"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">Details</a></li></ul>');
-	   		this.$desctab = $('<div role="tabpanel" class="tab-pane active" id="desc"></div>').append( this.$title, this.$description, this.$lightboxLink);
-	   		//this.$photographer = $('<li class="photographer">Photographer</li>');
-	   		this.$date = $('<li class="date">Date</li>');
-	   		this.$place = $('<li class="place">Place</li>');
-	   		this.$creator = $('<li class="creator">Photographer</li>');
-	   		this.$dtype = $('<li class="dtype">Type</li>');
-	   		this.$ssid = $('<li class="dtype">Shared Shelf ID</li>');
-	   		this.$infolist = $('<ul></ul>').append(this.$creator, this.$date, this.$place, this.$dtype, this.$ssid);
-	   		this.$infotab = $('<div role="tabpanel" class="tab-pane" id="info"></div>').append(this.$infolist, this.$href);
-	   		this.$tabcontent = $('<div class="tab-content"></div>').append(this.$desctab, this.$infotab);
+					'<li role="presentation"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">Details</a></li>' +
+	   			'<li role="presentation"><a href="#download" aria-controls="info" role="tab" data-toggle="tab">Downloads</a></li></ul>');
+	   	this.$desctab = $('<div role="tabpanel" class="tab-pane active" id="desc"></div>').append( this.$title, this.$description, this.$lightboxLink);
+   		//this.$photographer = $('<li class="photographer">Photographer</li>');
+   		this.$date = $('<li class="date">Date</li>');
+   		this.$place = $('<li class="place">Place</li>');
+   		this.$creator = $('<li class="creator">Photographer</li>');
+   		this.$dtype = $('<li class="dtype">Type</li>');
+   		this.$ssid = $('<li class="dtype">Shared Shelf ID</li>');
+   		this.$infolist = $('<ul></ul>').append(this.$creator, this.$date, this.$place, this.$dtype, this.$ssid);
+   		this.$infotab = $('<div role="tabpanel" class="tab-pane" id="info"></div>').append(this.$infolist, this.$href);
+			//Download tab information
+			this.$hugeDownloadImg = $('<li>Huge Image</li>');
+			this.$largeDownloadImg = $('<li>Large Image</li>');
+			this.$dlInfo = $('<ul></ul>').append(this.$hugeDownloadImg, this.$largeDownloadImg);
+			this.$downloadtab = $('<div role="tabpanel" class="tab-pane" id="download"></div>').append(this.$dlInfo);
+   		this.$tabcontent = $('<div class="tab-content"></div>').append(this.$desctab, this.$infotab, this.$downloadtab);
 			this.$details = $( '<div class="og-details"></div>' ).append(this.$tabs, this.$tabcontent);
 
 			this.$loading = $( '<div class="og-loading"></div>' );
@@ -337,8 +346,8 @@ var Grid = (function($) {
 			var $itemEl = this.$item.children( 'a' ),
 				eldata = {
 					href : $itemEl.attr( 'href' ),
-					largesrc : $itemEl.data( 'largesrc' ),
-					hugesrc : $itemEl.data( 'hugesrc' ),
+					largesrc : $itemEl.data( 'largesrc' ).split('::')[0],
+					hugesrc : $itemEl.data( 'hugesrc' ).split('::')[0],
 					title : $itemEl.data( 'title' ),
 					description : $itemEl.data( 'description' ),
 					creator : $itemEl.data( 'creator' ),
@@ -346,6 +355,8 @@ var Grid = (function($) {
 					place : $itemEl.data( 'place' ),
 					dtype: $itemEl.data('type'),
 					ssid: $itemEl.data('ssid'),
+					placesIds: $itemEl.data('places').split('::'),
+					subjectsIds: $itemEl.data('subjects').split('::'),
 				};
 
 			this.$title.html( eldata.title );
@@ -359,7 +370,10 @@ var Grid = (function($) {
 			this.$place.html( "<label>Location:</label> " + eldata.place );
 			this.$dtype.html("<label>Type:</label> " + eldata.dtype);
 			this.$ssid.html("<label>Shared Shelf ID:</label> " + eldata.ssid);
-
+			this.$hugeDownloadImg.html('<label>Huge Image:</label> ' + '<a href="' + eldata.hugesrc +
+			'" download><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp; Download</a>');
+			this.$largeDownloadImg.html('<label>Large Image:</label> ' + '<a href="' + eldata.largesrc +
+			'" download><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>&nbsp; Download</a>');
 
 			var self = this;
 
@@ -520,4 +534,4 @@ var Grid = (function($) {
 		addItems : addItems
 	};
 
-}) (jQuery);
+})(jQuery);
