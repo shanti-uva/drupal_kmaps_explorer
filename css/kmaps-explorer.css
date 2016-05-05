@@ -4,16 +4,13 @@
 .subjects-bg {
   background-color: #dc3c47;
 }
-
 .places-bg {
   background-color: #4ca6fb;
 }
  -------------------------------------
  */
 
-/* END custom colors */
-
-
+/* Gerard - When you get a chance, replace this class ( kmaps-hidden ) in your html with the Bootstrap version for hiding */
 .kmaps-hidden {
   visibility: hidden;
   display: none;
@@ -145,34 +142,6 @@ figcaption .center-caption {
 }
 
 
-
-
-
-
-
-
-
-
-/**
-* Feedback button
-*/
-.atlwdg-trigger.atlwdg-SUBTLE {
-  position: fixed;
-  right: 10rem !important;
-  border-right: 1px solid #ccc !important;
-  box-shadow: none !important;
-}
-
-.back-to-top {
-  position: fixed;
-  bottom: 4em; /* this seperates button from Kmaps EDIT button */
-} 
-
-#accordion.panel-group{
-  margin-bottom:7rem;
-}
-
-
 /* custom image gallery for kmaps display */
 .og-expander{
   margin-left:1.3rem; 
@@ -184,8 +153,6 @@ figcaption .center-caption {
 .feature-type-wrapper h6{
   text-transform: uppercase !important;
 }
-
-
 
 
 
@@ -251,8 +218,9 @@ figcaption .center-caption {
 }
 
 
-
-
+/**
+* Columnizer Lists
+*/
 .texts-list li,
 .kmaps-list-columns ul li{
   font-family: 'Helvetica Neue',helvetica,arial,sans-serif;
@@ -294,18 +262,13 @@ figcaption .center-caption {
 }
 
 
-
-
 /** 
 * ------------------------------------------------------------------------
 * Page Layouts - the width of content-resource column influences these
 * ------------------------------------------------------------------------
 */
-
 body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-right:15px; padding-top:0.5rem; /* padding:0.5rem 2.75rem 0; */ }
 
-/**
-*** Breakpoints */
 @media screen and (min-width: 992px) {
 
   body:not(.front) .content-section.equal-height.col-md-9 { width: 81%; padding-right:0; }
@@ -322,16 +285,3 @@ body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-r
 }
 /**
 *** END Layouts */
-
-
-
-
-
-
-
-
-
-
-
-
-
