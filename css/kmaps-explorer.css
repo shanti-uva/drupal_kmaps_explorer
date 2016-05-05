@@ -226,6 +226,15 @@ figcaption .center-caption {
   font-family: 'Helvetica Neue',helvetica,arial,sans-serif;
 }
 
+.texts-list li{
+  letter-spacing: 0.015em;
+  line-height: 1.75em;
+}
+
+.kmaps-list-columns h6{
+  text-transform: capitalize;
+}
+
 .texts-list .column:not(.first),
 .kmaps-list-columns .column:not(.first){
   padding-left: 2rem;
@@ -246,7 +255,7 @@ figcaption .center-caption {
 }
 
 .places-in-places.kmaps-list-columns h6{
-  font-size: 0.75em;
+  font-size: 0.82em;
   border: 2px solid #ddd;
   background: #fff;
   padding: 7px 12px 5px;
@@ -254,11 +263,6 @@ figcaption .center-caption {
 
 .kmaps-list-columns .popover-kmaps-tip{
   font-size: 0.1rem;
-}
-
-.texts-list li{
-  letter-spacing: 0.015em;
-  line-height: 1.75em;
 }
 
 

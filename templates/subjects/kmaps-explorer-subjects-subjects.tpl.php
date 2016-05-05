@@ -1,6 +1,6 @@
 <h6><?php print $title; ?></h6>
 <div class="subjects-in-subjects kmaps-list-columns">
-<p><strong>From the General Perspective:</strong></p>
+<h6>From the General Perspective:</h6>
 <h6><?php print ucfirst($aItem->label); ?> (<?php print count($aItem->features); ?>):</h6>
   <?php foreach($data->feature_relation_types as $aItem): ?>
 
