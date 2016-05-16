@@ -7,10 +7,11 @@
 * -------------------------------------------------
 * 
 */
-
+/* This is messing up Rails so hiding for now May 16 2016
 body {
   font-size: inherit;
 }
+*/
 /* Kmaps - Subject Overview image subsection */
 figcaption .center-caption {
   text-align: center;
