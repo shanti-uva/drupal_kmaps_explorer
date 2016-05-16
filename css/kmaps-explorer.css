@@ -43,10 +43,12 @@ figcaption .center-caption {
   line-height: 24px;
   -webkit-transition: all 0.6s ease;
   transition: all 0.6s ease;
+  filter: alpha(opacity=75);
   opacity: 0.75;
 }
 
 .resource-overview-image figure:hover::before {
+  filter: alpha(opacity=0);
   opacity: 0;
 }
 
@@ -61,12 +63,14 @@ figcaption .center-caption {
   background: rgba(0,0,0,0.75);
   color: white;
   padding: 10px 20px;
+  filter: alpha(opacity=0);
   opacity: 0;
   -webkit-transition: all 0.6s ease;
   transition: all 0.6s ease;
 }
 
 .resource-overview-image figure:hover figcaption {
+  filter: alpha(opacity=100);
   opacity: 1;
 }
 
@@ -115,7 +119,7 @@ figcaption .center-caption {
   -webkit-tap-highlight-color: transparent;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   border-collapse: separate;
-  filter: alpha(opacity:85);
+  filter: alpha(opacity=85);
   opacity:0.85;
 }
 
@@ -245,10 +249,12 @@ body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-r
   margin-right: .4rem;
   font-size: 1rem;
   cursor:pointer;
+  filter: alpha(opacity=895);
   opacity: 0.95;
 }
 
 .popover-kmaps:hover{
+  filter: alpha(opacity=100);
   opacity: 1.0;
 }
 
