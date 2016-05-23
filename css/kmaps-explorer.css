@@ -522,8 +522,8 @@ li.pager-item.widget > form input.form-control {
 */
 
 .sidebar-first {
-  padding-left: 0;
-  padding-right: 0;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
   padding-top: 0;
   margin-left: -1.5rem;
   max-width: 14em;
@@ -647,12 +647,16 @@ li.pager-item.widget > form input.form-control {
     width: 18.5rem;
   }
 
+  .row-offcanvas-left.active {
+    left: 18.6rem; /* 6 columns */
+  }
+
   .row-offcanvas-left .sidebar-first {
     left: -17.1rem; /* 6 columns */
   }
 
-  .row-offcanvas-left.active {
-    left: 18.6rem; /* 6 columns */
+  .row-offcanvas-left.active .sidebar-first { 
+    width: 18.5rem; 
   }
 
   .sidebar-first ul.nav-pills li {
