@@ -229,8 +229,8 @@ body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-r
 
 
 
-/**
-* Temporary hacks below this line
+/** 
+* Temporary: popover class name inconsistent with Sarvaka
 */
 
 /* Popovers for subjects and places  */
@@ -294,6 +294,404 @@ body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-r
   color: #555;
   font-family: 'museo-sans-500',helvetica,arial,sans-serif;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Fix for kmaps side-col */
+.no-sidebars.page-places .tab-pane.main-col > div.region-content,
+.no-sidebars.page-subjects .tab-pane.main-col > div.region-content,
+.page-node-devel.page-places .tab-pane.main-col > div.region-content,
+.page-node-devel.page-subjects .tab-pane.main-col > div.region-content {
+  padding-top: 0;
+}
+
+.no-sidebars.page-places .tab-pane.main-col > div.region-content,
+.no-sidebars.page-subjects .tab-pane.main-col > div.region-content,
+.no-sidebars.page-places- .tab-pane.main-col > div.region-content,
+.no-sidebars.page-subjects .tab-pane.main-col > div.region-content {
+  max-width: 100% !important;
+}
+
+
+
+
+
+
+/**
+* BEGIN Overview Page
+*/
+
+.openlayermap {
+  margin-bottom: 1rem;
+}
+
+.openlayermap #sidebar_wrapper {
+  position: absolute;
+  z-index: 100;
+  display: none;
+}
+
+#controlPanelWrapper {
+  float: left;
+  width: 100%;
+  left: 0;
+}
+
+
+.feature-type-wrapper{
+  padding: 1rem 0 0.5rem;
+}
+
+.feature-type-wrapper h6{
+  text-transform:uppercase;
+  font-size:90%;
+}
+
+
+.resource-overview-image {
+  margin: 0 0 1.5rem;
+  /*-webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;*/
+}
+
+
+
+.olControlCustomToggle.olControlNoSelect {
+  width: 160px !important;
+} /* openLayerMap text */
+
+.olControlCustomToggle.olControlNoSelect .custom_toggle_text {
+  width: 160px !important;
+  font-size: 0.75em;
+  white-space: nowrap;
+}
+
+/* --- gmaps-buttons is example of class set on div wrapper ---*/
+.map-renditions {
+  position: relative;
+  height: 600px;
+  margin-bottom: 20px;
+}
+
+.map-renditions > div:nth-of-type(1) {
+  box-shadow: 0 0 5px rgba(0,0,0, 0.125);
+  border-collapse: separate;
+}
+
+.btn-group-gmaps {
+  display: inline-block;
+  position: absolute;
+  bottom: 35px;
+  left: 30px;
+  box-shadow: 0 0 12px 0 rgba(50, 50, 50, 0.4);
+  border-collapse: separate;
+}
+
+.btn-group-gmaps.btn-group > .btn.btn-default {
+  color: #000;
+  background: #eee;
+  border: none;
+  font-size: 0.68em;
+  font-family: 'droidserif',palatino,'Palatino Linotype',georgia,serif;
+  font-weight: bold;
+}
+
+.btn-group-gmaps.btn-group > .btn.btn-default span {
+  background:transparent;
+} 
+
+.btn-group-gmaps.btn-group > .btn.btn-default:not(.active):hover{ 
+  background: #fff;
+}
+
+.btn-group-gmaps.btn-group > .btn.btn-default.active {
+  color: #fff;
+  background: #333;
+  padding-left: 2.5rem;
+  cursor:default;
+}
+
+.btn-group-gmaps.btn-group > .btn.btn-default.active span {
+  border-radius: 0;
+  width: 0;
+  height: 0;
+  line-height: 1;
+  padding: 0;
+}
+
+.btn-group-gmaps.btn-group > .btn.btn-default.active span::before {
+  content: '\e642';
+  position: relative;
+  top: 0.7rem;
+  left: -0.1rem;
+  font-size: 1.32em;
+}
+
+.btn-group-gmaps.btn-group .btn+.btn {
+  margin-left: 0;
+}
+
+.google-maps {
+  position: relative;
+  padding-bottom: 75%;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+ /* aspect ratio fix - temp */
+  height: 0;
+  overflow: hidden;
+}
+
+.google-maps iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+/*------ END from kmaps */
+/*----------------------*/
+
+
+
+
+
+
+
+/* temp fix for icon change on banner */
+.page-places .page-title .shanticon-subjects::before {
+  content: '\e62c';
+  font-size: 95%;
+}
+
+
+
+
+
+
+.modal img {
+  margin-bottom: 1rem;
+  max-width:100%;
+  height:auto;
+}
+
+.modal-header {
+  min-height: 5.5rem;
+}
+
+.modal-header button.close {
+  color: #777;
+  font-size: 4em !important;
+  position: relative;
+  top: -1rem;
+}
+/*.modal-body p:nth-of-type(2),*/
+/*.modal-body p:nth-of-type(3){ display:none;}*/
+p.modal-title {
+  font-size: 110%;
+}
+
+
+
+
+/* pager class convention in kmaps */
+li.pager-item.widget > form,
+li.pager-item.widget > form div,
+li.pager-item.widget > form input {
+  display: inline !important;
+}
+
+li.pager-item.widget > form input.form-control {
+  width: 100px;
+}
+
+
+
+
+/**
+* BEGIN Kmaps Sidebar
+*/
+
+.sidebar-first {
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0;
+  margin-left: -1.5rem;
+  max-width: 14em;
+  background: #fff;
+  min-height: 650px;
+  height: auto;
+  background-image: -webkit-linear-gradient(left, #ccc 0, #ccc 9px, #fff 10px);
+  background-image: linear-gradient(left,#ccc 0,#ccc 9px,#fff 10px);
+}
+
+.sidebar-first .nav-pills {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.sidebar-first .nav-pills li {
+  border-left: 10px solid transparent;
+  margin: 0;
+  padding: 0;
+  font-size: 1.12em;
+  line-height: 3em;
+  height: 3em;
+  position: relative;
+  white-space: nowrap;
+}
+
+.sidebar-first .nav-pills li.active { /* see custom theme colors */ }
+.sidebar-first .nav-pills li a {
+  display: block;
+  padding: 0 0 0 1.2rem;
+  background: #fff;
+  font-size: .75em;
+  line-height: 4.4em;
+  height: 4em;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #e0e0e0;
+  -webkit-transition: background 300ms ease-out;
+  transition: background 300ms ease-out;
+  font-family: 'museo-sans-700',helvetica,arial,sans-serif;
+  font-weight: bold;
+}
+
+.sidebar-first .nav-pills li:first-child a { /*border-top:1px solid #e0e0e0;*/ }
+.sidebar-first .nav-pills li a,
+.sidebar-first .nav-pills li a:hover,
+.sidebar-first .nav-pills li a:active {
+  color: #777;
+}
+
+.sidebar-first .nav-pills li a:hover,
+.sidebar-first .nav-pills li a:active {
+  color: #333;
+  background: #eee;
+}
+
+.sidebar-first .nav-pills li.active a {
+  color: #333;
+  background: #eee;
+}
+
+.sidebar-first .nav-pills li a .icon {
+  margin-right: 0.2em;
+  font-size: 1.68em;
+  position: relative;
+  top: 4px;
+  font-family: 'shanticon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.sidebar-first .nav-pills li a .icon:before {
+  position: relative;
+  top: 0;
+  font-size: 1.75rem;
+}
+
+.sidebar-first .nav-pills li > a > .badge {
+  margin-left: 4px;
+  position: relative;
+  top: -1px;
+  font-size: .82em;
+  font-family: sans-serif;
+  line-height: 1em;
+  height: 1.62em;
+  text-shadow: 0 1px 1px #444;
+  display: inline-block;
+  color: #fff;
+  background: #777;
+}
+
+.sidebar-first .nav-pills li > a:hover > .badge,
+.sidebar-first .nav-pills li.active > a > .badge {
+  background: #505050;
+}
+
+.sidebar-first .nav-pills li > a > .badge:empty {
+  display: none;
+}
+
+.sidebar-first .nav-pills li .ajax-progress {
+  position: absolute;
+  right: 0.2rem;
+  top: 1.5rem;
+}
+
+.sidebar-first .nav-pills li a .icon.shanticon-overview{
+  margin-right: .5em;
+}
+
+
+@media screen and (max-width: 993px) {
+
+  .sidebar-first {
+    width: 18.5rem;
+  }
+
+  .row-offcanvas-left .sidebar-first {
+    left: -17.1rem; /* 6 columns */
+  }
+
+  .row-offcanvas-left.active {
+    left: 18.6rem; /* 6 columns */
+  }
+
+  .sidebar-first ul.nav-pills li {
+    font-size: 1em;
+    line-height: 1em;
+    height: 2.75em;
+  }
+
+  .sidebar-first ul.nav-pills li a {
+    font-size: 0.68em;
+    line-height: 4em;
+    height: 4em;
+    padding: 0 0 0 10px;
+  }
+
+  .sidebar-first ul.nav-pills li.active:first-child a {
+    margin-top: 0;
+  }
+
+  .sidebar-first ul.nav-pills li a .icon {
+    position: relative;
+    top: 4px;
+  }
+
+  .sidebar-first .nav-pills li .ajax-progress {
+    position: absolute;
+    top: 0.8rem;
+  } 
+  
+  /* custom set for resource column */
+  .page-places .view-offcanvas-sidebar.btn-default:nth-child(1),
+  .page-subjects .view-offcanvas-sidebar.btn-default:nth-child(1) {
+    display: inline-block !important;
+  }
+}
+/**
+* END Kmaps Sidebar */
+
+
 
 
 /**
