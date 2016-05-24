@@ -537,7 +537,7 @@ li.pager-item.widget > form input.form-control {
   margin: 0;
 }
 
-.sidebar-first .nav-pills li {
+.sidebar-first .nav-pills > li {
   border-left: 10px solid transparent;
   margin: 0;
   padding: 0;
@@ -548,8 +548,8 @@ li.pager-item.widget > form input.form-control {
   white-space: nowrap;
 }
 
-.sidebar-first .nav-pills li.active { /* see custom theme colors */ }
-.sidebar-first .nav-pills li a {
+.sidebar-first .nav-pills > li.active { /* see custom theme colors */ }
+.sidebar-first .nav-pills > li > a {
   display: block;
   padding: 0 0 0 1.2rem;
   background: #fff;
@@ -565,25 +565,25 @@ li.pager-item.widget > form input.form-control {
   font-weight: bold;
 }
 
-.sidebar-first .nav-pills li:first-child a { /*border-top:1px solid #e0e0e0;*/ }
-.sidebar-first .nav-pills li a,
-.sidebar-first .nav-pills li a:hover,
-.sidebar-first .nav-pills li a:active {
+.sidebar-first .nav-pills > li:first-child > a { /*border-top:1px solid #e0e0e0;*/ }
+.sidebar-first .nav-pills > li > a,
+.sidebar-first .nav-pills > li > a:hover,
+.sidebar-first .nav-pills > li > a:active {
   color: #777;
 }
 
-.sidebar-first .nav-pills li a:hover,
-.sidebar-first .nav-pills li a:active {
+.sidebar-first .nav-pills > li > a:hover,
+.sidebar-first .nav-pills > li > a:active {
   color: #333;
   background: #eee;
 }
 
-.sidebar-first .nav-pills li.active a {
+.sidebar-first .nav-pills > li.active > a {
   color: #333;
   background: #eee;
 }
 
-.sidebar-first .nav-pills li a .icon {
+.sidebar-first .nav-pills > li > a .icon {
   margin-right: 0.2em;
   font-size: 1.68em;
   position: relative;
@@ -598,13 +598,13 @@ li.pager-item.widget > form input.form-control {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.sidebar-first .nav-pills li a .icon:before {
+.sidebar-first .nav-pills > li > a .icon:before {
   position: relative;
   top: 0;
   font-size: 1.75rem;
 }
 
-.sidebar-first .nav-pills li > a > .badge {
+.sidebar-first .nav-pills > li > a > .badge {
   margin-left: 4px;
   position: relative;
   top: -1px;
@@ -618,22 +618,22 @@ li.pager-item.widget > form input.form-control {
   background: #777;
 }
 
-.sidebar-first .nav-pills li > a:hover > .badge,
-.sidebar-first .nav-pills li.active > a > .badge {
+.sidebar-first .nav-pills > li > a:hover > .badge,
+.sidebar-first .nav-pills > li.active > a > .badge {
   background: #505050;
 }
 
-.sidebar-first .nav-pills li > a > .badge:empty {
+.sidebar-first .nav-pills > li > a > .badge:empty {
   display: none;
 }
 
-.sidebar-first .nav-pills li .ajax-progress {
+.sidebar-first .nav-pills > li .ajax-progress {
   position: absolute;
   right: 0.2rem;
   top: 1.5rem;
 }
 
-.sidebar-first .nav-pills li a .icon.shanticon-overview{
+.sidebar-first .nav-pills > li > a .icon.shanticon-overview{
   margin-right: .5em;
 }
 
@@ -656,29 +656,29 @@ li.pager-item.widget > form input.form-control {
     width: 18.5rem; 
   }
 
-  .sidebar-first ul.nav-pills li {
+  .sidebar-first ul.nav-pills > li {
     font-size: 1em;
     line-height: 1em;
     height: 2.75em;
   }
 
-  .sidebar-first ul.nav-pills li a {
+  .sidebar-first ul.nav-pills > li > a {
     font-size: 0.68em;
     line-height: 4em;
     height: 4em;
     padding: 0 0 0 10px;
   }
 
-  .sidebar-first ul.nav-pills li.active:first-child a {
+  .sidebar-first ul.nav-pills > li.active:first-child > a {
     margin-top: 0;
   }
 
-  .sidebar-first ul.nav-pills li a .icon {
+  .sidebar-first ul.nav-pills > li > a .icon {
     position: relative;
     top: 4px;
   }
 
-  .sidebar-first .nav-pills li .ajax-progress {
+  .sidebar-first .nav-pills > li .ajax-progress {
     position: absolute;
     top: 0.8rem;
   } 
