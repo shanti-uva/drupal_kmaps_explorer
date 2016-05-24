@@ -380,7 +380,6 @@ body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-r
 .map-renditions {
   position: relative;
   height: 600px;
-  margin-bottom: 20px;
 }
 
 .map-renditions > div:nth-of-type(1) {
@@ -391,7 +390,7 @@ body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-r
 .btn-group-gmaps {
   display: inline-block;
   position: absolute;
-  bottom: 35px;
+  bottom: 65px;
   left: 30px;
   box-shadow: 0 0 12px 0 rgba(50, 50, 50, 0.4);
   border-collapse: separate;
@@ -494,8 +493,7 @@ body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-r
   position: relative;
   top: -1rem;
 }
-/*.modal-body p:nth-of-type(2),*/
-/*.modal-body p:nth-of-type(3){ display:none;}*/
+
 p.modal-title {
   font-size: 110%;
 }
@@ -520,7 +518,6 @@ li.pager-item.widget > form input.form-control {
 /**
 * BEGIN Kmaps Sidebar
 */
-
 .sidebar-first {
   padding-left: 0 !important;
   padding-right: 0 !important;
