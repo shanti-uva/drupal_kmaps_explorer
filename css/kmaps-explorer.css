@@ -638,7 +638,7 @@ li.pager-item.widget > form input.form-control {
 }
 
 
-@media screen and (max-width: 993px) {
+@media screen and (max-width: 991px) {
 
   .sidebar-first {
     position: absolute;
@@ -685,11 +685,11 @@ li.pager-item.widget > form input.form-control {
     top: 0.8rem;
   } 
   
-  /* custom set for resource column */
+  /* custom set for resource column 
   .page-places .view-offcanvas-sidebar.btn-default:nth-child(1),
   .page-subjects .view-offcanvas-sidebar.btn-default:nth-child(1) {
     display: inline-block !important;
-  }
+  }*/
 }
 /**
 * END Kmaps Sidebar */
