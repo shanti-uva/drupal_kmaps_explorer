@@ -685,11 +685,11 @@ li.pager-item.widget > form input.form-control {
     top: 0.8rem;
   } 
   
-  /* custom set for resource column 
-  .page-places .view-offcanvas-sidebar.btn-default:nth-child(1),
-  .page-subjects .view-offcanvas-sidebar.btn-default:nth-child(1) {
+  /* custom set for resource column */
+  .page-places .view-offcanvas-sidebar.btn-default,
+  .page-subjects .view-offcanvas-sidebar.btn-default {
     display: inline-block !important;
-  }*/
+  }
 }
 /**
 * END Kmaps Sidebar */
