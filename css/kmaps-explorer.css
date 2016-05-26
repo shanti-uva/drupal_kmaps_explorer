@@ -638,11 +638,16 @@ li.pager-item.widget > form input.form-control {
 }
 
 
-@media screen and (max-width: 993px) {
+
+
 
   .sidebar-first {
     width: 18.5rem;
   }
+
+@media screen and (max-width: 993px) {
+
+
 
   .row-offcanvas-left.active {
     /* left: 18.6rem; */ /* 6 columns */
