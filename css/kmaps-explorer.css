@@ -315,11 +315,12 @@ body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-r
   padding-top: 0;
 }
 */
-.no-sidebars.page-places .tab-pane.main-col,
-.no-sidebars.page-subjects .tab-pane.main-col,
-.no-sidebars.page-places- .tab-pane.main-col,
-.no-sidebars.page-subjects .tab-pane.main-col {
+.page-places .tab-pane.main-col,
+.page-subjects .tab-pane.main-col,
+.page-places- .tab-pane.main-col,
+.page-subjects .tab-pane.main-col {
   max-width: 100% !important;
+  padding-top:0;
 }
 
 
@@ -570,13 +571,14 @@ li.pager-item.widget > form input.form-control {
   color: #777;
 }
 
-.sidebar-first .nav-pills > li > a:hover,
-.sidebar-first .nav-pills > li > a:active {
+.sidebar-first .nav-pills > li.active > a {
   color: #333;
   background: #eee;
 }
 
-.sidebar-first .nav-pills > li.active > a {
+.sidebar-first .nav-pills > li > a:hover,
+.sidebar-first .nav-pills > li.active > a:hover,
+.sidebar-first .nav-pills > li > a:active {
   color: #333;
   background: #eee;
 }
