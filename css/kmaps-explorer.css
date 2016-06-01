@@ -307,18 +307,18 @@ body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-r
 
 
 
-/* Fix for kmaps side-col */
+/* Fix for kmaps side-col 
 .no-sidebars.page-places .tab-pane.main-col > div.region-content,
 .no-sidebars.page-subjects .tab-pane.main-col > div.region-content,
 .page-node-devel.page-places .tab-pane.main-col > div.region-content,
 .page-node-devel.page-subjects .tab-pane.main-col > div.region-content {
   padding-top: 0;
 }
-
-.no-sidebars.page-places .tab-pane.main-col > div.region-content,
-.no-sidebars.page-subjects .tab-pane.main-col > div.region-content,
-.no-sidebars.page-places- .tab-pane.main-col > div.region-content,
-.no-sidebars.page-subjects .tab-pane.main-col > div.region-content {
+*/
+.no-sidebars.page-places .tab-pane.main-col,
+.no-sidebars.page-subjects .tab-pane.main-col,
+.no-sidebars.page-places- .tab-pane.main-col,
+.no-sidebars.page-subjects .tab-pane.main-col {
   max-width: 100% !important;
 }
 
