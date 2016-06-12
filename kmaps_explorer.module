@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implemente hook_menu
+ * Implements hook_menu
  */
 
 define('SUBJECTS_URL', 'http://subjects.kmaps.virginia.edu');
@@ -2121,56 +2121,61 @@ function kmaps_explorer_block_view($delta = '') {
 
     switch ($delta) {
         case 'kmaps_explorer_block':
-            //why?
-            drupal_add_library('system', 'drupal.ajax');
+            $domain = arg(0);
+            if ($domain == 'places' || $domain == 'subjects') {
+                $root_kmap_path = ($domain == 'places') ? variable_get('shanti_kmaps_admin_root_places_path') : variable_get('shanti_kmaps_admin_root_subjects_path');
 
-            $block['subject'] = '';
-            $block['content'] = array(
-                '#markup' => theme('kmaps_explorer_block', array(
-                    'forums' => 'f',
-                    'topics' => 't',
-                    'parents' => 'p',
-                    'domain' => 'Places',
-                    'search' => shanti_kmaps_admin_search_field('kmaps-explorer', 'places'),
-                    'filters' => shanti_kmaps_admin_search_filters('kmaps-explorer', 'places'),
-                )),
-                '#attached' => array(
-                    'library' => array(
-                        'system',
-                        'drupal.ajax',
-                    ),
-                    'libraries_load' => array(
-                        array('typeahead'),
-                        array('shanti_kmaps_typeahead'),
-                        array('json2'),
-                        array('fancytree', 'source'),
-                        array('shanti_kmaps_tree'),
-                    ),
-                    'css' => array(
-                        SHANTI_KMAPS_ADMIN_PATH . "/css/shanti_kmaps_filter.css",
-                        SHANTI_KMAPS_ADMIN_PATH . "/css/shanti_kmaps_picklist.css",
-                        SHANTI_KMAPS_ADMIN_PATH . "/css/shanti_kmaps_typeahead.css",
-                        drupal_get_path('module', 'kmaps_explorer') . "/css/kmaps-explorer-block.css",
-                    ),
-                    'js' => array(
-                        SHANTI_KMAPS_ADMIN_PATH . "/js/shanti_kmaps_filter.js",
-                        drupal_get_path('module', 'kmaps_explorer') . "/js/kmaps-explorer-block.js",
-                        array(
-                            'type' => 'setting',
-                            'data' => array(
-                                'shanti_kmaps_admin' => array(
-                                    'kmaps_filter' => array(
-                                        'kmaps-explorer' => array(
-                                            'domain' => 'places', // places should not be hard-coded
-                                            'root_kmap_path' => '',
+                //why?
+                drupal_add_library('system', 'drupal.ajax');
+
+                $block['subject'] = '';
+                $block['content'] = array(
+                    '#markup' => theme('kmaps_explorer_block', array(
+                        'forums' => 'f',
+                        'topics' => 't',
+                        'parents' => 'p',
+                        'domain' => 'Places',
+                        'search' => shanti_kmaps_admin_search_field('kmaps-explorer', $domain),
+                        'filters' => shanti_kmaps_admin_search_filters('kmaps-explorer', $domain),
+                    )),
+                    '#attached' => array(
+                        'library' => array(
+                            'system',
+                            'drupal.ajax',
+                        ),
+                        'libraries_load' => array(
+                            array('typeahead'),
+                            array('shanti_kmaps_typeahead'),
+                            array('json2'),
+                            array('fancytree', 'source'),
+                            array('shanti_kmaps_tree'),
+                        ),
+                        'css' => array(
+                            SHANTI_KMAPS_ADMIN_PATH . "/css/shanti_kmaps_filter.css",
+                            SHANTI_KMAPS_ADMIN_PATH . "/css/shanti_kmaps_picklist.css",
+                            SHANTI_KMAPS_ADMIN_PATH . "/css/shanti_kmaps_typeahead.css",
+                            drupal_get_path('module', 'kmaps_explorer') . "/css/kmaps-explorer-block.css",
+                        ),
+                        'js' => array(
+                            SHANTI_KMAPS_ADMIN_PATH . "/js/shanti_kmaps_filter.js",
+                            drupal_get_path('module', 'kmaps_explorer') . "/js/kmaps-explorer-block.js",
+                            array(
+                                'type' => 'setting',
+                                'data' => array(
+                                    'shanti_kmaps_admin' => array(
+                                        'kmaps_filter' => array(
+                                            'kmaps-explorer' => array(
+                                                'domain' => $domain,
+                                                'root_kmap_path' => $root_kmap_path,
+                                            ),
                                         ),
                                     ),
                                 ),
                             ),
                         ),
                     ),
-                ),
-            );
+                );
+            }
             break;
     }
     return $block;
