@@ -2160,7 +2160,7 @@ function kmaps_explorer_block_view($delta = '') {
                             'data' => array(
                                 'shanti_kmaps_admin' => array(
                                     'kmaps_filter' => array(
-                                        'kmaps-navigator' => array(
+                                        'kmaps-explorer' => array(
                                             'domain' => 'places', // places should not be hard-coded
                                             'root_kmap_path' => '',
                                         ),
