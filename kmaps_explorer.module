@@ -367,7 +367,7 @@ function kmaps_explorer_theme()
         ),
         'kmaps_explorer_block' => array(
             'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates',
-            'template' => 'kmaps_explorer_block',
+            'template' => 'kmaps-explorer-block',
             'variables' => array(
                 'forums' => NULL, 'topics' => NULL, 'parents' => NULL, 'domain' => NULL, 'search' => NULL, 'filters' => NULL,
             ),
