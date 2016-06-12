@@ -4,7 +4,10 @@ core = 7.x
 package = Shanti
 
 files[] = kmaps-explorer.module
+dependencies[] = jquery_update
 dependencies[] = shanti_kmaps_admin
+dependencies[] = shanti_kmaps_typeahead
+dependencies[] = shanti_kmaps_tree
 
 stylesheets[all][] = css/photoswipe.css
 stylesheets[all][] = css/pswp-default-skin.css

@@ -1,0 +1,10 @@
+/* List view results cannot be closed */
+.view-wrap .kmaps-tt-header button.close{
+    display: none;
+    /* visibility: hidden; */
+}
+.view-wrap .kmaps-tt-header:first-of-type{
+    position: relative;
+    height: 60px !important;
+    padding-top:1rem;
+}
