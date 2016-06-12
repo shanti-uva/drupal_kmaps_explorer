@@ -34,7 +34,7 @@
         return this;
     };
 
-    Drupal.behaviors.kmaps_navigator = {
+    Drupal.behaviors.explorer_block = {
         attach: function (context, settings) {
             var admin = settings.shanti_kmaps_admin;
             //console.dir(settings);
@@ -44,9 +44,9 @@
             var base_url = domain == 'subjects' ? admin.shanti_kmaps_admin_server_subjects : admin.shanti_kmaps_admin_server_places;
             var root_kmapid = domain == 'subjects' ? admin.shanti_kmaps_admin_root_subjects_id : admin.shanti_kmaps_admin_root_places_id;
 
-            $('#kmaps-search', context).once('kmaps-navigator').each(function () {
+            $('#kmaps-search', context).once('kmaps-explorer').each(function () {
 
-                var $typeahead = $('#kmaps-navigator-search-term', this);
+                var $typeahead = $('#kmaps-explorer-search-term', this);
                 var search = $typeahead.hasClass('kmap-no-search') ? false : true;
                 var search_key = '';
                 var $tree = $('#tree');
@@ -150,10 +150,10 @@
 
                 $("#searchbutton").on('click', function () {
                     console.log("triggering doSearch!");
-                    $("#kmaps-navigator-search-term").trigger('doSearch');
+                    $("#kmaps-explorer-search-term").trigger('doSearch');
                 })
 
-                $('#kmaps-navigator-search-term').attr('autocomplete', 'off'); // turn off browser autocomplete
+                $('#kmaps-explorer-search-term').attr('autocomplete', 'off'); // turn off browser autocomplete
 
                 $('.listview').on('shown.bs.tab', function () {
 
@@ -231,7 +231,7 @@
                             var countsElem = $("#infowrap" + key + " .counts-display");
 
                             // highlight matching text (if/where they occur).
-                            var txt = $('#kmaps-navigator-search-term').val();
+                            var txt = $('#kmaps-explorer-search-term').val();
                             $('.popover-caption').highlight(txt, {element: 'mark'});
 
                             $.ajax({
@@ -401,7 +401,7 @@
                 };
                 // SOLR AJAX
                 //
-                var kms = $("#kmaps-navigator-search-term"); // the main search input
+                var kms = $("#kmaps-explorer-search-term"); // the main search input
                 $(kms).data("holder", $(kms).attr("placeholder"));
 
                 // --- features inputs - focusin / focusout
