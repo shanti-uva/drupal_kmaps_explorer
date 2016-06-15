@@ -686,8 +686,8 @@ li.pager-item.widget > form input.form-control {
   } 
   
   /* custom set for resource column */
-  .page-places .view-offcanvas-sidebar.btn-default,
-  .page-subjects .view-offcanvas-sidebar.btn-default {
+  .page-places .btn.btn-default.view-offcanvas-sidebar,
+  .page-subjects .btn.btn-default.view-offcanvas-sidebar {
     display: inline-block !important;
   }
 }
