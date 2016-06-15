@@ -8,3 +8,8 @@
     height: 60px !important;
     padding-top:1rem;
 }
+
+/* List results cursor should be a hand */
+.view-wrap .kmaps-tt-suggestion{
+    cursor: pointer;
+}
