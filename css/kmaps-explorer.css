@@ -640,6 +640,8 @@ li.pager-item.widget > form input.form-control {
   padding-top: 0;
   margin-left: -1.5rem;
   background-image: -webkit-linear-gradient(left, #ccc 0, #ccc 9px, #fff 10px);
+  background-image: -moz-linear-gradient(left, #ccc 0, #ccc 9px, #fff 10px);
+  background-image: -o-linear-gradient(left, #ccc 0, #ccc 9px, #fff 10px);
   background-image: linear-gradient(left,#ccc 0,#ccc 9px,#fff 10px);
 }
 
