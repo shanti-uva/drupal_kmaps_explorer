@@ -541,7 +541,7 @@ li.pager-item.widget > form input.form-control {
 .sidebar-first .nav-pills > li > a {
   display: block;
   padding: 0 0 0 1.2rem;
-  background: #fff;
+  /*background: #fff;*/
   font-size: .75em;
   line-height: 4.4em;
   height: 4em;
@@ -634,7 +634,7 @@ li.pager-item.widget > form input.form-control {
   padding-right: 0 !important;
   padding-top: 0;
   margin-left: -1.5rem;
-  max-width: 190px;
+  max-width: 200px;
   background-image: -webkit-linear-gradient(left, #ccc 0, #ccc 9px, #fff 10px);
   background-image: linear-gradient(left,#ccc 0,#ccc 9px,#fff 10px);
 }
@@ -718,8 +718,8 @@ li.pager-item.widget > form input.form-control {
   }
 
   .sidebar-first ul.nav-pills > li > a {
-    font-size: 0.68em;
-    line-height: 4em;
+    font-size: 0.75em;
+    line-height: 4.5em;
     height: 4em;
     padding: 0 0 0 10px;
   }
