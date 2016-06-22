@@ -640,21 +640,16 @@ li.pager-item.widget > form input.form-control {
 
 @media screen and (max-width: 991px) {
 
-  .row.row-offcanvas { position:relative; right:0; -webkit-transition: all .25s ease-out; -o-transition: all .25s ease-out; transition: all .25s ease-out; }
-  .row.row-offcanvas.active { position:relative; left:190px; }
+  .row-offcanvas.row-offcanvas-left { position:relative; right:0; -webkit-transition: all .25s ease-out; -o-transition: all .25s ease-out; transition: all .25s ease-out; }
+  .row-offcanvas.row-offcanvas-left.active { position:relative; left:190px; }
 
-  .row.row-offcanvas .sidebar-first.sidebar-offcanvas { position: absolute; left:-190px; min-width:190px; width:25%; }
+  .row-offcanvas.row-offcanvas-left .sidebar-first.sidebar-offcanvas { position: absolute; left:-190px; min-width:190px; width:25%; }
 
-  .row.row-offcanvas .btn.btn-default.view-offcanvas-sidebar { display: inline-block !important; position:absolute; top:0.7rem; left:-8px; border-radius:0.4rem 0 0 0.4rem;}
-  .row.row-offcanvas.active .btn.btn-default.view-offcanvas-sidebar { position:absolute; top:-0.5rem; left:-3.6rem; }
-  .row.row-offcanvas .btn.btn-default.view-offcanvas-sidebar .icon{ position:relative; top:0.7rem; left:-0.3rem; float:right; }
-  .row.row-offcanvas.active .btn.btn-default.view-offcanvas-sidebar .icon{ position:relative; top:-0.5rem; }
-
+  .row-offcanvas.row-offcanvas-left .btn.btn-default.view-offcanvas-sidebar { display: inline-block !important; position:absolute; left:-8px; border-radius:0.4rem 0 0 0.4rem; }
+  .row-offcanvas.row-offcanvas-left.active .btn.btn-default.view-offcanvas-sidebar { position:absolute; top:-0.5rem; left:-3.6rem; }
+  .row-offcanvas.row-offcanvas-left .btn.btn-default.view-offcanvas-sidebar .icon{ position:relative; top:0; left:-0.3rem; float:right; }
+  .row-offcanvas.row-offcanvas-left.active .btn.btn-default.view-offcanvas-sidebar .icon{ position:relative; top:0; }
   /* END mobile sidebar */
-
-
-
-
 
 
 
@@ -688,11 +683,6 @@ li.pager-item.widget > form input.form-control {
     top: 0.8rem;
   } 
   
-  /* custom set for resource column */
-  .page-places .btn.btn-default.view-offcanvas-sidebar,
-  .page-subjects .btn.btn-default.view-offcanvas-sidebar {
-    display: inline-block !important;
-  }
 }
 /**
 * END Kmaps Sidebar */
