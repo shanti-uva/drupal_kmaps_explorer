@@ -519,6 +519,15 @@ li.pager-item.widget > form input.form-control {
 /**
 * BEGIN Kmaps Sidebar
 */
+.sidebar-first {
+  padding-left: 0 !important; 
+  padding-right: 0 !important;
+  padding-top: 0;
+  margin-left: -1.5rem;
+  max-width: 190px;
+  background-image: -webkit-linear-gradient(left, #ccc 0, #ccc 9px, #fff 10px);
+  background-image: linear-gradient(left,#ccc 0,#ccc 9px,#fff 10px);
+}
 
 .sidebar-first .nav-pills {
   font-weight: bold;
@@ -628,78 +637,18 @@ li.pager-item.widget > form input.form-control {
 
 
 
-/**
-* BEGIN Mobile sidebar display
-*/
-
-.sidebar-first {
-  /* padding control for template issue */
-  padding-left: 0 !important; 
-  padding-right: 0 !important;
-  padding-top: 0;
-  margin-left: -1.5rem;
-  max-width: 190px;
-  background-image: -webkit-linear-gradient(left, #ccc 0, #ccc 9px, #fff 10px);
-  background-image: linear-gradient(left,#ccc 0,#ccc 9px,#fff 10px);
-}
-
-
 
 @media screen and (max-width: 991px) {
 
-  .sidebar-first {
-    position: absolute;
-    top: 0;
-    width: 18.5rem;
-  }
+  .row.row-offcanvas { position:relative; right:0; -webkit-transition: all .25s ease-out; -o-transition: all .25s ease-out; transition: all .25s ease-out; }
+  .row.row-offcanvas.active { position:relative; left:190px; }
 
-  .row-offcanvas.active {
-    /* left: 18.6rem; */ /* 6 columns */
-  }
+  .row.row-offcanvas .sidebar-first.sidebar-offcanvas { position: absolute; left:-190px; min-width:190px; width:25%; }
 
-  .row-offcanvas .sidebar-first {
-    left: -190px;
-  }
-
-  .row-offcanvas-left.active .sidebar-first { 
-    width: 190px; 
-  }
-
-
-
-  /******* migrate from av */
-   /**
-  * BEGIN: custom right-sidebar breakpoint styles 
-  */
-  .row-offcanvas { /* wider breakpoint in AV than in Sarvaka */
-    position: relative;
-    right: 0;
-    -webkit-transition: all .25s ease-out;
-    -o-transition: all .25s ease-out;
-    transition: all .25s ease-out;
-  }
-  .row-offcanvas.active { position: relative; left:190px; }
-
-  .row-offcanvas .sidebar-first.sidebar-offcanvas { left:-190px; position: absolute; width:25%; min-width:190px; }
-
-  .btn.btn-default.view-offcanvas-sidebar { display: inline-block !important; position: absolute; top: 0.7rem; /* adjusted lower */ }
-  .row-offcanvas .btn.btn-default.view-offcanvas-sidebar { left: -8px; border-radius: 0.4rem 0 0 0.4rem;}
-  .row-offcanvas.active .btn.btn-default.view-offcanvas-sidebar { position: absolute;right: -3.6rem;top: -0.5rem; /* adjusted lower */}
-  .row-offcanvas .btn.btn-default.view-offcanvas-sidebar .icon{
-    position: relative;
-    right:0.3rem;
-    top: -0.1rem; /* adjusted lower */
-    /* reverse direction of icon for right-sidebar */
-    -webkit-transform: rotate(180deg);
-    -ms-transform: rotate(180deg);
-    transform: rotate(180deg);
-  }
-  .row-offcanvas .btn.btn-default.view-offcanvas-sidebar .icon { float: right; left: -0.3rem; }
-  .row-offcanvas.active .btn.btn-default.view-offcanvas-sidebar .icon{ position:relative; top:0.7rem; }
-  /**
-  ******** END: custom right-sidebar
-  */
-
+  .row.row-offcanvas .btn.btn-default.view-offcanvas-sidebar { display: inline-block !important; position:absolute; top:0.7rem; left:-8px; border-radius:0.4rem 0 0 0.4rem;}
+  .row.row-offcanvas.active .btn.btn-default.view-offcanvas-sidebar { position:absolute; top:-0.5rem; left:-3.6rem; }
+  .row.row-offcanvas .btn.btn-default.view-offcanvas-sidebar .icon{ position:relative; top:0.7rem; left:-0.3rem; float:right; }
+  .row.row-offcanvas.active .btn.btn-default.view-offcanvas-sidebar .icon{ position:relative; top:-0.5rem; }
 
   /* END mobile sidebar */
 
