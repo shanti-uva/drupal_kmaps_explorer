@@ -628,111 +628,102 @@ li.pager-item.widget > form input.form-control {
 
 
 
-
+/**
+* BEGIN Mobile Sidebar
+*/
 .sidebar-first {
+  
+  max-width: 200px; /* 10px wider than for mobile */
+
   padding-left: 0 !important; 
   padding-right: 0 !important;
   padding-top: 0;
   margin-left: -1.5rem;
-  max-width: 200px;
   background-image: -webkit-linear-gradient(left, #ccc 0, #ccc 9px, #fff 10px);
   background-image: linear-gradient(left,#ccc 0,#ccc 9px,#fff 10px);
 }
 
+/**
+* LEFT BUTTON - Note: simplified class selector to just 'row-offcanvas' for Kmaps template
+*/
+.row-offcanvas .btn.btn-default.view-offcanvas-sidebar { left: -8px; }
 
-  /**
-  * LEFT BUTTON - Note: simplified class selector to just 'row-offcanvas' for Kmaps template
-  */
-  .row-offcanvas .btn.btn-default.view-offcanvas-sidebar { left: -8px; }
+.row-offcanvas.active .btn.btn-default.view-offcanvas-sidebar {
+  position: absolute;
+  left: -3.6rem;
+  top: -0.7rem;
+  color: #000;
+  filter: alpha(opacity=100);
+  opacity: 1;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
 
-  .row-offcanvas.active .btn.btn-default.view-offcanvas-sidebar {
-    position: absolute;
-    left: -3.6rem;
-    top: -0.7rem;
-    color: #000;
-    filter: alpha(opacity=100);
-    opacity: 1;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-  }
+.row-offcanvas.active .btn.btn-default.view-offcanvas-sidebar .icon {
+  color: #777;
+  font-size: 1.5rem;
+  position: relative;
+  top: 0.4rem;
+  left: -1.3rem;
+}
 
-  .row-offcanvas.active .btn.btn-default.view-offcanvas-sidebar .icon {
-    color: #777;
-    font-size: 1.5rem;
-    position: relative;
-    top: 0.4rem;
-    left: -0.3rem;
-  }
+.row-offcanvas.active .btn.btn-default.view-offcanvas-sidebar .icon::before,
+.row-offcanvas.active .btn.btn-default.view-offcanvas-sidebar .icon::after {
+  background: #aaa;
+  position: absolute;
+  top: 0rem;
+  left: .2rem;
+  width: 1.5rem;
+  height: 0.2rem;
+  content: '';
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
 
-  .row-offcanvas.active .btn.btn-default.view-offcanvas-sidebar .icon::before,
-  .row-offcanvas.active .btn.btn-default.view-offcanvas-sidebar .icon::after {
-    background: #aaa;
-    position: absolute;
-    top: 0rem;
-    left: .2rem;
-    width: 1.5rem;
-    height: 0.2rem;
-    content: '';
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-  }
+.row-offcanvas.active .btn.btn-default.view-offcanvas-sidebar .icon::after {
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
 
-  .row-offcanvas.active .btn.btn-default.view-offcanvas-sidebar .icon::after {
-    -webkit-transform: rotate(-45deg);
-    -ms-transform: rotate(-45deg);
-    transform: rotate(-45deg);
-  }
-
-  .row-offcanvas.active .btn.btn-default.view-offcanvas-sidebar:hover .icon::before,
-  .row-offcanvas.active .btn.btn-default.view-offcanvas-sidebar:hover .icon::after {
-    background: #444;
-  }
+.row-offcanvas.active .btn.btn-default.view-offcanvas-sidebar:hover .icon::before,
+.row-offcanvas.active .btn.btn-default.view-offcanvas-sidebar:hover .icon::after {
+  background: #444;
+}
 
 
 @media screen and (max-width: 991px) {
 
   .sidebar-first { margin-left:0; }
-
   .row-offcanvas { position:relative; right:0; /*-webkit-transition: all .25s ease-out; -o-transition: all .25s ease-out; transition: all .25s ease-out;*/ }
-  .row-offcanvas.active { position:relative; left:180px; }
-
+  .row-offcanvas.active { position:relative; left:190px; }
   .row-offcanvas .sidebar-first.sidebar-offcanvas { position:absolute; left:-190px; min-width:190px; max-width:190px; width:25%; }
-
   .row-offcanvas .btn.btn-default.view-offcanvas-sidebar { display: inline-block !important; position:absolute; left:-8px; top:-0.5rem; border-radius: 0 0.4rem 0.4rem 0; }
   .row-offcanvas.active .btn.btn-default.view-offcanvas-sidebar { position:absolute; top:-0.5rem; left:-2.6rem; }
   .row-offcanvas .btn.btn-default.view-offcanvas-sidebar .icon{ position:relative; top:0; left:-0.3rem; float:right; }
   .row-offcanvas.active .btn.btn-default.view-offcanvas-sidebar .icon{ position:relative; top:0; }
   /* END mobile sidebar */
 
-
-
-  /**
-  * BEGIN sidebar resource link list 
-  */
   .sidebar-first ul.nav-pills > li {
     font-size: 1em;
     line-height: 1em;
     height: 2.75em;
   }
-
   .sidebar-first ul.nav-pills > li > a {
     font-size: 0.75em;
     line-height: 4.5em;
     height: 4em;
     padding: 0 0 0 10px;
   }
-
   .sidebar-first ul.nav-pills > li.active:first-child > a {
     margin-top: 0;
   }
-
   .sidebar-first ul.nav-pills > li > a .icon {
     position: relative;
     top: 4px;
   }
-
   .sidebar-first .nav-pills > li .ajax-progress {
     position: absolute;
     top: 0.8rem;
