@@ -645,6 +645,10 @@ li.pager-item.widget > form input.form-control {
   background-image: linear-gradient(left,#ccc 0,#ccc 9px,#fff 10px);
 }
 
+.sidebar-first.sidebar-offcanvas{
+  min-height:1200px;
+}
+
 /**
 * LEFT BUTTON - Note: simplified class selector to just 'row-offcanvas' for Kmaps template
 */
