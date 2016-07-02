@@ -632,7 +632,6 @@ li.pager-item.widget > form input.form-control {
 * BEGIN Mobile Sidebar
 */
 .sidebar-first {
-  
   max-width: 200px; /* 10px wider than for mobile */
 
   padding-left: 0 !important; 
@@ -647,6 +646,7 @@ li.pager-item.widget > form input.form-control {
 
 .sidebar-first.sidebar-offcanvas{
   min-height:600px;
+  background-color: #fff;
 }
 
 /**
