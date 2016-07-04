@@ -538,11 +538,13 @@ li.pager-item.widget > form input.form-control {
 }
 
 .sidebar-first .nav-pills > li.active { /* see custom theme colors */ }
+
 .sidebar-first .nav-pills > li > a {
   display: block;
   padding: 0 0 0 1.2rem;
   /*background: #fff;*/
   font-size: .75em;
+  color: #777;
   line-height: 4.4em;
   height: 4em;
   border: none;
@@ -555,10 +557,13 @@ li.pager-item.widget > form input.form-control {
 }
 
 .sidebar-first .nav-pills > li:first-child > a { /*border-top:1px solid #e0e0e0;*/ }
-.sidebar-first .nav-pills > li > a,
+
+/*.sidebar-first .nav-pills > li > a,*/
 .sidebar-first .nav-pills > li > a:hover,
-.sidebar-first .nav-pills > li > a:active {
+.sidebar-first .nav-pills > li > a:active,
+.sidebar-first .nav-pills > li > a:focus {
   color: #777;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .sidebar-first .nav-pills > li.active > a {
@@ -568,7 +573,8 @@ li.pager-item.widget > form input.form-control {
 
 .sidebar-first .nav-pills > li > a:hover,
 .sidebar-first .nav-pills > li.active > a:hover,
-.sidebar-first .nav-pills > li > a:active {
+.sidebar-first .nav-pills > li > a:active,
+.sidebar-first .nav-pills > li > a:focus {
   color: #333;
   background: #eee;
 }
