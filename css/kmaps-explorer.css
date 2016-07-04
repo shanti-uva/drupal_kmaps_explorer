@@ -650,7 +650,7 @@ li.pager-item.widget > form input.form-control {
 }
 
 .sidebar-first.sidebar-offcanvas{
-  min-height:600px;
+  /*min-height:600px;*/
   background-color: #fff;
 }
 
