@@ -560,8 +560,7 @@ li.pager-item.widget > form input.form-control {
 
 /*.sidebar-first .nav-pills > li > a,*/
 .sidebar-first .nav-pills > li > a:hover,
-.sidebar-first .nav-pills > li > a:active,
-.sidebar-first .nav-pills > li > a:focus {
+.sidebar-first .nav-pills > li > a:active {
   color: #777;
   border-bottom: 1px solid #e0e0e0;
 }
