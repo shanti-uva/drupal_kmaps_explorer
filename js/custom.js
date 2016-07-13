@@ -1,9 +1,9 @@
 (function ($) {
   Drupal.behaviors.kmapsExplorerCustom = {
     attach: function (context, settings) {
-      var $related = $('.content-resources > ul.nav-pills > li a');
+      var $related = $('#sidebar-first > ul.nav-pills > li a');
       $related.click(function () {
-        $('.content-resources > ul.nav-pills > li').removeClass("active");
+        $('#sidebar-first > ul.nav-pills > li').removeClass("active");
         $(this).parent().addClass("active");
       });
 
@@ -20,8 +20,16 @@
         window.location.href = location.href;
       });
 
-      //Functionality for columnizer
-      $('ul.texts-list,div.places-in-places,div.subjects-in-subjects', context).columnize({width: 350});
+      // Functionality for columnizer
+      $('.kmaps-list-columns:not(.subjects-in-places)', context).columnize({
+            width: 330,
+            lastNeverTallest : true
+      });
+      // dontsplit = don't break these headers
+      $('.places-in-places').find('.column > h6, .column > ul > li, .column ul').addClass("dontsplit");
+      // dontend = don't end column with headers
+      $('.places-in-places').find('.column > h6, .column > ul > li').addClass("dontend");
+      
 
       //Functionality for popovers
       $('.popover-kmaps', context).each(function() {

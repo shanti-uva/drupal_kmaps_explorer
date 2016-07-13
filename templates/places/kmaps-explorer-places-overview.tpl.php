@@ -32,7 +32,7 @@
   </div>
 <?php endif; ?>
 
-<aside class="panel-group" id="accordion">
+<div class="panel-group" id="accordion">
   <section class="panel panel-default">
     <div class="panel-heading">
       <h6>
@@ -111,4 +111,4 @@
     </div>
   </section>
   <?php endif; ?>
-</aside>
+</div>
