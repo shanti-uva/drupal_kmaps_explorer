@@ -105,6 +105,7 @@ jQuery(function($) {
 
 
 // *** SEARCH *** toggle button
+/*
 jQuery(function($) {
   if (!$(".extruder.right").hasClass("isOpened")) {
         $(".flap").click( function() {
@@ -128,6 +129,7 @@ jQuery(function($) {
 //    console.dir($._data($('#searchy').get(0).events));
 
 });
+*/
 /*
 function decorateElementWithPopover(elem, node) {
 
