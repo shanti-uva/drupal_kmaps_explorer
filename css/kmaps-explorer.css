@@ -218,7 +218,7 @@ body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-r
 
 @media screen and (min-width: 1300px) {
 
-  body:not(.front) .content-section.equal-height.col-md-9 { width: 85.5%; }
+  body:not(.front) .content-section.equal-height.col-md-9 { width: 85%; }
 }
 /**
 *** END Layouts */

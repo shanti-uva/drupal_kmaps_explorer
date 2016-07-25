@@ -105,7 +105,7 @@ jQuery(function($) {
 
 
 // *** SEARCH *** toggle button
-/*
+/* ------- mf8yk Removed on July 24, 2016
 jQuery(function($) {
   if (!$(".extruder.right").hasClass("isOpened")) {
         $(".flap").click( function() {
