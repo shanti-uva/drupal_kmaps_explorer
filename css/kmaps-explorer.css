@@ -200,9 +200,9 @@ figcaption .center-caption {
 
 
 /** 
-* ------------------------------------------------------------------------
-* Page Layouts - the width of content-resource column influences these
-* ------------------------------------------------------------------------
+* -------------------------------------------------------------------------------
+* Page Layouts - the width of content-resource column - maximizes map viewing
+* -------------------------------------------------------------------------------
 */
 body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-right:15px; padding-top:0.5rem; /* padding:0.5rem 2.75rem 0; */ }
 
@@ -218,8 +218,24 @@ body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-r
 
 @media screen and (min-width: 1300px) {
 
-  body:not(.front) .content-section.equal-height.col-md-9 { width: 85%; }
+  body:not(.front) .content-section.equal-height.col-md-9 { width: 85.5%; }
 }
+
+@media screen and (min-width: 1600px) {
+
+  body:not(.front) .content-section.equal-height.col-md-9 { width: 88%; }
+}
+
+@media screen and (min-width: 1900px) {
+
+  body:not(.front) .content-section.equal-height.col-md-9 { width: 90%; }
+}
+
+@media screen and (min-width: 2250px) {
+
+  body:not(.front) .content-section.equal-height.col-md-9 { width: 91.5%; }
+}
+
 /**
 *** END Layouts */
 
