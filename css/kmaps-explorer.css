@@ -670,6 +670,10 @@ li.pager-item.widget > form input.form-control {
   background-color: #fff;
 }
 
+.sidebar, .main-wrapper{
+  min-height:auto;
+}
+
 /**
 * LEFT BUTTON - Note: simplified class selector to just 'row-offcanvas' for Kmaps template
 */
