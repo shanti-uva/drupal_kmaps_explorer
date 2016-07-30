@@ -213,7 +213,7 @@ body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-r
 
 @media screen and (min-width: 1100px) {
 
-  body:not(.front) .content-section.equal-height.col-md-9 { width: 83%; }
+  body:not(.front) .content-section.equal-height.col-md-9 { width: 82.5%; }
 }
 
 @media screen and (min-width: 1300px) {
