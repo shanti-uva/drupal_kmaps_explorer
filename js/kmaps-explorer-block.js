@@ -84,7 +84,7 @@
                         sort: 'header_s ASC', // sort even when there's a search term
                         filters: admin.shanti_kmaps_admin_solr_filter_query ? admin.shanti_kmaps_admin_solr_filter_query : '',
                         no_results_msg: 'Showing the whole tree.'
-                    }).kmapsTypeahead('onSuggest',
+                    }/*).kmapsTypeahead('onSuggest',
                         function (suggestions) {
                             if (suggestions.length == 0) {
                                 $tree.kmapsTree('reset', function () {
@@ -104,18 +104,9 @@
                                         }
                                     );
                                 }
-                                /* $tree.kmapsTree('showPaths',
-                                 $.map(suggestions, function (val) {
-                                 return '/' + val['doc']['ancestor_id_path'];
-                                 }),
-                                 function () {
-                                 // scroll to top - doesn't work
-                                 $tree.fancytree('getTree').getNodeByKey(root_kmapid).scrollIntoView(true);
-                                 }
-                                 ); */
                             }
                         }
-                    ).kmapsTypeahead('mergeParams', {
+                    */).kmapsTypeahead('mergeParams', {
                             'facet': true,
                             'facet.field': KMapsUtil.getLevelFacetParams(root_kmapid, 2)
                         }
