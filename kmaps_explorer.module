@@ -2159,6 +2159,7 @@ function kmaps_explorer_block_view($delta = '') {
                         'js' => array(
                             SHANTI_KMAPS_ADMIN_PATH . "/js/shanti_kmaps_filter.js",
                             drupal_get_path('module', 'kmaps_explorer') . "/js/kmaps-explorer-block.js",
+                            SHANTI_KMAPS_ADMIN_PATH . "/js/shanti_kmaps_typeahead.js",
                             array(
                                 'type' => 'setting',
                                 'data' => array(
