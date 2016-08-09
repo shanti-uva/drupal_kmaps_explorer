@@ -392,39 +392,11 @@
                 };
                 // SOLR AJAX
                 //
-                var kms = $("#kmaps-explorer-search-term"); // the main search input
-                $(kms).data("holder", $(kms).attr("placeholder"));
 
-                // --- features inputs - focusin / focusout
-                $(kms).focusin(function () {
-                    $(kms).attr("placeholder", "");
-                    $("button.searchreset").show("fast");
-                });
-                $(kms).focusout(function () {
-                    $(kms).attr("placeholder", $(kms).data("holder"));
-                    $("button.searchreset").hide();
-
-                    var str = "Enter Search...";
-                    var txt = $(kms).val();
-
-                    if (str.indexOf(txt) > -1) {
-                        $("button.searchreset").hide();
-                        return true;
-                    } else {
-                        $("button.searchreset").show(100);
-                        return false;
-                    }
-                });
                 // --- close and clear all
-                $("button.searchreset").click(function () {
-                    $(kms).attr("placeholder", $(kms).data("holder"));
-                    $("button.searchreset").hide();
-                    $(".alert").hide();
-                    //    console.log("clearFilter()");
-                    searchUtil.clearSearch();
-                    $('#tree').fancytree("getTree").clearFilter();
+                //  searchUtil.clearSearch();
+                //  $('#tree').fancytree("getTree").clearFilter();
 
-                });
                 // If there is a error node in fancytree.  Then you can click it to retry.
                 $('#tree').on('click', '.fancytree-statusnode-error', function () {
                     $('#tree').fancytree();
