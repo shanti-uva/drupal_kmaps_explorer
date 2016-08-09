@@ -2153,13 +2153,14 @@ function kmaps_explorer_block_view($delta = '') {
                         'css' => array(
                             SHANTI_KMAPS_ADMIN_PATH . "/css/shanti_kmaps_filter.css",
                             SHANTI_KMAPS_ADMIN_PATH . "/css/shanti_kmaps_picklist.css",
+                            SHANTI_KMAPS_ADMIN_PATH . "/css/shanti_kmaps_xbutton.css",
                             SHANTI_KMAPS_ADMIN_PATH . "/css/shanti_kmaps_typeahead.css",
                             drupal_get_path('module', 'kmaps_explorer') . "/css/kmaps-explorer-block.css",
                         ),
                         'js' => array(
                             SHANTI_KMAPS_ADMIN_PATH . "/js/shanti_kmaps_filter.js",
+                            SHANTI_KMAPS_ADMIN_PATH . "/js/shanti_kmaps_xbutton.js",
                             drupal_get_path('module', 'kmaps_explorer') . "/js/kmaps-explorer-block.js",
-                            SHANTI_KMAPS_ADMIN_PATH . "/js/shanti_kmaps_typeahead.js",
                             array(
                                 'type' => 'setting',
                                 'data' => array(
