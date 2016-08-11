@@ -188,7 +188,7 @@ figcaption .center-caption {
 }
 
 .places-in-places.kmaps-list-columns h6{
-  font-size: 0.82em;
+  font-size: 0.88em;
   border: 2px solid #ddd;
   background: #fff;
   padding: 7px 12px 5px;
@@ -204,7 +204,8 @@ figcaption .center-caption {
 * Page Layouts - the width of content-resource column - maximizes map viewing
 * -------------------------------------------------------------------------------
 */
-body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-right:15px; padding-top:0.5rem; /* padding:0.5rem 2.75rem 0; */ }
+body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-right:15px; padding-top:0.5rem; }
+
 
 @media screen and (min-width: 992px) {
 
