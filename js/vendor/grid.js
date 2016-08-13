@@ -104,9 +104,8 @@ var Grid = (function($) {
 		var res = $("#og-grid").rowGrid({itemSelector: ".item", minMargin: 10, resize: true, maxMargin: 10, firstItemClass: "first-item"});
 		// iterate through grid children (= div.item) and set their <a> heights
         res.children('.item').each(function(key, value) {
-            $(this).css({"height": "165px"});
-            var mya = $(this).children('a').eq(0);
-            mya.css( {"height" : "165px", "display" : "block" } );
+						var mya = $(this).children('a').eq(0);
+						mya.css( {"height" : $(this).height(), "display" : "block" } );
         });
 	}
 
@@ -284,7 +283,8 @@ var Grid = (function($) {
 			// create Preview structure:
 			this.$title = $( '<h3></h3>' );
 			this.$description = $( '<p></p>' );
-			this.$href = $( '<a href="#" class="og-details-more og-view-more"><span class="icon shanticon-list2">Read More</span></a>' );
+			this.$href = $( '<a href="#" class="og-details-more og-view-more images-show-more-modal"><span class="icon shanticon-list2">Read More</span></a>' );
+			this.$copyurl = $('<button class="copyurl"><span><i class="fa fa-clipboard" aria-hidden="true"></i> Copy URL</span></button>');
 			this.$lightboxLink = $( '<a href="#" class="lightbox-link btn-lightbox og-view-more"><span class="icon fa-expand">View Full Screen</span></a>' );
 
 			this.$tabs = $('<ul class="nav nav-tabs" role="tablist">' +
@@ -299,7 +299,7 @@ var Grid = (function($) {
    		this.$dtype = $('<li class="dtype">Type</li>');
    		this.$ssid = $('<li class="dtype">Shared Shelf ID</li>');
    		this.$infolist = $('<ul></ul>').append(this.$creator, this.$date, this.$place, this.$dtype, this.$ssid);
-   		this.$infotab = $('<div role="tabpanel" class="tab-pane" id="info"></div>').append(this.$infolist, this.$href);
+   		this.$infotab = $('<div role="tabpanel" class="tab-pane" id="info"></div>').append(this.$infolist, this.$href, this.$copyurl);
 			//Download tab information
 			this.$hugeDownloadImg = $('<li>Huge Image</li>');
 			this.$largeDownloadImg = $('<li>Large Image</li>');
@@ -325,7 +325,6 @@ var Grid = (function($) {
 			}
 		},
 		update : function( $item ) {
-
 			if( $item ) {
 				this.$item = $item;
 			}
@@ -344,26 +343,31 @@ var Grid = (function($) {
 
 			// update preview´s content
 			var $itemEl = this.$item.children( 'a' ),
-				eldata = {
-					href : $itemEl.attr( 'href' ),
-					largesrc : $itemEl.data( 'largesrc' ).split('::')[0],
-					hugesrc : $itemEl.data( 'hugesrc' ).split('::')[0],
-					title : $itemEl.data( 'title' ),
-					description : $itemEl.data( 'description' ),
-					creator : $itemEl.data( 'creator' ),
-					date : $itemEl.data( 'date' ),
-					place : $itemEl.data( 'place' ),
-					dtype: $itemEl.data('type'),
-					ssid: $itemEl.data('ssid'),
-					placesIds: $itemEl.data('places').split('::'),
-					subjectsIds: $itemEl.data('subjects').split('::'),
-				};
+					eldata = {
+						href : $itemEl.attr( 'href' ),
+						largesrc : $itemEl.data( 'largesrc' ).toString().split('::')[0],
+						hugesrc : $itemEl.data( 'hugesrc' ).toString().split('::')[0],
+						title : $itemEl.data( 'title' ),
+						description : $itemEl.data( 'description' ),
+						creator : $itemEl.data( 'creator' ),
+						date : $itemEl.data( 'date' ),
+						place : $itemEl.data( 'place' ),
+						dtype: $itemEl.data('type'),
+						ssid: $itemEl.data('ssid'),
+						placesIds: $itemEl.data('places').toString(),
+						subjectsIds: $itemEl.data('subjects').toString()
+					};
 
 			this.$title.html( eldata.title );
 			this.$description.html( eldata.description );
 
 			var lnktxt = (eldata.dtype == 'pdf') ? "View PDF" : "Read more";
-			this.$href.html('<span>' + lnktxt + '</span>').attr( 'href', eldata.href );
+			this.$href.html('<span>' + lnktxt + '</span>').attr({
+				"href": "#imagesModal",
+				"data-toggle": "modal",
+				"data-places": eldata.placesIds,
+				"data-subjects": eldata.subjectsIds
+			});
 
 			this.$creator.html( "<label>Photographer:</label> " + eldata.creator );
 			this.$date.html( "<label>Date:</label> " + eldata.date );
@@ -433,6 +437,32 @@ var Grid = (function($) {
 				}).attr( 'src', eldata.largesrc );
 			}
 
+			//Functionality for images to show modal for more information
+			$('#imagesModal').off();
+			$('#imagesModal').on('show.bs.modal', function(e) {
+				var placesArray = eldata.placesIds.split('::');
+				var subjectsArray = eldata.subjectsIds.split('::');
+				var entities = '';
+				placesArray.forEach(function(el, ind, arry) {
+					entities += 'id:places-' + el + '%20OR%20';
+				});
+				subjectsArray.forEach(function(el, ind, arry) {
+					entities += 'id:subjects-' + el + '%20OR%20';
+				});
+				entities = entities.substring(0, entities.length - '%20OR%20'.length);
+				var url = 'http://kidx.shanti.virginia.edu/solr/termindex-dev-update/select?q=' + entities + '&wt=json';
+				$.get(url, function(data) {
+					data = $.parseJSON(data);
+					$('#imagesModal .images-modal-title').html(eldata.title);
+					$('#imagesModal .images-modal-body').html(relatedPlacesSubjects(data));
+				});
+			});
+
+			//Clipboard copy Functionality
+			$('button.copyurl').click(function() {
+				clipboard.copy(window.location.href);
+			});
+
 		},
 		open : function() {
 
@@ -443,8 +473,11 @@ var Grid = (function($) {
 				this.positionPreview();
 			}, this ), 25 );
 
+
+
 		},
 		close : function() {
+			$('#imagesModal').off();
 
 			var self = this,
 				onEndFn = function() {
@@ -533,5 +566,24 @@ var Grid = (function($) {
 		init : init,
 		addItems : addItems
 	};
+
+	//Utility groupBy function to split items into places and subjects;
+	function groupBy(arr, property) {
+	  return arr.reduce(function(memo, x) {
+	    if (!memo[x[property]]) { memo[x[property]] = []; }
+	    memo[x[property]].push(x);
+	    return memo;
+	  }, {});
+	}
+
+	//Create markup to return for the related images places and subjects.
+	function relatedPlacesSubjects(data) {
+		var docs = data.response.docs;
+		var relatedObjects = groupBy(docs, 'tree');
+		var template = $('#imagesInfo').html();
+		var templateScript = Handlebars.compile(template);
+		var html = templateScript(relatedObjects);
+		return html;
+	}
 
 })(jQuery);

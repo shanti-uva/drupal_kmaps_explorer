@@ -29,7 +29,7 @@
       $('.places-in-places').find('.column > h6, .column > ul > li, .column ul').addClass("dontsplit");
       // dontend = don't end column with headers
       $('.places-in-places').find('.column > h6, .column > ul > li').addClass("dontend");
-      
+
 
       //Functionality for popovers
       $('.popover-kmaps', context).each(function() {
@@ -151,6 +151,35 @@
 
         Drupal.ajax[base] = new Drupal.ajax(base, this, element_settings);
         $(this).click();
+      });
+
+      //Extend handlebars to support comparison Functionality
+      Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
+        switch (operator) {
+          case '==':
+            return (v1 == v2) ? options.fn(this) : options.inverse(this);
+          case '===':
+            return (v1 === v2) ? options.fn(this) : options.inverse(this);
+          case '<':
+            return (v1 < v2) ? options.fn(this) : options.inverse(this);
+          case '<=':
+            return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+          case '>':
+            return (v1 > v2) ? options.fn(this) : options.inverse(this);
+          case '>=':
+            return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+          case '&&':
+            return (v1 && v2) ? options.fn(this) : options.inverse(this);
+          case '||':
+            return (v1 || v2) ? options.fn(this) : options.inverse(this);
+          default:
+            return options.inverse(this);
+        }
+      });
+
+      //Extend handlebars to support increment function
+      Handlebars.registerHelper("inc", function(value, options) {
+        return parseInt(value) + 1;
       });
 
     }

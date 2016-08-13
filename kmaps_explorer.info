@@ -15,5 +15,6 @@ stylesheets[all][] = css/shanti-images-gallery.css
 
 stylesheets[all][] = css/kmaps-explorer.css
 
+scripts[] = js/handlebars.min-latest.js
 scripts[] = js/jquery.columnizer.min.js
 scripts[] = js/custom-ajax.js
