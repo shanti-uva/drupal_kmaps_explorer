@@ -1337,17 +1337,19 @@ function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num = 1, $total
         'group' => CSS_THEME,
     );
     /**
-     *  drupal_add_css($path . '/css/grid-components.css', $options);
-     *  drupal_add_css($path . '/css/photoswipe.css', $options);
-     *  drupal_add_css($path . '/css/pswp-default-skin.css', $options);
-     *  drupal_add_css($path . '/css/shanti-images-gallery.css', $options);
-     **/
+    *  drupal_add_css($path . '/css/grid-components.css', $options);
+    *  drupal_add_css($path . '/css/photoswipe.css', $options);
+    *  drupal_add_css($path . '/css/pswp-default-skin.css', $options);
+    *  drupal_add_css($path . '/css/shanti-images-gallery.css', $options);
+    **/
     $options = array(
         'group' => JS_THEME,
         'weight' => 1000,
     );
 
+    drupal_add_js($path . '/js/vendor/imagesloaded.pkgd.min.js', $options);
     drupal_add_js($path . '/js/vendor/jquery.actual.min.js', $options);
+    drupal_add_js($path . '/js/vendor/clipboard.min.js', $options);
     drupal_add_js($path . '/js/vendor/photoswipe.js', $options);
     drupal_add_js($path . '/js/vendor/photoswipe-ui-default.js', $options);
     drupal_add_js($path . '/js/vendor/jquery.row-grid.js', $options);
@@ -1370,7 +1372,7 @@ function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num = 1, $total
 
     drupal_add_js($countsettings, 'setting');
 
-    if ($type == 'ajax') {
+    if($type == 'ajax') {
         $total_items = intval($_SESSION['kmaps_explorer']['kmaps_explorer_places_photos_count']);
         $total_pages = intval($total_items / $photosObj->place->per_page);
 

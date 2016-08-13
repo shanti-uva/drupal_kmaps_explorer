@@ -1,11 +1,11 @@
 /**
 * Mandala KMAPS-Explorer Module (Places-Subjects) - Development
-* 
+*
 * version 1.x - kmaps-explorer.css
 * -------------------------------------------------
 * University of Virginia / SHANTI MANDALA / KMAPS
 * -------------------------------------------------
-* 
+*
 */
 /* This is messing up Rails so hiding for now May 16 2016
 body {
@@ -95,7 +95,7 @@ figcaption .center-caption {
 }
 
 /**
-* Edit Button for Kmaps Nodes 
+* Edit Button for Kmaps Nodes
 */
 .fixed-action-button {
   display: inline-block;
@@ -142,7 +142,7 @@ figcaption .center-caption {
 
 /* custom image gallery for kmaps display */
 .og-expander{
-  margin-left:1.3rem; 
+  margin-left:1.3rem;
   width: 99%;
 }
 
@@ -246,7 +246,7 @@ body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-r
 
 
 
-/** 
+/**
 * Temporary: popover class name inconsistent with Sarvaka
 */
 
@@ -324,7 +324,7 @@ body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-r
 
 
 
-/* Fix for kmaps side-col 
+/* Fix for kmaps side-col
 .no-sidebars.page-places .tab-pane.main-col > div.region-content,
 .no-sidebars.page-subjects .tab-pane.main-col > div.region-content,
 .page-node-devel.page-places .tab-pane.main-col > div.region-content,
@@ -425,9 +425,9 @@ body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-r
 
 .btn-group-gmaps.btn-group > .btn.btn-default span {
   background:transparent;
-} 
+}
 
-.btn-group-gmaps.btn-group > .btn.btn-default:not(.active):hover{ 
+.btn-group-gmaps.btn-group > .btn.btn-default:not(.active):hover{
   background: #fff;
 }
 
@@ -527,7 +527,8 @@ li.pager-item.widget > form input {
 }
 
 li.pager-item.widget > form input.form-control {
-  width: 100px;
+  width: 5rem !important;
+  font-size: 1em;
 }
 
 
@@ -656,7 +657,7 @@ li.pager-item.widget > form input.form-control {
 .sidebar-first {
   max-width: 200px; /* 10px wider than for mobile */
 
-  padding-left: 0 !important; 
+  padding-left: 0 !important;
   padding-right: 0 !important;
   padding-top: 0;
   margin-left: -1.5rem;
@@ -759,18 +760,57 @@ li.pager-item.widget > form input.form-control {
   .sidebar-first .nav-pills > li .ajax-progress {
     position: absolute;
     top: 0.8rem;
-  } 
-  
+  }
+
 }
 /**
 * END Kmaps Sidebar */
 
+/**
+ * Quick fixes for the images implementation in kmaps
+ */
+.og-details .nav-tabs > li:first-of-type {
+  margin-left: inherit;
+}
+.og-details .nav-tabs > li {
+  margin-right: inherit;
+}
+.og-details button.copyurl {
+  color: #999;
+  background: transparent;
+  position: absolute;
+  bottom: 1.2rem;
+  margin-right: 0.5rem;
+  right: 0.2em;
+  border: 1px solid;
+  border-radius: 10px;
+  font-size: 1.44rem;
+  letter-spacing: 0.05rem;
+}
+.og-details button.copyurl:hover {
+  color: #ddd;
+}
 
+/** Fix for accordion in images modal **/
+.images-info-tabs .panel-group .panel {
+  margin: inherit;
+  padding: inherit;
+}
+.images-info-tabs .panel-default .panel-heading {
+  padding: 10px 15px;
+}
 
+.images-info-tabs .panel-body {
+  padding: 15px;
+}
+
+.images-info-tabs .panel-heading .accordion-toggle::after,
+.images-info-tabs .panel-heading .accordion-toggle.collapsed::after {
+  left: -1.15rem;
+}
 
 /**
-* 
+*
 * END - KMAPS/css/kmaps-explorer.css
 *
 */
-
