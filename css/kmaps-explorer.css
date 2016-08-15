@@ -190,6 +190,11 @@ figcaption .center-caption {
   margin-left: -1.8rem;
 }
 
+.texts-list li:hover::before{
+  background: #454fa4;
+  box-shadow:none;
+}
+
 .texts-list li.dontend,
 .kmaps-list-columns ul li.dontend{
   
