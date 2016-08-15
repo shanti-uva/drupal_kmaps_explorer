@@ -192,7 +192,7 @@ figcaption .center-caption {
 
 .texts-list li.dontend,
 .kmaps-list-columns ul li.dontend{
-  line-height:0;
+  
 }
 
 .texts-list li.dontend::before,
@@ -304,7 +304,7 @@ body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-r
   display: inline-block;
   position: relative;
   left: 0;
-  top: .4rem;
+  top: .45rem;
   margin-left: .6rem;
   margin-right: .4rem;
   font-size: 1rem;
