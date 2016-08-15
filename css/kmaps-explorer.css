@@ -157,6 +157,7 @@ figcaption .center-caption {
 .texts-list li,
 .kmaps-list-columns ul li{
   font-family: 'Helvetica Neue',helvetica,arial,sans-serif;
+  line-height: 1.56em;
 }
 
 .texts-list li{
@@ -179,8 +180,8 @@ figcaption .center-caption {
 .texts-list li::before,
 .kmaps-list-columns ul li::before{
   content: '';
-  width: 9px;
-  height: 9px;
+  width: 8px;
+  height: 8px;
   background: #fff;
   border-radius: 50%;
   box-shadow: 0px 0px 2px #555;
@@ -303,7 +304,7 @@ body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-r
   display: inline-block;
   position: relative;
   left: 0;
-  top: .1rem;
+  top: .4rem;
   margin-left: .6rem;
   margin-right: .4rem;
   font-size: 1rem;
@@ -323,7 +324,7 @@ body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-r
   border-right: .5rem solid #5a65d1;
   font-size: 0;
   position: relative;
-  bottom: 1rem;
+  bottom: 1.3rem;
   right: .5rem;
   height: 0;
   width: 0;
