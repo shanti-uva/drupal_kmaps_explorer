@@ -166,10 +166,14 @@ figcaption .center-caption {
 
 
 
+.texts-list li,
+.kmaps-list-columns ul:nth-child(1) > li{
+  margin-left: 1rem;
+}
 
 .texts-list li,
 .kmaps-list-columns ul li{
-  margin-left: 1rem;
+  list-style-type: none;
 }
 
 .texts-list li::before,
