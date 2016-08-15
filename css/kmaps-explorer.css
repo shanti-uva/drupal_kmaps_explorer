@@ -375,6 +375,9 @@ body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-r
   font-size:90%;
 }
 
+.feature-type-wrapper h6 ~ span{
+  font-style:italic;
+}
 
 .resource-overview-image {
   margin: 0 0 1.5rem;
