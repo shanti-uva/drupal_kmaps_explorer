@@ -205,7 +205,7 @@ figcaption .center-caption {
 }
 
 .texts-list li.dontend::before,
-.kmaps-list-columns ul li.dontend::before{
+.places-in-places.kmaps-list-columns ul li.dontend::before{
   display:none;
   width:0;
   height:0;
