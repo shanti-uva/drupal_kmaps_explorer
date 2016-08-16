@@ -156,26 +156,27 @@ figcaption .center-caption {
 */
 .texts-list li,
 .kmaps-list-columns ul li{
+  list-style-type: none;
+  margin-bottom:0.5em;
   font-family: 'Helvetica Neue',helvetica,arial,sans-serif;
-  line-height: 1.75em;
 }
+
+.content-section .texts-list li a,
+.content-section .kmaps-list-columns ul li a{
+  border-bottom: none;
+}  
 
 .texts-list li{
   letter-spacing: 0.015em;
 }
 
 .kmaps-list-columns ul li{
-  line-height: 1.88em;
+  line-height: 1.32em;
 }
 
 .texts-list li,
 .kmaps-list-columns ul:nth-child(1) > li{
   margin-left: 1rem;
-}
-
-.texts-list li,
-.kmaps-list-columns ul li{
-  list-style-type: none;
 }
 
 .texts-list li::before,
