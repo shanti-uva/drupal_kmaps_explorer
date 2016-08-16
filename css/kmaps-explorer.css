@@ -226,7 +226,10 @@ figcaption .center-caption {
   margin-top: 0.3rem;
 }
 
-
+.places-in-subjects.kmaps-list-columns ul,
+.subjects-in-subjects.kmaps-list-columns ul{
+  margin-left:1.5rem;
+}
 
 
 .kmaps-list-columns h6{
