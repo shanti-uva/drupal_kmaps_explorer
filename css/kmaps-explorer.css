@@ -238,7 +238,9 @@ figcaption .center-caption {
 
 .texts-list .column:not(.first),
 .kmaps-list-columns .column:not(.first){
-  padding-left: 2rem;
+  padding-left: 1rem;
+  border-left: 1px solid #ddd;
+  margin-left: 1rem;
 }
 
 .subjects-in-places.kmaps-list-columns .column > ul > li,
