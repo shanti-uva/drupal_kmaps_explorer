@@ -1069,7 +1069,7 @@ function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num = 1, $tot
 {
     $setup = kmaps_explorer_setup_page($id, 'subjects');
 
-    $placesURL = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . "/topics/" . $id . ".json?page=" . $page_num;
+    $placesURL = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . "/topics/" . $id . ".json?per_page=150&page=" . $page_num;
     $places_fetch = save_to_cache('places', 'subjects', $id, $placesURL, $page_num);
     $placesObj = json_decode($places_fetch);
 
