@@ -174,8 +174,7 @@ figcaption .center-caption {
   line-height: 1.32em;
 }
 
-.texts-list li,
-.kmaps-list-columns ul:nth-child(1) > li{
+.texts-list li{
   margin-left: 1rem;
 }
 
