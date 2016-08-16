@@ -206,6 +206,7 @@ figcaption .center-caption {
   height:0;
 }
 
+.places-in-subjects.kmaps-list-columns li::before,
 .subjects-in-places.kmaps-list-columns ul li::before,
 .subjects-in-subjects.kmaps-list-columns ul li::before{
   margin-left: -0.5rem;
