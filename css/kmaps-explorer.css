@@ -242,6 +242,10 @@ figcaption .center-caption {
   border-left: 1px solid #ddd;
 }
 
+.places-in-subjects.kmaps-list-columns .column:not(.first){
+  padding-left:2.5rem;
+}
+
 .subjects-in-places.kmaps-list-columns .column > ul > li,
 .subjects-in-subjects.kmaps-list-columns .column > ul > li{
   margin-bottom:0.5rem;
