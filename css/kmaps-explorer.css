@@ -181,7 +181,7 @@ figcaption .center-caption {
 
 .texts-list li::before,
 .kmaps-list-columns ul li::before,
-.places-in-subjects.kmaps-list-columns ul li::before{
+.places-in-subjects.kmaps-list-columns li::before{
   content: '';
   width: 8px;
   height: 8px;
