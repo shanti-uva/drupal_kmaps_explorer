@@ -157,7 +157,7 @@ figcaption .center-caption {
 .texts-list li,
 .kmaps-list-columns ul li{
   list-style-type: none;
-  margin-bottom:0.5em;
+  margin-bottom: 0.5em;
   font-family: 'Helvetica Neue',helvetica,arial,sans-serif;
 }
 
@@ -180,7 +180,8 @@ figcaption .center-caption {
 }
 
 .texts-list li::before,
-.kmaps-list-columns ul li::before{
+.kmaps-list-columns ul li::before,
+.places-in-subjects.kmaps-list-columns ul li::before{
   content: '';
   width: 8px;
   height: 8px;
@@ -189,7 +190,7 @@ figcaption .center-caption {
   box-shadow: 0px 0px 2px #555;
   display: inline-block;
   margin-right: .4rem;
-  margin-left: -2.5rem;
+  margin-left: -2rem;
 }
 
 .texts-list li:hover::before{
@@ -203,6 +204,10 @@ figcaption .center-caption {
   display:none;
   width:0;
   height:0;
+}
+
+.subjects-in-places.kmaps-list-columns .kmaps-list-columns ul li::before{
+  margin-left: -0.5rem;
 }
 
 
