@@ -278,6 +278,10 @@ figcaption .center-caption {
   font-size: 0.1rem;
 }
 
+.places-in-places.kmaps-list-columns .popover-kmaps-tip{
+  position: relative;
+  bottom: 1.1rem;
+}
 
 /** 
 * -------------------------------------------------------------------------------
