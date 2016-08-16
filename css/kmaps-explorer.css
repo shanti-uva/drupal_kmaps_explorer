@@ -212,7 +212,13 @@ figcaption .center-caption {
   margin-left: -0.5rem;
 }
 
+.subjects-in-subjects.kmaps-list-columns ul:nth-child(1) > li{
+  margin-left:0;
+}
 
+.subjects-in-subjects.kmaps-list-columns ul{
+  margin-bottom: 0;
+}
 
 
 
