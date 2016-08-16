@@ -198,7 +198,8 @@ figcaption .center-caption {
 }
 
 .texts-list li.dontend::before,
-.places-in-places.kmaps-list-columns ul li.dontend::before{
+.places-in-places.kmaps-list-columns ul li.dontend::before,
+.subjects-in-places.kmaps-list-columns ul li.dontend::before{
   display:none;
   width:0;
   height:0;
@@ -218,7 +219,8 @@ figcaption .center-caption {
   padding-left: 2rem;
 }
 
-.places-in-places.kmaps-list-columns .column > ul > li {
+.places-in-places.kmaps-list-columns .column > ul > li,
+.subjects-in-places.kmaps-list-columns .column > ul > li {
   list-style-type: none;
   font-weight: bold;
   margin-top: 1rem;
@@ -227,35 +229,41 @@ figcaption .center-caption {
   text-transform: capitalize;
 }
 
-.places-in-places.kmaps-list-columns .column > ul > li::before{
+.places-in-places.kmaps-list-columns .column > ul > li::before,
+.subjects-in-places.kmaps-list-columns .column > ul > li::before{
   width:0;
   height:0;
   display:none;
 }
 
-.places-in-places.kmaps-list-columns .column > ul > li ul li {
+.places-in-places.kmaps-list-columns .column > ul > li ul li,
+.subjects-in-places.kmaps-list-columns .column > ul > li ul li {
   font-weight:normal;
   font-size: 1.06em;
 }
 
-.places-in-places.kmaps-list-columns .column > ul > li.split.dontsplit.dontend > ul{
+.places-in-places.kmaps-list-columns .column > ul > li.split.dontsplit.dontend > ul,
+.subjects-in-places.kmaps-list-columns .column > ul > li.split.dontsplit.dontend > ul{
   -webkit-padding-start: 10px;
   padding-left: 10px;
 }
 
-.places-in-places.kmaps-list-columns h6{
+.places-in-places.kmaps-list-columns h6,
+.subjects-in-places.kmaps-list-columns h6{
   font-size: 0.88em;
   border: 2px solid #ddd;
   background: #fff;
   padding: 7px 12px 5px;
 }
 
-.places-in-places.kmaps-list-columns .popover-kmaps{
+.places-in-places.kmaps-list-columns .popover-kmaps,
+.subjects-in-places.kmaps-list-columns .popover-kmaps{
   position: relative;
   top: .3rem;
 }
 
-.places-in-places.kmaps-list-columns .popover-kmaps-tip{
+.places-in-places.kmaps-list-columns .popover-kmaps-tip,
+.subjects-in-places.kmaps-list-columns .popover-kmaps-tip{
   position: relative;
   bottom: 1.1rem;
   font-size: 0.1rem;
