@@ -240,7 +240,6 @@ figcaption .center-caption {
 .kmaps-list-columns .column:not(.first){
   padding-left: 1rem;
   border-left: 1px solid #ddd;
-  margin-left: 1rem;
 }
 
 .subjects-in-places.kmaps-list-columns .column > ul > li,
@@ -287,6 +286,7 @@ figcaption .center-caption {
   border: 2px solid #ddd;
   background: #fff;
   padding: 7px 12px 5px;
+  margin-right:1.5rem;
 }
 
 .places-in-places.kmaps-list-columns .popover-kmaps,
