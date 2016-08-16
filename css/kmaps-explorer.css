@@ -219,7 +219,7 @@ figcaption .center-caption {
   margin-bottom: 0;
 }
 
-.places-in-places.kmaps-list-columns .column > ul{
+.places-in-places.kmaps-list-columns .column > ul > li > ul{
   margin-top: 0.3rem;
 }
 
