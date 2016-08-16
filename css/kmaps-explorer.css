@@ -157,19 +157,16 @@ figcaption .center-caption {
 .texts-list li,
 .kmaps-list-columns ul li{
   font-family: 'Helvetica Neue',helvetica,arial,sans-serif;
-  line-height: 1.56em;
-}
-
-.kmaps-list-columns ul li{
   line-height: 1.75em;
 }
 
 .texts-list li{
   letter-spacing: 0.015em;
-  line-height: 1.75em;
 }
 
-
+.kmaps-list-columns ul li{
+  line-height: 1.88em;
+}
 
 .texts-list li,
 .kmaps-list-columns ul:nth-child(1) > li{
@@ -197,11 +194,6 @@ figcaption .center-caption {
 .texts-list li:hover::before{
   background: #6b7bff;
   box-shadow:none;
-}
-
-.texts-list li.dontend,
-.kmaps-list-columns ul li.dontend{
-  
 }
 
 .texts-list li.dontend::before,
@@ -257,7 +249,14 @@ figcaption .center-caption {
   padding: 7px 12px 5px;
 }
 
-.kmaps-list-columns .popover-kmaps-tip{
+.places-in-places.kmaps-list-columns .popover-kmaps{
+  position: relative;
+  top: .7rem;
+}
+
+.places-in-places.kmaps-list-columns .popover-kmaps-tip{
+  position: relative;
+  bottom: 1.5rem;
   font-size: 0.1rem;
 }
 
@@ -324,7 +323,7 @@ body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-r
   display: inline-block;
   position: relative;
   left: 0;
-  top: .45rem;
+  top: .1rem;
   margin-left: .6rem;
   margin-right: .4rem;
   font-size: 1rem;
@@ -344,7 +343,7 @@ body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-r
   border-right: .5rem solid #5a65d1;
   font-size: 0;
   position: relative;
-  bottom: 1.4rem;
+  bottom: 1rem;
   right: .5rem;
   height: 0;
   width: 0;
