@@ -220,6 +220,10 @@ figcaption .center-caption {
   margin-bottom: 0;
 }
 
+.places-in-places.kmaps-list-columns .column > ul{
+  margin-top: 0.3rem;
+}
+
 
 
 
@@ -265,7 +269,6 @@ figcaption .center-caption {
   font-size: 1.06em;
 }
 
-.places-in-places.kmaps-list-columns .column > ul > li.split.dontsplit.dontend > ul,
 .subjects-in-places.kmaps-list-columns .column > ul > li.split.dontsplit.dontend > ul{
   -webkit-padding-start: 10px;
   padding-left: 10px;
