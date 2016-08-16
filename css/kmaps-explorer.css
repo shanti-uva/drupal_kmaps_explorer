@@ -298,10 +298,14 @@ figcaption .center-caption {
   bottom: 1.1rem;
 }
 
-.subjects-in-places.kmaps-list-columns .popover-kmaps-tip,
-.subjects-in-subjects.kmaps-list-columns .popover-kmaps-tip{
+.subjects-in-places.kmaps-list-columns .popover-kmaps-tip{
   position: relative;
   bottom: 1.2rem;
+}
+
+.subjects-in-subjects.kmaps-list-columns .popover-kmaps-tip{
+  position: relative;
+  bottom: 1.3rem;  
 }
 
 /** 
