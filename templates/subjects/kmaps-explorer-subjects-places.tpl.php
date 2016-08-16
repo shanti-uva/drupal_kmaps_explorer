@@ -1,5 +1,5 @@
 <h6><?php print $title; ?></h6>
-<ul class="related-places">
+<ul class="related-places places-in-subjects kmaps-list-columns">
   <?php foreach($data->topic->features as $aItem): ?>
     <li>
       <span><?php print $aItem->header; ?></span>
