@@ -211,9 +211,7 @@ figcaption .center-caption {
   margin-left: -0.5rem;
 }
 
-.subjects-in-subjects.kmaps-list-columns .first-column > ul{
-  margin-bottom:0;
-}
+
 
 
 
@@ -225,6 +223,14 @@ figcaption .center-caption {
 .texts-list .column:not(.first),
 .kmaps-list-columns .column:not(.first){
   padding-left: 2rem;
+}
+
+.subjects-in-subjects.kmaps-list-columns .column > ul{
+  margin-bottom:0;
+}
+
+.places-in-subjects.kmaps-list-columns .column > li{
+
 }
 
 .places-in-places.kmaps-list-columns .column > ul > li,
