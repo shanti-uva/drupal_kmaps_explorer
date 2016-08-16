@@ -206,7 +206,8 @@ figcaption .center-caption {
   height:0;
 }
 
-.subjects-in-places.kmaps-list-columns ul li::before{
+.subjects-in-places.kmaps-list-columns ul li::before,
+.subjects-in-subjects.kmaps-list-columns ul li::before{
   margin-left: -0.5rem;
 }
 
@@ -264,15 +265,16 @@ figcaption .center-caption {
 }
 
 .places-in-places.kmaps-list-columns .popover-kmaps,
-.subjects-in-places.kmaps-list-columns .popover-kmaps{
+.subjects-in-places.kmaps-list-columns .popover-kmaps,
+.subjects-in-subjects.kmaps-list-columns .popover-kmaps{
   position: relative;
-  top: .3rem;
+  top: .35rem;
 }
 
 .places-in-places.kmaps-list-columns .popover-kmaps-tip,
 .subjects-in-places.kmaps-list-columns .popover-kmaps-tip{
   position: relative;
-  bottom: 1.1rem;
+  bottom: 1.3rem;
   font-size: 0.1rem;
 }
 
