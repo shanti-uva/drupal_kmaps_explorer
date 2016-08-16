@@ -160,6 +160,10 @@ figcaption .center-caption {
   line-height: 1.56em;
 }
 
+.kmaps-list-columns ul li{
+  line-height: 1.75em;
+}
+
 .texts-list li{
   letter-spacing: 0.015em;
   line-height: 1.75em;
@@ -334,7 +338,7 @@ body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-r
   border-right: .5rem solid #5a65d1;
   font-size: 0;
   position: relative;
-  bottom: 1.3rem;
+  bottom: 1.4rem;
   right: .5rem;
   height: 0;
   width: 0;
