@@ -206,11 +206,13 @@ figcaption .center-caption {
   height:0;
 }
 
-.subjects-in-places.kmaps-list-columns .kmaps-list-columns ul li::before{
+.subjects-in-places.kmaps-list-columns ul li::before{
   margin-left: -0.5rem;
 }
 
-
+.subjects-in-subjects.kmaps-list-columns .first-column > ul{
+  margin-bottom:0;
+}
 
 
 
