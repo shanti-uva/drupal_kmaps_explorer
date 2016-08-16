@@ -206,7 +206,7 @@ figcaption .center-caption {
 
 .texts-list li.dontend::before,
 .kmaps-list-columns ul li.dontend::before{
-  content:'';
+  display:none;
   width:0;
   height:0;
 }
@@ -232,6 +232,12 @@ figcaption .center-caption {
   font-size: 0.88em;
   letter-spacing: 0.035em;
   text-transform: capitalize;
+}
+
+.places-in-places.kmaps-list-columns .column > ul > li::before{
+  width:0;
+  height:0;
+  display:none;
 }
 
 .places-in-places.kmaps-list-columns .column > ul > li ul li {
