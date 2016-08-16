@@ -225,12 +225,14 @@ figcaption .center-caption {
   padding-left: 2rem;
 }
 
-.subjects-in-subjects.kmaps-list-columns .column > ul{
+.subjects-in-places.kmaps-list-columns .column > ul > li,
+.subjects-in-subjects.kmaps-list-columns .column > ul > li{
   margin-bottom:0.5rem;
 }
 
 .places-in-subjects.kmaps-list-columns .column > li{
   list-style-type: none;
+  margin-bottom: 0.5rem;
 }
 
 .places-in-places.kmaps-list-columns .column > ul > li,
@@ -287,6 +289,11 @@ figcaption .center-caption {
 .places-in-places.kmaps-list-columns .popover-kmaps-tip{
   position: relative;
   bottom: 1.1rem;
+}
+
+.subjects-in-places.kmaps-list-columns .popover-kmaps-tip{
+  position: relative;
+  bottom: 1.2rem;
 }
 
 /** 
