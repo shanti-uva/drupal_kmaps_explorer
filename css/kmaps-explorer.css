@@ -226,11 +226,11 @@ figcaption .center-caption {
 }
 
 .subjects-in-subjects.kmaps-list-columns .column > ul{
-  margin-bottom:0;
+  margin-bottom:0.5rem;
 }
 
 .places-in-subjects.kmaps-list-columns .column > li{
-
+  list-style-type: none;
 }
 
 .places-in-places.kmaps-list-columns .column > ul > li,
