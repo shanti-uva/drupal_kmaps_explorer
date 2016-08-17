@@ -202,11 +202,11 @@ figcaption .center-caption {
   margin-right: .4rem;
   margin-left: -2rem;
 }
-/* list bullet hover */
-/*.texts-list li:hover::before{
-  background: #6b7bff;
+/* list bullet hover remove shadow */
+.texts-list li:hover::before{
+  background: #555; /* default grey hover - see subtheme for custom color */
   box-shadow:none;
-}*/
+}
 
 .places-in-places.kmaps-list-columns li::before{
   margin-left: -1.3rem;
