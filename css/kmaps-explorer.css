@@ -266,6 +266,7 @@ figcaption .center-caption {
 .kmaps-list-columns ul li{
   list-style-type: none;
   margin-bottom: 0.5em;
+  margin-right:1rem;
   font-family: 'Helvetica Neue',helvetica,arial,sans-serif;
 
   /*line-height: 1.32em;*/
