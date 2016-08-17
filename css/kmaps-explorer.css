@@ -152,37 +152,36 @@ figcaption .center-caption {
 
 
 /**
+* -------------------
 * Columnizer Lists
+* -------------------
 */
 
 .kmaps-list-columns{
   margin-bottom:7rem;
 }
 
-.texts-list li,
-.kmaps-list-columns ul li{
-  list-style-type: none;
-  margin-bottom: 0.5em;
-  font-family: 'Helvetica Neue',helvetica,arial,sans-serif;
+/*--- headers ---*/
+.kmaps-list-columns h6{
+  text-transform: capitalize;
 }
 
+.places-in-places.kmaps-list-columns h6,
+.subjects-in-places.kmaps-list-columns h6{
+  font-size: 0.88em;
+  border: 2px solid #ddd;
+  background: #fff;
+  padding: 7px 12px 5px;
+  margin-right:1.5rem;
+}
+
+/*--- anchors ---*/
 .content-section .texts-list li a,
 .content-section .kmaps-list-columns ul li a{
   border-bottom: none;
-}  
+} 
 
-.texts-list li{
-  letter-spacing: 0.015em;
-}
-
-.kmaps-list-columns ul li{
-  line-height: 1.32em;
-}
-
-.texts-list li{
-  margin-left: 1rem;
-}
-
+/*--- bullets ---*/
 .texts-list li::before,
 .kmaps-list-columns ul li::before,
 .places-in-subjects.kmaps-list-columns li::before{
@@ -196,18 +195,14 @@ figcaption .center-caption {
   margin-right: .4rem;
   margin-left: -2rem;
 }
-
+/* list bullet hover */
 .texts-list li:hover::before{
   background: #6b7bff;
   box-shadow:none;
 }
 
-.texts-list li.dontend::before,
-.places-in-places.kmaps-list-columns ul li.dontend::before,
-.subjects-in-places.kmaps-list-columns ul li.dontend::before{
-  display:none;
-  width:0;
-  height:0;
+.places-in-places.kmaps-list-columns li::before{
+  margin-left: -1.3rem;
 }
 
 .places-in-subjects.kmaps-list-columns li::before,
@@ -219,28 +214,17 @@ figcaption .center-caption {
   margin-left: -2.5rem;
 }
 
-.subjects-in-subjects.kmaps-list-columns ul:nth-child(1) > li{
-  margin-left:0;
+.texts-list li.dontend::before,
+.places-in-places.kmaps-list-columns ul > li::before,
+.places-in-places.kmaps-list-columns ul li.dontend::before,
+.subjects-in-places.kmaps-list-columns > ul > li::before,
+.subjects-in-places.kmaps-list-columns ul li.dontend::before{
+  display:none;
+  width:0;
+  height:0;
 }
 
-.subjects-in-subjects.kmaps-list-columns ul{
-  margin-bottom: 0;
-}
-
-.places-in-places.kmaps-list-columns .column > ul > li > ul{
-  margin-top: 0.3rem;
-}
-
-.places-in-subjects.kmaps-list-columns ul,
-.subjects-in-subjects.kmaps-list-columns ul{
-  margin-left:1.5rem;
-}
-
-
-.kmaps-list-columns h6{
-  text-transform: capitalize;
-}
-
+/*--- column dividers ---*/
 .texts-list .column:not(.first),
 .kmaps-list-columns .column:not(.first){
   padding-left: 1rem;
@@ -249,6 +233,42 @@ figcaption .center-caption {
 
 .places-in-subjects.kmaps-list-columns .column:not(.first){
   padding-left:2.5rem;
+}
+
+/*--- list wrappers ---*/
+.subjects-in-places.kmaps-list-columns .column > ul > li.split.dontsplit.dontend > ul{
+  -webkit-padding-start: 10px;
+  padding-left: 10px;
+}
+
+.subjects-in-subjects.kmaps-list-columns ul{
+  margin-bottom: 0;
+}
+
+.places-in-subjects.kmaps-list-columns ul,
+.subjects-in-subjects.kmaps-list-columns ul{
+  margin-left:1.5rem;
+}
+
+.places-in-places.kmaps-list-columns .column > ul > li > ul{
+  margin-top: 0.3rem;
+}
+
+/*--- list items ---*/
+.texts-list li,
+.kmaps-list-columns ul li{
+  list-style-type: none;
+  margin-bottom: 0.5em;
+  font-family: 'Helvetica Neue',helvetica,arial,sans-serif;
+} 
+
+.texts-list li{
+  letter-spacing: 0.015em;
+  margin-left: 1rem;
+}
+
+.kmaps-list-columns ul li{
+  line-height: 1.32em;
 }
 
 .subjects-in-places.kmaps-list-columns .column > ul > li,
@@ -271,33 +291,17 @@ figcaption .center-caption {
   text-transform: capitalize;
 }
 
-.places-in-places.kmaps-list-columns .column > ul > li::before,
-.subjects-in-places.kmaps-list-columns .column > ul > li::before{
-  width:0;
-  height:0;
-  display:none;
-}
-
 .places-in-places.kmaps-list-columns .column > ul > li ul li,
 .subjects-in-places.kmaps-list-columns .column > ul > li ul li {
   font-weight:normal;
   font-size: 1.06em;
 }
 
-.subjects-in-places.kmaps-list-columns .column > ul > li.split.dontsplit.dontend > ul{
-  -webkit-padding-start: 10px;
-  padding-left: 10px;
+.subjects-in-subjects.kmaps-list-columns ul:nth-child(1) > li{
+  margin-left:0;
 }
 
-.places-in-places.kmaps-list-columns h6,
-.subjects-in-places.kmaps-list-columns h6{
-  font-size: 0.88em;
-  border: 2px solid #ddd;
-  background: #fff;
-  padding: 7px 12px 5px;
-  margin-right:1.5rem;
-}
-
+/*--- list popovers ---*/
 .places-in-places.kmaps-list-columns .popover-kmaps,
 .subjects-in-places.kmaps-list-columns .popover-kmaps,
 .subjects-in-subjects.kmaps-list-columns .popover-kmaps{
@@ -326,6 +330,11 @@ figcaption .center-caption {
   position: relative;
   bottom: 1.3rem;  
 }
+
+
+
+
+
 
 /** 
 * -------------------------------------------------------------------------------
