@@ -154,6 +154,11 @@ figcaption .center-caption {
 /**
 * Columnizer Lists
 */
+
+.kmaps-list-columns{
+  margin-bottom:7rem;
+}
+
 .texts-list li,
 .kmaps-list-columns ul li{
   list-style-type: none;
