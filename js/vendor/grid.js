@@ -101,7 +101,7 @@ var Grid = (function($) {
 
 	// Initialize the row Grid layout called from init and on window resize
 	function initGridLayout() {
-		var res = $("#og-grid").rowGrid({itemSelector: ".item", minMargin: 10, resize: true, maxMargin: 10, firstItemClass: "first-item"});
+		var res = $("#og-grid").rowGrid({itemSelector: ".item", minMargin: 10, maxMargin: 10, firstItemClass: "first-item"});
 		// iterate through grid children (= div.item) and set their <a> heights
         res.children('.item').each(function(key, value) {
 						var mya = $(this).children('a').eq(0);
