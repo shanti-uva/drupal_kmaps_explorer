@@ -162,9 +162,9 @@ figcaption .center-caption {
 }
 
 /*--- headers ---*/
-.kmaps-list-columns h6{
+/*.kmaps-list-columns h6{
   text-transform: capitalize;
-}
+}*/
 
 .places-in-places.kmaps-list-columns h6,
 .subjects-in-places.kmaps-list-columns h6{
@@ -173,6 +173,8 @@ figcaption .center-caption {
   background: #fff;
   padding: 7px 12px 5px;
   margin-right:1.5rem;
+
+  text-transform: capitalize;
 }
 
 /*--- anchors ---*/
@@ -182,7 +184,7 @@ figcaption .center-caption {
 } 
 
 /*--- bullets ---*/
-.texts-list li::before,
+/*.texts-list li::before,*/
 .kmaps-list-columns ul li::before,
 .places-in-subjects.kmaps-list-columns li::before{
   content: '';
@@ -196,10 +198,10 @@ figcaption .center-caption {
   margin-left: -2rem;
 }
 /* list bullet hover */
-.texts-list li:hover::before{
+/*.texts-list li:hover::before{
   background: #6b7bff;
   box-shadow:none;
-}
+}*/
 
 .places-in-places.kmaps-list-columns li::before{
   margin-left: -1.3rem;
@@ -214,10 +216,10 @@ figcaption .center-caption {
   margin-left: -2.5rem;
 }
 
-.texts-list li.dontend::before,
-.places-in-places.kmaps-list-columns ul > li::before,
+/*.texts-list li.dontend::before,*/
+/*.places-in-places.kmaps-list-columns ul > li::before,*/
 .places-in-places.kmaps-list-columns ul li.dontend::before,
-.subjects-in-places.kmaps-list-columns > ul > li::before,
+/*.subjects-in-places.kmaps-list-columns > ul > li::before,*/
 .subjects-in-places.kmaps-list-columns ul li.dontend::before{
   display:none;
   width:0;
@@ -225,7 +227,7 @@ figcaption .center-caption {
 }
 
 /*--- column dividers ---*/
-.texts-list .column:not(.first),
+/*.texts-list .column:not(.first),*/
 .kmaps-list-columns .column:not(.first){
   padding-left: 1rem;
   border-left: 1px solid #ddd;
@@ -255,17 +257,19 @@ figcaption .center-caption {
 }
 
 /*--- list items ---*/
-.texts-list li,
+/*.texts-list li,*/
 .kmaps-list-columns ul li{
   list-style-type: none;
   margin-bottom: 0.5em;
   font-family: 'Helvetica Neue',helvetica,arial,sans-serif;
+
+  /*line-height: 1.32em;*/
 } 
 
-.texts-list li{
+/*.texts-list li{
   letter-spacing: 0.015em;
   margin-left: 1rem;
-}
+}*/
 
 .kmaps-list-columns ul li{
   line-height: 1.32em;
