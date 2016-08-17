@@ -203,7 +203,7 @@ figcaption .center-caption {
   margin-left: -2rem;
 }
 /* list bullet hover remove shadow */
-.texts-list li:hover::before{
+.kmaps-list-columns ul.texts-list li:hover::before{
   background: #555; /* default grey hover - see subtheme for custom color */
   box-shadow:none;
 }
