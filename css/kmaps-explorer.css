@@ -161,6 +161,11 @@ figcaption .center-caption {
   margin-bottom:7rem;
 }
 
+.texts-list li{
+  /* letter-spacing: 0.015em; */
+  margin-left: 1rem;
+}
+
 /*--- headers ---*/
 /*.kmaps-list-columns h6{
   text-transform: capitalize;
@@ -265,11 +270,6 @@ figcaption .center-caption {
 
   /*line-height: 1.32em;*/
 } 
-
-/*.texts-list li{
-  letter-spacing: 0.015em;
-  margin-left: 1rem;
-}*/
 
 .kmaps-list-columns ul li{
   line-height: 1.32em;
