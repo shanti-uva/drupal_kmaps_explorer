@@ -19,7 +19,7 @@
         data-subjects="<?php print implode('::', array_map(function($o) { return $o->id; }, $aItem->associated_categories)); ?>"
         data-toggle="modal"
       >
-        <img src="<?php print $formats['essay']->url; ?>" alt="<?php print (count($aItem->captions) > 0 ? $aItem->captions[0]->title : ''); ?>">
+        <img src="<?php print $formats['essay']->url; ?>" alt="<?php print (count($aItem->captions) > 0 ? $aItem->captions[0]->title : ''); ?>" height="180">
       </a>
     </div>
   <?php endforeach; ?>
