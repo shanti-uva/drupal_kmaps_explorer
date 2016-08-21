@@ -664,23 +664,6 @@ p.modal-title {
 
 
 
-/* pager class convention in kmaps */
-/* --- moved these rulesets to shanti-main
-li.pager-item.widget > form,
-li.pager-item.widget > form div,
-li.pager-item.widget > form input {
-  display: inline !important;
-}
-
-li.pager-item.widget > form input.form-control {
-  width: 3.5rem !important;
-  font-size: 1em;
-  padding: 0.1rem .5rem 0.2rem;
-}
-*/
-
-
-
 /**
 * BEGIN Kmaps Sidebar
 */
