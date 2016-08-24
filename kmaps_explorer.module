@@ -455,8 +455,10 @@ function kmaps_explorer_places_landing($type)
     ));
 }
 
-function kmaps_explorer_subjects_overview($type = 'ajax', $id, $app)
-{
+function kmaps_explorer_subjects_overview($type = 'ajax', $id, $app) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
     //css and js files to include in pages
     $path = drupal_get_path('module', 'kmaps_explorer');
 
@@ -486,7 +488,7 @@ function kmaps_explorer_subjects_overview($type = 'ajax', $id, $app)
 
     if ($type == 'ajax') {
         $breadcrumb = theme('kmaps_explorer_breadcrumbs', array(
-            'data' => $_SESSION['kmaps_explorer']['kmaps_explorer_ancestors'],
+            'data' => $data_shuffle['ancestors'],
             'app' => $app,
         ));
 
@@ -497,9 +499,6 @@ function kmaps_explorer_subjects_overview($type = 'ajax', $id, $app)
         $commands[] = ajax_command_invoke('ol.breadcrumb', 'css', array('display', 'block'));
         $page = array('#type' => 'ajax', '#commands' => $commands);
 
-        //Remove the kmaps_explorer variable from the sessions table
-        unset($_SESSION['kmaps_explorer']);
-
         ajax_deliver($page);
     } else {
         return $content;
@@ -507,8 +506,10 @@ function kmaps_explorer_subjects_overview($type = 'ajax', $id, $app)
 
 }
 
-function kmaps_explorer_places_overview($type = 'ajax', $id, $app)
-{
+function kmaps_explorer_places_overview($type = 'ajax', $id, $app) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
     //css and js files to include in pages
     $path = drupal_get_path('module', 'kmaps_explorer');
 
@@ -588,7 +589,7 @@ function kmaps_explorer_places_overview($type = 'ajax', $id, $app)
 
     if ($type == 'ajax') {
         $breadcrumb = theme('kmaps_explorer_breadcrumbs', array(
-            'data' => $_SESSION['kmaps_explorer']['kmaps_explorer_ancestors'],
+            'data' => $data_shuffle['ancestors'],
             'app' => $app,
         ));
 
@@ -598,9 +599,6 @@ function kmaps_explorer_places_overview($type = 'ajax', $id, $app)
         $commands[] = ajax_command_html('ol.breadcrumb', $breadcrumb);
         $commands[] = ajax_command_invoke('ol.breadcrumb', 'css', array('display', 'block'));
         $page = array('#type' => 'ajax', '#commands' => $commands);
-
-        //Remove the kmaps_explorer variable from the sessions table
-        unset($_SESSION['kmaps_explorer']);
 
         ajax_deliver($page);
     } else {
@@ -612,14 +610,17 @@ function kmaps_explorer_places_overview($type = 'ajax', $id, $app)
 /**
  * Function to setup the page for first time loads and non ajax loads.
  */
-function kmaps_explorer_setup_page($id, $app)
-{
+function kmaps_explorer_setup_page($id, $app) {
     global $base_url;
+
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
     //css and js files to include in pages
     $path = drupal_get_path('module', 'kmaps_explorer');
 
     //Store the type of the application(subjects or places)
-    $_SESSION['kmaps_explorer']['kmaps_explorer_app'] = $app;
+    $data_shuffle['app'] = $app;
 
     $options = array(
         'group' => CSS_THEME,
@@ -673,18 +674,18 @@ function kmaps_explorer_setup_page($id, $app)
 
     //Store the ancestors to be used for breadcrumbs
     if ($app == 'subjects') {
-        $_SESSION['kmaps_explorer']['kmaps_explorer_ancestors'] = $obj->feature->ancestors;
+        $data_shuffle['ancestors'] = $obj->feature->ancestors;
     } elseif ($app == 'places') {
-        $_SESSION['kmaps_explorer']['kmaps_explorer_ancestors'] = $obj->feature->perspectives[0]->ancestors;
+        $data_shuffle['ancestors'] = $obj->feature->perspectives[0]->ancestors;
     }
 
     //Set and Store the title of this node for other functions to use
-    $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'] = $obj->feature->header;
+    $data_shuffle['node_title'] = $obj->feature->header;
     drupal_set_title($obj->feature->header);
 
     //Store the count for the places photos if available
     if (isset($obj->feature->associated_resources->picture_count) && intval($obj->feature->associated_resources->picture_count) > 0) {
-        $_SESSION['kmaps_explorer']['kmaps_explorer_places_photos_count'] = $obj->feature->associated_resources->picture_count;
+        $data_shuffle['places_photos_count'] = $obj->feature->associated_resources->picture_count;
     }
 
     //Get solr data
@@ -694,7 +695,7 @@ function kmaps_explorer_setup_page($id, $app)
     //dpm($solrObj);
 
     //Store the solr object to be used in essays.
-    $_SESSION['kmaps_explorer']['kmaps_explorer_solr'] = $solrObj;
+    $data_shuffle['solr'] = $solrObj;
 
     $video_count = 0;
     $solr_text_count = 0;
@@ -702,7 +703,7 @@ function kmaps_explorer_setup_page($id, $app)
     foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
         if ($solrValue->groupValue == "audio-video" && $solrValue->doclist->numFound > 0) {
             $video_count = $solrValue->doclist->numFound;
-            $_SESSION['kmaps_explorer']['kmaps_explorer_audio_video'] = $solrValue->doclist;
+            $data_shuffle['audio_video'] = $solrValue->doclist;
         }
         if ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound > 0) {
             $solr_text_count = $solrValue->doclist->numFound;
@@ -739,8 +740,10 @@ function kmaps_explorer_setup_page($id, $app)
 /**
  * Function to create the ajax content for subjects in subjects
  */
-function kmaps_explorer_subjects_subjects($type = 'ajax', $id, $app)
-{
+function kmaps_explorer_subjects_subjects($type = 'ajax', $id, $app) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
     $setup = kmaps_explorer_setup_page($id, $app);
 
     $subjectsURL = variable_get('shanti_kmaps_admin_server_subjects', SHANTI_KMAPS_ADMIN_SERVER_SUBJECTS) . "/features/" . $id . "/related.json";
@@ -749,7 +752,7 @@ function kmaps_explorer_subjects_subjects($type = 'ajax', $id, $app)
     $subjObj = _add_subject_child_counts($subjObj, $id);
     if ($type == 'ajax') {
         //Retrieve the title of the node
-        $title = isset($_SESSION['kmaps_explorer']['kmaps_explorer_node_title']) ? $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'] : '';
+        $title = isset($data_shuffle['node_title']) ? $data_shuffle['node_title'] : '';
 
         $output = theme('kmaps_explorer_subjects_subjects_ajax', array(
             'data' => $subjObj,
@@ -760,15 +763,12 @@ function kmaps_explorer_subjects_subjects($type = 'ajax', $id, $app)
         $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'subjects/' . $id . '/subjects/nojs');
         $page = array('#type' => 'ajax', '#commands' => $commands);
 
-        //Remove the kmaps_explorer variable from the sessions table
-        unset($_SESSION['kmaps_explorer']);
-
         ajax_deliver($page);
     } else {
         $setup = kmaps_explorer_setup_page($id, $app);
 
         //Retrieve the title of the node
-        $title = isset($_SESSION['kmaps_explorer']['kmaps_explorer_node_title']) ? $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'] : '';
+        $title = isset($data_shuffle['node_title']) ? $data_shuffle['node_title'] : '';
 
         $output = theme('kmaps_explorer_subjects_subjects_ajax', array(
             'data' => $subjObj,
@@ -790,8 +790,10 @@ function kmaps_explorer_subjects_subjects($type = 'ajax', $id, $app)
 /**
  * Function to create the ajax content for subjects in places
  */
-function kmaps_explorer_places_subjects($type = 'ajax', $id, $app)
-{
+function kmaps_explorer_places_subjects($type = 'ajax', $id, $app) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
     $setup = kmaps_explorer_setup_page($id, $app);
 
     $subjectsURL = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . "/features/" . $id . "/topics.json";
@@ -800,7 +802,7 @@ function kmaps_explorer_places_subjects($type = 'ajax', $id, $app)
 
     if ($type == 'ajax') {
         //Retrieve the title of the node
-        $title = $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'];
+        $title = $data_shuffle['node_title'];
 
         $output = theme('kmaps_explorer_places_subjects_ajax', array(
             'data' => $subjObj,
@@ -811,15 +813,12 @@ function kmaps_explorer_places_subjects($type = 'ajax', $id, $app)
         $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'places/' . $id . '/subjects/nojs');
         $page = array('#type' => 'ajax', '#commands' => $commands);
 
-        //Remove the kmaps_explorer variable from the sessions table
-        unset($_SESSION['kmaps_explorer']);
-
         ajax_deliver($page);
     } else {
         $setup = kmaps_explorer_setup_page($id, $app);
 
         //Retrieve the title of the node
-        $title = $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'];
+        $title = $data_shuffle['node_title'];
 
         $output = theme('kmaps_explorer_places_subjects_ajax', array(
             'data' => $subjObj,
@@ -841,15 +840,17 @@ function kmaps_explorer_places_subjects($type = 'ajax', $id, $app)
 /**
  * Function to create the ajax content for essays in subjects
  */
-function kmaps_explorer_subjects_essays($type = 'ajax', $id, $app)
-{
+function kmaps_explorer_subjects_essays($type = 'ajax', $id, $app) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
     $setup = kmaps_explorer_setup_page($id, $app);
 
     if ($type == 'ajax') {
         //Retrieve the title of the node
-        $title = $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'];
+        $title = $data_shuffle['node_title'];
 
-        $solrObj = $_SESSION['kmaps_explorer']['kmaps_explorer_solr'];
+        $solrObj = $data_shuffle['solr'];
 
         foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
             if ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound == 1) {
@@ -868,17 +869,14 @@ function kmaps_explorer_subjects_essays($type = 'ajax', $id, $app)
         $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'subjects/' . $id . '/texts/nojs');
         $page = array('#type' => 'ajax', '#commands' => $commands);
 
-        //Remove the kmaps_explorer variable from the sessions table
-        unset($_SESSION['kmaps_explorer']);
-
         ajax_deliver($page);
     } else {
         $setup = kmaps_explorer_setup_page($id, $app);
 
         //Retrieve the title of the node
-        $title = $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'];
+        $title = $data_shuffle['node_title'];
 
-        $solrObj = $_SESSION['kmaps_explorer']['kmaps_explorer_solr'];
+        $solrObj = $data_shuffle['solr'];
 
         foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
             if ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound == 1) {
@@ -908,15 +906,17 @@ function kmaps_explorer_subjects_essays($type = 'ajax', $id, $app)
 /**
  * Function to create the ajax content for esssays in places
  */
-function kmaps_explorer_places_essays($type = 'ajax', $id, $app)
-{
+function kmaps_explorer_places_essays($type = 'ajax', $id, $app) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
     $setup = kmaps_explorer_setup_page($id, $app);
 
     if ($type == 'ajax') {
         //Retrieve the title of the node
-        $title = $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'];
+        $title = $data_shuffle['node_title'];
 
-        $solrObj = $_SESSION['kmaps_explorer']['kmaps_explorer_solr'];
+        $solrObj = $data_shuffle['solr'];
 
         foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
             if ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound == 1) {
@@ -935,17 +935,14 @@ function kmaps_explorer_places_essays($type = 'ajax', $id, $app)
         $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'places/' . $id . '/texts/nojs');
         $page = array('#type' => 'ajax', '#commands' => $commands);
 
-        //Remove the kmaps_explorer variable from the sessions table
-        unset($_SESSION['kmaps_explorer']);
-
         ajax_deliver($page);
     } else {
         $setup = kmaps_explorer_setup_page($id, $app);
 
         //Retrieve the title of the node
-        $title = $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'];
+        $title = $data_shuffle['node_title'];
 
-        $solrObj = $_SESSION['kmaps_explorer']['kmaps_explorer_solr'];
+        $solrObj = $data_shuffle['solr'];
 
         foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
             if ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound == 1) {
@@ -975,12 +972,14 @@ function kmaps_explorer_places_essays($type = 'ajax', $id, $app)
 /**
  * Function to implement the ajax content for individual text nodes
  */
-function kmaps_explorer_each_text_node($type = 'ajax', $id, $tid, $app)
-{
+function kmaps_explorer_each_text_node($type = 'ajax', $id, $tid, $app) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
     $setup = kmaps_explorer_setup_page($id, $app);
 
     if ($type == 'ajax') {
-        $solrObj = $_SESSION['kmaps_explorer']['kmaps_explorer_solr'];
+        $solrObj = $data_shuffle['solr'];
 
         if ($solrObj == '') {
             $solrObj = call_solr_index($id, $app);
@@ -1004,15 +1003,12 @@ function kmaps_explorer_each_text_node($type = 'ajax', $id, $tid, $app)
         $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . $app . '/' . $id . '/text_node/' . $tid . '/nojs');
         $page = array('#type' => 'ajax', '#commands' => $commands);
 
-        //Remove the kmaps_explorer variable from the sessions table
-        unset($_SESSION['kmaps_explorer']);
-
         ajax_deliver($page);
 
     } else {
         $setup = kmaps_explorer_setup_page($id, $app);
 
-        $solrObj = $_SESSION['kmaps_explorer']['kmaps_explorer_solr'];
+        $solrObj = $data_shuffle['solr'];
 
         if ($solrObj == '') {
             $solrObj = call_solr_index($id, $app);
@@ -1046,8 +1042,10 @@ function kmaps_explorer_each_text_node($type = 'ajax', $id, $tid, $app)
 /**
  * Function to make a call to the solr index
  */
-function call_solr_index($id, $app)
-{
+function call_solr_index($id, $app) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
     //Create the url for the solr related assets for subjects and places
     $solrURL = variable_get('shanti_kmaps_admin_server_solr', SHANTI_KMAPS_ADMIN_SERVER_SOLR) . '/select?q=kmapid:' . $app . '-' . $id . '&fq=&start=0&facets=on&group=true&group.field=asset_type&group.facet=true&group.ngroups=true&group.limit=1000&wt=json';
 
@@ -1057,7 +1055,7 @@ function call_solr_index($id, $app)
     //dpm($solrObj);
 
     //Store the solr object to be used in essays.
-    $_SESSION['kmaps_explorer']['kmaps_explorer_solr'] = $solrObj;
+    $data_shuffle['solr'] = $solrObj;
 
     return $solrObj;
 }
@@ -1065,8 +1063,10 @@ function call_solr_index($id, $app)
 /**
  * Function to create the ajax content for places in subjects
  */
-function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num = 1, $total_pages = 1, $subpage = FALSE)
-{
+function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num = 1, $total_pages = 1, $subpage = FALSE) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
     $setup = kmaps_explorer_setup_page($id, 'subjects');
 
     $placesURL = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . "/topics/" . $id . ".json?per_page=150&page=" . $page_num;
@@ -1094,16 +1094,13 @@ function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num = 1, $tot
     if ($type == 'ajax') {
         $output = theme('kmaps_explorer_subjects_places_ajax', array(
             'data' => $placesObj,
-            'title' => 'Places Related to ' . $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+            'title' => 'Places Related to ' . $data_shuffle['node_title'],
         ));
 
         $commands = array();
         $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'subjects/' . $id . '/places/nojs/' . $page_num . '/' . $total_pages);
         $commands[] = ajax_command_append('#tab-main', $pagination);
         $page = array('#type' => 'ajax', '#commands' => $commands);
-
-        //Remove the kmaps_explorer variable from the sessions table
-        unset($_SESSION['kmaps_explorer']);
 
         if ($subpage) {
             return $page;
@@ -1115,7 +1112,7 @@ function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num = 1, $tot
 
         $output = theme('kmaps_explorer_subjects_places_ajax', array(
             'data' => $placesObj,
-            'title' => 'Places Related to ' . $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+            'title' => 'Places Related to ' . $data_shuffle['node_title'],
         ));
 
         $setup += array(
@@ -1133,8 +1130,10 @@ function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num = 1, $tot
 /**
  * Function to create the ajax content for the places in places
  */
-function kmaps_explorer_places_places($type = 'ajax', $id, $page_num = 1, $total_pages = 1, $subpage = FALSE)
-{
+function kmaps_explorer_places_places($type = 'ajax', $id, $page_num = 1, $total_pages = 1, $subpage = FALSE) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
     $setup = kmaps_explorer_setup_page($id, 'places');
 
     $placesURL = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . "/features/" . $id . "/related.json";
@@ -1144,15 +1143,12 @@ function kmaps_explorer_places_places($type = 'ajax', $id, $page_num = 1, $total
     if ($type == 'ajax') {
         $output = theme('kmaps_explorer_places_places_ajax', array(
             'data' => $placesObj,
-            'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+            'title' => $data_shuffle['node_title'],
         ));
 
         $commands = array();
         $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'places/' . $id . '/places/nojs');
         $page = array('#type' => 'ajax', '#commands' => $commands);
-
-        //Remove the kmaps_explorer variable from the sessions table
-        unset($_SESSION['kmaps_explorer']);
 
         if ($subpage) {
             return $page;
@@ -1164,7 +1160,7 @@ function kmaps_explorer_places_places($type = 'ajax', $id, $page_num = 1, $total
 
         $output = theme('kmaps_explorer_places_places_ajax', array(
             'data' => $placesObj,
-            'title' => $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+            'title' => $data_shuffle['node_title'],
         ));
 
         $setup += array(
@@ -1232,8 +1228,10 @@ function kmaps_explore_pager_ajax($form, &$form_state)
 /**
  * Function to create ajax content for photos in subjects
  */
-function kmaps_explorer_subjects_photos($type = 'ajax', $id, $page_num = 1, $total_pages = 1, $subpage = FALSE)
-{
+function kmaps_explorer_subjects_photos($type = 'ajax', $id, $page_num = 1, $total_pages = 1, $subpage = FALSE) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
     $setup = kmaps_explorer_setup_page($id, 'subjects');
 
     $photosURL = 'http://mms.thlib.org/topics/' . $id . '/pictures.json?per_page=60&page=' . $page_num;
@@ -1261,16 +1259,13 @@ function kmaps_explorer_subjects_photos($type = 'ajax', $id, $page_num = 1, $tot
     if ($type == 'ajax') {
         $output = theme('kmaps_explorer_subjects_photos_ajax', array(
             'data' => $photosObj->topic->media,
-            'title' => 'Images Related to ' . $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+            'title' => 'Images Related to ' . $data_shuffle['node_title'],
         ));
 
         $commands = array();
         $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'subjects/' . $id . '/photos/nojs/' . $page_num . '/' . $total_pages);
         $commands[] = ajax_command_append('#tab-main', $pagination);
         $page = array('#type' => 'ajax', '#commands' => $commands);
-
-        //Remove the kmaps_explorer variable from the sessions table
-        unset($_SESSION['kmaps_explorer']);
 
         if ($subpage) {
             return $page;
@@ -1282,7 +1277,7 @@ function kmaps_explorer_subjects_photos($type = 'ajax', $id, $page_num = 1, $tot
 
         $output = theme('kmaps_explorer_subjects_photos_ajax', array(
             'data' => $photosObj->topic->media,
-            'title' => 'Images Related to ' . $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+            'title' => 'Images Related to ' . $data_shuffle['node_title'],
         ));
 
         $setup += array(
@@ -1326,8 +1321,10 @@ function kmaps_explorer_subjects_photos_node($id, $pid)
 /**
  * Function to create ajax content for photos in places
  */
-function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num = 1, $total_pages = 1, $subpage = FALSE)
-{
+function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num = 1, $total_pages = 1, $subpage = FALSE) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
     $setup = kmaps_explorer_setup_page($id, 'places');
 
     //css and js files to include for the image slider view
@@ -1363,7 +1360,7 @@ function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num = 1, $total
     // Load Page JS Settings
     $countsettings = array(
         'sarvaka_image_gallery' => array(
-            'total_items' => intval($_SESSION['kmaps_explorer']['kmaps_explorer_places_photos_count']),
+            'total_items' => intval($data_shuffle['places_photos_count']),
             'items_per_page' => $photosObj->place->per_page,
             'page_number' => intval($page_num),
             'item_count' => count($photosObj->place->media),
@@ -1373,12 +1370,12 @@ function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num = 1, $total
     drupal_add_js($countsettings, 'setting');
 
     if($type == 'ajax') {
-        $total_items = intval($_SESSION['kmaps_explorer']['kmaps_explorer_places_photos_count']);
+        $total_items = intval($data_shuffle['places_photos_count']);
         $total_pages = intval($total_items / $photosObj->place->per_page);
 
         $output = theme('kmaps_explorer_subjects_photos_ajax', array(
             'data' => $photosObj->place->media,
-            'title' => 'Images Related to ' . $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+            'title' => 'Images Related to ' . $data_shuffle['node_title'],
             'type' => 'places',
             'id' => $id,
         ));
@@ -1411,12 +1408,12 @@ function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num = 1, $total
     } else {
         //$setup = kmaps_explorer_setup_page($id, 'places');
 
-        $total_items = intval($_SESSION['kmaps_explorer']['kmaps_explorer_places_photos_count']);
+        $total_items = intval($data_shuffle['places_photos_count']);
         $total_pages = intval($total_items / $photosObj->place->per_page);
 
         $output = theme('kmaps_explorer_subjects_photos_ajax', array(
             'data' => $photosObj->place->media,
-            'title' => 'Images Related to ' . $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+            'title' => 'Images Related to ' . $data_shuffle['node_title'],
             'type' => 'places',
             'id' => $id,
         ));
@@ -1477,12 +1474,14 @@ function kmaps_explorer_places_photos_node($id, $pid)
 /**
  * Function to create ajax content for audio-video in subjects
  */
-function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_num = 1, $total_pages = 1, $subpage = FALSE)
-{
+function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_num = 1, $total_pages = 1, $subpage = FALSE) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
     $setup = kmaps_explorer_setup_page($id, $app . 's');
 
     if ($type == 'ajax') {
-        $avObj = $_SESSION['kmaps_explorer']['kmaps_explorer_audio_video'];
+        $avObj = $data_shuffle['audio_video'];
 
         $show_items = 24;
         $total_pages = intval(ceil($avObj->numFound / floatval($show_items)));
@@ -1499,7 +1498,7 @@ function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_nu
 
         $output = theme('kmaps_explorer_subjects_audio_video_ajax', array(
             'data' => array_slice($avObj->docs, $start_ind, $end_length),
-            'title' => 'Audio-Video Related to ' . $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+            'title' => 'Audio-Video Related to ' . $data_shuffle['node_title'],
             'app' => $app . 's',
             'main_id' => $id,
         ));
@@ -1524,9 +1523,6 @@ function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_nu
         $commands[] = ajax_command_append('#tab-main', $pagination);
         $page = array('#type' => 'ajax', '#commands' => $commands);
 
-        //Remove the kmaps_explorer variable from the sessions table
-        unset($_SESSION['kmaps_explorer']);
-
         if ($subpage) {
             return $page;
         } else {
@@ -1535,7 +1531,7 @@ function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_nu
     } else {
         $setup = kmaps_explorer_setup_page($id, $app . 's');
 
-        $avObj = $_SESSION['kmaps_explorer']['kmaps_explorer_audio_video'];
+        $avObj = $data_shuffle['audio_video'];
 
         $show_items = 24;
         $total_pages = intval(ceil($avObj->numFound / floatval($show_items)));
@@ -1552,7 +1548,7 @@ function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_nu
 
         $output = theme('kmaps_explorer_subjects_audio_video_ajax', array(
             'data' => array_slice($avObj->docs, $start_ind, $end_length),
-            'title' => 'Audio-Video Related to ' . $_SESSION['kmaps_explorer']['kmaps_explorer_node_title'],
+            'title' => 'Audio-Video Related to ' . $data_shuffle['node_title'],
             'app' => $app . 's',
             'main_id' => $id,
         ));
@@ -1587,13 +1583,15 @@ function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_nu
 /**
  * Function to create ajax content for audio-video individual node items
  */
-function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid)
-{
+function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
     $setup = kmaps_explorer_setup_page($mid, $app);
 
     if ($type == 'ajax') {
         $avNodeURL = '';
-        $avObj = $_SESSION['kmaps_explorer']['kmaps_explorer_audio_video'];
+        $avObj = $data_shuffle['audio_video'];
         foreach ($avObj->docs as $avNodeObj) {
             if ($avNodeObj->id == $vid) {
                 $avNodeURL = $avNodeObj->url_html;
@@ -1606,15 +1604,12 @@ function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid)
         $commands[] = ajax_command_invoke('body', 'addClass', array('max-col-widths'));
         $page = array('#type' => 'ajax', '#commands' => $commands);
 
-        //Remove the kmaps_explorer variable from the sessions table
-        unset($_SESSION['kmaps_explorer']);
-
         ajax_deliver($page);
     } else {
         $setup = kmaps_explorer_setup_page($mid, $app);
 
         $avNodeURL = '';
-        $avObj = $_SESSION['kmaps_explorer']['kmaps_explorer_audio_video'];
+        $avObj = $data_shuffle['audio_video'];
         foreach ($avObj->docs as $avNodeObj) {
             if ($avNodeObj->id == $vid) {
                 $avNodeURL = $avNodeObj->url_html;
@@ -1679,8 +1674,10 @@ function search_etymology($obj)
 /**
  * Implements hook_menu_breadcrumb_alter().
  */
-function kmaps_explorer_menu_breadcrumb_alter(&$active_trail, $item)
-{
+function kmaps_explorer_menu_breadcrumb_alter(&$active_trail, $item) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
     $active_trail = array();
 
     if (current_path() == 'subjects') {
@@ -1700,9 +1697,9 @@ function kmaps_explorer_menu_breadcrumb_alter(&$active_trail, $item)
         );
         array_push($active_trail, $link1);
 
-    } else if (!empty($_SESSION['kmaps_explorer']['kmaps_explorer_ancestors'])) {
-        $ancestors = $_SESSION['kmaps_explorer']['kmaps_explorer_ancestors'];
-        $app = $_SESSION['kmaps_explorer']['kmaps_explorer_app'];
+    } else if (!empty($data_shuffle['ancestors'])) {
+        $ancestors = $data_shuffle['ancestors'];
+        $app = $data_shuffle['app'];
         foreach ($ancestors as $key => $ancestor) {
             $link = array(
                 'title' => $ancestor->header,
