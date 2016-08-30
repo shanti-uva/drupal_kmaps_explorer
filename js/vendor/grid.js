@@ -369,9 +369,37 @@ var Grid = (function($) {
 				"data-subjects": eldata.subjectsIds
 			});
 
+			//Get the related data for related places and subjects
+			var placesArray = eldata.placesIds.split('::');
+			var subjectsArray = eldata.subjectsIds.split('::');
+			var entities = '';
+			placesArray.forEach(function(el, ind, arry) {
+				entities += 'id:places-' + el + '%20OR%20';
+			});
+			subjectsArray.forEach(function(el, ind, arry) {
+				entities += 'id:subjects-' + el + '%20OR%20';
+			});
+			entities = entities.substring(0, entities.length - '%20OR%20'.length);
+			var url = 'http://kidx.shanti.virginia.edu/solr/termindex-dev-update/select?q=' + entities + '&wt=json';
+			$.get(url, function(data) {
+				data = $.parseJSON(data);
+				var docs = data.response.docs;
+				var relatedObjects = groupBy(docs, 'tree');
+				console.log(relatedObjects);
+				var placesMarkup = '<label>Places: </label>';
+				relatedObjects.places.forEach(function(el, ind, arry) {
+					placesMarkup += '<span>' + el.header + '</span>';
+					placesMarkup += '<span id="' + el.id + '-common' + '" class="kmaps-images-popover" data-toggle="popover" data-html="true" data-trigger="hover" data-content="<span>And heres</span> some amazing content. Its very engaging. Right?">';
+					placesMarkup += '<span class="popover-kmaps-tip"></span>';
+					placesMarkup += '<span class="icon shanticon-menu3"></span>';
+					placesMarkup += '</span> ' + '&nbsp;';
+				});
+				this.$place.html(placesMarkup);
+				$("[data-toggle=popover]").popover();
+			}.bind(this));
+
 			this.$creator.html( "<label>Photographer:</label> " + eldata.creator );
-			this.$date.html( "<label>Date:</label> " + eldata.date );
-			this.$place.html( "<label>Location:</label> " + eldata.place );
+			this.$date.html('<button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Popover on left</button>');
 			this.$dtype.html("<label>Type:</label> " + eldata.dtype);
 			this.$ssid.html("<label>Shared Shelf ID:</label> " + eldata.ssid);
 			this.$hugeDownloadImg.html('<label>Huge Image:</label> ' + '<a href="' + eldata.hugesrc +
