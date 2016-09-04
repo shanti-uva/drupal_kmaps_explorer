@@ -271,7 +271,7 @@
                                         kmidxBase = 'http://kidx.shanti.virginia.edu/solr/kmindex';
                                         console.error("Drupal.settings.shanti_kmaps_admin.shanti_kmaps_admin_server_solr not defined. using default value: " + kmidxBase);
                                     }
-                                    var solrURL = kmidxBase + '/select?q=kmapid:' + settings.type + '-' + key + project_filter + '&start=0&facets=on&group=true&group.field=asset_type&group.facet=true&group.ngroups=true&group.limit=0&wt=json';
+                                    var solrURL = kmidxBase + '/select?q=kmapid:' + settings.type + '-' + key + project_filter + '&start=0&facets=on&group=true&group.field=asset_type&group.facet=true&group.ngroups=true&group.limit=0&wt=json&json.wrf=?';
                                     // console.log ("solrURL = " + solrURL);
                                     $.get(solrURL, function (json) {
                                         //console.log(json);
@@ -284,7 +284,7 @@
                                         });
                                         //console.log(key + "(" + title + ") : " + JSON.stringify(updates));
                                         update_counts(countsElem, updates)
-                                    });
+                                    }, 'jsonp');
                                 }
                             });
                         });
