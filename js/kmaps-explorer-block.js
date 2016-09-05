@@ -273,10 +273,9 @@
                                     }
                                     var solrURL = kmidxBase + '/select?q=kmapid:' + settings.type + '-' + key + project_filter + '&start=0&facets=on&group=true&group.field=asset_type&group.facet=true&group.ngroups=true&group.limit=0&wt=json&json.wrf=?';
                                     // console.log ("solrURL = " + solrURL);
-                                    $.get(solrURL, function (json) {
-                                        //console.log(json);
+                                    $.get(solrURL, function (data) {
+                                        //console.log(data);
                                         var updates = {};
-                                        var data = JSON.parse(json);
                                         $.each(data.grouped.asset_type.groups, function (x, y) {
                                             var asset_type = y.groupValue;
                                             var asset_count = y.doclist.numFound;
