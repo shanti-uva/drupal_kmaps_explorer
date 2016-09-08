@@ -1,0 +1,2185 @@
+<?php
+
+/**
+ * Implements hook_menu
+ */
+
+define('SUBJECTS_URL', 'http://subjects.kmaps.virginia.edu');
+define('PLACES_URL', 'http://places.kmaps.virginia.edu');
+
+function kmaps_explorer_menu()
+{
+    $items = array();
+
+    $items['kmaps/template'] = array(
+        'title' => 'Kmaps Content Template',
+        'description' => 'Return the html for the display of a KMap feature',
+        'page callback' => 'kmaps_explorer_get_template',
+        'access callback' => TRUE,
+        'type' => MENU_LOCAL_ACTION,
+    );
+
+    $items['subjects'] = array(
+        'title' => 'Subjects',
+        'description' => 'Creates a page that shows the initial landing content of the subjects app.',
+        'page callback' => 'kmaps_explorer_subjects_landing',
+        'page arguments' => array('subjects'),
+        'access arguments' => array('access content'),
+        'type' => MENU_NORMAL_ITEM,
+        'menu_name' => 'main-menu',
+    );
+
+    $items['subjects/%/overview/%'] = array(
+        'title' => 'Subjects',
+        'description' => 'Creates a callback that shows overview in subjects via ajax',
+        'page callback' => 'kmaps_explorer_subjects_overview',
+        'page arguments' => array(3, 1, 'subjects'),
+        'access arguments' => TRUE,
+        'access callback' => TRUE,
+    );
+
+    $items['places'] = array(
+        'title' => 'Places',
+        'description' => 'Creates a page that shows the initial landing content of the places app.',
+        'page callback' => 'kmaps_explorer_places_landing',
+        'page arguments' => array('places'),
+        'access arguments' => array('access content'),
+        'type' => MENU_NORMAL_ITEM,
+        'menu_name' => 'main-menu',
+    );
+
+    $items['places/%/overview/%'] = array(
+        'title' => 'Places',
+        'description' => 'Creates a callback that shows overview in places via ajax',
+        'page callback' => 'kmaps_explorer_places_overview',
+        'page arguments' => array(3, 1, 'places'),
+        'access arguments' => TRUE,
+        'access callback' => TRUE,
+    );
+
+    $items['subjects/%/subjects/%'] = array(
+        'title' => 'Subjects',
+        'description' => 'Creates a callback that shows subjects in subjects via ajax',
+        'page callback' => 'kmaps_explorer_subjects_subjects',
+        'page arguments' => array(3, 1, 'subjects'),
+        'access arguments' => TRUE,
+        'access callback' => TRUE,
+    );
+
+    $items['places/%/subjects/%'] = array(
+        'title' => 'Places',
+        'description' => 'Creates a callback that shows subjects in places via ajax',
+        'page callback' => 'kmaps_explorer_places_subjects',
+        'page arguments' => array(3, 1, 'places'),
+        'access arguments' => TRUE,
+        'access callback' => TRUE,
+    );
+
+    $items['subjects/%/texts/%'] = array(
+        'title' => 'Subjects',
+        'description' => 'Creates a callback that shows essays in subjects via ajax',
+        'page callback' => 'kmaps_explorer_subjects_essays',
+        'page arguments' => array(3, 1, 'subjects'),
+        'access arguments' => TRUE,
+        'access callback' => TRUE,
+    );
+
+    $items['places/%/texts/%'] = array(
+        'title' => 'Places',
+        'description' => 'Creates a callback that shows essays in places via ajax',
+        'page callback' => 'kmaps_explorer_places_essays',
+        'page arguments' => array(3, 1, 'places'),
+        'access arguments' => TRUE,
+        'access callback' => TRUE,
+    );
+
+    $items['subjects/%/places/%'] = array(
+        'title' => 'Subjects',
+        'description' => 'Creates a callback that shows places in subjects via ajax',
+        'page callback' => 'kmaps_explorer_subjects_places',
+        'page arguments' => array(3, 1),
+        'access arguments' => TRUE,
+        'access callback' => TRUE,
+    );
+
+    $items['places/%/places/%'] = array(
+        'title' => 'Places',
+        'description' => 'Creates a callback that shows places in places via ajax',
+        'page callback' => 'kmaps_explorer_places_places',
+        'page arguments' => array(3, 1),
+        'access arguments' => TRUE,
+        'access callback' => TRUE,
+    );
+
+    $items['subjects/%/photos/%'] = array(
+        'title' => 'Subjects',
+        'description' => 'Creates a callback that shows photos in subjects via ajax',
+        'page callback' => 'kmaps_explorer_subjects_photos',
+        'page arguments' => array(3, 1),
+        'access arguments' => TRUE,
+        'access callback' => TRUE,
+    );
+
+    $items['subjects/%/photos_node/%'] = array(
+        'title' => 'Subjects',
+        'description' => 'Creates a callback that shows individual photos in subjects via ajax',
+        'page callback' => 'kmaps_explorer_subjects_photos_node',
+        'page arguments' => array(1, 3),
+        'access arguments' => TRUE,
+        'access callback' => TRUE,
+    );
+
+    $items['places/%/photos/%'] = array(
+        'title' => 'Places',
+        'description' => 'Creates a callback that shows photos in places via ajax',
+        'page callback' => 'kmaps_explorer_places_photos',
+        'page arguments' => array(3, 1),
+        'access arguments' => TRUE,
+        'access callback' => TRUE,
+    );
+
+    $items['places/%/photos_node/%'] = array(
+        'title' => 'Places',
+        'description' => 'Creates a callback that shows individual photos in places via ajax',
+        'page callback' => 'kmaps_explorer_places_photos_node',
+        'page arguments' => array(1, 3),
+        'access arguments' => TRUE,
+        'access callback' => TRUE,
+    );
+
+    $items['subjects/%/text_node/%/%'] = array(
+        'title' => 'Subjects',
+        'description' => 'Creates a callback that shows individual text nodes',
+        'page callback' => 'kmaps_explorer_each_text_node',
+        'page arguments' => array(4, 1, 3, 'subjects'),
+        'access arguments' => TRUE,
+        'access callback' => TRUE,
+    );
+
+    $items['places/%/text_node/%/%'] = array(
+        'title' => 'Places',
+        'description' => 'Creates a callback that shows individual text nodes',
+        'page callback' => 'kmaps_explorer_each_text_node',
+        'page arguments' => array(4, 1, 3, 'places'),
+        'access arguments' => TRUE,
+        'access callback' => TRUE,
+    );
+
+    $items['subjects/%/audio-video/%'] = array(
+        'title' => 'Subjects',
+        'description' => 'Creates a callback that shows audio-video in subjects via ajax',
+        'page callback' => 'kmaps_explorer_subjects_audio_video',
+        'page arguments' => array(3, 1, 'subject'),
+        'access arguments' => TRUE,
+        'access callback' => TRUE,
+    );
+
+    $items['places/%/audio-video/%'] = array(
+        'title' => 'Places',
+        'description' => 'Creates a callback that shows audio-video in places via ajax',
+        'page callback' => 'kmaps_explorer_subjects_audio_video', //using same function as in subjects.
+        'page arguments' => array(3, 1, 'place'),
+        'access arguments' => TRUE,
+        'access callback' => TRUE,
+    );
+
+    $items['subjects/%/audio-video-node/%/%'] = array(
+        'title' => 'Subjects',
+        'description' => 'Creates a callback that shows individual audio-video nodes',
+        'page callback' => 'kmaps_explorer_audio_video_node', //using same function for both places and subjects.
+        'page arguments' => array(4, 1, 0, 3),
+        'access arguments' => TRUE,
+        'access callback' => TRUE,
+    );
+
+    $items['places/%/audio-video-node/%/%'] = array(
+        'title' => 'Places',
+        'description' => 'Creates a callback that shows individual audio-video nodes',
+        'page callback' => 'kmaps_explorer_audio_video_node', //using same function for both places and subjects.
+        'page arguments' => array(4, 1, 0, 3),
+        'access arguments' => TRUE,
+        'access callback' => TRUE,
+    );
+    $items['admin/config/content/kmaps_explorer'] = array(
+        'title' => 'SHANTI KMAPS EXPLORER ADMIN',
+        'description' => 'Specify settings to clear caches for the kmaps explorer module',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('kmaps_explorer_admin'),
+        'access arguments' => array('administer content types'),
+        'type' => MENU_NORMAL_ITEM,
+    );
+    $items['api/subject/mod/%'] = array(
+        'title' => 'Modified Subject API Call',
+        'description' => 'Modifies the subject api call by adding counts of descendants',
+        'page callback' => 'kmaps_explorer_modified_subject_api',
+        'page arguments' => array(3),
+        'access arguments' => TRUE,
+        'access callback' => TRUE,
+    );
+
+    return $items;
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function kmaps_explorer_theme()
+{
+    return array(
+        'kmaps_explorer_tree_block' => array(
+            'variables' => array('block' => NULL, 'trees' => NUll),
+        ),
+        'kmaps_explorer_initial_template' => array(
+            'template' => 'kmaps-explorer-page',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates',
+        ),
+        'kmaps_explorer_subjects_overview_ajax' => array(
+            'template' => 'kmaps-explorer-subjects-overview',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/subjects',
+        ),
+        'kmaps_explorer_subjects_overview_image' => array(
+            'template' => 'kmaps-explorer-subjects-overview-image',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/subjects',
+        ),
+        'kmaps_explorer_subjects_subjects_ajax' => array(
+            'template' => 'kmaps-explorer-subjects-subjects',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/subjects',
+        ),
+        'kmaps_explorer_subjects_essays_ajax' => array(
+            'template' => 'kmaps-explorer-subjects-essays',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/subjects',
+        ),
+        'kmaps_explorer_subjects_places_ajax' => array(
+            'template' => 'kmaps-explorer-subjects-places',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/subjects',
+        ),
+        'kmaps_explorer_pagination_template' => array(
+            'template' => 'kmaps-explorer-pagination',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates',
+        ),
+        'kmaps_explorer_subjects_photos_ajax' => array(
+            'template' => 'kmaps-explorer-subjects-photos',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/subjects',
+        ),
+        'kmaps_explorer_subjects_photos_node' => array(
+            'template' => 'kmaps-explorer-subjects-photos-node',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/subjects',
+        ),
+        'kmaps_explorer_subjects_texts_ajax' => array(
+            'template' => 'kmaps-explorer-subjects-texts',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/subjects',
+        ),
+        'kmaps_explorer_subjects_audio_video_ajax' => array(
+            'template' => 'kmaps-explorer-subjects-audio-video',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/subjects',
+        ),
+        'kmaps_explorer_places_overview_ajax' => array(
+            'template' => 'kmaps-explorer-places-overview',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
+        ),
+        'kmaps_explorer_places_overview_image' => array(
+            'template' => 'kmaps-explorer-places-overview-image',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
+        ),
+        'kmaps_explorer_subjects_landing' => array(
+            'template' => 'kmaps-explorer-subjects-landing-page',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/subjects',
+        ),
+        'kmaps_explorer_places_landing' => array(
+            'template' => 'kmaps-explorer-places-landing-page',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
+        ),
+        'kmaps_explorer_places_overview_names' => array(
+            'template' => 'kmaps-explorer-places-overview-names',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
+        ),
+        'kmaps_explorer_places_overview_etymology' => array(
+            'template' => 'kmaps-explorer-places-overview-etymology',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
+        ),
+        'kmaps_explorer_places_overview_ids' => array(
+            'template' => 'kmaps-explorer-places-overview-ids',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
+        ),
+        'kmaps_explorer_places_overview_location' => array(
+            'template' => 'kmaps-explorer-places-overview-location',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
+        ),
+        'kmaps_explorer_places_overview_gis' => array(
+            'template' => 'kmaps-explorer-places-overview-gis',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
+        ),
+        'kmaps_explorer_places_places_ajax' => array(
+            'template' => 'kmaps-explorer-places-places',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
+        ),
+        'kmaps_explorer_places_essays_ajax' => array(
+            'template' => 'kmaps-explorer-places-essays',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
+        ),
+        'kmaps_explorer_places_subjects_ajax' => array(
+            'template' => 'kmaps-explorer-places-subjects',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
+        ),
+        'kmaps_explorer_places_texts_ajax' => array(
+            'template' => 'kmaps-explorer-places-texts',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates/places',
+        ),
+        'kmaps_explorer_breadcrumbs' => array(
+            'template' => 'kmaps-explorer-breadcrumbs',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates',
+        ),
+        'kmaps_explorer_texts_summary' => array(
+            'template' => 'kmaps-explorer-texts-display',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates',
+        ),
+        'kmaps_explorer_texts_individual_node' => array(
+            'template' => 'kmaps-explorer-texts-node',
+            'arguments' => array(),
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates',
+        ),
+        'kmaps_explorer_block' => array(
+            'path' => drupal_get_path('module', 'kmaps_explorer') . '/templates',
+            'template' => 'kmaps-explorer-block',
+            'variables' => array(
+                'forums' => NULL, 'topics' => NULL, 'parents' => NULL, 'domain' => NULL, 'search' => NULL, 'filters' => NULL,
+            ),
+        ),
+    );
+}
+
+function theme_kmaps_explorer_tree_block($variables)
+{
+    $html = '<div id="kmaps-tree-block" class="view-wrap">';
+    foreach ($variables['trees'] as $tree) {
+        $lctree = strtolower($tree);
+        $html .= "<div id=\"km-{$lctree}-tree\">
+  						<h2>{$tree}</h2><div class=\"tree\"></div>
+  					</div>";
+    }
+    $html .= '</div>';
+    //dpm($html, 'in tsktb hey');
+    return $html;
+}
+
+/**
+ * Function to create the landing page for subjects
+ */
+function kmaps_explorer_subjects_landing($type)
+{
+    //css and js files to include in pages
+    $path = drupal_get_path('module', 'kmaps_explorer');
+
+    $options = array(
+        'group' => CSS_THEME,
+    );
+
+    // drupal_add_css('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', 'external');
+    // drupal_add_css($path . '/css/jquery.bxslider.css', $options);
+
+    $options = array(
+        'group' => JS_THEME,
+        'weight' => 1000,
+    );
+
+    drupal_add_library('system', 'drupal.ajax');
+    drupal_add_js(array('kmaps_explorer' => array('app' => 'subjects')), 'setting');
+    drupal_add_js($path . '/js/jquery.bxslider-rahisified.js', $options);
+    drupal_add_js($path . '/js/bxslider-initialize.js', $options);
+    drupal_add_js($path . '/js/custom.js', $options);
+    // drupal_add_js($path . '/js/bxsliderInit.js', $options);
+
+    return theme('kmaps_explorer_subjects_landing', array(
+        'path' => $path . '/images',
+    ));
+}
+
+/**
+ * Function to create the landing page for places
+ */
+function kmaps_explorer_places_landing($type)
+{
+    //css and js files to include in pages
+    $path = drupal_get_path('module', 'kmaps_explorer');
+
+    $options = array(
+        'group' => CSS_THEME,
+    );
+
+    drupal_add_css('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', 'external');
+    // drupal_add_css($path . '/css/jquery.bxslider.css', $options);
+
+    $options = array(
+        'group' => JS_THEME,
+        'weight' => 1000,
+    );
+
+    drupal_add_library('system', 'drupal.ajax');
+    drupal_add_js(array('kmaps_explorer' => array('app' => 'places')), 'setting');
+    drupal_add_js('https://maps.googleapis.com/maps/api/js?v=3.exp', 'external');
+    drupal_add_js($path . '/js/google_maps.js', $options);
+    drupal_add_js($path . '/js/jquery.bxslider-rahisified.js', $options);
+    drupal_add_js($path . '/js/bxslider-initialize.js', $options);
+    drupal_add_js($path . '/js/custom.js', $options);
+    // drupal_add_js($path . '/js/bxsliderInit.js', $options);
+
+    return theme('kmaps_explorer_places_landing', array(
+        'path' => $path . '/images',
+    ));
+}
+
+function kmaps_explorer_subjects_overview($type = 'ajax', $id, $app) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
+    //css and js files to include in pages
+    $path = drupal_get_path('module', 'kmaps_explorer');
+
+    $setup = kmaps_explorer_setup_page($id, $app);
+
+    $obj = $setup['obj'];
+
+    $accordionNameContent = array();
+    foreach ($obj->feature->names as $lang_name) {
+        array_push($accordionNameContent, $lang_name->name);
+    }
+
+    $accordionNameContent = array_unique($accordionNameContent);
+
+    $overview_content = theme('kmaps_explorer_subjects_overview_ajax', array(
+        'obj' => $obj,
+        'accordionNameContent' => $accordionNameContent,
+    ));
+
+    $setup += array(
+        'active_content' => $overview_content,
+        'ajax' => $type == 'ajax' ? TRUE : FALSE,
+        'overview' => TRUE,
+    );
+
+    $content = theme('kmaps_explorer_initial_template', $setup);
+
+    if ($type == 'ajax') {
+        $breadcrumb = theme('kmaps_explorer_breadcrumbs', array(
+            'data' => $data_shuffle['ancestors'],
+            'app' => $app,
+        ));
+
+        $commands = array();
+        $commands[] = custom_ajax_command_html('#' . $app . '-main', $content, null, base_path() . 'subjects/' . $id . '/overview/nojs');
+        $commands[] = ajax_command_html('.page-title span:last-child', $obj->feature->header);
+        $commands[] = ajax_command_html('ol.breadcrumb', $breadcrumb);
+        $commands[] = ajax_command_invoke('ol.breadcrumb', 'css', array('display', 'block'));
+        $page = array('#type' => 'ajax', '#commands' => $commands);
+
+        ajax_deliver($page);
+    } else {
+        return $content;
+    }
+
+}
+
+function kmaps_explorer_places_overview($type = 'ajax', $id, $app) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
+    //css and js files to include in pages
+    $path = drupal_get_path('module', 'kmaps_explorer');
+
+    $setup = kmaps_explorer_setup_page($id, $app);
+
+    //Places Overview setup
+    $obj = $setup['obj'];
+
+    if (count($obj->feature->illustrations) > 0 && $obj->feature->illustrations[0]->type == 'mms') {
+        $illustrations = save_to_cache('illustrations', $app, $id, $obj->feature->illustrations[0]->url);
+        $placesOverviewImageOBJ = json_decode($illustrations);
+        $placesOverviewImage = theme('kmaps_explorer_places_overview_image', array(
+            'url' => $placesOverviewImageOBJ->picture->images[3]->url,
+        ));
+    } else if (count($obj->feature->illustrations) > 0 && $obj->feature->illustrations[0]->type == 'external') {
+        $placesOverviewImage = theme('kmaps_explorer_places_overview_image', array(
+            'url' => $obj->feature->illustrations[0]->url,
+        ));
+    }
+
+    //Accordion setup
+    $accordionURL = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . "/features/" . $id . "/names.json";
+    $accordion = save_to_cache('accordion', $app, $id, $accordionURL);
+    $accordionOBJ = json_decode($accordion);
+    //dpm($accordionOBJ);
+    $accordionName = theme('kmaps_explorer_places_overview_names', array(
+        'data' => $accordionOBJ,
+    ));
+
+    $etymology = search_etymology($accordionOBJ->names);
+    if ($etymology) {
+        $accordionEtymology = theme('kmaps_explorer_places_overview_etymology', array(
+            'etymology' => $etymology,
+        ));
+    }
+
+    //Accordion ID's
+    $accordionId = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . "/features/" . $id . "/codes.json";
+    $accordionIdJson = save_to_cache('accordionId', $app, $id, $accordionId);
+    $accordionIdOBJ = json_decode($accordionIdJson);
+    $accordionIdContent = theme('kmaps_explorer_places_overview_ids', array(
+        'data' => $accordionIdOBJ,
+    ));
+
+    //Accordion Location
+    $accordionLocation = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . "/features/" . $id . "/locations.json";
+    $accordionLocationJson = save_to_cache('accordionLocation', $app, $id, $accordionLocation);
+    $accordionLocationOBJ = json_decode($accordionLocationJson);
+    $accordionLocationContent = theme('kmaps_explorer_places_overview_location', array(
+        'data' => $accordionLocationOBJ,
+    ));
+
+    //Accordion GIS
+    if (!empty($accordionLocationOBJ->feature->resources)) {
+        $accordionGisContent = theme('kmaps_explorer_places_overview_gis', array(
+            'data' => $accordionLocationOBJ,
+        ));
+    }
+
+    $overview_content = theme('kmaps_explorer_places_overview_ajax', array(
+        'obj' => $setup['obj'],
+        'places_overview_image' => isset($placesOverviewImage) ? $placesOverviewImage : '',
+        'accordionName' => isset($accordionName) ? $accordionName : '',
+        'accordionEtymology' => isset($accordionEtymology) ? $accordionEtymology : '',
+        'accordionIdContent' => isset($accordionIdContent) ? $accordionIdContent : '',
+        'accordionLocationContent' => isset($accordionLocationContent) ? $accordionLocationContent : '',
+        'accordionGisContent' => isset($accordionGisContent) ? $accordionGisContent : '',
+    ));
+
+    $setup += array(
+        'active_content' => $overview_content,
+        'ajax' => $type == 'ajax' ? TRUE : FALSE,
+        'overview' => TRUE,
+    );
+
+    $content = theme('kmaps_explorer_initial_template', $setup);
+
+    if ($type == 'ajax') {
+        $breadcrumb = theme('kmaps_explorer_breadcrumbs', array(
+            'data' => $data_shuffle['ancestors'],
+            'app' => $app,
+        ));
+
+        $commands = array();
+        $commands[] = custom_ajax_command_html('#' . $app . '-main', $content, null, base_path() . 'places/' . $id . '/overview/nojs');
+        $commands[] = ajax_command_html('.page-title span:last-child', $obj->feature->header);
+        $commands[] = ajax_command_html('ol.breadcrumb', $breadcrumb);
+        $commands[] = ajax_command_invoke('ol.breadcrumb', 'css', array('display', 'block'));
+        $page = array('#type' => 'ajax', '#commands' => $commands);
+
+        ajax_deliver($page);
+    } else {
+        return $content;
+    }
+
+}
+
+/**
+ * Function to setup the page for first time loads and non ajax loads.
+ */
+function kmaps_explorer_setup_page($id, $app) {
+    global $base_url;
+
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
+    //css and js files to include in pages
+    $path = drupal_get_path('module', 'kmaps_explorer');
+
+    //Store the type of the application(subjects or places)
+    $data_shuffle['app'] = $app;
+
+    $options = array(
+        'group' => CSS_THEME,
+    );
+
+    //drupal_add_css($path . '/css/bootstrap.min.css', $options);
+    //drupal_add_css($path . '/css/bootstrap-theme.min.css', $options);
+    drupal_add_css($path . '/css/kmaps_explorer.css', $options);
+    /**
+     *  if ($app === 'places') {
+     *    drupal_add_css($path . '/css/places.css', $options);
+     *  }
+     **/
+    //custom javascript
+    drupal_add_js($path . '/js/custom.js', $options);
+    drupal_add_js(array('kmaps_explorer' => array('app' => $app)), 'setting');
+
+    drupal_add_library('system', 'drupal.ajax');
+
+    //Create the url for related assets for subjects and places
+    if ($app == 'subjects') {
+        //$mURL = "{$base_url}/api/subject/mod/{$id}";
+        $mURL = variable_get('shanti_kmaps_admin_server_subjects', SHANTI_KMAPS_ADMIN_SERVER_SUBJECTS) . '/features/' . $id . '.json';
+    } elseif ($app == 'places') {
+        $mURL = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . '/features/' . $id . '.json';
+    } else {
+        $mURL = "http://" . $app . ".kmaps.virginia.edu/features/" . $id . ".json";
+    }
+
+    /* if($app == 'subjects') { $mURL = "{$base_url}/api/subject/mod/{$id}"; } */ // not sure what this is but will remove for now
+
+    //Create the url for the solr related assets for subjects and places
+    $solrURL = variable_get('shanti_kmaps_admin_server_solr', SHANTI_KMAPS_ADMIN_SERVER_SOLR) . '/select?q=kmapid:' . $app . '-' . $id . '&fq=&start=0&facets=on&group=true&group.field=asset_type&group.facet=true&group.ngroups=true&group.limit=1000&wt=json';
+
+    //Get related data and saving in cache
+    $c_name = 'json';
+
+    $related_url = save_to_cache($c_name, $app, $id, $mURL);
+
+    $obj = json_decode($related_url);
+
+    if ($app === 'places') {
+        if (isset($obj->feature->closest_fid_with_shapes)) {
+            $options = array(
+                'group' => JS_THEME,
+                'weight' => 1000,
+            );
+            drupal_add_js(array('kmaps_explorer' => array('closest_fid_with_shapes' => $obj->feature->closest_fid_with_shapes)), 'setting');
+            drupal_add_js('https://maps.googleapis.com/maps/api/js?v=3.exp', 'external');
+            drupal_add_js($path . '/js/google_maps.js', $options);
+        }
+    }
+
+    //Store the ancestors to be used for breadcrumbs
+    if ($app == 'subjects') {
+        $data_shuffle['ancestors'] = $obj->feature->ancestors;
+    } elseif ($app == 'places') {
+        $data_shuffle['ancestors'] = $obj->feature->perspectives[0]->ancestors;
+    }
+
+    //Set and Store the title of this node for other functions to use
+    $data_shuffle['node_title'] = $obj->feature->header;
+    drupal_set_title($obj->feature->header);
+
+    //Store the count for the places photos if available
+    if (isset($obj->feature->associated_resources->picture_count) && intval($obj->feature->associated_resources->picture_count) > 0) {
+        $data_shuffle['places_photos_count'] = $obj->feature->associated_resources->picture_count;
+    }
+
+    //Get solr data
+    $c_name_solr = 'solrJSON';
+    $related_solr = save_to_cache($c_name_solr, $app, $id, $solrURL);
+    $solrObj = json_decode($related_solr);
+    //dpm($solrObj);
+
+    //Store the solr object to be used in essays.
+    $data_shuffle['solr'] = $solrObj;
+
+    $video_count = 0;
+    $solr_text_count = 0;
+
+    foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
+        if ($solrValue->groupValue == "audio-video" && $solrValue->doclist->numFound > 0) {
+            $video_count = $solrValue->doclist->numFound;
+            $data_shuffle['audio_video'] = $solrValue->doclist;
+        }
+        if ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound > 0) {
+            $solr_text_count = $solrValue->doclist->numFound;
+        }
+    }
+
+    //test information for subpages
+    // $app = 'subject';
+    // $avURL = 'http://mediabase.drupal-dev.shanti.virginia.edu/services/' . $app . '/' . $id . '?rows=12&pg=3';
+    // $avObj = json_decode(file_get_contents($avURL));
+    // dpm($avObj);
+
+    //Link for edit_url variable
+    if ($app == 'subjects') {
+        $edit_url = variable_get('shanti_kmaps_admin_server_subjects', SHANTI_KMAPS_ADMIN_SERVER_SUBJECTS) . '/admin/features/' . $obj->feature->db_id;
+    } elseif ($app == 'places') {
+        $edit_url = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . '/admin/features/' . $obj->feature->db_id;
+    } else {
+        $edit_url = '';
+    }
+
+    return array(
+        'type' => $app,
+        'kid' => $id,
+        'obj' => $obj,
+        'reverse_type' => $app == 'subjects' ? 'places' : 'subjects',
+        'video_count' => $video_count,
+        'solr_text_count' => $solr_text_count,
+        'edit_url' => $edit_url,
+    );
+
+}
+
+/**
+ * Function to create the ajax content for subjects in subjects
+ */
+function kmaps_explorer_subjects_subjects($type = 'ajax', $id, $app) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
+    $setup = kmaps_explorer_setup_page($id, $app);
+
+    $subjectsURL = variable_get('shanti_kmaps_admin_server_subjects', SHANTI_KMAPS_ADMIN_SERVER_SUBJECTS) . "/features/" . $id . "/related.json";
+    $subjects_fetch = save_to_cache('subjects', $app, $id, $subjectsURL);
+    $subjObj = json_decode($subjects_fetch);
+    $subjObj = _add_subject_child_counts($subjObj, $id);
+    if ($type == 'ajax') {
+        //Retrieve the title of the node
+        $title = isset($data_shuffle['node_title']) ? $data_shuffle['node_title'] : '';
+
+        $output = theme('kmaps_explorer_subjects_subjects_ajax', array(
+            'data' => $subjObj,
+            'title' => 'Subjects Related to ' . $title,
+        ));
+
+        $commands = array();
+        $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'subjects/' . $id . '/subjects/nojs');
+        $page = array('#type' => 'ajax', '#commands' => $commands);
+
+        ajax_deliver($page);
+    } else {
+        $setup = kmaps_explorer_setup_page($id, $app);
+
+        //Retrieve the title of the node
+        $title = isset($data_shuffle['node_title']) ? $data_shuffle['node_title'] : '';
+
+        $output = theme('kmaps_explorer_subjects_subjects_ajax', array(
+            'data' => $subjObj,
+            'title' => 'Subjects Related to ' . $title,
+        ));
+
+        $setup += array(
+            'active_content' => $output,
+            'ajax' => $type == 'ajax' ? TRUE : FALSE,
+            'subject' => TRUE,
+        );
+
+        $content = theme('kmaps_explorer_initial_template', $setup);
+
+        return $content;
+    }
+}
+
+/**
+ * Function to create the ajax content for subjects in places
+ */
+function kmaps_explorer_places_subjects($type = 'ajax', $id, $app) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
+    $setup = kmaps_explorer_setup_page($id, $app);
+
+    $subjectsURL = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . "/features/" . $id . "/topics.json";
+    $subjects_fetch = save_to_cache('subjects', $app, $id, $subjectsURL);
+    $subjObj = json_decode($subjects_fetch);
+
+    if ($type == 'ajax') {
+        //Retrieve the title of the node
+        $title = $data_shuffle['node_title'];
+
+        $output = theme('kmaps_explorer_places_subjects_ajax', array(
+            'data' => $subjObj,
+            'title' => 'Subjects Related to ' . $title,
+        ));
+
+        $commands = array();
+        $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'places/' . $id . '/subjects/nojs');
+        $page = array('#type' => 'ajax', '#commands' => $commands);
+
+        ajax_deliver($page);
+    } else {
+        $setup = kmaps_explorer_setup_page($id, $app);
+
+        //Retrieve the title of the node
+        $title = $data_shuffle['node_title'];
+
+        $output = theme('kmaps_explorer_places_subjects_ajax', array(
+            'data' => $subjObj,
+            'title' => 'Subjects Related to ' . $title,
+        ));
+
+        $setup += array(
+            'active_content' => $output,
+            'ajax' => $type == 'ajax' ? TRUE : FALSE,
+            'subject' => TRUE,
+        );
+
+        $content = theme('kmaps_explorer_initial_template', $setup);
+
+        return $content;
+    }
+}
+
+/**
+ * Function to create the ajax content for essays in subjects
+ */
+function kmaps_explorer_subjects_essays($type = 'ajax', $id, $app) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
+    $setup = kmaps_explorer_setup_page($id, $app);
+
+    if ($type == 'ajax') {
+        //Retrieve the title of the node
+        $title = $data_shuffle['node_title'];
+
+        $solrObj = $data_shuffle['solr'];
+
+        foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
+            if ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound == 1) {
+                $output = '<iframe height="700" width="100%" frameBorder="0" src="' . $solrValue->doclist->docs[0]->url_ajax . '"></iframe>';
+            } elseif ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound > 1) {
+                $output = theme('kmaps_explorer_texts_summary', array(
+                    'data' => $solrValue,
+                    'sid' => $id,
+                    'app' => $app,
+                    'title' => 'Texts Related to ' . $title,
+                ));
+            }
+        }
+
+        $commands = array();
+        $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'subjects/' . $id . '/texts/nojs');
+        $page = array('#type' => 'ajax', '#commands' => $commands);
+
+        ajax_deliver($page);
+    } else {
+        $setup = kmaps_explorer_setup_page($id, $app);
+
+        //Retrieve the title of the node
+        $title = $data_shuffle['node_title'];
+
+        $solrObj = $data_shuffle['solr'];
+
+        foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
+            if ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound == 1) {
+                $output = '<iframe height="700" width="100%" frameBorder="0" src="' . $solrValue->doclist->docs[0]->url_ajax . '"></iframe>';
+            } elseif ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound > 1) {
+                $output = theme('kmaps_explorer_texts_summary', array(
+                    'data' => $solrValue,
+                    'sid' => $id,
+                    'app' => $app,
+                    'title' => 'Texts Related to ' . $title,
+                ));
+            }
+        }
+
+        $setup += array(
+            'active_content' => $output,
+            'ajax' => $type == 'ajax' ? TRUE : FALSE,
+            'text' => TRUE,
+        );
+
+        $content = theme('kmaps_explorer_initial_template', $setup);
+
+        return $content;
+    }
+}
+
+/**
+ * Function to create the ajax content for esssays in places
+ */
+function kmaps_explorer_places_essays($type = 'ajax', $id, $app) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
+    $setup = kmaps_explorer_setup_page($id, $app);
+
+    if ($type == 'ajax') {
+        //Retrieve the title of the node
+        $title = $data_shuffle['node_title'];
+
+        $solrObj = $data_shuffle['solr'];
+
+        foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
+            if ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound == 1) {
+                $output = '<iframe height="700" width="100%" frameBorder="0" src="' . $solrValue->doclist->docs[0]->url_ajax . '"></iframe>';
+            } elseif ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound > 1) {
+                $output = theme('kmaps_explorer_texts_summary', array(
+                    'data' => $solrValue,
+                    'sid' => $id,
+                    'app' => $app,
+                    'title' => 'Texts Related to ' . $title,
+                ));
+            }
+        }
+
+        $commands = array();
+        $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'places/' . $id . '/texts/nojs');
+        $page = array('#type' => 'ajax', '#commands' => $commands);
+
+        ajax_deliver($page);
+    } else {
+        $setup = kmaps_explorer_setup_page($id, $app);
+
+        //Retrieve the title of the node
+        $title = $data_shuffle['node_title'];
+
+        $solrObj = $data_shuffle['solr'];
+
+        foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
+            if ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound == 1) {
+                $output = '<iframe height="700" width="100%" frameBorder="0" src="' . $solrValue->doclist->docs[0]->url_ajax . '"></iframe>';
+            } elseif ($solrValue->groupValue == "texts" && $solrValue->doclist->numFound > 1) {
+                $output = theme('kmaps_explorer_texts_summary', array(
+                    'data' => $solrValue,
+                    'sid' => $id,
+                    'app' => $app,
+                    'title' => 'Texts Related to ' . $title,
+                ));
+            }
+        }
+
+        $setup += array(
+            'active_content' => $output,
+            'ajax' => $type == 'ajax' ? TRUE : FALSE,
+            'text' => TRUE,
+        );
+
+        $content = theme('kmaps_explorer_initial_template', $setup);
+
+        return $content;
+    }
+}
+
+/**
+ * Function to implement the ajax content for individual text nodes
+ */
+function kmaps_explorer_each_text_node($type = 'ajax', $id, $tid, $app) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
+    $setup = kmaps_explorer_setup_page($id, $app);
+
+    if ($type == 'ajax') {
+        $solrObj = $data_shuffle['solr'];
+
+        if ($solrObj == '') {
+            $solrObj = call_solr_index($id, $app);
+        }
+
+        $output = '';
+
+        foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
+            if ($solrValue->groupValue == "texts") {
+                foreach ($solrValue->doclist->docs as $tnode) {
+                    if ($tnode->id == $tid) {
+                        $output = theme('kmaps_explorer_texts_individual_node', array(
+                            'data' => $tnode->url_ajax,
+                        ));
+                    }
+                }
+            }
+        }
+
+        $commands = array();
+        $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . $app . '/' . $id . '/text_node/' . $tid . '/nojs');
+        $page = array('#type' => 'ajax', '#commands' => $commands);
+
+        ajax_deliver($page);
+
+    } else {
+        $setup = kmaps_explorer_setup_page($id, $app);
+
+        $solrObj = $data_shuffle['solr'];
+
+        if ($solrObj == '') {
+            $solrObj = call_solr_index($id, $app);
+        }
+
+        $output = '';
+
+        foreach ($solrObj->grouped->asset_type->groups as $solrKey => $solrValue) {
+            if ($solrValue->groupValue == "texts") {
+                foreach ($solrValue->doclist->docs as $tnode) {
+                    if ($tnode->id == $tid) {
+                        $output = theme('kmaps_explorer_texts_individual_node', array(
+                            'data' => $tnode->url_ajax,
+                        ));
+                    }
+                }
+            }
+        }
+        $setup += array(
+            'active_content' => $output,
+            'ajax' => $type == 'ajax' ? TRUE : FALSE,
+            'text' => TRUE,
+        );
+
+        $content = theme('kmaps_explorer_initial_template', $setup);
+
+        return $content;
+    }
+}
+
+/**
+ * Function to make a call to the solr index
+ */
+function call_solr_index($id, $app) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
+    //Create the url for the solr related assets for subjects and places
+    $solrURL = variable_get('shanti_kmaps_admin_server_solr', SHANTI_KMAPS_ADMIN_SERVER_SOLR) . '/select?q=kmapid:' . $app . '-' . $id . '&fq=&start=0&facets=on&group=true&group.field=asset_type&group.facet=true&group.ngroups=true&group.limit=1000&wt=json';
+
+    //Get solr data
+    $solrJSON = file_get_contents($solrURL);
+    $solrObj = json_decode($solrJSON);
+    //dpm($solrObj);
+
+    //Store the solr object to be used in essays.
+    $data_shuffle['solr'] = $solrObj;
+
+    return $solrObj;
+}
+
+/**
+ * Function to create the ajax content for places in subjects
+ */
+function kmaps_explorer_subjects_places($type = 'ajax', $id, $page_num = 1, $total_pages = 1, $subpage = FALSE) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
+    $setup = kmaps_explorer_setup_page($id, 'subjects');
+
+    $placesURL = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . "/topics/" . $id . ".json?per_page=150&page=" . $page_num;
+    $places_fetch = save_to_cache('places', 'subjects', $id, $placesURL, $page_num);
+    $placesObj = json_decode($places_fetch);
+
+    $page_num = $placesObj->topic->current_page;
+    $total_pages = $placesObj->topic->total_pages;
+
+    //create the pager input element
+    $page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'places', 'subject');
+    $input_el = render($page_input_array);
+
+    $pageBaseUrl = base_path() . 'subjects/' . $id . '/places/nojs/';
+    $pagination = theme('kmaps_explorer_pagination_template', array(
+        'first_link' => $pageBaseUrl . '1/' . $total_pages,
+        'previous_link' => $pageBaseUrl . ($page_num <= 1 ? '1' : ($page_num - 1)) . '/' . $total_pages,
+        'next_link' => $pageBaseUrl . ($page_num >= $total_pages ? $total_pages : ($page_num + 1)) . '/' . $total_pages,
+        'last_link' => $pageBaseUrl . $total_pages . '/' . $total_pages,
+        'total_pages' => $total_pages,
+        'page_num' => $page_num,
+        'input_el' => $input_el,
+    ));
+
+    if ($type == 'ajax') {
+        $output = theme('kmaps_explorer_subjects_places_ajax', array(
+            'data' => $placesObj,
+            'title' => 'Places Related to ' . $data_shuffle['node_title'],
+        ));
+
+        $commands = array();
+        $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'subjects/' . $id . '/places/nojs/' . $page_num . '/' . $total_pages);
+        $commands[] = ajax_command_append('#tab-main', $pagination);
+        $page = array('#type' => 'ajax', '#commands' => $commands);
+
+        if ($subpage) {
+            return $page;
+        } else {
+            ajax_deliver($page);
+        }
+    } else {
+        $setup = kmaps_explorer_setup_page($id, 'subjects');
+
+        $output = theme('kmaps_explorer_subjects_places_ajax', array(
+            'data' => $placesObj,
+            'title' => 'Places Related to ' . $data_shuffle['node_title'],
+        ));
+
+        $setup += array(
+            'active_content' => $output . $pagination,
+            'ajax' => $type == 'ajax' ? TRUE : FALSE,
+            'place' => TRUE,
+        );
+
+        $content = theme('kmaps_explorer_initial_template', $setup);
+
+        return $content;
+    }
+}
+
+/**
+ * Function to create the ajax content for the places in places
+ */
+function kmaps_explorer_places_places($type = 'ajax', $id, $page_num = 1, $total_pages = 1, $subpage = FALSE) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
+    $setup = kmaps_explorer_setup_page($id, 'places');
+
+    $placesURL = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . "/features/" . $id . "/related.json";
+    $places_fetch = save_to_cache('places', 'places', $id, $placesURL);
+    $placesObj = json_decode($places_fetch);
+
+    if ($type == 'ajax') {
+        $output = theme('kmaps_explorer_places_places_ajax', array(
+            'data' => $placesObj,
+            'title' => $data_shuffle['node_title'],
+        ));
+
+        $commands = array();
+        $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'places/' . $id . '/places/nojs');
+        $page = array('#type' => 'ajax', '#commands' => $commands);
+
+        if ($subpage) {
+            return $page;
+        } else {
+            ajax_deliver($page);
+        }
+    } else {
+        $setup = kmaps_explorer_setup_page($id, 'places');
+
+        $output = theme('kmaps_explorer_places_places_ajax', array(
+            'data' => $placesObj,
+            'title' => $data_shuffle['node_title'],
+        ));
+
+        $setup += array(
+            'active_content' => $output,
+            'ajax' => $type == 'ajax' ? TRUE : FALSE,
+            'place' => TRUE,
+        );
+
+        $content = theme('kmaps_explorer_initial_template', $setup);
+
+        return $content;
+    }
+}
+
+/**
+ * Initial function to create the lone text field for pager
+ */
+function kmaps_explorer_text_field($form, &$form_state, $id, $page_num, $total_pages, $related_assoc, $app = 'none')
+{
+    $form['page_num_text'] = array(
+        '#type' => 'textfield',
+        '#value' => isset($form_state['input']['page_num_text']) ? $form_state['input']['page_num_text'] : $page_num,
+        '#size' => 10,
+        '#attributes' => array(
+            'class' => array('page-input pagerer-page'),
+            'data-arg' => $id . '-' . $total_pages . '-' . $related_assoc . '-' . $app,
+        ),
+        '#ajax' => array(
+            'callback' => 'kmaps_explore_pager_ajax',
+            'wrapper' => 'tab-main',
+            'keypress' => TRUE,
+            'progress' => array(
+                'type' => 'throbber',
+                'message' => NULL,
+            ),
+        ),
+    );
+
+    return $form;
+}
+
+/**
+ * Function to handle the callback of the ajax pager input text field.
+ */
+function kmaps_explore_pager_ajax($form, &$form_state)
+{
+    list($id, $total_pages, $related_assoc, $app) = explode('-', $form['page_num_text']['#attributes']['data-arg']);
+    $page_num = $form_state['input']['page_num_text'];
+    if ($related_assoc == 'places') {
+        return kmaps_explorer_subjects_places('ajax', intval($id), intval($page_num), intval($total_pages), TRUE);
+    }
+    if ($related_assoc == 'photos') {
+        if ($app == 'subject') {
+            return kmaps_explorer_subjects_photos('ajax', intval($id), intval($page_num), intval($total_pages), TRUE);
+        }
+        if ($app == 'place') {
+            return kmaps_explorer_places_photos('ajax', intval($id), intval($page_num), intval($total_pages), TRUE);
+        }
+    }
+    if ($related_assoc == 'audiovideo') {
+        return kmaps_explorer_subjects_audio_video('ajax', intval($id), $app, intval($page_num), intval($total_pages), TRUE);
+    }
+}
+
+/**
+ * Function to create ajax content for photos in subjects
+ */
+function kmaps_explorer_subjects_photos($type = 'ajax', $id, $page_num = 1, $total_pages = 1, $subpage = FALSE) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
+    $setup = kmaps_explorer_setup_page($id, 'subjects');
+
+    $photosURL = 'http://mms.thlib.org/topics/' . $id . '/pictures.json?per_page=60&page=' . $page_num;
+    $photos_fetch = save_to_cache('photos', 'subjects', $id, $photosURL, $page_num);
+    $photosObj = json_decode($photos_fetch);
+
+    $page_num = $photosObj->topic->current_page;
+    $total_pages = $photosObj->topic->total_pages;
+
+    //create the pager input element
+    $page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'photos', 'subject');
+    $input_el = render($page_input_array);
+
+    $pageBaseUrl = base_path() . 'subjects/' . $id . '/photos/nojs/';
+    $pagination = theme('kmaps_explorer_pagination_template', array(
+        'first_link' => $pageBaseUrl . '1/' . $total_pages,
+        'previous_link' => $pageBaseUrl . ($page_num <= 1 ? '1' : ($page_num - 1)) . '/' . $total_pages,
+        'next_link' => $pageBaseUrl . ($page_num >= $total_pages ? $total_pages : ($page_num + 1)) . '/' . $total_pages,
+        'last_link' => $pageBaseUrl . $total_pages . '/' . $total_pages,
+        'total_pages' => $total_pages,
+        'page_num' => $page_num,
+        'input_el' => $input_el,
+    ));
+
+    if ($type == 'ajax') {
+        $output = theme('kmaps_explorer_subjects_photos_ajax', array(
+            'data' => $photosObj->topic->media,
+            'title' => 'Images Related to ' . $data_shuffle['node_title'],
+        ));
+
+        $commands = array();
+        $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'subjects/' . $id . '/photos/nojs/' . $page_num . '/' . $total_pages);
+        $commands[] = ajax_command_append('#tab-main', $pagination);
+        $page = array('#type' => 'ajax', '#commands' => $commands);
+
+        if ($subpage) {
+            return $page;
+        } else {
+            ajax_deliver($page);
+        }
+    } else {
+        $setup = kmaps_explorer_setup_page($id, 'subjects');
+
+        $output = theme('kmaps_explorer_subjects_photos_ajax', array(
+            'data' => $photosObj->topic->media,
+            'title' => 'Images Related to ' . $data_shuffle['node_title'],
+        ));
+
+        $setup += array(
+            'active_content' => $output . $pagination,
+            'ajax' => $type == 'ajax' ? TRUE : FALSE,
+            'photo' => TRUE,
+        );
+
+        $content = theme('kmaps_explorer_initial_template', $setup);
+
+        return $content;
+    }
+}
+
+/**
+ * Function to show individual images in a separate page
+ */
+function kmaps_explorer_subjects_photos_node($id, $pid)
+{
+    $photosURL = 'http://mms.thlib.org/media_objects/' . $pid . '.json';
+    $photos_fetch = save_to_cache('photos_node', 'subjects', $pid, $photosURL);
+    $photosObj = json_decode($photos_fetch);
+
+    $setup = kmaps_explorer_setup_page($id, 'subjects');
+
+    $output = theme('kmaps_explorer_subjects_photos_node', array(
+        'photo' => $photosObj,
+    ));
+
+    $setup += array(
+        'active_content' => $output,
+        'ajax' => FALSE,
+        'photo' => TRUE,
+    );
+
+    $content = theme('kmaps_explorer_initial_template', $setup);
+
+    return $content;
+}
+
+/**
+ * Function to create ajax content for photos in places
+ */
+function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num = 1, $total_pages = 1, $subpage = FALSE) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
+    $setup = kmaps_explorer_setup_page($id, 'places');
+
+    //css and js files to include for the image slider view
+    $path = drupal_get_path('module', 'kmaps_explorer');
+
+    $options = array(
+        'group' => CSS_THEME,
+    );
+    /**
+    *  drupal_add_css($path . '/css/grid-components.css', $options);
+    *  drupal_add_css($path . '/css/photoswipe.css', $options);
+    *  drupal_add_css($path . '/css/pswp-default-skin.css', $options);
+    *  drupal_add_css($path . '/css/shanti-images-gallery.css', $options);
+    **/
+    $options = array(
+        'group' => JS_THEME,
+        'weight' => 1000,
+    );
+
+    drupal_add_js($path . '/js/vendor/imagesloaded.pkgd.min.js', $options);
+    drupal_add_js($path . '/js/vendor/jquery.actual.min.js', $options);
+    drupal_add_js($path . '/js/vendor/clipboard.min.js', $options);
+    drupal_add_js($path . '/js/vendor/photoswipe.js', $options);
+    drupal_add_js($path . '/js/vendor/photoswipe-ui-default.js', $options);
+    drupal_add_js($path . '/js/vendor/jquery.row-grid.js', $options);
+    drupal_add_js($path . '/js/vendor/grid.js', $options);
+    drupal_add_js($path . '/js/shanti-gallery-images.js', $options);
+
+    $photosURL = 'http://mms.thlib.org/places/' . $id . '/pictures.json?per_page=64&page=' . $page_num;
+    $photos_fetch = save_to_cache('photos', 'places', $id, $photosURL, $page_num);
+    $photosObj = json_decode($photos_fetch);
+
+    // Load Page JS Settings
+    $countsettings = array(
+        'sarvaka_image_gallery' => array(
+            'total_items' => intval($data_shuffle['places_photos_count']),
+            'items_per_page' => $photosObj->place->per_page,
+            'page_number' => intval($page_num),
+            'item_count' => count($photosObj->place->media),
+        ),
+    );
+
+    drupal_add_js($countsettings, 'setting');
+
+    if($type == 'ajax') {
+        $total_items = intval($data_shuffle['places_photos_count']);
+        $total_pages = intval($total_items / $photosObj->place->per_page);
+
+        $output = theme('kmaps_explorer_subjects_photos_ajax', array(
+            'data' => $photosObj->place->media,
+            'title' => 'Images Related to ' . $data_shuffle['node_title'],
+            'type' => 'places',
+            'id' => $id,
+        ));
+
+        //create the pager input element
+        $page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'photos', 'place');
+        $input_el = render($page_input_array);
+
+        $pageBaseUrl = base_path() . 'places/' . $id . '/photos/nojs/';
+        $pagination = theme('kmaps_explorer_pagination_template', array(
+            'first_link' => $pageBaseUrl . '1/' . $total_pages,
+            'previous_link' => $pageBaseUrl . ($page_num <= 1 ? '1' : ($page_num - 1)) . '/' . $total_pages,
+            'next_link' => $pageBaseUrl . ($page_num >= $total_pages ? $total_pages : ($page_num + 1)) . '/' . $total_pages,
+            'last_link' => $pageBaseUrl . $total_pages . '/' . $total_pages,
+            'total_pages' => $total_pages,
+            'page_num' => $page_num,
+            'input_el' => $input_el,
+        ));
+
+        $commands = array();
+        $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'places/' . $id . '/photos/nojs/' . $page_num . '/' . $total_pages);
+        $commands[] = ajax_command_append('#tab-main', $pagination);
+        $page = array('#type' => 'ajax', '#commands' => $commands);
+
+        if ($subpage) {
+            return $page;
+        } else {
+            ajax_deliver($page);
+        }
+    } else {
+        //$setup = kmaps_explorer_setup_page($id, 'places');
+
+        $total_items = intval($data_shuffle['places_photos_count']);
+        $total_pages = intval($total_items / $photosObj->place->per_page);
+
+        $output = theme('kmaps_explorer_subjects_photos_ajax', array(
+            'data' => $photosObj->place->media,
+            'title' => 'Images Related to ' . $data_shuffle['node_title'],
+            'type' => 'places',
+            'id' => $id,
+        ));
+
+        //create the pager input element
+        $page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'photos', 'place');
+        $input_el = render($page_input_array);
+
+        $pageBaseUrl = base_path() . 'places/' . $id . '/photos/nojs/';
+        $pagination = theme('kmaps_explorer_pagination_template', array(
+            'first_link' => $pageBaseUrl . '1/' . $total_pages,
+            'previous_link' => $pageBaseUrl . ($page_num <= 1 ? '1' : ($page_num - 1)) . '/' . $total_pages,
+            'next_link' => $pageBaseUrl . ($page_num >= $total_pages ? $total_pages : ($page_num + 1)) . '/' . $total_pages,
+            'last_link' => $pageBaseUrl . $total_pages . '/' . $total_pages,
+            'total_pages' => $total_pages,
+            'page_num' => $page_num,
+            'input_el' => $input_el,
+        ));
+
+        $setup += array(
+            'active_content' => $output . $pagination,
+            'ajax' => $type == 'ajax' ? TRUE : FALSE,
+            'photo' => TRUE,
+        );
+
+        $content = theme('kmaps_explorer_initial_template', $setup);
+
+        return $content;
+    }
+}
+
+/**
+ * Function to show individual images in a separate page
+ */
+function kmaps_explorer_places_photos_node($id, $pid)
+{
+    $photosURL = 'http://mms.thlib.org/media_objects/' . $pid . '.json';
+    $photos_fetch = save_to_cache('photos_node', 'places', $pid, $photosURL);
+    $photosObj = json_decode($photos_fetch);
+
+    $setup = kmaps_explorer_setup_page($id, 'places');
+
+    $output = theme('kmaps_explorer_subjects_photos_node', array(
+        'photo' => $photosObj,
+    ));
+
+    $setup += array(
+        'active_content' => $output,
+        'ajax' => FALSE,
+        'photo' => TRUE,
+    );
+
+    $content = theme('kmaps_explorer_initial_template', $setup);
+
+    return $content;
+}
+
+/**
+ * Function to create ajax content for audio-video in subjects
+ */
+function kmaps_explorer_subjects_audio_video($type = 'ajax', $id, $app, $page_num = 1, $total_pages = 1, $subpage = FALSE) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
+    $setup = kmaps_explorer_setup_page($id, $app . 's');
+
+    if ($type == 'ajax') {
+        $avObj = $data_shuffle['audio_video'];
+
+        $show_items = 24;
+        $total_pages = intval(ceil($avObj->numFound / floatval($show_items)));
+        $total_items = intval($avObj->numFound);
+        $page_num = intval($page_num);
+        $start_ind = ($page_num - 1) * $show_items;
+        $end_length = ($page_num * $show_items) >= $total_items ? ($total_items - $start_ind) : $show_items;
+
+        //Error checking to stop pages that do not exist from impoding the code base
+        if ($page_num > $total_pages) {
+            $start_ind = $total_items - 1;
+            $end_length = 0;
+        }
+
+        $output = theme('kmaps_explorer_subjects_audio_video_ajax', array(
+            'data' => array_slice($avObj->docs, $start_ind, $end_length),
+            'title' => 'Audio-Video Related to ' . $data_shuffle['node_title'],
+            'app' => $app . 's',
+            'main_id' => $id,
+        ));
+
+        //create the pager input element
+        $page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'audiovideo', $app);
+        $input_el = render($page_input_array);
+
+        $pageBaseUrl = base_path() . $app . 's/' . $id . '/audio-video/nojs/';
+        $pagination = theme('kmaps_explorer_pagination_template', array(
+            'first_link' => $pageBaseUrl . '1/' . $total_pages,
+            'previous_link' => $pageBaseUrl . ($page_num <= 1 ? '1' : ($page_num - 1)) . '/' . $total_pages,
+            'next_link' => $pageBaseUrl . ($page_num >= $total_pages ? $total_pages : ($page_num + 1)) . '/' . $total_pages,
+            'last_link' => $pageBaseUrl . $total_pages . '/' . $total_pages,
+            'total_pages' => $total_pages,
+            'page_num' => $page_num,
+            'input_el' => $input_el,
+        ));
+
+        $commands = array();
+        $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . $app . 's/' . $id . '/audio-video/nojs/' . $page_num . '/' . $total_pages);
+        $commands[] = ajax_command_append('#tab-main', $pagination);
+        $page = array('#type' => 'ajax', '#commands' => $commands);
+
+        if ($subpage) {
+            return $page;
+        } else {
+            ajax_deliver($page);
+        }
+    } else {
+        $setup = kmaps_explorer_setup_page($id, $app . 's');
+
+        $avObj = $data_shuffle['audio_video'];
+
+        $show_items = 24;
+        $total_pages = intval(ceil($avObj->numFound / floatval($show_items)));
+        $total_items = intval($avObj->numFound);
+        $page_num = intval($page_num);
+        $start_ind = ($page_num - 1) * $show_items;
+        $end_length = ($page_num * $show_items) >= $total_items ? ($total_items - $start_ind) : $show_items;
+
+        //Error checking to stop pages that do not exist from impoding the code base
+        if ($page_num > $total_pages) {
+            $start_ind = $total_items - 1;
+            $end_length = 0;
+        }
+
+        $output = theme('kmaps_explorer_subjects_audio_video_ajax', array(
+            'data' => array_slice($avObj->docs, $start_ind, $end_length),
+            'title' => 'Audio-Video Related to ' . $data_shuffle['node_title'],
+            'app' => $app . 's',
+            'main_id' => $id,
+        ));
+
+        //create the pager input element
+        $page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'audiovideo', $app);
+        $input_el = render($page_input_array);
+
+        $pageBaseUrl = base_path() . $app . 's/' . $id . '/audio-video/nojs/';
+        $pagination = theme('kmaps_explorer_pagination_template', array(
+            'first_link' => $pageBaseUrl . '1/' . $total_pages,
+            'previous_link' => $pageBaseUrl . ($page_num <= 1 ? '1' : ($page_num - 1)) . '/' . $total_pages,
+            'next_link' => $pageBaseUrl . ($page_num >= $total_pages ? $total_pages : ($page_num + 1)) . '/' . $total_pages,
+            'last_link' => $pageBaseUrl . $total_pages . '/' . $total_pages,
+            'total_pages' => $total_pages,
+            'page_num' => $page_num,
+            'input_el' => $input_el,
+        ));
+
+        $setup += array(
+            'active_content' => $output . $pagination,
+            'ajax' => $type == 'ajax' ? TRUE : FALSE,
+            'audio_video' => TRUE,
+        );
+
+        $content = theme('kmaps_explorer_initial_template', $setup);
+
+        return $content;
+    }
+}
+
+/**
+ * Function to create ajax content for audio-video individual node items
+ */
+function kmaps_explorer_audio_video_node($type = 'ajax', $mid, $app, $vid) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
+    $setup = kmaps_explorer_setup_page($mid, $app);
+
+    if ($type == 'ajax') {
+        $avNodeURL = '';
+        $avObj = $data_shuffle['audio_video'];
+        foreach ($avObj->docs as $avNodeObj) {
+            if ($avNodeObj->id == $vid) {
+                $avNodeURL = $avNodeObj->url_html;
+            }
+        }
+        $output = '<iframe scrolling="no" height="2400" width="100%" frameBorder="0" src="' . $avNodeURL . '?mbframe=on' . '" seamless ></iframe>';
+
+        $commands = array();
+        $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . $app . '/' . $mid . '/audio-video-node/' . $vid . '/nojs');
+        $commands[] = ajax_command_invoke('body', 'addClass', array('max-col-widths'));
+        $page = array('#type' => 'ajax', '#commands' => $commands);
+
+        ajax_deliver($page);
+    } else {
+        $setup = kmaps_explorer_setup_page($mid, $app);
+
+        $avNodeURL = '';
+        $avObj = $data_shuffle['audio_video'];
+        foreach ($avObj->docs as $avNodeObj) {
+            if ($avNodeObj->id == $vid) {
+                $avNodeURL = $avNodeObj->url_html;
+            }
+        }
+
+        $output = '<iframe scrolling="no" height="2400" width="100%" frameBorder="0" src="' . $avNodeURL . '?mbframe=on' . '" seamless ></iframe>';
+
+        $setup += array(
+            'active_content' => $output,
+            'ajax' => $type == 'ajax' ? TRUE : FALSE,
+            'audio_video' => TRUE,
+        );
+
+        $content = theme('kmaps_explorer_initial_template', $setup);
+
+        return $content;
+    }
+}
+
+/**
+ * Select the correct images to use in photos grid
+ */
+function kmaps_explorer_correct_images($item)
+{
+    $formats = array();
+    foreach ($item->images as $id => $image) {
+        if ($image->thumbnail === "search") {
+            $formats['search'] = $image;
+        }
+        if ($image->thumbnail === "large") {
+            $formats['large'] = $image;
+        }
+        if ($image->thumbnail === "huge") {
+            $formats['huge'] = $image;
+        }
+        if ($image->thumbnail === "essay") {
+            $formats['essay'] = $image;
+        }
+    }
+    return $formats;
+}
+
+/**
+ * Recursive function to search for etymology from an object
+ */
+function search_etymology($obj)
+{
+    foreach ($obj as $key => $value) {
+        if (!empty($value->etymology)) {
+            return array(
+                'etymology_value' => $value->etymology,
+                'name' => $value->name,
+            );
+        } else {
+            search_etymology($value->names);
+        }
+    }
+    return FALSE;
+}
+
+/**
+ * Implements hook_menu_breadcrumb_alter().
+ */
+function kmaps_explorer_menu_breadcrumb_alter(&$active_trail, $item) {
+    //Drupal static initializations
+    $data_shuffle = &drupal_static('kmaps_explorer_data');
+
+    $active_trail = array();
+
+    if (current_path() == 'subjects') {
+        $link1 = array(
+            'title' => 'Home',
+            'href' => '/subjects',
+            'localized_options' => array(),
+            'type' => 0,
+        );
+        array_push($active_trail, $link1);
+    } elseif (current_path() == 'places') {
+        $link1 = array(
+            'title' => 'Home',
+            'href' => '/places',
+            'localized_options' => array(),
+            'type' => 0,
+        );
+        array_push($active_trail, $link1);
+
+    } else if (!empty($data_shuffle['ancestors'])) {
+        $ancestors = $data_shuffle['ancestors'];
+        $app = $data_shuffle['app'];
+        foreach ($ancestors as $key => $ancestor) {
+            $link = array(
+                'title' => $ancestor->header,
+                'href' => $app . '/' . $ancestor->id . '/overview/nojs',
+                'localized_options' => array(),
+                'type' => 0,
+            );
+
+            array_push($active_trail, $link);
+        }
+    }
+}
+
+/**
+ * Custom ajax function to supplement the ajax_command_html command with
+ * html5 history pushState.
+ */
+function custom_ajax_command_html($selector, $html, $settings = NULL, $url_path = '')
+{
+    return array(
+        'command' => 'insert_history',
+        'method' => 'html',
+        'selector' => $selector,
+        'data' => $html,
+        'settings' => $settings,
+        'url_path' => $url_path,
+    );
+}
+
+/**
+ * Function for kaltura transcripts
+ */
+function kmaps_explorer_transcripts_ui_js_alter(&$scripts)
+{
+    $scripts['ui'] = drupal_get_path('module', 'kmaps_explorer') . '/js/transcripts_ui.js';
+}
+
+/**
+ * Function to retrieve counts from solr index and Rails API
+ */
+function kmaps_explorer_retrieve_counts($app, $id)
+{
+    //Create the url for related assets for subjects and places
+    if ($app == 'subjects') {
+        $mURL = "{$base_url}/api/subject/mod/{$id}";
+    } elseif ($app == 'places') {
+        $mURL = variable_get('shanti_kmaps_admin_server_places', SHANTI_KMAPS_ADMIN_SERVER_PLACES) . '/features/' . $id . '.json';
+    } else {
+        $mURL = "http://" . $app . ".kmaps.virginia.edu/features/" . $id . ".json";
+    }
+
+    //Create the url for the solr related assets for subjects and places
+    $solrURL = variable_get('shanti_kmaps_admin_server_solr', SHANTI_KMAPS_ADMIN_SERVER_SOLR) . '/select?q=kmapid:' . $app . '-' . $id . '&fq=&start=0&facets=on&group=true&group.field=asset_type&group.facet=true&group.ngroups=true&group.limit=1000&wt=json';
+
+    //Get related data
+    $json = file_get_contents($mURL);
+    $obj = json_decode($json);
+    //dpm($obj);
+
+    $results = array();
+
+    if ($app == 'subjects') {
+        //Store the count for the related subject in subjects
+        if (isset($obj->feature->associated_resources->related_feature_count) && intval($obj->feature->associated_resources->related_feature_count) > 0) {
+            $results['Related Subjects (' . $obj->feature->associated_resources->related_feature_count . ')'] = array(
+                'icon' => 'subjects',
+                'href' => '#',
+            );
+        }
+    }
+
+    if ($app == 'places') {
+        //Store the count for the related places in places
+        if (isset($obj->feature->associated_resources->related_feature_count) && intval($obj->feature->associated_resources->related_feature_count) > 0) {
+            $results['Related Places (' . $obj->feature->associated_resources->related_feature_count . ')'] = array(
+                'icon' => 'places',
+                'href' => '#',
+            );
+        }
+    }
+
+    //Store the count for the related places in subjects
+    if (isset($obj->feature->associated_resources->place_count) && intval($obj->feature->associated_resources->place_count) > 0) {
+        $results['Related Places (' . $obj->feature->associated_resources->place_count . ')'] = array(
+            'icon' => 'places',
+            'href' => '#',
+        );
+    }
+
+    //Store the count for the related subjects in places
+    if (isset($obj->feature->associated_resources->subject_count) && intval($obj->feature->associated_resources->subject_count) > 0) {
+        $results['Related Subjects (' . $obj->feature->associated_resources->subject_count . ')'] = array(
+            'icon' => 'subjects',
+            'href' => '#',
+        );
+    }
+
+    //Store the count for the related texts in subjects
+    if (isset($obj->feature->associated_resources->description_count) && intval($obj->feature->associated_resources->description_count) > 0) {
+        $results['Related Texts (' . $obj->feature->associated_resources->description_count . ')'] = array(
+            'icon' => 'texts',
+            'href' => '#',
+        );
+    }
+
+    //Store the count for the related photos in subjects
+    if (isset($obj->feature->associated_resources->picture_count) && intval($obj->feature->associated_resources->picture_count) > 0) {
+        $results['Related Photos (' . $obj->feature->associated_resources->picture_count . ')'] = array(
+            'icon' => 'photos',
+            'href' => '#',
+        );
+    }
+
+    //Store the count for the related videos in subjects
+    if (isset($obj->feature->associated_resources->video_count) && intval($obj->feature->associated_resources->video_count) > 0) {
+        $results['Related Audio-Video (' . $obj->feature->associated_resources->video_count . ')'] = array(
+            'icon' => 'audio-video',
+            'href' => '#',
+        );
+    }
+
+    //Get solr data
+    /*$solrJSON = file_get_contents($solrURL);*/
+    /*$solrObj = json_decode($solrJSON);*/
+    //dpm($solrObj);
+
+    return $results;
+}
+
+/**
+ * Function to save all calls into cache_kmaps_explorer table
+ */
+function save_to_cache($c_name_var, $app, $id, $url, $page_num = 1)
+{
+    //${$c_name_var . '_' . $app . '_' . $id} = &drupal_static(__FUNCTION__);
+    if (!isset(${$c_name_var . '_' . $app . '_' . $id . '_' . $page_num})) {
+        if ($cache = cache_get($c_name_var . $app . $id . '_' . $page_num, 'cache_kmaps_explorer')) {
+            ${$c_name_var . '_' . $app . '_' . $id . '_' . $page_num} = $cache->data;
+        } else {
+            ${$c_name_var . '_' . $app . '_' . $id . '_' . $page_num} = file_get_contents($url);
+            if (!empty(${$c_name_var . '_' . $app . '_' . $id . '_' . $page_num})) {
+                cache_set($c_name_var . $app . $id . '_' . $page_num, ${$c_name_var . '_' . $app . '_' . $id . '_' . $page_num}, 'cache_kmaps_explorer');
+            }
+        }
+    }
+    return ${$c_name_var . '_' . $app . '_' . $id . '_' . $page_num};
+}
+
+/**
+ * Function to implement the kmaps admin form
+ */
+function kmaps_explorer_admin()
+{
+    $form['kmaps_explorer_solr'] = array(
+        '#type' => 'submit',
+        '#value' => t('Clear all solr api caches'),
+        '#submit' => array('kmaps_explorer_solr_clear_cache_submit'),
+        '#prefix' => '<div>',
+        '#suffix' => '</div>',
+    );
+    $form['kmaps_explorer_overview'] = array(
+        '#type' => 'submit',
+        '#value' => t('Clear all overview caches'),
+        '#submit' => array('kmaps_explorer_overview_clear_cache_submit'),
+        '#prefix' => '<div>',
+        '#suffix' => '</div>',
+    );
+    $form['kmaps_explorer_illustrations'] = array(
+        '#type' => 'submit',
+        '#value' => t('Clear all illustration caches'),
+        '#submit' => array('kmaps_explorer_illustrations_clear_cache_submit'),
+        '#prefix' => '<div>',
+        '#suffix' => '</div>',
+    );
+    $form['kmaps_explorer_accordion'] = array(
+        '#type' => 'submit',
+        '#value' => t('Clear all accordion caches'),
+        '#submit' => array('kmaps_explorer_accordion_clear_cache_submit'),
+        '#prefix' => '<div>',
+        '#suffix' => '</div>',
+    );
+    $form['kmaps_explorer_subjects'] = array(
+        '#type' => 'submit',
+        '#value' => t('Clear all subjects caches'),
+        '#submit' => array('kmaps_explorer_subjects_clear_cache_submit'),
+        '#prefix' => '<div>',
+        '#suffix' => '</div>',
+    );
+    $form['kmaps_explorer_places'] = array(
+        '#type' => 'submit',
+        '#value' => t('Clear all places caches'),
+        '#submit' => array('kmaps_explorer_places_clear_cache_submit'),
+        '#prefix' => '<div>',
+        '#suffix' => '</div>',
+    );
+    $form['kmaps_explorer_photos'] = array(
+        '#type' => 'submit',
+        '#value' => t('Clear all photos caches'),
+        '#submit' => array('kmaps_explorer_photos_clear_cache_submit'),
+        '#prefix' => '<div>',
+        '#suffix' => '</div>',
+    );
+    $form['kmaps_explorer_audio_video'] = array(
+        '#type' => 'submit',
+        '#value' => t('Clear all audio_video caches'),
+        '#submit' => array('kmaps_explorer_audio_video_clear_cache_submit'),
+        '#prefix' => '<div>',
+        '#suffix' => '</div>',
+    );
+    $form['kmaps_explorer_all'] = array(
+        '#type' => 'submit',
+        '#value' => t('Clear all caches'),
+        '#submit' => array('kmaps_explorer_all_clear_cache_submit'),
+        '#prefix' => '<div>',
+        '#suffix' => '</div>',
+    );
+    return system_settings_form($form);
+}
+
+/**
+ * Callback to clear all solr api calls from the cache_kmaps_explorer table
+ */
+function kmaps_explorer_solr_clear_cache_submit($form, &$form_state)
+{
+    cache_clear_all('solrJSON', 'cache_kmaps_explorer', TRUE);
+    drupal_set_message(t('Solr caches cleared from the kmaps explorer cache table.'));
+}
+
+/**
+ * Callback to clear all overview(main api from Rails) calls from the cache_kmaps_explorer table
+ */
+function kmaps_explorer_overview_clear_cache_submit($form, &$form_state)
+{
+    cache_clear_all('json', 'cache_kmaps_explorer', TRUE);
+    drupal_set_message(t('Main overview caches cleared from the kmaps explorer cache table.'));
+}
+
+/**
+ * Callback to clear all api calls from the cache_kmaps_explorer table
+ */
+function kmaps_explorer_all_clear_cache_submit($form, &$form_state)
+{
+    cache_clear_all('*', 'cache_kmaps_explorer', TRUE);
+    drupal_set_message(t('All caches cleared from the kmaps explorer cache table.'));
+}
+
+/**
+ * Callback to clear illustration calls from the cache_kmaps_explorer table
+ */
+function kmaps_explorer_illustrations_clear_cache_submit($form, &$form_state)
+{
+    cache_clear_all('illustrations', 'cache_kmaps_explorer', TRUE);
+    drupal_set_message(t('Illustrations cleared from the kmaps explorer cache table.'));
+}
+
+/**
+ * Callback to clear accordion calls from the cache_kmaps_explorer table
+ */
+function kmaps_explorer_accordion_clear_cache_submit($form, &$form_state)
+{
+    cache_clear_all('accordion', 'cache_kmaps_explorer', TRUE);
+    drupal_set_message(t('Accordion cleared from the kmaps explorer cache table.'));
+}
+
+/**
+ * Callback to clear subjects calls from the cache_kmaps_explorer table
+ */
+function kmaps_explorer_subjects_clear_cache_submit($form, &$form_state)
+{
+    cache_clear_all('subjects', 'cache_kmaps_explorer', TRUE);
+    drupal_set_message(t('Subjects cleared from the kmaps explorer cache table.'));
+}
+
+/**
+ * Callback to clear places calls from the cache_kmaps_explorer table
+ */
+function kmaps_explorer_places_clear_cache_submit($form, &$form_state)
+{
+    cache_clear_all('places', 'cache_kmaps_explorer', TRUE);
+    drupal_set_message(t('Places cleared from the kmaps explorer cache table.'));
+}
+
+/**
+ * Callback to clear photos calls from the cache_kmaps_explorer table
+ */
+function kmaps_explorer_photos_clear_cache_submit($form, &$form_state)
+{
+    cache_clear_all('photos', 'cache_kmaps_explorer', TRUE);
+    drupal_set_message(t('Photos cleared from the kmaps explorer cache table.'));
+}
+
+/**
+ * Callback to clear audio_video calls from the cache_kmaps_explorer table
+ */
+function kmaps_explorer_audio_video_clear_cache_submit($form, &$form_state)
+{
+    cache_clear_all('audio_video', 'cache_kmaps_explorer', TRUE);
+    drupal_set_message(t('Audio-video cleared from the kmaps explorer cache table.'));
+}
+
+/**
+ * Call back for api/subject/mod/% path called in kmaps_explorer_set_up page for subjects
+ * Adds total counts to feature tree and descendants
+ */
+function kmaps_explorer_modified_subject_api($id)
+{
+    $furl = variable_get('shanti_kmaps_admin_server_subjects', SHANTI_KMAPS_ADMIN_SERVER_SUBJECTS) . "/features/__ID__.json";
+    $url = str_replace('__ID__', $id . '/nested', $furl);
+    $rel = file_get_contents($url);
+    $nested = json_decode($rel);
+    $total_descendants = _count_tree($nested->feature);
+    $url = str_replace('__ID__', $id, $furl);
+    $jsonstr = file_get_contents($url);
+    $main = json_decode($jsonstr);
+    $feature = &$main->feature;
+    $feature->associated_resources->related_feature_count = $total_descendants;
+    foreach ($feature->children as &$child) {
+        $cid = $child->id;
+        foreach ($nested->feature->feature as $descendant) {
+            if ($descendant->id == $cid) {
+                $childtotal = _count_tree($descendant);
+                $child->descendant_count = $childtotal;
+                break;
+            }
+        }
+    }
+    drupal_json_output($main);
+}
+
+function _count_tree($obj)
+{
+    $total = (isset($obj->childCount)) ? $obj->childCount : 0;
+    if (!empty($obj->feature)) {
+        foreach ($obj->feature as $n => $feature) {
+            $total += _count_tree($feature);
+        }
+    }
+    return $total;
+}
+
+/**
+ * Adds descendant counts from subject feature call to related features with has.as.a.part relationship
+ * Displayed in kmaps-explores-subject-subject template
+ */
+function _add_subject_child_counts($obj, $id)
+{
+    global $base_url;
+    $mURL = "{$base_url}/api/subject/mod/{$id}";
+    $related_url = save_to_cache('json', 'subjects', $id, $mURL);
+    $sobj = json_decode($related_url);
+    foreach ($obj->feature_relation_types as &$frel) {
+        if ($frel->code == 'has.as.a.part') {
+            foreach ($frel->features as &$feature) {
+                $fid = $feature->id;
+                foreach ($sobj->feature->children as $child) {
+                    if ($child->id == $fid) {
+                        $feature->descendant_count = $child->descendant_count;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    return $obj;
+}
+
+/**
+ * Implements hook_cron().
+ */
+function kmaps_explorer_cron()
+{
+    //Check if it is the first time this hook fires.
+    $last_run_time = variable_get('kmaps_explorer_last', 0);
+    if (!$last_run_time) {
+        //Set the time
+        variable_set('kmaps_explorer_last', REQUEST_TIME);
+    }
+
+    //Check if we should run, this should only be once a day
+    if (REQUEST_TIME > $last_run_time + 86400) {
+        $timestamp = REQUEST_TIME - 86400;
+
+        //Perform the deletion
+        $query = db_delete('sessions');
+        $query->condition('timestamp', $timestamp, '<');
+        $query->condition('uid', '0', '=');
+
+        //Delete the sessions
+        $num_updated = $query->execute();
+
+        //Write to the watchdog
+        watchdog('cron', 'Number of anonymous sessions deleted: @num.', array('@num' => $num_updated));
+
+        //Set the last time we deleted
+        variable_set('kmaps_explorer_last', REQUEST_TIME);
+    }
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function kmaps_explorer_block_info()
+{
+    $blocks['kmaps_explorer_block'] = array(
+        'info' => t('KMaps Explorer Navigator'),
+        'cache' => DRUPAL_NO_CACHE,   // DRUPAL_CACHE_PER_ROLE,
+    );
+    return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ *
+ * Prepares the contents of the block.
+ */
+function kmaps_explorer_block_view($delta = '') {
+    $block = array();
+
+    switch ($delta) {
+        case 'kmaps_explorer_block':
+            $domain = arg(0);
+            if ($domain == 'places' || $domain == 'subjects') {
+                $root_kmap_path = ($domain == 'places') ? variable_get('shanti_kmaps_admin_root_places_path') : variable_get('shanti_kmaps_admin_root_subjects_path');
+
+                //why?
+                drupal_add_library('system', 'drupal.ajax');
+
+                $block['subject'] = '';
+                $block['content'] = array(
+                    '#markup' => theme('kmaps_explorer_block', array(
+                        'forums' => 'f',
+                        'topics' => 't',
+                        'parents' => 'p',
+                        'domain' => 'Places',
+                        'search' => shanti_kmaps_admin_search_field('kmaps-explorer', $domain),
+                        'filters' => shanti_kmaps_admin_search_filters('kmaps-explorer', $domain),
+                    )),
+                    '#attached' => array(
+                        'library' => array(
+                            'system',
+                            'drupal.ajax',
+                        ),
+                        'libraries_load' => array(
+                            array('typeahead'),
+                            array('shanti_kmaps_typeahead'),
+                            array('json2'),
+                            array('fancytree', 'source'),
+                            array('shanti_kmaps_tree'),
+                        ),
+                        'css' => array(
+                            SHANTI_KMAPS_ADMIN_PATH . "/css/shanti_kmaps_filter.css",
+                            SHANTI_KMAPS_ADMIN_PATH . "/css/shanti_kmaps_picklist.css",
+                            SHANTI_KMAPS_ADMIN_PATH . "/css/shanti_kmaps_xbutton.css",
+                            SHANTI_KMAPS_ADMIN_PATH . "/css/shanti_kmaps_typeahead.css",
+                            drupal_get_path('module', 'kmaps_explorer') . "/css/kmaps-explorer-block.css",
+                        ),
+                        'js' => array(
+                            SHANTI_KMAPS_ADMIN_PATH . "/js/shanti_kmaps_filter.js",
+                            SHANTI_KMAPS_ADMIN_PATH . "/js/shanti_kmaps_xbutton.js",
+                            drupal_get_path('module', 'kmaps_explorer') . "/js/kmaps-explorer-block.js",
+                            array(
+                                'type' => 'setting',
+                                'data' => array(
+                                    'shanti_kmaps_admin' => array(
+                                        'kmaps_filter' => array(
+                                            'kmaps-explorer' => array(
+                                                'domain' => $domain,
+                                                'root_kmap_path' => $root_kmap_path,
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                );
+            }
+            break;
+    }
+    return $block;
+}
