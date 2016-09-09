@@ -432,9 +432,9 @@ body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-r
 .popover-kmaps .icon, .kmaps-images-popover .icon {
   color: white;
   position: absolute;
-  bottom: 0.2rem;
+  bottom: 0.03rem;
   right: 0.25rem;
-  font-size: 0.7em;
+  font-size: 0.75em;
 }
 
 .popover-kmaps .popover-footer-button a,
@@ -511,7 +511,7 @@ body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-r
 
 
 .feature-type-wrapper{
-  padding: 1rem 0 0.5rem;
+  padding: 1rem 0 0;
 }
 
 .feature-type-wrapper h6{
@@ -524,7 +524,7 @@ body:not(.front) .content-section.equal-height.col-md-9 { width: 100%; padding-r
 }
 
 .resource-overview-image {
-  margin: 0 0 1.5rem;
+  margin: 0 0 1rem;
   /*-webkit-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;*/
 }
