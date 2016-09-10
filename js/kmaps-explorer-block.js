@@ -82,8 +82,7 @@
                         empty_limit: 20,
                         empty_sort: 'header_ssort ASC', // sortable header field
                         sort: 'header_ssort ASC', // sort even when there's a search term
-                        filters: admin.shanti_kmaps_admin_solr_filter_query ? admin.shanti_kmaps_admin_solr_filter_query : '',
-                        no_results_msg: 'Showing the whole tree.'
+                        filters: admin.shanti_kmaps_admin_solr_filter_query ? admin.shanti_kmaps_admin_solr_filter_query : ''
                     }/*).kmapsTypeahead('onSuggest',
                         function (suggestions) {
                             if (suggestions.length == 0) {
