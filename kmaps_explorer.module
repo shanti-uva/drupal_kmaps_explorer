@@ -2135,7 +2135,7 @@ function kmaps_explorer_block_view($delta = '') {
                         'forums' => 'f',
                         'topics' => 't',
                         'parents' => 'p',
-                        'domain' => 'Places',
+                        'domain' => $domain,
                         'search' => shanti_kmaps_admin_search_field('kmaps-explorer', $domain),
                         'filters' => shanti_kmaps_admin_search_filters('kmaps-explorer', $domain),
                     )),
