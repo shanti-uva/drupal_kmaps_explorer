@@ -1231,67 +1231,110 @@ function kmaps_explore_pager_ajax($form, &$form_state)
  * Function to create ajax content for photos in subjects
  */
 function kmaps_explorer_subjects_photos($type = 'ajax', $id, $page_num = 1, $total_pages = 1, $subpage = FALSE) {
-    //Drupal static initializations
-    $data_shuffle = &drupal_static('kmaps_explorer_data');
+  //Drupal static initializations
+  $data_shuffle = &drupal_static('kmaps_explorer_data');
+  $setup = kmaps_explorer_setup_page($id, 'subjects');
 
-    $setup = kmaps_explorer_setup_page($id, 'subjects');
+  //css and js files to include for the image slider view
+  $path = drupal_get_path('module', 'kmaps_explorer');
 
-    $photosURL = 'http://mms.thlib.org/topics/' . $id . '/pictures.json?per_page=60&page=' . $page_num;
-    $photos_fetch = save_to_cache('photos', 'subjects', $id, $photosURL, $page_num);
-    $photosObj = json_decode($photos_fetch);
+  $options = array(
+      'group' => CSS_THEME,
+  );
+  /**
+  *  drupal_add_css($path . '/css/grid-components.css', $options);
+  *  drupal_add_css($path . '/css/photoswipe.css', $options);
+  *  drupal_add_css($path . '/css/pswp-default-skin.css', $options);
+  *  drupal_add_css($path . '/css/shanti-images-gallery.css', $options);
+  **/
+  $options = array(
+      'group' => JS_THEME,
+      'weight' => 1000,
+  );
 
-    $page_num = $photosObj->topic->current_page;
-    $total_pages = $photosObj->topic->total_pages;
+  drupal_add_js($path . '/js/vendor/imagesloaded.pkgd.min.js', $options);
+  drupal_add_js($path . '/js/vendor/jquery.actual.min.js', $options);
+  drupal_add_js($path . '/js/vendor/clipboard.min.js', $options);
+  drupal_add_js($path . '/js/vendor/photoswipe.js', $options);
+  drupal_add_js($path . '/js/vendor/photoswipe-ui-default.js', $options);
+  drupal_add_js($path . '/js/vendor/jquery.row-grid.js', $options);
+  drupal_add_js($path . '/js/vendor/grid.js', $options);
+  drupal_add_js($path . '/js/shanti-gallery-images.js', $options);
 
-    //create the pager input element
-    $page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'photos', 'subject');
-    $input_el = render($page_input_array);
+  $photosURL = 'http://mms.thlib.org/topics/' . $id . '/pictures.json?per_page=64&page=' . $page_num;
+  $photos_fetch = save_to_cache('photos', 'subjects', $id, $photosURL, $page_num);
+  $photosObj = json_decode($photos_fetch);
+  dpm($photosObj);
 
-    $pageBaseUrl = base_path() . 'subjects/' . $id . '/photos/nojs/';
-    $pagination = theme('kmaps_explorer_pagination_template', array(
-        'first_link' => $pageBaseUrl . '1/' . $total_pages,
-        'previous_link' => $pageBaseUrl . ($page_num <= 1 ? '1' : ($page_num - 1)) . '/' . $total_pages,
-        'next_link' => $pageBaseUrl . ($page_num >= $total_pages ? $total_pages : ($page_num + 1)) . '/' . $total_pages,
-        'last_link' => $pageBaseUrl . $total_pages . '/' . $total_pages,
-        'total_pages' => $total_pages,
-        'page_num' => $page_num,
-        'input_el' => $input_el,
-    ));
+  // Load Page JS Settings
+  $countsettings = array(
+      'sarvaka_image_gallery' => array(
+          'total_items' => intval($data_shuffle['places_photos_count']),
+          'items_per_page' => $photosObj->topic->per_page,
+          'page_number' => intval($page_num),
+          'item_count' => count($photosObj->topic->media),
+          'solrUrl' => variable_get('shanti_kmaps_admin_server_solr_terms', SHANTI_KMAPS_ADMIN_SERVER_SOLR_TERMS),
+      ),
+  );
 
-    if ($type == 'ajax') {
-        $output = theme('kmaps_explorer_subjects_photos_ajax', array(
-            'data' => $photosObj->topic->media,
-            'title' => 'Images Related to ' . $data_shuffle['node_title'],
-        ));
+  drupal_add_js($countsettings, 'setting');
 
-        $commands = array();
-        $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'subjects/' . $id . '/photos/nojs/' . $page_num . '/' . $total_pages);
-        $commands[] = ajax_command_append('#tab-main', $pagination);
-        $page = array('#type' => 'ajax', '#commands' => $commands);
+  $page_num = $photosObj->topic->current_page;
+  $total_pages = $photosObj->topic->total_pages;
 
-        if ($subpage) {
-            return $page;
-        } else {
-            ajax_deliver($page);
-        }
-    } else {
-        $setup = kmaps_explorer_setup_page($id, 'subjects');
+  //create the pager input element
+  $page_input_array = drupal_get_form('kmaps_explorer_text_field', $id, $page_num, $total_pages, 'photos', 'subject');
+  $input_el = render($page_input_array);
 
-        $output = theme('kmaps_explorer_subjects_photos_ajax', array(
-            'data' => $photosObj->topic->media,
-            'title' => 'Images Related to ' . $data_shuffle['node_title'],
-        ));
+  $pageBaseUrl = base_path() . 'subjects/' . $id . '/photos/nojs/';
+  $pagination = theme('kmaps_explorer_pagination_template', array(
+      'first_link' => $pageBaseUrl . '1/' . $total_pages,
+      'previous_link' => $pageBaseUrl . ($page_num <= 1 ? '1' : ($page_num - 1)) . '/' . $total_pages,
+      'next_link' => $pageBaseUrl . ($page_num >= $total_pages ? $total_pages : ($page_num + 1)) . '/' . $total_pages,
+      'last_link' => $pageBaseUrl . $total_pages . '/' . $total_pages,
+      'total_pages' => $total_pages,
+      'page_num' => $page_num,
+      'input_el' => $input_el,
+  ));
 
-        $setup += array(
-            'active_content' => $output . $pagination,
-            'ajax' => $type == 'ajax' ? TRUE : FALSE,
-            'photo' => TRUE,
-        );
+  if ($type == 'ajax') {
+      $output = theme('kmaps_explorer_subjects_photos_ajax', array(
+          'data' => $photosObj->topic->media,
+          'title' => 'Images Related to ' . $data_shuffle['node_title'],
+          'type' => 'places',
+          'id' => $id,
+      ));
 
-        $content = theme('kmaps_explorer_initial_template', $setup);
+      $commands = array();
+      $commands[] = custom_ajax_command_html('#tab-main', $output, null, base_path() . 'subjects/' . $id . '/photos/nojs/' . $page_num . '/' . $total_pages);
+      $commands[] = ajax_command_append('#tab-main', $pagination);
+      $page = array('#type' => 'ajax', '#commands' => $commands);
 
-        return $content;
-    }
+      if ($subpage) {
+          return $page;
+      } else {
+          ajax_deliver($page);
+      }
+  } else {
+      $setup = kmaps_explorer_setup_page($id, 'subjects');
+
+      $output = theme('kmaps_explorer_subjects_photos_ajax', array(
+          'data' => $photosObj->topic->media,
+          'title' => 'Images Related to ' . $data_shuffle['node_title'],
+          'type' => 'places',
+          'id' => $id,
+      ));
+
+      $setup += array(
+          'active_content' => $output . $pagination,
+          'ajax' => $type == 'ajax' ? TRUE : FALSE,
+          'photo' => TRUE,
+      );
+
+      $content = theme('kmaps_explorer_initial_template', $setup);
+
+      return $content;
+  }
 }
 
 /**
@@ -1366,6 +1409,7 @@ function kmaps_explorer_places_photos($type = 'ajax', $id, $page_num = 1, $total
             'items_per_page' => $photosObj->place->per_page,
             'page_number' => intval($page_num),
             'item_count' => count($photosObj->place->media),
+            'solrUrl' => variable_get('shanti_kmaps_admin_server_solr_terms', SHANTI_KMAPS_ADMIN_SERVER_SOLR_TERMS),
         ),
     );
 

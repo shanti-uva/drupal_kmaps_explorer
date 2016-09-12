@@ -283,7 +283,7 @@ var Grid = (function($) {
 			// create Preview structure:
 			this.$title = $( '<h3></h3>' );
 			this.$description = $( '<p></p>' );
-			this.$href = $( '<a href="#" class="og-details-more og-view-more images-show-more-modal"><span class="icon shanticon-list2">Read More</span></a>' );
+			//this.$href = $( '<a href="#" class="og-details-more og-view-more images-show-more-modal"><span class="icon shanticon-list2">Read More</span></a>' );
 			this.$copyurl = $('<button class="copyurl"><span><i class="fa fa-clipboard" aria-hidden="true"></i> Copy URL</span></button>');
 			this.$lightboxLink = $( '<a href="#" class="lightbox-link btn-lightbox og-view-more"><span class="icon fa-expand">View Full Screen</span></a>' );
 
@@ -293,12 +293,12 @@ var Grid = (function($) {
 	   			'<li role="presentation"><a href="#download" aria-controls="info" role="tab" data-toggle="tab">Downloads</a></li></ul>');
 	   	this.$desctab = $('<div role="tabpanel" class="tab-pane active" id="desc"></div>').append( this.$title, this.$description, this.$lightboxLink);
    		//this.$photographer = $('<li class="photographer">Photographer</li>');
-   		this.$date = $('<li class="date">Date</li>');
-   		this.$place = $('<li class="place">Place</li>');
+   		this.$place = $('<li class="place">Places: Not available</li>');
+			this.$subject = $('<li class="date">Subjects: Not available</li>');
    		this.$creator = $('<li class="creator">Photographer</li>');
    		this.$dtype = $('<li class="dtype">Type</li>');
    		this.$ssid = $('<li class="dtype">Shared Shelf ID</li>');
-   		this.$infolist = $('<ul></ul>').append(this.$creator, this.$date, this.$place, this.$dtype, this.$ssid);
+   		this.$infolist = $('<ul></ul>').append(this.$creator, this.$place, this.$subject, this.$dtype, this.$ssid);
    		this.$infotab = $('<div role="tabpanel" class="tab-pane" id="info"></div>').append(this.$infolist, this.$href, this.$copyurl);
 			//Download tab information
 			this.$hugeDownloadImg = $('<li>Huge Image</li>');
@@ -362,12 +362,12 @@ var Grid = (function($) {
 			this.$description.html( eldata.description );
 
 			var lnktxt = (eldata.dtype == 'pdf') ? "View PDF" : "Read more";
-			this.$href.html('<span>' + lnktxt + '</span>').attr({
-				"href": "#imagesModal",
-				"data-toggle": "modal",
-				"data-places": eldata.placesIds,
-				"data-subjects": eldata.subjectsIds
-			});
+			// this.$href.html('<span>' + lnktxt + '</span>').attr({
+			// 	"href": "#imagesModal",
+			// 	"data-toggle": "modal",
+			// 	"data-places": eldata.placesIds,
+			// 	"data-subjects": eldata.subjectsIds
+			// });
 
 			//Get the related data for related places and subjects
 			var placesArray = eldata.placesIds.split('::');
@@ -380,7 +380,7 @@ var Grid = (function($) {
 				entities += 'id:subjects-' + el + '%20OR%20';
 			});
 			entities = entities.substring(0, entities.length - '%20OR%20'.length);
-			var url = 'http://kidx.shanti.virginia.edu/solr/termindex-dev-update/select?q=' + entities + '&wt=json';
+			var url = 'https://kidx.shanti.virginia.edu/solr/termindex-dev-update/select?q=' + entities + '&wt=json';
 			$.get(url, function(data) {
 				data = $.parseJSON(data);
 				var docs = data.response.docs;
@@ -395,11 +395,25 @@ var Grid = (function($) {
 					placesMarkup += '</span> ' + '&nbsp;';
 				});
 				this.$place.html(placesMarkup);
-				$("[data-toggle=popover]").popover();
+
+				var subjectsMarkup = '<label>Subjects: </label>';
+				relatedObjects.subjects.forEach(function(el, ind, arry) {
+					subjectsMarkup += '<span>' + el.header + '</span>';
+					subjectsMarkup += '<span id="' + el.id + '-common' + '" class="kmaps-images-popover" data-toggle="popover" data-html="true" data-trigger="hover" data-content="<span>And heres</span> some amazing content. Its very engaging. Right?">';
+					subjectsMarkup += '<span class="popover-kmaps-tip"></span>';
+					subjectsMarkup += '<span class="icon shanticon-menu3"></span>';
+					subjectsMarkup += '</span> ' + '&nbsp;';
+				});
+				this.$subject.html(subjectsMarkup);
+
+				// $("[data-toggle=popover]").popover({
+				// 	delay: {
+				// 		hide: 100
+				// 	}
+				// });
 			}.bind(this));
 
 			this.$creator.html( "<label>Photographer:</label> " + eldata.creator );
-			this.$date.html('<button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Popover on left</button>');
 			this.$dtype.html("<label>Type:</label> " + eldata.dtype);
 			this.$ssid.html("<label>Shared Shelf ID:</label> " + eldata.ssid);
 			this.$hugeDownloadImg.html('<label>Huge Image:</label> ' + '<a href="' + eldata.hugesrc +
