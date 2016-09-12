@@ -1264,7 +1264,6 @@ function kmaps_explorer_subjects_photos($type = 'ajax', $id, $page_num = 1, $tot
   $photosURL = 'http://mms.thlib.org/topics/' . $id . '/pictures.json?per_page=64&page=' . $page_num;
   $photos_fetch = save_to_cache('photos', 'subjects', $id, $photosURL, $page_num);
   $photosObj = json_decode($photos_fetch);
-  dpm($photosObj);
 
   // Load Page JS Settings
   $countsettings = array(
