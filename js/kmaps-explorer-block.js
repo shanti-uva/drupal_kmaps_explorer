@@ -141,7 +141,7 @@
                 $("#searchbutton").on('click', function () {
                     console.log("triggering doSearch!");
                     $("#kmaps-explorer-search-term").trigger('doSearch');
-                })
+                });
 
                 $('#kmaps-explorer-search-term').attr('autocomplete', 'off'); // turn off browser autocomplete
 
