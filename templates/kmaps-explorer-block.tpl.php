@@ -17,7 +17,7 @@
     <ul class="nav nav-tabs">
       <li class="listview active"><a href=".listview" data-toggle="tab"><span class="icon shanticon-list"></span>Results</a></li>
       <li class="treeview"><a href=".treeview" data-toggle="tab"><span
-            class="icon shanticon-tree"></span>Browse</a></li>
+            class="icon shanticon-tree"></span>Browse Places</a></li>
     </ul>
     <div class="tab-content">
       <!-- TAB - list view -->
