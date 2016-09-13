@@ -1,8 +1,21 @@
 <section id="kmaps-search" role="search">
   <!-- BEGIN view section -->
   <section class="view-section">
+    <!-- BEGIN Input section -->
+    <section class="input-section" style="display:none;">
+      <form class="form">
+        <fieldset>
+          <div class="search-group">
+            <?php print render($search); ?>
+          </div>
+          <section class="search-filters">
+            <?php print render($filters); ?>
+          </section><!-- END seach filters -->
+        </fieldset>
+      </form>
+    </section> <!-- END input section -->
     <ul class="nav nav-tabs">
-      <li class="listview active"><a href=".listview" data-toggle="tab"><span class="icon shanticon-list"></span>Search</a></li>
+      <li class="listview active"><a href=".listview" data-toggle="tab"><span class="icon shanticon-list"></span>Results</a></li>
       <li class="treeview"><a href=".treeview" data-toggle="tab"><span
             class="icon shanticon-tree"></span>Browse</a></li>
     </ul>
@@ -10,18 +23,12 @@
       <!-- TAB - list view -->
       <div class="listview tab-pane active">
         <!-- BEGIN Input section -->
-        <section class="input-section" style="display:none;">
+        <!-- <section class="input-section" style="display:none;">
           <form class="form">
             <fieldset>
-              <div class="search-group">
-                <?php print render($search); ?>
-              </div>
-              <section class="search-filters">
-                <?php print render($filters); ?>
-              </section><!-- END seach filters -->
             </fieldset>
           </form>
-        </section> <!-- END input section -->
+        </section> --> <!-- END input section -->
         <div class="view-wrap"> <!-- view-wrap controls container height -->
         </div>
       </div>

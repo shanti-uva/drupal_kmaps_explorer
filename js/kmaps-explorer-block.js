@@ -83,7 +83,11 @@
                         empty_sort: 'header_ssort ASC', // sortable header field
                         sort: 'header_ssort ASC', // sort even when there's a search term
                         filters: admin.shanti_kmaps_admin_solr_filter_query ? admin.shanti_kmaps_admin_solr_filter_query : ''
-                    }/*).kmapsTypeahead('onSuggest',
+                    }).kmapsTypeahead('onSuggest',
+                      function () {
+                        $('a[href=".listview"]').tab('show');
+                      }
+                    /*).kmapsTypeahead('onSuggest',
                         function (suggestions) {
                             if (suggestions.length == 0) {
                                 $tree.kmapsTree('reset', function () {
