@@ -5,17 +5,26 @@
       <fieldset>
         <div class="search-group">
           <?php print render($search); ?>
+          <div class="form-group">
+            <a class="advanced-link toggle-link show-advanced" href="#">
+              <span class="icon"></span>
+              Advanced
+            </a>
+          </div>
         </div>
-        <section class="search-filters">
-          <?php print render($filters); ?>
-        </section><!-- END seach filters -->
+        <section class="advanced-view">
+          <div class="search-filters">
+            <?php print render($filters); ?>
+          </div>
+        </section>
       </fieldset>
     </form>
   </section> <!-- END input section -->
   <!-- BEGIN view section -->
   <section class="view-section">
     <ul class="nav nav-tabs">
-      <li class="listview active"><a href=".listview" data-toggle="tab"><span class="icon shanticon-list"></span>Results</a></li>
+      <li class="listview active"><a href=".listview" data-toggle="tab"><span class="icon shanticon-list"></span>Results</a>
+      </li>
       <li class="treeview"><a href=".treeview" data-toggle="tab"><span
             class="icon shanticon-tree"></span>Browse Places</a></li>
     </ul>
