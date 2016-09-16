@@ -139,7 +139,10 @@
                     $(this).toggleClass("show-advanced", 'fast');
                     $(".advanced-view").slideToggle('fast');
                     $(".advanced-view").toggleClass("show-options");
-                    $(".view-wrap").toggleClass("short-wrap"); // ----- toggle class for managing view-section height
+                    $(".view-wrap").toggleClass("long-view"); // ----- toggle class for managing view-section height
+                    
+                    // Drupal.ShantiSarvaka.searchTabHeight();
+                    searchTabHeight();
                 });
 
                 $("#searchbutton").on('click', function () {
