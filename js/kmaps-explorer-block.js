@@ -141,7 +141,7 @@
                     $(".advanced-view").toggleClass("show-options");
                     $(".view-wrap").toggleClass("long-view"); // ----- toggle class for managing view-section height
                     
-                    // Drupal.ShantiSarvaka.searchTabHeight();
+                    Drupal.ShantiSarvaka.searchTabHeight();
                 });
 
                 $("#searchbutton").on('click', function () {
