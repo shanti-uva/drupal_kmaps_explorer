@@ -135,6 +135,12 @@
                         }
                     );
                 }
+                $('.advanced-link').click(function () {
+                    $(this).toggleClass("show-advanced", 'fast');
+                    $(".advanced-view").slideToggle('fast');
+                    $(".advanced-view").toggleClass("show-options");
+                    $(".view-wrap").toggleClass("advanced-height"); // ----- toggle class for managing view-section height
+                });
 
                 $("#searchbutton").on('click', function () {
                     console.log("triggering doSearch!");
