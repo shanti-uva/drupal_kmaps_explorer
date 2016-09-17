@@ -139,7 +139,7 @@
                     $(this).toggleClass("show-advanced", 'fast');
                     $(".advanced-view").slideToggle('fast');
                     $(".advanced-view").toggleClass("show-options");
-                    $(".view-wrap").toggleClass("advanced-height"); // ----- toggle class for managing view-section height
+                    $(".view-wrap").toggleClass("short-wrap"); // ----- toggle class for managing view-section height
                 });
 
                 $("#searchbutton").on('click', function () {

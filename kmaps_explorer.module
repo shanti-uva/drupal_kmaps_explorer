@@ -377,7 +377,7 @@ function kmaps_explorer_theme()
 
 function theme_kmaps_explorer_tree_block($variables)
 {
-    $html = '<div id="kmaps-tree-block" class="view-wrap advanced-height">';
+    $html = '<div id="kmaps-tree-block" class="view-wrap">';
     foreach ($variables['trees'] as $tree) {
         $lctree = strtolower($tree);
         $html .= "<div id=\"km-{$lctree}-tree\">
