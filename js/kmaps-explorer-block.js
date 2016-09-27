@@ -87,6 +87,10 @@
                       function () {
                         $('a[href=".listview"]').tab('show');
                       }
+                    ).kmapsTypeahead('onFilterChange',
+                      function (filters) {
+                        Drupal.ShantiSarvaka.searchTabHeightKMaps();
+                      }
                     /*).kmapsTypeahead('onSuggest',
                         function (suggestions) {
                             if (suggestions.length == 0) {
@@ -137,7 +141,9 @@
                 }
                 $('.advanced-link').click(function () {
                     $(this).toggleClass("show-advanced", 'fast');
-                    $(".advanced-view").slideToggle('fast');
+                    $(".advanced-view").slideToggle('fast', function() {
+                      Drupal.ShantiSarvaka.searchTabHeightKMaps();
+                    });
                     $(".advanced-view").toggleClass("show-options");
                     $(".view-wrap").toggleClass("short-wrap"); // ----- toggle class for managing view-section height
                 });
