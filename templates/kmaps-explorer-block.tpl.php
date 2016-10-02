@@ -12,11 +12,13 @@
             </a>
           </div>
         </div>
-        <section class="advanced-view">
-          <div class="search-filters">
-            <?php print render($filters); ?>
-          </div>
-        </section>
+        <?php if (count($filters) > 0): ?>
+          <section class="advanced-view">
+            <div class="search-filters">
+              <?php print render($filters); ?>
+            </div>
+          </section>
+        <?php endif; ?>
       </fieldset>
     </form>
   </section> <!-- END input section -->
